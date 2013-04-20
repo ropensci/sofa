@@ -1,11 +1,11 @@
 thedude
 =======
 
-```ruby
+```python
 if 
-	the big lebowski >> the dude 
+	the big lebowski ~ the dude 
 then 
-	CouchDB ~ relax + R = thedude
+	CouchDB + R ~ thedude
 ```
 
 duuuuuuude
@@ -39,6 +39,7 @@ In your terminal type `couchdb`
 
 ```r
 dude_createdb(dbname='dudedb')
+
   ok 
 TRUE 
 
@@ -50,7 +51,5 @@ dude_listdbs() # see if its there now
 ### 
 
 ```r
-
-
 
 ```

@@ -44,16 +44,23 @@ dude_createdb <- function(endpoint="http://127.0.0.1", port=5984, dbname)
 #' @examples
 #' # write a document WITH a name (uses PUT)
 #' doc1 <- '{"name":"dude","beer":"IPA"}'
-#' dude_writedoc(dbname="dudedb", doc=doc1, docid="dudesbeer", named=TRUE)
+#' dude_writedoc(dbname="dudedb", doc=doc1, docid="dudesbeer")
 #' 
-#' # write a document WITHOUT a name (uses POST)
+#' # write a json document WITHOUT a name (uses POST)
 #' doc2 <- '{"name":"dude","icecream":"rocky road"}'
-#' dude_writedoc(dbname="dudedb", doc=doc2, named=FALSE)
+#' dude_writedoc(dbname="dudedb", doc=doc2)
+#' 
+#' # write an xml document WITH a name (uses PUT). xml is written as xml in 
+#' # couchdb, just wrapped in json, when you get it out it will be as xml
+#' doc3 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
+#' dude_writedoc(dbname="dudedb", doc=doc3, docid="somexml")
 #' @export
 dude_writedoc <- function(endpoint="http://127.0.0.1", port=5984, dbname, doc, 
-                          docid, named=TRUE)
+                          docid=NULL)
 {
-  if(named){
+  if(grepl("<[A-Za-z]+>", doc))
+    doc <- paste('{"xml":', '"', doc, '"', '}', sep="")
+  if(!is.null(docid)){
     call_ <- paste(paste(endpoint, port, sep=":"), "/", dbname, "/", docid, sep="")
     fromJSON(content(PUT(call_, body=doc)))
   } else

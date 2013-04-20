@@ -1,5 +1,7 @@
 export(dude_alldocs)
+export(dude_createdb)
 export(dude_deldoc)
 export(dude_getdoc)
 export(dude_listdbs)
 export(dude_ping)
+export(dude_writedoc)
