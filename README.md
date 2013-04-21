@@ -122,9 +122,10 @@ dude_getdoc(dbname="dudedb", docid="somexml")[["xml"]]
 + cd /usr/local
 + sudo ln -s elasticsearch-0.20.6 elasticsearch
 
-#### Install  CouchDB plugin for Elasticsearch
+#### Install CouchDB plugin for Elasticsearch
 
-+ 
++ cd elasticsearch
++ bin/plugin -install elasticsearch/elasticsearch-river-couchdb/1.1.0
 
 #### Start Elasticsearch
 
