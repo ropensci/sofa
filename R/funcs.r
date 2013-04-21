@@ -115,7 +115,7 @@ dude_alldocs <- function(endpoint="http://127.0.0.1", port=5984, dbname, asdf = 
 }
 
 
-#' List all docs in a given database.
+#' Delete a document in a database.
 #'
 #' @inheritParams dude_ping
 #' @param dbname Database name. (charcter)
@@ -135,4 +135,95 @@ dude_deldoc <- function(endpoint="http://127.0.0.1", port=5984, dbname, docid)
   call_ <- paste(paste(endpoint, port, sep=":"), "/", dbname, "/", docid, "?rev=", revget, sep="")
   out <- DELETE(call_)
   stop_for_status(out)
+}
+
+
+#' List changes to a database.
+#'
+#' @inheritParams dude_ping
+#' @param dbname Database name. (charcter)
+#' @param descending Return in descending order? (logical)
+#' @param startkey Document ID to start at. (character)
+#' @param endkey Document ID to end at. (character)
+#' @param limit Number document IDs to return. (numeric)
+#' @param include_docs If TRUE, returns docs themselves, in addition to IDs (logical)
+#' @examples
+#' dude_changes(dbname="dudedb")
+#' dude_changes(dbname="dudedb", limit=2)
+#' @export
+dude_changes <- function(endpoint="http://127.0.0.1", port=5984, dbname, 
+                         descending=NULL, startkey=NULL, endkey=NULL, limit=NULL, 
+                         include_docs=NULL)
+{
+  call_ <- paste(paste(endpoint, port, sep=":"), "/", dbname, "/_changes", sep="")
+  args <- compact(list(descending=descending, startkey=startkey,endkey=endkey,
+                       limit=limit,include_docs=include_docs))
+  out <- GET(call_, query=args)
+  stop_for_status(out)
+  fromJSON(content(out))
+}
+
+
+#' Just get header info on a document
+#'
+#' @inheritParams dude_ping
+#' @param dbname Database name. (charcter)
+#' @param docid Document ID (character)
+#' @examples
+#' dude_head(dbname="dudedb", docid="dudesbeer")
+#' @export
+dude_head <- function(endpoint="http://127.0.0.1", port=5984, dbname, docid)
+{
+  call_ <- paste(paste(endpoint, port, sep=":"), "/", dbname, "/", docid, sep="")
+  out <- HEAD(call_)
+  stop_for_status(out)
+  out$headers
+}
+
+
+#' Include an attachment either on an existing or new document.
+#'
+#' @inheritParams dude_ping
+#' @param dbname Database name. (charcter)
+#' @param docid Document ID (character)
+#' @param attachment The attachment object name
+#' @param attname Attachment name.
+#' @examples
+#' # put on to an existing document
+#' doc <- '{"name":"guy","beer":"anybeerisfine"}'
+#' dude_writedoc(dbname="dudedb", doc=doc, docid="guysbeer")
+#' myattachment <- "just a simple text string"
+#' myattachment <- mtcars
+#' dude_attach(dbname="dudedb", docid="guysbeer", attachment=myattachment, attname="mtcarstable.csv")
+#' @export
+# dude_attach <- function(endpoint="http://127.0.0.1", port=5984, dbname, docid, attachment, attname)
+# {
+#   revget <- dude_getdoc(dbname=dbname, docid=docid)[["_rev"]] 
+#   call_ <- paste(paste(endpoint, port, sep=":"), "/", dbname, "/", docid, "/", attname, "?rev=", revget, sep="")
+#   out <- PUT(call_, body=attachment, config=list(httpheader='Content-Type: text/csv'))
+#   stop_for_status(out)
+#   fromJSON(content(out))
+# }
+
+
+#' Get an attachment.
+#'
+#' @inheritParams dude_ping
+#' @param dbname Database name. (charcter)
+#' @param docid Document ID (character)
+#' @param attname Attachment name.
+#' @examples
+#' dude_getattach(dbname="dudedb", docid="guysbeer")
+#' @export
+dude_getattach <- function(endpoint="http://127.0.0.1", port=5984, dbname, docid, attname=NULL)
+{
+  if(is.null(attname)){
+    call_ <- paste(paste(endpoint, port, sep=":"), "/", dbname, "/", docid, "?_attachments=true", sep="")
+  } else
+  {
+    call_ <- paste(paste(endpoint, port, sep=":"), "/", dbname, "/", docid, "/", attname, sep="")
+  }
+  out <- GET(call_)
+  stop_for_status(out)
+  fromJSON(content(out))
 }

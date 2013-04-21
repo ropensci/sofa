@@ -1,6 +1,6 @@
 \name{dude_deldoc}
 \alias{dude_deldoc}
-\title{List all docs in a given database.}
+\title{Delete a document in a database.}
 \usage{
   dude_deldoc(endpoint = "http://127.0.0.1", port = 5984,
     dbname, docid)
@@ -16,7 +16,7 @@
   \item{port}{port to connect to, defaults to 5984}
 }
 \description{
-  List all docs in a given database.
+  Delete a document in a database.
 }
 \examples{
 doc3 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
