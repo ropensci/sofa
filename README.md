@@ -110,3 +110,90 @@ dude_getdoc(dbname="dudedb", docid="somexml")[["xml"]]
 
 [1] "<top><a/><b/><c><d/><e>bob</e></c></top>"
 ```
+
+
+### Full text search? duuuuuuude
+
+#### Install Elasticsearch (on OSX)
+
++ Download zip or tar file
++ unzip or untar
++ sudo mv /path/to/elasticsearch-0.20.6 /usr/local
++ cd /usr/local
++ sudo ln -s elasticsearch-0.20.6 elasticsearch
+
+#### Install  CouchDB plugin for Elasticsearch
+
++ 
+
+#### Start Elasticsearch
+
++ cd elasticsearch
++ start elasticsearch: bin/elasticsearch -f
+
+#### Searching
+
+##### At the cli...
+
+```sh
+curl -XGET "http://localhost:9200/dudedb/_search?q=road&pretty=true"
+
+{
+  "took" : 3,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 5,
+    "successful" : 5,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : 2,
+    "max_score" : 0.614891,
+    "hits" : [ {
+      "_index" : "dudedb",
+      "_type" : "dudedb",
+      "_id" : "a1812100bd1dba00c2ed1cd507000277",
+      "_score" : 0.614891, "_source" : {"_rev":"1-5406480672da172726810767e7d0ead3","_id":"a1812100bd1dba00c2ed1cd507000277","name":"dude","icecream":"rocky road"}
+    }, {
+      "_index" : "dudedb",
+      "_type" : "dudedb",
+      "_id" : "a1812100bd1dba00c2ed1cd507000b92",
+      "_score" : 0.13424811, "_source" : {"_rev":"1-5406480672da172726810767e7d0ead3","_id":"a1812100bd1dba00c2ed1cd507000b92","name":"dude","icecream":"rocky road"}
+    } ]
+  }
+}
+```
+
+##### In R...
+
+```ruby
+> dude_search(dbname="dudedb", q="road")
+
+...
+
+$hits$hits[[3]]
+$hits$hits[[3]]$`_index`
+[1] "dudedb"
+
+$hits$hits[[3]]$`_type`
+[1] "dudedb"
+
+$hits$hits[[3]]$`_id`
+[1] "a1812100bd1dba00c2ed1cd507000277"
+
+$hits$hits[[3]]$`_score`
+[1] 1
+
+$hits$hits[[3]]$`_source`
+$hits$hits[[3]]$`_source`$`_rev`
+[1] "1-5406480672da172726810767e7d0ead3"
+
+$hits$hits[[3]]$`_source`$`_id`
+[1] "a1812100bd1dba00c2ed1cd507000277"
+
+$hits$hits[[3]]$`_source`$name
+[1] "dude"
+
+$hits$hits[[3]]$`_source`$icecream
+[1] "rocky road"
+```

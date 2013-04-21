@@ -96,7 +96,7 @@ dude_getdoc <- function(endpoint="http://127.0.0.1", port=5984, dbname, docid)
 #' @param limit Number document IDs to return. (numeric)
 #' @param include_docs If TRUE, returns docs themselves, in addition to IDs (logical)
 #' @examples
-#' dude_alldocs(dbname="twitter_db")
+#' dude_alldocs(dbname="dudedb")
 #' dude_alldocs(dbname="twitter_db", limit=2)
 #' dude_alldocs(dbname="twitter_db", limit=2, include_docs="true")
 #' @export
@@ -226,4 +226,26 @@ dude_getattach <- function(endpoint="http://127.0.0.1", port=5984, dbname, docid
   out <- GET(call_)
   stop_for_status(out)
   fromJSON(content(out))
+}
+
+
+
+#' Full text search of any CouchDB databases using Elasticsearch.
+#'
+#' @inheritParams dude_ping
+#' @param dbname Database name. (charcter)
+#' @param docid Document ID (character)
+#' @param q Query terms.
+#' @details There are a lot of terms you can use for Elasticsearch. See here 
+#'    \url{http://www.elasticsearch.org/guide/reference/query-dsl/} for the documentation.
+#' @examples
+#' dude_search(dbname="dudedb", q="scott")
+#' @export
+dude_search <- function(endpoint="http://127.0.0.1", port=9200, dbname, ...)
+{
+  call_ <- paste(paste(endpoint, port, sep=":"), "/", dbname, "/_search", sep="")
+  args <- compact(list(...))
+  out <- GET(call_, query=args)
+  stop_for_status(out)
+  content(out)
 }
