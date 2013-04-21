@@ -119,18 +119,20 @@ dude_alldocs <- function(endpoint="http://127.0.0.1", port=5984, dbname, asdf = 
 #'
 #' @inheritParams dude_ping
 #' @param dbname Database name. (charcter)
-#' @param asdf Return as data.frame? defaults to TRUE (logical)
-#' @param descending Return in descending order? (logical)
-#' @param startkey Document ID to start at. (character)
-#' @param endkey Document ID to end at. (character)
-#' @param limit Number document IDs to return. (numeric)
-#' @param include_docs If TRUE, returns docs themselves, in addition to IDs (logical)
+#' @param docid Document ID (character)
 #' @examples
-#' dude_createdoc()
-#' dude_deldoc(dbname="twitter_db", docid="9f6950f1ee18ed0f0a2c529c30003ab0")
+#' doc3 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
+#' dude_writedoc(dbname="dudedb", doc=doc3, docid="somexml")
+#' dude_deldoc(dbname="dudedb", docid="somexml")
+#' 
+#' # wrong docid name
+#' dude_writedoc(dbname="dudedb", doc=doc3, docid="somexml")
+#' dude_deldoc(dbname="dudedb", docid="wrongname")
 #' @export
 dude_deldoc <- function(endpoint="http://127.0.0.1", port=5984, dbname, docid)
 {
-  call_ <- paste(paste(endpoint, port, sep=":"), "/", dbname, "/", docid, sep="")
-  fromJSON(content(DELETE(call_)))
+  revget <- dude_getdoc(dbname="dudedb", docid="somexml")[["_rev"]]
+  call_ <- paste(paste(endpoint, port, sep=":"), "/", dbname, "/", docid, "?rev=", revget, sep="")
+  out <- DELETE(call_)
+  stop_for_status(out)
 }

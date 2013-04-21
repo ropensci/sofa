@@ -8,19 +8,7 @@
 \arguments{
   \item{dbname}{Database name. (charcter)}
 
-  \item{asdf}{Return as data.frame? defaults to TRUE
-  (logical)}
-
-  \item{descending}{Return in descending order? (logical)}
-
-  \item{startkey}{Document ID to start at. (character)}
-
-  \item{endkey}{Document ID to end at. (character)}
-
-  \item{limit}{Number document IDs to return. (numeric)}
-
-  \item{include_docs}{If TRUE, returns docs themselves, in
-  addition to IDs (logical)}
+  \item{docid}{Document ID (character)}
 
   \item{endpoint}{the endpoint, defaults to localhost
   (http://127.0.0.1)}
@@ -31,7 +19,12 @@
   List all docs in a given database.
 }
 \examples{
-dude_createdoc()
-dude_deldoc(dbname="twitter_db", docid="9f6950f1ee18ed0f0a2c529c30003ab0")
+doc3 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
+dude_writedoc(dbname="dudedb", doc=doc3, docid="somexml")
+dude_deldoc(dbname="dudedb", docid="somexml")
+
+# wrong docid name
+dude_writedoc(dbname="dudedb", doc=doc3, docid="somexml")
+dude_deldoc(dbname="dudedb", docid="wrongname")
 }
 
