@@ -33,7 +33,7 @@
   List all docs in a given database.
 }
 \examples{
-dude_alldocs(dbname="twitter_db")
+dude_alldocs(dbname="dudedb")
 dude_alldocs(dbname="twitter_db", limit=2)
 dude_alldocs(dbname="twitter_db", limit=2, include_docs="true")
 }

@@ -132,6 +132,20 @@ dude_getdoc(dbname="dudedb", docid="somexml")[["xml"]]
 + cd elasticsearch
 + start elasticsearch: bin/elasticsearch -f
 
+#### Make call to elasticsearch to start indexing (and always index) your database
+
+Edit details and paste into terminal and execute
+
+curl -XPUT 'localhost:9200/_river/rplos_db/_meta' -d '{
+    "type" : "couchdb",
+    "couchdb" : {
+        "host" : "localhost",
+        "port" : 5984,
+        "db" : "rplos_db",
+        "filter" : null
+    }
+}'
+
 #### Searching
 
 ##### At the cli...
@@ -168,7 +182,7 @@ curl -XGET "http://localhost:9200/dudedb/_search?q=road&pretty=true"
 ##### In R...
 
 ```ruby
-> dude_search(dbname="dudedb", q="road")
+dude_search(dbname="dudedb", q="road")
 
 ...
 

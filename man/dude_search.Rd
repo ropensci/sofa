@@ -3,7 +3,7 @@
 \title{Full text search of any CouchDB databases using Elasticsearch.}
 \usage{
   dude_search(endpoint = "http://127.0.0.1", port = 9200,
-    dbname, q)
+    dbname, parse_ = TRUE, verbose = TRUE, ...)
 }
 \arguments{
   \item{dbname}{Database name. (charcter)}
@@ -28,6 +28,9 @@
   for the documentation.
 }
 \examples{
-dude_search(dbname="dudedb", q="road")
+results <- dude_search(dbname="rplos_db", q="scienceseeker")
+sapply(results, function(x) x$id) # get the document IDs
+sapply(results, function(x) x$res) # get the document contents
+sapply(results, function(x) x$res)[[1]][[1]] # get one of the documents contents'
 }
 
