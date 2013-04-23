@@ -1,64 +1,72 @@
-thedude
+sofa
 =======
 
-```ruby
-if the big lebowski ~ the dude
-	CouchDB + R ~ thedude
-else
-	duuuuuuude
+#### *An easy interface to CouchDB from R*
+
+
+## Quickstart
+
+### Install CouchDB
+
+Instructions [here](http://wiki.apache.org/couchdb/Installation)
+
+### Connect to CouchDB
+
+In your terminal 
+
+```sh
+couchdb
 ```
 
-## Install 
+You can interact with your CouchDB databases as well in your browser. Navigate to [http://localhost:5984/_utils](http://localhost:5984/_utils)
+
+### Install sofa
 
 from github obviously
 
 ```ruby
 install.packages("devtools")
 library(devtools)
-install_github("thedude", "schamberlain")
-library(thedude)
+install_github("sofa", "schamberlain")
+library(sofa)
 ```
-
-## Quickstart
-
-### Connect to CouchDB
-
-In your terminal type `couchdb`
 
 ### Ping the server
 
 ```ruby
- dude_ping()
+ sofa_ping()
 
   couchdb   version 
 "Welcome"   "1.2.1" 
 ```
 
-### Create a new database, list databases
+Nice, it's working.
+
+### Create a new database, and list available databases
 
 ```ruby
-dude_createdb(dbname='dudedb')
+sofa_createdb(dbname='sofadb')
 
   ok 
 TRUE 
 
-dude_listdbs() # see if its there now
+sofa_listdbs() # see if its there now
 
-[1] "dudedb"
+[1] "sofadb"
 ```
 
 ### Create documents
 
 #### Write a document WITH a name (uses PUT)
 ```ruby
-doc1 <- '{"name":"dude","beer":"IPA"}'
-dude_writedoc(dbname="dudedb", doc=doc1, docid="dudesbeer")
+doc1 <- '{"name":"sofa","beer":"IPA"}'
+sofa_writedoc(dbname="sofadb", doc=doc1, docid="sofasbeer")
 
 $ok
 [1] TRUE
 
 $id
-[1] "dudesbeer"
+[1] "sofasbeer"
 
 $rev
 [1] "3-60b547ef0b162af1b3891f1955d46e66"
@@ -66,8 +74,8 @@ $rev
 
 #### Write a json document WITHOUT a name (uses POST)
 ```ruby
-doc2 <- '{"name":"dude","icecream":"rocky road"}'
-dude_writedoc(dbname="dudedb", doc=doc2)
+doc2 <- '{"name":"sofa","icecream":"rocky road"}'
+sofa_writedoc(dbname="sofadb", doc=doc2)
 
 $ok
 [1] TRUE
@@ -84,7 +92,7 @@ $rev
 ```ruby
 # write the xml
 doc3 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
-dude_writedoc(dbname="dudedb", doc=doc3, docid="somexml")
+sofa_writedoc(dbname="sofadb", doc=doc3, docid="somexml")
 
 $ok
 [1] TRUE
@@ -96,7 +104,7 @@ $rev
 [1] "5-493a2080920f9843459326b50ad358a1"
 
 # get the doc back out
-dude_getdoc(dbname="dudedb", docid="somexml")
+sofa_getdoc(dbname="sofadb", docid="somexml")
 
                                        _id 
                                  "somexml" 
@@ -106,13 +114,13 @@ dude_getdoc(dbname="dudedb", docid="somexml")
 "<top><a/><b/><c><d/><e>bob</e></c></top>" 
 
 # get just the xml out
-dude_getdoc(dbname="dudedb", docid="somexml")[["xml"]]
+sofa_getdoc(dbname="sofadb", docid="somexml")[["xml"]]
 
 [1] "<top><a/><b/><c><d/><e>bob</e></c></top>"
 ```
 
 
-### Full text search? duuuuuuude
+### Full text search? por sepuesto
 
 #### Install Elasticsearch (on OSX)
 
@@ -151,7 +159,7 @@ curl -XPUT 'localhost:9200/_river/rplos_db/_meta' -d '{
 ##### At the cli...
 
 ```sh
-curl -XGET "http://localhost:9200/dudedb/_search?q=road&pretty=true"
+curl -XGET "http://localhost:9200/sofadb/_search?q=road&pretty=true"
 
 {
   "took" : 3,
@@ -165,15 +173,15 @@ curl -XGET "http://localhost:9200/dudedb/_search?q=road&pretty=true"
     "total" : 2,
     "max_score" : 0.614891,
     "hits" : [ {
-      "_index" : "dudedb",
-      "_type" : "dudedb",
+      "_index" : "sofadb",
+      "_type" : "sofadb",
       "_id" : "a1812100bd1dba00c2ed1cd507000277",
-      "_score" : 0.614891, "_source" : {"_rev":"1-5406480672da172726810767e7d0ead3","_id":"a1812100bd1dba00c2ed1cd507000277","name":"dude","icecream":"rocky road"}
+      "_score" : 0.614891, "_source" : {"_rev":"1-5406480672da172726810767e7d0ead3","_id":"a1812100bd1dba00c2ed1cd507000277","name":"sofa","icecream":"rocky road"}
     }, {
-      "_index" : "dudedb",
-      "_type" : "dudedb",
+      "_index" : "sofadb",
+      "_type" : "sofadb",
       "_id" : "a1812100bd1dba00c2ed1cd507000b92",
-      "_score" : 0.13424811, "_source" : {"_rev":"1-5406480672da172726810767e7d0ead3","_id":"a1812100bd1dba00c2ed1cd507000b92","name":"dude","icecream":"rocky road"}
+      "_score" : 0.13424811, "_source" : {"_rev":"1-5406480672da172726810767e7d0ead3","_id":"a1812100bd1dba00c2ed1cd507000b92","name":"sofa","icecream":"rocky road"}
     } ]
   }
 }
@@ -182,16 +190,16 @@ curl -XGET "http://localhost:9200/dudedb/_search?q=road&pretty=true"
 ##### In R...
 
 ```ruby
-dude_search(dbname="dudedb", q="road")
+sofa_search(dbname="sofadb", q="road")
 
 ...
 
 $hits$hits[[3]]
 $hits$hits[[3]]$`_index`
-[1] "dudedb"
+[1] "sofadb"
 
 $hits$hits[[3]]$`_type`
-[1] "dudedb"
+[1] "sofadb"
 
 $hits$hits[[3]]$`_id`
 [1] "a1812100bd1dba00c2ed1cd507000277"
@@ -207,8 +215,14 @@ $hits$hits[[3]]$`_source`$`_id`
 [1] "a1812100bd1dba00c2ed1cd507000277"
 
 $hits$hits[[3]]$`_source`$name
-[1] "dude"
+[1] "sofa"
 
 $hits$hits[[3]]$`_source`$icecream
 [1] "rocky road"
+```
+
+##### And you can have sofa process the results from CouchDB
+
+```ruby
+
 ```

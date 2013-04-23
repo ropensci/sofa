@@ -1,12 +1,12 @@
-Package: thedude
+Package: sofa
 Maintainer: Scott Chamberlain <myrmecocystus@gmail.com>
 Author: Scott Chamberlain
 Version: 0.1
 License: CC0
 Title: easy R connector to CouchDB
 Description: easy R connector to CouchDB.
-URL: https://github.com/schamberlain/thedude
-BugReports: https://github.com/schamberlain/thedude/issues
+URL: https://github.com/schamberlain/sofa
+BugReports: https://github.com/schamberlain/sofa/issues
 Depends:
     httr,
     plyr,
@@ -15,4 +15,15 @@ Suggests:
     testthat,
     roxygen2
 Collate:
-    'funcs.r'
+    'elasticsearch.r'
+    'sofa_alldocs.r'
+    'sofa_attach.r'
+    'sofa_changes.r'
+    'sofa_createdb.r'
+    'sofa_deldoc.r'
+    'sofa_getattach.r'
+    'sofa_getdoc.r'
+    'sofa_head.r'
+    'sofa_listdbs.r'
+    'sofa_ping.r'
+    'sofa_writedoc.r'
