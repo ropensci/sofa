@@ -125,20 +125,20 @@ sofa_getdoc(dbname="sofadb", docid="somexml")[["xml"]]
 #### Install Elasticsearch (on OSX)
 
 + Download zip or tar file
-+ unzip or untar
-+ sudo mv /path/to/elasticsearch-0.20.6 /usr/local
-+ cd /usr/local
-+ sudo ln -s elasticsearch-0.20.6 elasticsearch
++ Unzip it: `unzip or untar`
++ Move it: `sudo mv /path/to/elasticsearch-0.20.6 /usr/local`
++ Navigate to /usr/local: `cd /usr/local`
++ Add shortcut: `sudo ln -s elasticsearch-0.20.6 elasticsearch`
 
 #### Install CouchDB plugin for Elasticsearch
 
-+ cd elasticsearch
-+ bin/plugin -install elasticsearch/elasticsearch-river-couchdb/1.1.0
++ Navigate to elastisearch di: `cd elasticsearch`
++ Install it: `bin/plugin -install elasticsearch/elasticsearch-river-couchdb/1.1.0`
 
 #### Start Elasticsearch
 
-+ cd elasticsearch
-+ start elasticsearch: bin/elasticsearch -f
++ Navigate to elasticsearch: `cd /usr/local/elasticsearch`
++ Start elasticsearch: `bin/elasticsearch -f`
 
 #### Make call to elasticsearch to start indexing (and always index) your database
 
