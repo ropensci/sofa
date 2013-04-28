@@ -27,3 +27,4 @@ Collate:
     'sofa_listdbs.r'
     'sofa_ping.r'
     'sofa_writedoc.r'
+    'methods.r'

@@ -1,4 +1,8 @@
+S3method(rawdata,sofaes)
+S3method(summary,sofaes)
 export(elasticsearch)
+export(is.sofaes)
+export(rawdata)
 export(sofa_alldocs)
 export(sofa_attach)
 export(sofa_changes)

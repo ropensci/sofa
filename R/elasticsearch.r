@@ -20,11 +20,20 @@ elasticsearch <- function(endpoint="http://127.0.0.1", port=9200, dbname, parse_
   out <- GET(call_, query=args)
   stop_for_status(out)
   
-  if(parse_){
-    parsed <- content(out)
-    if(verbose)
-      message(paste("\nmatches -> ", round(parsed$hits$total,1), "\nscore -> ", round(parsed$hits$max_score,3), sep=""))  
-    return( llply(parsed$hits$hits, function(x) list(id=x$`_id`, res=x$`_source`$response)) ) 
-  } else
-  { return( content(out) ) }
+  parsed <- content(out)
+  if(verbose)
+    message(paste("\nmatches -> ", round(parsed$hits$total,1), "\nscore -> ", round(parsed$hits$max_score,3), sep=""))  
+  class(parsed) <- "sofaes"
+  return( parsed )
+  
+#   if(parse_){
+#     parsed <- content(out)
+#     if(verbose)
+#       message(paste("\nmatches -> ", round(parsed$hits$total,1), "\nscore -> ", round(parsed$hits$max_score,3), sep=""))  
+#     return( llply(parsed$hits$hits, function(x) list(id=x$`_id`, res=x$`_source`$response)) ) 
+#   } else
+#     { 
+#       class(out) <- "sofaes"
+#       return( content(out) ) 
+#     }
 }
