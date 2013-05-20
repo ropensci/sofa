@@ -3,6 +3,7 @@ sofa
 
 #### *An easy interface to CouchDB from R*
 
+Note: Check out [*R4couchdb*](https://github.com/wactbprot/R4CouchDB), another R package to interact with CouchDB. 
 
 ## Quickstart
 

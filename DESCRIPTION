@@ -28,3 +28,6 @@ Collate:
     'sofa_ping.r'
     'sofa_writedoc.r'
     'methods.r'
+    'elastic_start.r'
+    'elastic_stop.r'
+    'sofa_view.r'
