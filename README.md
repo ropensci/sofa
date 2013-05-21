@@ -1,6 +1,8 @@
 sofa
 =======
 
+![](inst/assets/img/sofa.png)
+
 #### *An easy interface to CouchDB from R*
 
 Note: Check out [*R4couchdb*](https://github.com/wactbprot/R4CouchDB), another R package to interact with CouchDB. 
@@ -131,7 +133,7 @@ sofa_getdoc(dbname="sofadb", docid="somexml")[["xml"]]
 + Navigate to /usr/local: `cd /usr/local`
 + Add shortcut: `sudo ln -s elasticsearch-0.20.6 elasticsearch`
 
-#### Install CouchDB plugin for Elasticsearch
+#### Install CouchDB River plugin for Elasticsearch
 
 + Navigate to elastisearch di: `cd elasticsearch`
 + Install it: `bin/plugin -install elasticsearch/elasticsearch-river-couchdb/1.1.0`
