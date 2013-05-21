@@ -34,4 +34,24 @@ system.time(alm(doi=as.character(dois[,1])[1:60], write2couch=TRUE))
 elastic_start(dbname="alm_couchdb")
 
 #### search your database
-elasticsearch(dbname="alm_couchdb", q="twitter", parse_=TRUE)
+elastic_search(dbname="alm_couchdb", q="twitter", parse_=TRUE)
+
+
+### Using views 
+#### write a view - here letting key be the default of null
+sofa_view_put(dbname='alm_couchdb', design_name='myview', value="doc.baseurl")
+
+#### get info on your new view
+sofa_view_get(dbname='alm_couchdb', design_name='almview2')
+
+#### get data using a view
+sofa_view_search(dbname='alm_couchdb', design_name='almview2')
+
+#### delete the view
+sofa_view_del(dbname='alm_couchdb', design_name='almview2')
+
+#### a different query
+sofa_view_put(dbname='alm_couchdb', design_name='almview5', value="[doc.baseurl,doc.queryargs]")
+out <- sofa_view_search(dbname='alm_couchdb', design_name='almview5')
+out[[3]][[1]]$value[[1]] # can see base url used
+fromJSON(out[[3]][[1]]$value[[2]]) # ...and the query arguments 

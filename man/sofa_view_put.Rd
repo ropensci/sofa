@@ -2,7 +2,8 @@
 \alias{sofa_view_put}
 \title{Put a design document (i.e., a view) into your CouchDB database.}
 \usage{
-  sofa_view_put(dbname, design_name,
+  sofa_view_put(dbname, design_name, fxnname = "foo",
+    key = "null", value = "doc",
     endpoint = "http://127.0.0.1", port = 5984)
 }
 \arguments{
@@ -19,9 +20,16 @@
   Put a design document (i.e., a view) into your CouchDB
   database.
 }
+\details{
+  If you are writing a complicated javascript function,
+  better to do that in the Futon CouchDB interface or
+  otherwise.
+}
 \examples{
 \dontrun{
 sofa_view_put(dbname='alm_couchdb', design_name='almview1')
+sofa_view_put(dbname='alm_couchdb', design_name='almview2', value="doc.baseurl")
+sofa_view_put(dbname='alm_couchdb', design_name='almview5', value="[doc.baseurl,doc.queryargs]")
 }
 }
 

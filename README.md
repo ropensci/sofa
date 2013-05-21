@@ -191,7 +191,7 @@ curl -XGET "http://localhost:9200/sofadb/_search?q=road&pretty=true"
 ##### In R...
 
 ```ruby
-sofa_search(dbname="sofadb", q="road")
+elastic_search(dbname="sofadb", q="road")
 
 ...
 
@@ -207,23 +207,72 @@ $hits$hits[[3]]$`_id`
 
 $hits$hits[[3]]$`_score`
 [1] 1
-
-$hits$hits[[3]]$`_source`
-$hits$hits[[3]]$`_source`$`_rev`
-[1] "1-5406480672da172726810767e7d0ead3"
-
-$hits$hits[[3]]$`_source`$`_id`
-[1] "a1812100bd1dba00c2ed1cd507000277"
-
-$hits$hits[[3]]$`_source`$name
-[1] "sofa"
-
-$hits$hits[[3]]$`_source`$icecream
-[1] "rocky road"
 ```
 
-##### And you can have sofa process the results from CouchDB
+##### Using CouchDB views
 
 ```ruby
+#### write a view - here letting key be the default of null
+sofa_view_put(dbname='alm_couchdb', design_name='almview2', value="doc.baseurl")
 
+$ok
+[1] TRUE
+
+$id
+[1] "_design/myview4"
+
+$rev
+[1] "1-e7c17cff1b96e4595c3781da53e16ad8"
+```
+
+```ruby
+#### get info on your new view
+sofa_view_get(dbname='alm_couchdb', design_name='almview2')
+
+$`_id`
+[1] "_design/almview2"
+
+$`_rev`
+[1] "1-e7c17cff1b96e4595c3781da53e16ad8"
+
+$views
+$views$foo
+                                    map 
+"function(doc){emit(null,doc.baseurl)}" 
+```
+
+```ruby
+#### get data using a view
+gg <- sofa_view_search(dbname='alm_couchdb', design_name='almview2')
+
+gg[[3]][1:2]
+
+[[1]]
+[[1]]$id
+[1] "d0d091e25b9a22e503dc1e4e6710d7a2"
+
+[[1]]$key
+NULL
+
+[[1]]$value
+[1] "http://alm.plos.org/api/v3/articles"
+
+
+[[2]]
+[[2]]$id
+[1] "d0d091e25b9a22e503dc1e4e6710e51d"
+
+[[2]]$key
+NULL
+
+[[2]]$value
+[1] "http://alm.plos.org/api/v3/articles"
+
+```
+
+```ruby
+#### delete the view
+sofa_view_del(dbname='alm_couchdb', design_name='almview2')
+
+[1] "" # this means it worked
 ```

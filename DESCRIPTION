@@ -15,7 +15,6 @@ Suggests:
     testthat,
     roxygen2
 Collate:
-    'elasticsearch.r'
     'sofa_alldocs.r'
     'sofa_attach.r'
     'sofa_changes.r'
@@ -31,3 +30,4 @@ Collate:
     'elastic_start.r'
     'elastic_stop.r'
     'sofa_view.r'
+    'elastic_search.r'
