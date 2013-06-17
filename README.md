@@ -1,7 +1,13 @@
 sofa
 =======
 
-![](inst/assets/img/sofa.png)
+<pre>
+  _ _ _ _ _ _ _ _ _ _ _ 
+ /|                   |\
+/ |_ _ _ _ _ _ _ _ _ _| \
+\ /                    \/
+ \ ___________________ /
+</pre>
 
 #### *An easy interface to CouchDB from R*
 
