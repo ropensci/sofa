@@ -1,8 +1,8 @@
-\name{sofa_listdbs}
-\alias{sofa_listdbs}
-\title{List all databases.}
+\name{sofa_dbinfo}
+\alias{sofa_dbinfo}
+\title{List database info.}
 \usage{
-  sofa_listdbs(endpoint = "localhost", port = 5984,
+  sofa_dbinfo(dbname, endpoint = "localhost", port = 5984,
     username = NULL, pwd = NULL)
 }
 \arguments{
@@ -19,21 +19,21 @@
   \item{pwd}{Your cloudant or iriscouch password}
 }
 \description{
-  List all databases.
+  List database info.
 }
 \examples{
 \donttest{
 # local databasees
-sofa_listdbs()
+sofa_dbinfo(dbname="dudedb")
 
 # databasees on cloudant
 ## passing username and password in function call
-sofa_listdbs("cloudant", username='yourusername', pwd='yourpassword')
+sofa_dbinfo("cloudant", username='yourusername', pwd='yourpassword')
 
 ## or setting username and password in options() call
 options(cloudant.username="yourusername")
 options(cloudant.pwd="yourpassword")
-sofa_listdbs("cloudant")
+sofa_dbinfo("foobardb")
 }
 }
 

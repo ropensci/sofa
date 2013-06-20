@@ -31,3 +31,6 @@ Collate:
     'elastic_stop.r'
     'sofa_view.r'
     'elastic_search.r'
+    'zzz.r'
+    'sofa_dbinfo.r'
+    'sofa_deletedb.r'
