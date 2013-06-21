@@ -34,3 +34,4 @@ Collate:
     'zzz.r'
     'sofa_dbinfo.r'
     'sofa_deletedb.r'
+    'cushion.r'

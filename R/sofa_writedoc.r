@@ -4,7 +4,7 @@
 #' @param dbname Database name3
 #' @param doc Document content
 #' @param docid Document ID
-#' @param rodb Stand for "ropensci database". If TRUE, write with json format e.g.:
+#' @param apicall Stands for "ropensci database". If TRUE, write with json format e.g.:
 #'    {
 #'      "baseurl" : "http://alm.plos.org/api/v3/articles",
 #'      "yourqueryargs" : "doi=10.1371/journal.pone.0060590",
@@ -12,6 +12,8 @@
 #'    }
 #' @param baseurl Base url for the web API call
 #' @param queryargs Web API query arguments to pass in to json with document
+#' @param username Your cloudant or iriscouch username
+#' @param pwd Your cloudant or iriscouch password
 #' @examples
 #' # write a document WITH a name (uses PUT)
 #' doc1 <- '{"name":"dude","beer":"IPA"}'
@@ -28,35 +30,46 @@
 #' 
 #' # write a document using web api storage format
 #' doc <- '{"downloads":10,"pageviews":5000,"tweets":300}'
-#' sofa_writedoc(dbname="sofadb", doc=doc, rodb=TRUE, baseurl="http://shit", queryargs="some args")
+#' sofa_writedoc(dbname="sofadb", doc=doc, apicall=TRUE, baseurl="http://shit", queryargs="some args")
 #' @export
-sofa_writedoc <- function(endpoint="http://127.0.0.1", port=5984, dbname, doc, 
-                          docid=NULL, rodb=FALSE, baseurl, queryargs)
+sofa_writedoc <- function(endpoint="localhost", port=5984, dbname, doc, 
+                          docid=NULL, apicall=FALSE, baseurl, queryargs, username=NULL, pwd=NULL)
 {
-  if(rodb){ # if true, 
+  endpoint <- match.arg(endpoint,choices=c("localhost","cloudant","iriscouch"))
+  
+  if(endpoint=="localhost"){
+    call_ <- sprintf("http://127.0.0.1:%s/%s", port, dbname)
+  } else
+    if(endpoint=="cloudant"){
+      auth <- get_pwd(username,pwd,"cloudant")
+      call_ <- sprintf('https://%s:%s@%s.cloudant.com/%s', auth[[1]], auth[[2]], auth[[1]], dbname)
+    } else
+    {
+      auth <- get_pwd(username,pwd,"iriscouch")
+      call_ <- sprintf('https://%s.iriscouch.com/%s', auth[[1]], dbname)
+    }
+  
+  if(apicall){
     doc2 <- paste('{"baseurl":', '"', baseurl, '",', '"queryargs":', 
                   RJSONIO::toJSON(queryargs,collapse=""), ',', '"response":', doc, "}", sep="")
     if(!is.null(docid)){
-      call_ <- paste(paste(endpoint, port, sep=":"), "/", dbname, "/", docid, sep="")
+      call_ <- paste0(call_, "/", docid)
       fromJSON(content(PUT(call_, body=doc2)))
     } else
     {
-      call_ <- paste(paste(endpoint, port, sep=":"), "/", dbname, sep="")
       fromJSON(content(POST(call_, body=doc2, 
                             config=list(httpheader='Content-Type: application/json'))))
     }
   } else
   {
-    # detect whether document is xml format or not, if true, wrap in json
     if(grepl("<[A-Za-z]+>", doc))
       doc2 <- paste('{"xml":', '"', doc, '"', '}', sep="")
     
     if(!is.null(docid)){
-      call_ <- paste(paste(endpoint, port, sep=":"), "/", dbname, "/", docid, sep="")
+      call_ <- paste0(call_, "/", docid)
       fromJSON(content(PUT(call_, body=doc2)))
     } else
     {
-      call_ <- paste(paste(endpoint, port, sep=":"), "/", dbname, sep="")
       fromJSON(content(POST(call_, body=doc2, 
                             config=list(httpheader='Content-Type: application/json'))))
     }

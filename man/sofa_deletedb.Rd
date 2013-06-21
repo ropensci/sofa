@@ -27,8 +27,7 @@
 sofa_deletedb(dbname="shitbutt")
 
 ## or setting username and password in options() call
-options(cloudant.username="yourusername")
-options(cloudant.pwd="yourpassword")
+cushion(cloudant_username='name', cloudant_pwd='pwd')
 sofa_deletedb(dbname="foobardb", "cloudant")
 }
 }

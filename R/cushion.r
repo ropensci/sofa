@@ -1,18 +1,23 @@
 #' Put a cushion on the sofa - i.e., set up config for remote CouchDB databases
 #' 
 #' @import httr
-#' @param endpoint One of localhost, cloudant, iriscouch, or other URL. For local work 
-#'    use the default localhost. For cloudant or iriscouch you will need accounts 
-#'    with those database services.
-#' @param username Your cloudant or iriscouch username
-#' @param pwd Your cloudant or iriscouch password
-#' @export
+#' @param cloudant_name Cloudant username
+#' @param cloudant_pwd Cloudant password
+#' @param iriscouch_name Iriscouch username
+#' @param iriscouch_pwd Iriscouch password
 #' @examples \dontest{
-#' cushion('')
+#' cushion(cloudant_name='name', cloudant_pwd='pwd')
+#' cushion(iriscouch_name='name', iriscouch_pwd='pwd')
 #' }
-# cushion <- function(endpoint, username, pwd){
-#   
-# }
+#' @export
+cushion <- function(cloudant_name=NULL, cloudant_pwd=NULL, 
+                    iriscouch_name=NULL, iriscouch_pwd=NULL)
+{
+  options(cloudant.name=cloudant_name)
+  options(cloudant.pwd=cloudant_pwd)
+  options(iriscouch.name=iriscouch_name)
+  options(iriscouch.pwd=iriscouch_pwd)
+}
 
 #' Put a pillow on the sofa - HMM, WHAT WOULD A PILLOW BE...
 #'

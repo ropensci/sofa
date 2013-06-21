@@ -2,7 +2,7 @@
 \alias{sofa_createdb}
 \title{Create a database.}
 \usage{
-  sofa_createdb(dbname, endpoint = "http://127.0.0.1",
+  sofa_createdb(dbname, endpoint = "localhost",
     port = 5984, username = NULL, pwd = NULL)
 }
 \arguments{
@@ -22,14 +22,17 @@
   Create a database.
 }
 \examples{
-\dontest{
+\donttest{
 sofa_createdb(dbname='sofadb')
 sofa_listdbs() # see if its there now
 
-## or setting username and password in options() call
-options(cloudant.username="yourusername")
-options(cloudant.pwd="yourpassword")
+## or setting username and password in cushion() call
+cushion(cloudant_name='name', cloudant_pwd='pwd')
 sofa_createdb(dbname="mustache", "cloudant")
+
+## iriscouch
+cushion(iriscouch_name='name', iriscouch_pwd='pwd')
+sofa_createdb(dbname="mustache", "iriscouch")
 }
 }
 

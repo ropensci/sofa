@@ -31,8 +31,7 @@ sofa_dbinfo(dbname="dudedb")
 sofa_dbinfo("cloudant", username='yourusername', pwd='yourpassword')
 
 ## or setting username and password in options() call
-options(cloudant.username="yourusername")
-options(cloudant.pwd="yourpassword")
+cushion(cloudant_username='name', cloudant_pwd='pwd')
 sofa_dbinfo("foobardb")
 }
 }

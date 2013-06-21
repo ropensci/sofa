@@ -2,9 +2,9 @@
 \alias{sofa_writedoc}
 \title{Write documents to a database.}
 \usage{
-  sofa_writedoc(endpoint = "http://127.0.0.1", port = 5984,
-    dbname, doc, docid = NULL, rodb = FALSE, baseurl,
-    queryargs)
+  sofa_writedoc(endpoint = "localhost", port = 5984,
+    dbname, doc, docid = NULL, apicall = FALSE, baseurl,
+    queryargs, username = NULL, pwd = NULL)
 }
 \arguments{
   \item{dbname}{Database name3}
@@ -13,8 +13,8 @@
 
   \item{docid}{Document ID}
 
-  \item{rodb}{Stand for "ropensci database". If TRUE, write
-  with json format e.g.: { "baseurl" :
+  \item{apicall}{Stands for "ropensci database". If TRUE,
+  write with json format e.g.: { "baseurl" :
   "http://alm.plos.org/api/v3/articles", "yourqueryargs" :
   "doi=10.1371/journal.pone.0060590", "response":
   "response_from_the_api" }}
@@ -23,6 +23,10 @@
 
   \item{queryargs}{Web API query arguments to pass in to
   json with document}
+
+  \item{username}{Your cloudant or iriscouch username}
+
+  \item{pwd}{Your cloudant or iriscouch password}
 
   \item{endpoint}{the endpoint, defaults to localhost
   (http://127.0.0.1)}
@@ -48,6 +52,6 @@ sofa_writedoc(dbname="sofadb", doc=doc3, docid="somexml")
 
 # write a document using web api storage format
 doc <- '{"downloads":10,"pageviews":5000,"tweets":300}'
-sofa_writedoc(dbname="sofadb", doc=doc, rodb=TRUE, baseurl="http://shit", queryargs="some args")
+sofa_writedoc(dbname="sofadb", doc=doc, apicall=TRUE, baseurl="http://shit", queryargs="some args")
 }
 

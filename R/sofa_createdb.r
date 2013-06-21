@@ -7,17 +7,20 @@
 #' @param port The port to use. Only applicable if using endpoint="localhost".
 #' @param username Your cloudant or iriscouch username
 #' @param pwd Your cloudant or iriscouch password
-#' @examples \dontest{
+#' @examples \donttest{
 #' sofa_createdb(dbname='sofadb')
 #' sofa_listdbs() # see if its there now
 #' 
-#' ## or setting username and password in options() call
-#' options(cloudant.username="yourusername")
-#' options(cloudant.pwd="yourpassword")
+#' ## or setting username and password in cushion() call
+#' cushion(cloudant_name='name', cloudant_pwd='pwd')
 #' sofa_createdb(dbname="mustache", "cloudant")
+#' 
+#' ## iriscouch
+#' cushion(iriscouch_name='name', iriscouch_pwd='pwd')
+#' sofa_createdb(dbname="mustache", "iriscouch")
 #' }
 #' @export
-sofa_createdb <- function(dbname, endpoint="http://127.0.0.1", port=5984, username=NULL, pwd=NULL)
+sofa_createdb <- function(dbname, endpoint="localhost", port=5984, username=NULL, pwd=NULL)
 {
   endpoint <- match.arg(endpoint,choices=c("localhost","cloudant","iriscouch"))
   
@@ -26,16 +29,17 @@ sofa_createdb <- function(dbname, endpoint="http://127.0.0.1", port=5984, userna
     fromJSON(content(PUT(call_)))
   } else
     if(endpoint=="cloudant"){
-      if(is.null(username) | is.null(pwd)){
-        username <- getOption("cloudant.username")
-        pwd <- getOption("cloudant.pwd")
-        if(is.null(username) | is.null(pwd))
-          stop("You must supply your username and password for Cloudant\nOptionally, set your username and password in options, see vignette")
-      }
-      url <- sprintf('https://%s:%s@%s.cloudant.com/%s', username, pwd, username, dbname)
+      auth <- get_pwd(username,pwd,"cloudant")
+      url <- sprintf('https://%s:%s@%s.cloudant.com/%s', auth[[1]], auth[[2]], auth[[1]], dbname)
       out <- PUT(url, add_headers("Content-Type" = "application/json"))
       stop_for_status(out)
       fromJSON(content(out))
     } else
-      stop("iriscouch not supported yet")
+    {
+      auth <- get_pwd(username,pwd,"iriscouch")
+      url <- sprintf('https://%s.iriscouch.com/%s', auth[[1]], dbname)
+      out <- PUT(url, add_headers("Content-Type" = "application/json"))
+      stop_for_status(out)
+      fromJSON(content(out))
+    }
 }

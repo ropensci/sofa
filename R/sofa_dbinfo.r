@@ -16,8 +16,7 @@
 #' sofa_dbinfo("cloudant", username='yourusername', pwd='yourpassword')
 #' 
 #' ## or setting username and password in options() call
-#' options(cloudant.username="yourusername")
-#' options(cloudant.pwd="yourpassword")
+#' cushion(cloudant_username='name', cloudant_pwd='pwd')
 #' sofa_dbinfo("foobardb")
 #' }
 #' @export
@@ -30,13 +29,13 @@ sofa_dbinfo <- function(dbname, endpoint="localhost", port=5984, username=NULL, 
     fromJSON(content(GET(call_)))
   } else
     if(endpoint=="cloudant"){
-      if(is.null(username) | is.null(pwd))
-        username <- getOption("cloudant.username")
-        pwd <- getOption("cloudant.pwd")
-        if(is.null(username) | is.null(pwd))
-          stop("You must supply your username and password for Cloudant\nOptionally, set your username and password in options, see vignette")
-      url <- sprintf('https://%s:%s@%s.cloudant.com/%s', username, pwd, username, dbname)
+      auth <- get_pwd(username,pwd,"cloudant")
+      url <- sprintf('https://%s:%s@%s.cloudant.com/%s', auth[[1]], auth[[2]], auth[[1]], dbname)
       fromJSON(content(GET(url, add_headers("Content-Type" = "application/json"))))
     } else
-      stop("iriscouch not supported yet")
+    {
+      auth <- get_pwd(username,pwd,"iriscouch")
+      url <- sprintf('https://%s.iriscouch.com/%s', auth[[1]], dbname)
+      fromJSON(content(GET(url, add_headers("Content-Type" = "application/json"))))
+    }
 }

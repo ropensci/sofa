@@ -12,8 +12,7 @@
 #' sofa_deletedb(dbname="shitbutt")
 #'
 #' ## or setting username and password in options() call
-#' options(cloudant.username="yourusername")
-#' options(cloudant.pwd="yourpassword")
+#' cushion(cloudant_username='name', cloudant_pwd='pwd')
 #' sofa_deletedb(dbname="foobardb", "cloudant")
 #' }
 #' @export
@@ -26,15 +25,15 @@ sofa_deletedb <- function(dbname, endpoint="localhost", port=5984, username=NULL
     content(DELETE(call_))
   } else
     if(endpoint=="cloudant"){
-      if(is.null(username) | is.null(pwd)){
-        username <- getOption("cloudant.username")
-        pwd <- getOption("cloudant.pwd")
-        if(is.null(username) | is.null(pwd))
-          stop("You must supply your username and password for Cloudant\nOptionally, set your username and password in options, see vignette")
-      }
-      url <- sprintf('https://%s:%s@%s.cloudant.com/%s', username, pwd, username, dbname)
+      auth <- get_pwd(username,pwd,"cloudant")
+      url <- sprintf('https://%s:%s@%s.cloudant.com/%s', auth[[1]], auth[[2]], auth[[1]], dbname)
       out <- DELETE(url, add_headers("Content-Type" = "application/json"))
       stop_for_status(out)
     } else
-      stop("iriscouch not supported yet")
+    {
+      auth <- get_pwd(username,pwd,"iriscouch")
+      url <- sprintf('https://%s.iriscouch.com/%s', auth[[1]], dbname)
+      out <- DELETE(url, add_headers("Content-Type" = "application/json"))
+      stop_for_status(out)
+    }
 }

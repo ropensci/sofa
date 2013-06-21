@@ -1,6 +1,8 @@
+export(cushion)
 export(elastic_search)
 export(elastic_start)
 export(elastic_stop)
+export(get_pwd)
 export(is.sofaes)
 export(rawdata)
 export(sofa_alldocs)
