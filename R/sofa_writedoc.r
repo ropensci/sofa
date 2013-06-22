@@ -4,7 +4,7 @@
 #' @param dbname Database name3
 #' @param doc Document content
 #' @param docid Document ID
-#' @param apicall Stands for "ropensci database". If TRUE, write with json format e.g.:
+#' @param apicall If TRUE, write with json format e.g.:
 #'    {
 #'      "baseurl" : "http://alm.plos.org/api/v3/articles",
 #'      "yourqueryargs" : "doi=10.1371/journal.pone.0060590",
@@ -62,6 +62,7 @@ sofa_writedoc <- function(endpoint="localhost", port=5984, dbname, doc,
     }
   } else
   {
+    doc2 <- doc
     if(grepl("<[A-Za-z]+>", doc))
       doc2 <- paste('{"xml":', '"', doc, '"', '}', sep="")
     

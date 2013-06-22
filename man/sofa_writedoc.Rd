@@ -13,11 +13,10 @@
 
   \item{docid}{Document ID}
 
-  \item{apicall}{Stands for "ropensci database". If TRUE,
-  write with json format e.g.: { "baseurl" :
-  "http://alm.plos.org/api/v3/articles", "yourqueryargs" :
-  "doi=10.1371/journal.pone.0060590", "response":
-  "response_from_the_api" }}
+  \item{apicall}{If TRUE, write with json format e.g.: {
+  "baseurl" : "http://alm.plos.org/api/v3/articles",
+  "yourqueryargs" : "doi=10.1371/journal.pone.0060590",
+  "response": "response_from_the_api" }}
 
   \item{baseurl}{Base url for the web API call}
 
