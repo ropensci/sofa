@@ -22,7 +22,22 @@
 # url <- 'https://ropensci:eBT4Qjw4npZTibR@ropensci.cloudant.com/mynewdb'
 # content(DELETE(url, add_headers("Content-Type" = "application/json")))
 
+# #' Upload a local database to Cloudant
+# #' DB has to exist locally and you have to create the database on Cloudant first before uploadingn local database
+# #' it takes a while to respond, longer as database is bigger
+# ## create new database on cloudant
+# url <- 'https://ropensci:eBT4Qjw4npZTibR@ropensci.cloudant.com/foobardb'
+# fromJSON(content(PUT(url, add_headers("Content-Type" = "application/json"))))
+# 
+# ## upload local database of same name to cloudant
+# url <- 'http://localhost:5984/_replicate'
+# args <- toJSON(list(source="foobardb", target="https://ropensci:eBT4Qjw4npZTibR@ropensci.cloudant.com/foobardb"))
+# fromJSON(content(POST(url, add_headers("Content-Type" = "application/json"), args)))
 
+
+
+
+############################
 ## these not implemented yet
 #' Retrieving multiple documents in one request
 #' @param descending Return the documents in descending by key order, Optional, boolean, Default: false
@@ -47,15 +62,3 @@ fromJSON(content(GET(url, add_headers("Content-Type" = "application/json"))))
 url <- 'https://ropensci:eBT4Qjw4npZTibR@ropensci.cloudant.com/dudedb/_all_docs'
 keys <- toJSON(list(keys = c('6ab1c1f841767839655dd274ae81c173','6ab1c1f841767839655dd274ae799431')))
 fromJSON(content(POST(url, add_headers("Content-Type" = "application/json"), body=keys)))
-
-#' Upload a local database to Cloudant
-#' DB has to exist locally and you have to create the database on Cloudant first before uploadingn local database
-#' it takes a while to respond, longer as database is bigger
-## create new database on cloudant
-url <- 'https://ropensci:eBT4Qjw4npZTibR@ropensci.cloudant.com/foobardb'
-fromJSON(content(PUT(url, add_headers("Content-Type" = "application/json"))))
-
-## upload local database of same name to cloudant
-url <- 'http://localhost:5984/_replicate'
-args <- toJSON(list(source="foobardb", target="https://ropensci:eBT4Qjw4npZTibR@ropensci.cloudant.com/foobardb"))
-fromJSON(content(POST(url, add_headers("Content-Type" = "application/json"), args)))

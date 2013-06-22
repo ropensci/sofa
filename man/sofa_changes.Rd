@@ -26,7 +26,7 @@
   in addition to IDs (character)}
 
   \item{feed}{Select the type of feed. One of normal,
-  longpoll, or continuous. (character)}
+  longpoll, or continuous. See description. (character)}
 
   \item{heartbeat}{Period in milliseconds after which an
   empty line is sent in the results.  Only applicable for
@@ -47,7 +47,9 @@
   \item{port}{port to connect to, defaults to 5984}
 }
 \description{
-  List changes to a database.
+  Of course it doesn't make much sense to use certain
+  options in _changes. For example, using feed=longpoll or
+  continuous doesn't make much sense within R itself.
 }
 \examples{
 sofa_changes(dbname="sofadb")

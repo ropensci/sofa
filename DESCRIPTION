@@ -34,3 +34,4 @@ Collate:
     'sofa_dbinfo.r'
     'sofa_deletedb.r'
     'cushion.r'
+    'sofa_upload.r'
