@@ -14,8 +14,9 @@
 #' @export
 sofa_deldoc <- function(endpoint="http://127.0.0.1", port=5984, dbname, docid)
 {
-  revget <- sofa_getdoc(dbname="sofadb", docid="somexml")[["_rev"]]
+  revget <- sofa_getdoc(dbname=dbname, docid=docid)[["_rev"]]
   call_ <- paste(paste(endpoint, port, sep=":"), "/", dbname, "/", docid, "?rev=", revget, sep="")
   out <- DELETE(call_)
   stop_for_status(out)
+  message(sprintf("%s deleted", docid))
 }

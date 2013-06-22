@@ -28,17 +28,17 @@
 #' @param descending Return the documents in descending by key order, Optional, boolean, Default: false
 #' @param endkey Stop returning records when the speciﬁed key is reached, Optional
 #' @param endkey_docid Stop returning records when the speciﬁed document ID is reached, Optional
-#' @param endkey_docid group Group the results using the reduce function to a group or single row, Optional, boolean, Default: false
-#' @param endkey_docid group_level Specify the group level to be used, Optional, numeric
-#' @param endkey_docid include_docs Include the full content of the documents in the return, Optional, boolean, Default: false
-#' @param endkey_docid inclusive_end Speciﬁes whether the speciﬁed end key should be included in the result, Optional, boolean, Default: true
-#' @param endkey_docid key Return only documents that match the speciﬁed key, Optional, string
-#' @param endkey_docid limit Limit the number of the returned documents to the speciﬁed number, Optional, numeric
-#' @param endkey_docid reduce Use the reduction function, Optional, boolean, Default: true
-#' @param endkey_docid skip Skip this number of records before starting to return the results, Optional, numeric, Default: 0
-#' @param endkey_docid stale Allow the results from a stale view to be used, Optional
-#' @param endkey_docid startkey Return records starting with the speciﬁed key, Optional
-#' @param endkey_docid startkey_docid Return records starting with the speciﬁed document ID, Optional
+#' @param group Group the results using the reduce function to a group or single row, Optional, boolean, Default: false
+#' @param group_level Specify the group level to be used, Optional, numeric
+#' @param include_docs Include the full content of the documents in the return, Optional, boolean, Default: false
+#' @param inclusive_end Speciﬁes whether the speciﬁed end key should be included in the result, Optional, boolean, Default: true
+#' @param key Return only documents that match the speciﬁed key, Optional, string
+#' @param limit Limit the number of the returned documents to the speciﬁed number, Optional, numeric
+#' @param reduce Use the reduction function, Optional, boolean, Default: true
+#' @param skip Skip this number of records before starting to return the results, Optional, numeric, Default: 0
+#' @param stale Allow the results from a stale view to be used, Optional
+#' @param startkey Return records starting with the speciﬁed key, Optional
+#' @param startkey_docid Return records starting with the speciﬁed document ID, Optional
 url <- 'https://ropensci:eBT4Qjw4npZTibR@ropensci.cloudant.com/dudedb/_all_docs'
 fromJSON(content(GET(url, add_headers("Content-Type" = "application/json"))))
 
