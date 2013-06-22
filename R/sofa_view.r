@@ -1,6 +1,6 @@
 #' Put a design document (i.e., a view) into your CouchDB database.
 #' 
-#' @import httr RJSONIO
+#' @import httr
 #' @inheritParams sofa_ping
 #' @param dbname Database name
 #' @param design_name Design document name

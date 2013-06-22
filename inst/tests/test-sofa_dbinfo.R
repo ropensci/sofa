@@ -6,7 +6,6 @@ sofa_createdb('testingdb4')
 
 test_that("sofa_dbinfo returns the correct dimensions", {
   expect_that(length(sofa_dbinfo('testingdb4')), equals(11))
-  expect_that(length(sofa_dbinfo('testingdb4')), equals(2))
 })
 
 test_that("sofa_alldocs returns the correct class", {

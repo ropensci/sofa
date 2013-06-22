@@ -50,8 +50,10 @@ sofa_writedoc <- function(endpoint="localhost", port=5984, dbname, doc,
     }
   
   if(apicall){
+#     doc2 <- paste('{"baseurl":', '"', baseurl, '",', '"queryargs":', 
+#                   RJSONIO::toJSON(queryargs,collapse=""), ',', '"response":', doc, "}", sep="")
     doc2 <- paste('{"baseurl":', '"', baseurl, '",', '"queryargs":', 
-                  RJSONIO::toJSON(queryargs,collapse=""), ',', '"response":', doc, "}", sep="")
+                  toJSON(queryargs,collapse=""), ',', '"response":', doc, "}", sep="")
     if(!is.null(docid)){
       call_ <- paste0(call_, "/", docid)
       fromJSON(content(PUT(call_, body=doc2)))

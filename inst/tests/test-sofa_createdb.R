@@ -7,8 +7,7 @@ test_that("sofa_alldocs returns the correct dimensions", {
 })
 
 test_that("sofa_alldocs returns the correct class", {
-  expect_that(sofa_createdb("testingdb3"), is_a("logical"))
-  expect_that(sofa_createdb("testingdb3"), is_a("character"))
+  expect_that(sofa_createdb("testingdb3"), is_a("list"))
   expect_that(sofa_createdb("testingdb3")[[1]], matches("file_exists"))
 })
 

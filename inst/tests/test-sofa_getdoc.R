@@ -14,7 +14,7 @@ test_that("sofa_getdoc returns the right characters", {
 })
 
 test_that("sofa_getdoc returns the correct class", {
-  expect_that(sofa_getdoc(dbname="getdoctesting", docid="thingsandstuff"), is_a("character"))
+  expect_that(sofa_getdoc(dbname="getdoctesting", docid="thingsandstuff"), is_a("list"))
   expect_that(sofa_getdoc(dbname="getdoctesting", docid="thingsandstuff")[[1]], is_a("character"))
 })
 
