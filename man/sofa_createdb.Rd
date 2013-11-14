@@ -3,7 +3,8 @@
 \title{Create a database.}
 \usage{
   sofa_createdb(dbname, endpoint = "localhost",
-    port = 5984, username = NULL, pwd = NULL)
+    port = 5984, username = NULL, pwd = NULL,
+    delifexists = FALSE)
 }
 \arguments{
   \item{endpoint}{One of localhost, cloudant, or iriscouch.
@@ -17,6 +18,10 @@
   \item{username}{Your cloudant or iriscouch username}
 
   \item{pwd}{Your cloudant or iriscouch password}
+
+  \item{delifexists}{If TRUE, delete any database of the
+  same name before creating it.  This is useful for
+  testing. Default is FALSE.}
 }
 \description{
   Create a database.
@@ -33,6 +38,9 @@ sofa_createdb(dbname="mustache", "cloudant")
 ## iriscouch
 cushion(iriscouch_name='name', iriscouch_pwd='pwd')
 sofa_createdb(dbname="mustache", "iriscouch")
+
+# different login credentials than normal, just pass in to function call
+sofa_createdb(dbname='shit', "cloudant", username='app16517180.heroku', pwd='DA1w5hbKJJAtcGnF74Ds3nVl')
 }
 }
 

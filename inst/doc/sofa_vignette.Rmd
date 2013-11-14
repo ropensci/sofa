@@ -2,7 +2,7 @@
 %\VignetteEngine{knitr}
 %\VignetteIndexEntry{An R Markdown Vignette made with knitr}
 -->
-  
+
 sofa - easy interface to CouchDB from R
 ======
   
@@ -53,6 +53,14 @@ This is what XML looks like:
 
 ### Quick start
 
+#### Start CouchDB in your terminal
+
+You can do this from anywhere in your directory. See [here](http://couchdb.apache.org/) for instructions on how to install CouchDB. You can't use `sofa` functions without having couchdb running, either locally or on a remote server. If using a remote sever of course you don't need to have CouchDB running locally.
+
+```bash
+couchdb
+```
+
 #### Install sofa
 
 ```{r install, comment=NA, warning=FALSE}
@@ -65,12 +73,136 @@ library(sofa)
 sofa_ping()
 ```
 
+#### Create a new database
+```{r createdb, comment=NA, warning=FALSE, message=FALSE}
+sofa_createdb('helloworld', delifexists=TRUE)
+```
+
+#### List databases
+```{r listdbs, comment=NA, warning=FALSE, message=FALSE}
+sofa_listdbs()
+```
+
 ### More in depth stuff
+
+XXXXX
 
 #### Working with documents
 
-#### Working with a remote database
+XXXXX
+
+#### Working with remote CouchDB databases
+
++ Cloudant: Sign up for a free account at [Cloudant][cloudant]. Take note of your user name and your password as you will need both.
++ Iriscouch: Sign up for a free account at [Iriscouch][iriscouch]. Take note of your user name and your password as you will need both.
++ EC2: EC2 does take a little more work than the previous two. There is however, a short YouTube video that describes how to get CouchDB up and running on EC2. At the end of the process you can simply call localhost:5984 as you can use [port forwarding][forwarding] - unless you use a different option.
+
+I've tried to make it as simple as possible to connect to a remote CouchDB. Here is the process:
+
++ Step 1: Save your authentication information to the R options list. The function `cushion` takes care of this. This only saves your auth details for the current R session. If you want to save them permanently add entries to your .Rprofile file like `options(cloudant.name = <yourusername>)`. 
+
+```{r auth, eval=FALSE}
+cushion(cloudant_name=<yourusername>, cloudant_pwd=<yourpassword>, iriscouch_name=<yourusername>, iriscouch_pwd=<yourpassword>)
+```
+
++ Step 2: In nearly any `sofa` function, specify the the `endpoint` parameter as either *cloudant*, *iriscouch*, or *ec2*. For example, `sofa_createdb(endpoint = 'cloudant')`. If you are not using port forwarding for EC2, then your endpoint may not be localhost:5984, in which case use `endpoint=other`.
++ Step 3: There is no Step 3.
+
+Cloudant has come out with [BigCouch][bigcouch], which they describe as *A Highly Available, Fault-tolerant, Clustered Version of Apache CouchDB*. Basically, if you have a shit load of data, you may want to try this. You could probably use that and query from `sofa`. Do let me know if it works for anyone. 
 
 #### Attachements
 
+Functions not filled out yet...
+
 #### The changes feed
+
+The changes feed is a really cool feature of CouchDB. 
+
+Unfortunately, we can't take full advantage of the changes feed in R. That is, there are a few options in the _changes API, *normal*, *longpoll*, and *continuous*. *Longpoll* and *continuous* keep a connection open and show changes to the database as they happen, while *normal* merely returns the changes and closes the connection. Though perhaps one could use the changes feed e.g. in a [Shiny app][shiny] to make e.g. a chat app, or something like that takes advantage of real time changes in a database.
+
+Here is a nice video on the changes feed: [*Asynchronous architectures with the CouchDB _changes feed*][changes]
+
+Note: The changes feed is how Elasticsearch indexes your CouchDB database for full text search  (see below). 
+
+#### Full text search
+
+CouchDB doesn't natively support full text search, but you can use Elasticsearch, and the couchb river plugin to make it happen. First, we must install Elasticsearch before getting to the fun stuff, which will depend on your system. So rather than me helping, we'll go to the interwebs.
+
++ [Install Elasticsearch][installes]
++ Integrating CouchDB and Elasticsearch on Linux [here][linuxes]
++ The river plugin [here][river]
++ Blog post by creater of Elasticsearch [here][esblog]
+
+##### Start elasticsearch in your terminal
+
+See [here][sofa] for instructions on how to install Elasticsearch and the River CouchDB plugin.
+
+```bash
+cd /usr/local/elasticsearch
+bin/elasticsearch -f
+```
+
+***************
+
+#### Incorporating sofa into web API calls
+
+##### Install alm, branch "couch"
+```{r install2, comment=NA, warning=FALSE, message=FALSE}
+# Uncomment these lines if you don't have these packages installed
+library(devtools)
+install_github("alm", "ropensci", ref="couch")
+library(alm)
+```
+
+##### Create a new database
+```{r createdb2, comment=NA, warning=FALSE, message=FALSE}
+sofa_createdb(dbname='alm_db', delifexists=TRUE)
+```
+
+##### Write couchdb database name to options
+```{r options, comment=NA, warning=FALSE, message=FALSE}
+options(couch_db_name = "alm_db")
+```
+
+##### Search for altmetrics normally, w/o writing to a database
+```{r almsearch1, comment=NA, warning=FALSE, message=FALSE}
+head( alm(doi="10.1371/journal.pone.0029797") )
+```
+
+##### Search for altmetrics normally, while writing to a database
+```{r almsearch2, comment=NA, warning=FALSE, message=FALSE, eval=FALSE}
+head( alm(doi="10.1371/journal.pone.0029797", write2couch=TRUE) )
+```
+
+##### Make lots of calls, and write them simultaneously
+```{r lotscalls, comment=NA, warning=FALSE, message=FALSE, eval=FALSE}
+# install_github("rplos", "ropensci")
+library(rplos)
+dois <- searchplos(terms='evolution', fields='id', limit = 100)
+out <- alm(doi=as.character(dois[,1]), write2couch=TRUE)
+lapply(out[1:2], head)
+```
+
+##### Writing data to CouchDB does take a bit longer
+```{r systemtime, comment=NA, warning=FALSE, message=FALSE, eval=FALSE}
+system.time(alm(doi=as.character(dois[,1])[1:60], write2couch=FALSE))
+system.time(alm(doi=as.character(dois[,1])[1:60], write2couch=TRUE))
+```
+
+```{r cleanup, echo=FALSE}
+sofa_deletedb('alm_db')
+```
+
+[cloudant]: https://cloudant.com/
+[iriscouch]: http://www.iriscouch.com/
+[ec2]: http://aws.amazon.com/ec2/
+[ec2video]: http://youtu.be/0YuvP41kfME
+[forwarding]: http://wiki.apache.org/couchdb/Getting_started_with_Amazon_EC2
+[installes]: http://www.elasticsearch.org/download/
+[linuxes]: http://www.ripariandata.com/blog/time-to-relax-installing-couchdb-and-elasticsearch
+[sofa]: https://github.com/schamberlain/sofa
+[river]: https://github.com/elasticsearch/elasticsearch-river-couchdb
+[esblog]: http://www.elasticsearch.org/blog/the-river-searchable-couchdb/
+[changes]: http://youtu.be/WaH4_Hq33PI
+[bigcouch]: http://bigcouch.cloudant.com/
+[shiny]: http://www.rstudio.com/shiny/

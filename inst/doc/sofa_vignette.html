@@ -232,6 +232,13 @@ hljs.initHighlightingOnLoad();
 
 <h3>Quick start</h3>
 
+<h4>Start CouchDB in your terminal</h4>
+
+<p>You can do this from anywhere in your directory. See <a href="http://couchdb.apache.org/">here</a> for instructions on how to install CouchDB. You can&#39;t use <code>sofa</code> functions without having couchdb running, either locally or on a remote server. If using a remote sever of course you don&#39;t need to have CouchDB running locally.</p>
+
+<pre><code class="bash">couchdb
+</code></pre>
+
 <h4>Install sofa</h4>
 
 <pre><code class="r"># install.packages(&#39;devtools&#39;); library(devtools);
@@ -254,7 +261,7 @@ Use suppressPackageStartupMessages() to suppress these startup messages in
 the future
 </code></pre>
 
-<h4>XXXX</h4>
+<h4>Ping your local server just to check your head</h4>
 
 <pre><code class="r">sofa_ping()
 </code></pre>
@@ -269,8 +276,140 @@ $version
 [1] &quot;1.3.0&quot;
 
 $vendor
-   version       name 
- &quot;1.3.0-1&quot; &quot;Homebrew&quot; 
+$vendor$version
+[1] &quot;1.3.0-1&quot;
+
+$vendor$name
+[1] &quot;Homebrew&quot;
+</code></pre>
+
+<h4>Create a new database</h4>
+
+<pre><code class="r">sofa_createdb(&quot;helloworld&quot;, delifexists = TRUE)
+</code></pre>
+
+<pre><code>Error: unused argument (delifexists = TRUE)
+</code></pre>
+
+<h4>List databases</h4>
+
+<pre><code class="r">sofa_listdbs()
+</code></pre>
+
+<pre><code> [1] &quot;_replicator&quot;                &quot;_users&quot;                    
+ [3] &quot;alm_couchdb&quot;                &quot;alm_db&quot;                    
+ [5] &quot;cheese&quot;                     &quot;deldbtesting&quot;              
+ [7] &quot;dudedb&quot;                     &quot;example&quot;                   
+ [9] &quot;foobar&quot;                     &quot;foodb&quot;                     
+[11] &quot;getattachtesting&quot;           &quot;hello_earth&quot;               
+[13] &quot;hello_world&quot;                &quot;helloworld&quot;                
+[15] &quot;rplos_db&quot;                   &quot;shit&quot;                      
+[17] &quot;shitty&quot;                     &quot;shitty2&quot;                   
+[19] &quot;sofadb&quot;                     &quot;test_suite_db&quot;             
+[21] &quot;test_suite_db/with_slashes&quot; &quot;test_suite_reports&quot;        
+[23] &quot;testr2couch&quot;                &quot;twitter_db&quot;                
+</code></pre>
+
+<h3>More in depth stuff</h3>
+
+<h4>Working with documents</h4>
+
+<h4>Working with a remote database</h4>
+
+<h4>Attachements</h4>
+
+<h4>The changes feed</h4>
+
+<h4>Full text search</h4>
+
+<h5>Start elasticsearch in your terminal</h5>
+
+<p>See <a href="https://github.com/schamberlain/sofa">here</a> for instructions on how to install Elasticsearch and the River CouchDB plugin.</p>
+
+<pre><code class="bash">cd /usr/local/elasticsearch
+bin/elasticsearch -f
+</code></pre>
+
+<hr/>
+
+<h4>Incorporating sofa into web API calls</h4>
+
+<h5>Install alm, branch &ldquo;couch&rdquo;</h5>
+
+<pre><code class="r"># Uncomment these lines if you don&#39;t have these packages installed
+install_github(&quot;alm&quot;, &quot;ropensci&quot;, ref = &quot;couch&quot;)
+</code></pre>
+
+<pre><code>Error: could not find function &quot;install_github&quot;
+</code></pre>
+
+<pre><code class="r">library(alm)
+</code></pre>
+
+<h3>Create a new database</h3>
+
+<pre><code class="r">sofa_createdb(dbname = &quot;alm_db&quot;, delifexists = TRUE)
+</code></pre>
+
+<pre><code>Error: unused argument (delifexists = TRUE)
+</code></pre>
+
+<h3>Write couchdb database name to options</h3>
+
+<pre><code class="r">options(couch_db_name = &quot;alm_db&quot;)
+</code></pre>
+
+<h3>Search for altmetrics normally, w/o writing to a database</h3>
+
+<pre><code class="r">head(alm(doi = &quot;10.1371/journal.pone.0029797&quot;))
+</code></pre>
+
+<pre><code>          .id pdf html shares groups comments likes citations total
+1   bloglines  NA   NA     NA     NA       NA    NA         0     0
+2   citeulike  NA   NA      1     NA       NA    NA        NA     1
+3    connotea  NA   NA     NA     NA       NA    NA         0     0
+4    crossref  NA   NA     NA     NA       NA    NA         6     6
+5      nature  NA   NA     NA     NA       NA    NA         4     4
+6 postgenomic  NA   NA     NA     NA       NA    NA         0     0
+</code></pre>
+
+<h3>Search for altmetrics normally, while writing to a database</h3>
+
+<pre><code class="r">head(alm(doi = &quot;10.1371/journal.pone.0029797&quot;, write2couch = TRUE))
+</code></pre>
+
+<pre><code>NULL
+</code></pre>
+
+<h3>Make lots of calls, and write them simultaneously</h3>
+
+<pre><code class="r"># install_github(&#39;rplos&#39;, &#39;ropensci&#39;)
+library(rplos)
+dois &lt;- searchplos(terms = &quot;evolution&quot;, fields = &quot;id&quot;, limit = 100)
+out &lt;- alm(doi = as.character(dois[, 1]), write2couch = TRUE)
+lapply(out[1:2], head)
+</code></pre>
+
+<pre><code>list()
+</code></pre>
+
+<h3>Writing data to CouchDB does take a bit longer</h3>
+
+<pre><code class="r">system.time(alm(doi = as.character(dois[, 1])[1:60], write2couch = FALSE))
+</code></pre>
+
+<pre><code>   user  system elapsed 
+  1.733   0.020   3.347 
+</code></pre>
+
+<pre><code class="r">system.time(alm(doi = as.character(dois[, 1])[1:60], write2couch = TRUE))
+</code></pre>
+
+<pre><code>   user  system elapsed 
+  0.040   0.008   1.247 
+</code></pre>
+
+<pre><code>## [1] &quot;&quot;
 </code></pre>
 
 </body>

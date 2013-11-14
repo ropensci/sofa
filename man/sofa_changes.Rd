@@ -54,5 +54,8 @@
 \examples{
 sofa_changes(dbname="sofadb")
 sofa_changes(dbname="sofadb", limit=2)
+
+# different login credentials than normal, just pass in to function call
+sofa_changes("cloudant", dbname='gaugesdb_ro', username='app16517180.heroku', pwd='DA1w5hbKJJAtcGnF74Ds3nVl', include_docs='true')
 }
 

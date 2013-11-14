@@ -33,6 +33,9 @@ sofa_listdbs("cloudant", username='yourusername', pwd='yourpassword')
 ## or setting username and password in options() call
 cushion(cloudant_username='name', cloudant_pwd='pwd')
 sofa_listdbs("cloudant")
+
+# different login credentials than normal, just pass in to function call
+sofa_listdbs("cloudant", username='appid.heroku', pwd='password')
 }
 }
 

@@ -18,6 +18,9 @@
 #' ## or setting username and password in options() call
 #' cushion(cloudant_username='name', cloudant_pwd='pwd')
 #' sofa_listdbs("cloudant")
+#' 
+#' # different login credentials than normal, just pass in to function call
+#' sofa_listdbs("cloudant", username='appid.heroku', pwd='password')
 #' }
 #' @export
 sofa_listdbs <- function(endpoint="localhost", port=5984, username=NULL, pwd=NULL)
@@ -30,12 +33,16 @@ sofa_listdbs <- function(endpoint="localhost", port=5984, username=NULL, pwd=NUL
     fromJSON(content(GET(call_)))
   } else
     if(endpoint=="cloudant"){
-      auth <- get_pwd(username,pwd,"cloudant")
+      if(is.null(username) | is.null(pwd)){
+        auth <- get_pwd(username,pwd,"cloudant")
+      } else { auth <- c(username, pwd) }
       url <- sprintf('https://%s:%s@%s.cloudant.com/_all_dbs', auth[[1]], auth[[2]], auth[[1]])
       fromJSON(content(GET(url, add_headers("Content-Type" = "application/json"))))
     } else
     {
-      auth <- get_pwd(username,pwd,"iriscouch")
+      if(is.null(username) | is.null(pwd)){
+        auth <- get_pwd(username,pwd,"iriscouch")
+      } else { auth <- c(username, pwd) }
       url <- sprintf('https://%s.iriscouch.com/_all_dbs', auth[[1]])
       fromJSON(content(GET(url, add_headers("Content-Type" = "application/json"))))
     }

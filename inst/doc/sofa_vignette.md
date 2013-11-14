@@ -2,7 +2,7 @@
 %\VignetteEngine{knitr}
 %\VignetteIndexEntry{An R Markdown Vignette made with knitr}
 -->
-  
+
 sofa - easy interface to CouchDB from R
 ======
   
@@ -53,6 +53,14 @@ This is what XML looks like:
 
 ### Quick start
 
+#### Start CouchDB in your terminal
+
+You can do this from anywhere in your directory. See [here](http://couchdb.apache.org/) for instructions on how to install CouchDB. You can't use `sofa` functions without having couchdb running, either locally or on a remote server. If using a remote sever of course you don't need to have CouchDB running locally.
+
+```bash
+couchdb
+```
+
 #### Install sofa
 
 
@@ -79,7 +87,7 @@ the future
 ```
 
 
-#### XXXX
+#### Ping your local server just to check your head
 
 ```r
 sofa_ping()
@@ -96,7 +104,172 @@ $version
 [1] "1.3.0"
 
 $vendor
-   version       name 
- "1.3.0-1" "Homebrew" 
+$vendor$version
+[1] "1.3.0-1"
+
+$vendor$name
+[1] "Homebrew"
+```
+
+
+#### Create a new database
+
+```r
+sofa_createdb("helloworld", delifexists = TRUE)
+```
+
+```
+Error: unused argument (delifexists = TRUE)
+```
+
+
+#### List databases
+
+```r
+sofa_listdbs()
+```
+
+```
+ [1] "_replicator"                "_users"                    
+ [3] "alm_couchdb"                "alm_db"                    
+ [5] "cheese"                     "deldbtesting"              
+ [7] "dudedb"                     "example"                   
+ [9] "foobar"                     "foodb"                     
+[11] "getattachtesting"           "hello_earth"               
+[13] "hello_world"                "helloworld"                
+[15] "rplos_db"                   "shit"                      
+[17] "shitty"                     "shitty2"                   
+[19] "sofadb"                     "test_suite_db"             
+[21] "test_suite_db/with_slashes" "test_suite_reports"        
+[23] "testr2couch"                "twitter_db"                
+```
+
+
+### More in depth stuff
+
+#### Working with documents
+
+#### Working with a remote database
+
+#### Attachements
+
+#### The changes feed
+
+#### Full text search
+
+##### Start elasticsearch in your terminal
+
+See [here](https://github.com/schamberlain/sofa) for instructions on how to install Elasticsearch and the River CouchDB plugin.
+
+```bash
+cd /usr/local/elasticsearch
+bin/elasticsearch -f
+```
+
+***************
+
+#### Incorporating sofa into web API calls
+
+##### Install alm, branch "couch"
+
+```r
+# Uncomment these lines if you don't have these packages installed
+install_github("alm", "ropensci", ref = "couch")
+```
+
+```
+Error: could not find function "install_github"
+```
+
+```r
+library(alm)
+```
+
+
+### Create a new database
+
+```r
+sofa_createdb(dbname = "alm_db", delifexists = TRUE)
+```
+
+```
+Error: unused argument (delifexists = TRUE)
+```
+
+
+### Write couchdb database name to options
+
+```r
+options(couch_db_name = "alm_db")
+```
+
+
+### Search for altmetrics normally, w/o writing to a database
+
+```r
+head(alm(doi = "10.1371/journal.pone.0029797"))
+```
+
+```
+          .id pdf html shares groups comments likes citations total
+1   bloglines  NA   NA     NA     NA       NA    NA         0     0
+2   citeulike  NA   NA      1     NA       NA    NA        NA     1
+3    connotea  NA   NA     NA     NA       NA    NA         0     0
+4    crossref  NA   NA     NA     NA       NA    NA         6     6
+5      nature  NA   NA     NA     NA       NA    NA         4     4
+6 postgenomic  NA   NA     NA     NA       NA    NA         0     0
+```
+
+
+### Search for altmetrics normally, while writing to a database
+
+```r
+head(alm(doi = "10.1371/journal.pone.0029797", write2couch = TRUE))
+```
+
+```
+NULL
+```
+
+
+### Make lots of calls, and write them simultaneously
+
+```r
+# install_github('rplos', 'ropensci')
+library(rplos)
+dois <- searchplos(terms = "evolution", fields = "id", limit = 100)
+out <- alm(doi = as.character(dois[, 1]), write2couch = TRUE)
+lapply(out[1:2], head)
+```
+
+```
+list()
+```
+
+
+### Writing data to CouchDB does take a bit longer
+
+```r
+system.time(alm(doi = as.character(dois[, 1])[1:60], write2couch = FALSE))
+```
+
+```
+   user  system elapsed 
+  1.733   0.020   3.347 
+```
+
+```r
+system.time(alm(doi = as.character(dois[, 1])[1:60], write2couch = TRUE))
+```
+
+```
+   user  system elapsed 
+  0.040   0.008   1.247 
+```
+
+
+
+```
+## [1] ""
 ```
 

@@ -21,6 +21,9 @@
 #' @examples
 #' sofa_changes(dbname="sofadb")
 #' sofa_changes(dbname="sofadb", limit=2)
+#' 
+#' # different login credentials than normal, just pass in to function call
+#' sofa_changes("cloudant", dbname='gaugesdb_ro', username='app16517180.heroku', pwd='DA1w5hbKJJAtcGnF74Ds3nVl', include_docs='true')
 #' @export
 sofa_changes <- function(endpoint="localhost", port=5984, dbname, 
   descending=NULL, startkey=NULL, endkey=NULL, since=NULL, limit=NULL, include_docs=NULL,
@@ -38,14 +41,14 @@ sofa_changes <- function(endpoint="localhost", port=5984, dbname,
     fromJSON(content(out))
   } else
     if(endpoint=="cloudant"){
-      auth <- get_pwd(username,pwd,"cloudant")
+      if(is.null(username) | is.null(pwd)){ auth <- get_pwd(username,pwd,"cloudant") } else { auth <- c(username, pwd) }
       call_ <- sprintf('https://%s:%s@%s.cloudant.com/%s/_changes', auth[[1]], auth[[2]], auth[[1]], dbname)
       out <- GET(call_, query=args, add_headers("Content-Type" = "application/json"))
       stop_for_status(out)
       fromJSON(content(out))
     } else
     {
-      auth <- get_pwd(username,pwd,"iriscouch")
+      if(is.null(username) | is.null(pwd)){ auth <- get_pwd(username,pwd,"iriscouch") } else { auth <- c(username, pwd) }
       call_ <- sprintf('https://%s.iriscouch.com/%s/_changes', auth[[1]], dbname)
       out <- GET(url, add_headers("Content-Type" = "application/json"))
       stop_for_status(out)

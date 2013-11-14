@@ -2,7 +2,7 @@
 \alias{get_pwd}
 \title{Get auth info for a cushion}
 \usage{
-  get_pwd(u, p, service)
+  get_pwd(u = NULL, p = NULL, service)
 }
 \arguments{
   \item{u}{username}
@@ -13,5 +13,10 @@
 }
 \description{
   Get auth info for a cushion
+}
+\examples{
+\dontrun{
+get_pwd(service='cloudant')
+}
 }
 

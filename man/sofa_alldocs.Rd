@@ -2,10 +2,10 @@
 \alias{sofa_alldocs}
 \title{List all docs in a given database.}
 \usage{
-  sofa_alldocs(endpoint = "http://127.0.0.1", port = 5984,
-    dbname, asdf = TRUE, descending = NULL,
-    startkey = NULL, endkey = NULL, limit = NULL,
-    include_docs = NULL)
+  sofa_alldocs(cushion = "localhost", port = 5984, dbname,
+    asdf = TRUE, descending = NULL, startkey = NULL,
+    endkey = NULL, limit = NULL, include_docs = NULL,
+    username = NULL, pwd = NULL)
 }
 \arguments{
   \item{dbname}{Database name. (charcter)}
@@ -24,10 +24,11 @@
   \item{include_docs}{If TRUE, returns docs themselves, in
   addition to IDs (logical)}
 
-  \item{endpoint}{the endpoint, defaults to localhost
-  (http://127.0.0.1)}
-
   \item{port}{port to connect to, defaults to 5984}
+
+  \item{username}{Your cloudant or iriscouch username}
+
+  \item{pwd}{Your cloudant or iriscouch password}
 }
 \description{
   List all docs in a given database.
@@ -36,5 +37,11 @@
 sofa_alldocs(dbname="sofadb")
 sofa_alldocs(dbname="twitter_db", limit=2)
 sofa_alldocs(dbname="twitter_db", limit=2, include_docs="true")
+
+# different login credentials than normal, just pass in to function call
+sofa_alldocs(cushion="sofa_cloudant", dbname='dbname', username='username', pwd='password')
+
+# different login credentials than normal, just pass in to function call
+sofa_alldocs(cushion="sofa_cloudant_heroku", dbname='gaugesdb_ro', include_docs='true')
 }
 

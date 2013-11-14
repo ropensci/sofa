@@ -2,26 +2,37 @@
 \alias{cushion}
 \title{Put a cushion on the sofa - i.e., set up config for remote CouchDB databases}
 \usage{
-  cushion(cloudant_name = NULL, cloudant_pwd = NULL,
-    iriscouch_name = NULL, iriscouch_pwd = NULL)
+  cushion(...)
 }
 \arguments{
-  \item{cloudant_name}{Cloudant username}
-
-  \item{cloudant_pwd}{Cloudant password}
-
-  \item{iriscouch_name}{Iriscouch username}
-
-  \item{iriscouch_pwd}{Iriscouch password}
+  \item{...}{Enter named sets of username and password.}
 }
 \description{
   Put a cushion on the sofa - i.e., set up config for
   remote CouchDB databases
 }
+\details{
+  Setup for authentication: For localhost you don't need to
+  authenticate, but of course you may have set up a
+  username and password in which case use 'localhost'.
+
+  Others supported are 'cloudant' and 'iriscouch'.
+
+  You can use other named username/password sets too.
+
+  You can permanently store your auth details in your
+  .Rprofile by putting in entries like this:
+
+  options(sofa_cloudant = c("username","yourcoolpassword"))
+
+  Though if you don't want to store them permanently, you
+  can use the cushion() function instead. See examples
+  below on how to do this. Though using cusion() only
+  stores them for the current session.
+}
 \examples{
 \dontest{
-cushion(cloudant_name='name', cloudant_pwd='pwd')
-cushion(iriscouch_name='name', iriscouch_pwd='pwd')
+cushion(sofa_cloudant=c('name','pwd'), sofa_iriscouch=c('name','pwd'))
 }
 }
 
