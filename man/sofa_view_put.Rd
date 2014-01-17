@@ -2,9 +2,8 @@
 \alias{sofa_view_put}
 \title{Put a design document (i.e., a view) into your CouchDB database.}
 \usage{
-  sofa_view_put(dbname, design_name, fxnname = "foo",
-    key = "null", value = "doc",
-    endpoint = "http://127.0.0.1", port = 5984)
+sofa_view_put(dbname, design_name, fxnname = "foo", key = "null",
+  value = "doc", endpoint = "http://127.0.0.1", port = 5984)
 }
 \arguments{
   \item{dbname}{Database name}
@@ -17,13 +16,13 @@
   \item{port}{port to connect to, defaults to 5984}
 }
 \description{
-  Put a design document (i.e., a view) into your CouchDB
-  database.
+Put a design document (i.e., a view) into your CouchDB
+database.
 }
 \details{
-  If you are writing a complicated javascript function,
-  better to do that in the Futon CouchDB interface or
-  otherwise.
+If you are writing a complicated javascript function,
+better to do that in the Futon CouchDB interface or
+otherwise.
 }
 \examples{
 \dontrun{

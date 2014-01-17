@@ -2,10 +2,9 @@
 \alias{sofa_alldocs}
 \title{List all docs in a given database.}
 \usage{
-  sofa_alldocs(cushion = "localhost", port = 5984, dbname,
-    asdf = TRUE, descending = NULL, startkey = NULL,
-    endkey = NULL, limit = NULL, include_docs = NULL,
-    username = NULL, pwd = NULL)
+sofa_alldocs(cushion = "sofa_localhost", port = 5984, dbname, asdf = TRUE,
+  descending = NULL, startkey = NULL, endkey = NULL, limit = NULL,
+  include_docs = NULL, username = NULL, pwd = NULL)
 }
 \arguments{
   \item{dbname}{Database name. (charcter)}
@@ -31,7 +30,7 @@
   \item{pwd}{Your cloudant or iriscouch password}
 }
 \description{
-  List all docs in a given database.
+List all docs in a given database.
 }
 \examples{
 sofa_alldocs(dbname="sofadb")

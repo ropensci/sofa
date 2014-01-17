@@ -7,30 +7,9 @@ Title: Easy R connector to CouchDB
 Description: Easy R connector to CouchDB.
 URL: https://github.com/schamberlain/sofa
 BugReports: https://github.com/schamberlain/sofa/issues
-Import: httr,
+Imports:
+    httr,
     plyr
 Suggests:
     testthat,
     roxygen2
-Collate:
-    'sofa_alldocs.r'
-    'sofa_attach.r'
-    'sofa_changes.r'
-    'sofa_createdb.r'
-    'sofa_deldoc.r'
-    'sofa_getattach.r'
-    'sofa_getdoc.r'
-    'sofa_head.r'
-    'sofa_listdbs.r'
-    'sofa_ping.r'
-    'sofa_writedoc.r'
-    'methods.r'
-    'elastic_start.r'
-    'elastic_stop.r'
-    'sofa_view.r'
-    'elastic_search.r'
-    'zzz.r'
-    'sofa_dbinfo.r'
-    'sofa_deletedb.r'
-    'cushion.r'
-    'sofa_upload.r'

@@ -2,9 +2,8 @@
 \alias{sofa_createdb}
 \title{Create a database.}
 \usage{
-  sofa_createdb(dbname, endpoint = "localhost",
-    port = 5984, username = NULL, pwd = NULL,
-    delifexists = FALSE)
+sofa_createdb(dbname, endpoint = "localhost", port = 5984,
+  username = NULL, pwd = NULL, delifexists = FALSE)
 }
 \arguments{
   \item{endpoint}{One of localhost, cloudant, or iriscouch.
@@ -24,7 +23,7 @@
   testing. Default is FALSE.}
 }
 \description{
-  Create a database.
+Create a database.
 }
 \examples{
 \donttest{

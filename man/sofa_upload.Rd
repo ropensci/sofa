@@ -2,8 +2,8 @@
 \alias{sofa_upload}
 \title{Upload a local database to a remote database server, e.g., Cloudant, Iriscouch}
 \usage{
-  sofa_upload(to = "cloudant", port = 5984, dbname,
-    username = NULL, pwd = NULL, createdb = FALSE)
+sofa_upload(to = "cloudant", port = 5984, dbname, username = NULL,
+  pwd = NULL, createdb = FALSE)
 }
 \arguments{
   \item{to}{Remote service name to upload to. One of
@@ -23,8 +23,8 @@
   \item{pwd}{Your cloudant or iriscouch password}
 }
 \description{
-  Upload a local database to a remote database server,
-  e.g., Cloudant, Iriscouch
+Upload a local database to a remote database server, e.g.,
+Cloudant, Iriscouch
 }
 \examples{
 \donttest{

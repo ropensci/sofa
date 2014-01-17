@@ -2,8 +2,8 @@
 \alias{sofa_getattach}
 \title{Get an attachment.}
 \usage{
-  sofa_getattach(endpoint = "http://127.0.0.1",
-    port = 5984, dbname, docid, attname = NULL)
+sofa_getattach(endpoint = "http://127.0.0.1", port = 5984, dbname, docid,
+  attname = NULL)
 }
 \arguments{
   \item{dbname}{Database name. (charcter)}
@@ -18,7 +18,7 @@
   \item{port}{port to connect to, defaults to 5984}
 }
 \description{
-  Get an attachment.
+Get an attachment.
 }
 \examples{
 sofa_getattach(dbname="sofadb", docid="guysbeer")

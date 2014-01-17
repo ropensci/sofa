@@ -2,9 +2,9 @@
 \alias{sofa_writedoc}
 \title{Write documents to a database.}
 \usage{
-  sofa_writedoc(endpoint = "localhost", port = 5984,
-    dbname, doc, docid = NULL, apicall = FALSE, baseurl,
-    queryargs, username = NULL, pwd = NULL)
+sofa_writedoc(endpoint = "localhost", port = 5984, dbname, doc,
+  docid = NULL, apicall = FALSE, baseurl, queryargs, username = NULL,
+  pwd = NULL)
 }
 \arguments{
   \item{dbname}{Database name3}
@@ -33,7 +33,7 @@
   \item{port}{port to connect to, defaults to 5984}
 }
 \description{
-  Write documents to a database.
+Write documents to a database.
 }
 \examples{
 # write a document WITH a name (uses PUT)

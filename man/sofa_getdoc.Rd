@@ -2,8 +2,7 @@
 \alias{sofa_getdoc}
 \title{Get a document from a database.}
 \usage{
-  sofa_getdoc(endpoint = "http://127.0.0.1", port = 5984,
-    dbname, docid)
+sofa_getdoc(endpoint = "http://127.0.0.1", port = 5984, dbname, docid)
 }
 \arguments{
   \item{dbname}{Database name}
@@ -16,7 +15,7 @@
   \item{port}{port to connect to, defaults to 5984}
 }
 \description{
-  Get a document from a database.
+Get a document from a database.
 }
 \examples{
 sofa_getdoc(dbname="twitter_db", docid="9f6950f1ee18ed0f0a2c529c30003ab0")

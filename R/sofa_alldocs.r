@@ -1,5 +1,6 @@
 #' List all docs in a given database.
 #'
+#' @import plyr
 #' @inheritParams sofa_ping
 #' @param dbname Database name. (charcter)
 #' @param asdf Return as data.frame? defaults to TRUE (logical)

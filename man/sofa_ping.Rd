@@ -2,8 +2,8 @@
 \alias{sofa_ping}
 \title{Ping the couchdb server.}
 \usage{
-  sofa_ping(endpoint = "localhost", port = 5984,
-    username = NULL, pwd = NULL)
+sofa_ping(endpoint = "localhost", port = 5984, username = NULL,
+  pwd = NULL)
 }
 \arguments{
   \item{endpoint}{the endpoint, defaults to localhost
@@ -16,7 +16,7 @@
   \item{pwd}{Your cloudant or iriscouch password}
 }
 \description{
-  Ping the couchdb server.
+Ping the couchdb server.
 }
 \examples{
 sofa_ping()

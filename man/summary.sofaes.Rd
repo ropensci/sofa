@@ -2,9 +2,9 @@
 \alias{summary.sofaes}
 \title{Print summary of results}
 \usage{
-  \method{summary}{sofaes} (x)
+\method{summary}{sofaes}(x)
 }
 \description{
-  Print summary of results
+Print summary of results
 }
 

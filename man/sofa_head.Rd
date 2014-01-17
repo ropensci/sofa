@@ -2,8 +2,8 @@
 \alias{sofa_head}
 \title{Just get header info on a document}
 \usage{
-  sofa_head(endpoint = "localhost", port = 5984, dbname,
-    docid, username = NULL, pwd = NULL)
+sofa_head(endpoint = "localhost", port = 5984, dbname, docid,
+  username = NULL, pwd = NULL)
 }
 \arguments{
   \item{dbname}{Database name. (charcter)}
@@ -20,7 +20,7 @@
   \item{port}{port to connect to, defaults to 5984}
 }
 \description{
-  Just get header info on a document
+Just get header info on a document
 }
 \examples{
 sofa_head(dbname="foobar", docid="dudesbeer")
