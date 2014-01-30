@@ -7,9 +7,9 @@ Title: Easy R connector to CouchDB
 Description: Easy R connector to CouchDB.
 URL: https://github.com/schamberlain/sofa
 BugReports: https://github.com/schamberlain/sofa/issues
-Import: httr,
-    plyr,
-    RJSONIO
+Imports:
+    httr,
+    plyr
 Suggests:
     testthat,
     roxygen2

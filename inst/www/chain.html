@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chaining function calls</title>
+    
+    <!-- Include order: first jquery, then opencpu.js, and then your code -->
+    <script src="opencpu/jquery-1.10.2.min.js"></script>
+    <script src="opencpu/opencpu-0.4.js"></script>
+    <script src="chain.js"></script>
+    
+    <style>
+    p {
+      max-width: 600px;
+    }
+    #output{
+      min-height: 200px;
+      border: solid gray 1px;
+    }
+
+    </style>
+    
+  </head>
+    
+  <body>
+    <h1>Chaining function calls</h1>
+    
+    <p>OpenCPU is plain HTTP and therefore each call is stateless. The client does not have a single dedicated R process. 
+    Instead, the client can pass the returned object from a function call as an argument to a subsequent function call using its session ID.
+    </p>
+    
+    <p>One way to think about this is as an R variable assignment, however instead of specifying an arbitrary variable name yourself, 
+    the system assigns the object to a unique ID. So for example in R you might want to run the following commands:</p>
+    <pre><code>
+mydata <- read.csv(file="mydatafile.csv", header=TRUE)
+summary(object=mydata)    
+    </code></pre>
+    
+<p>
+In OpenCPU you accomplish the same thing by first calling <tt>read.csv</tt>, which returns an ID. 
+Then you call <tt>summary</tt> and pass the given ID as the value for the argument <tt>object</tt>.
+</p>
+
+<p>In the example below we do almost exactly this, except for that we use functions <tt>readcsvnew</tt> and <tt>printsummary</tt> which are 
+included with this package. </p>
+
+    
+    
+    <b>CSV File</b> <input type="file" id="csvfile">
+    <br />
+    
+    <b>Header</b> <select id="header">
+      <option>true</option>
+      <option>false</option>
+    </select> 
+    
+    <br />
+    <button id="submitbutton" type="button">Upload CSV file!</button>
+
+   
+    <pre id="output"><code></code></pre>
+  </body>
+</html>

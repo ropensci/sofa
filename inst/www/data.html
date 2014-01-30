@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello</title>
+    
+    <!-- Include order: first jquery, then opencpu.js, and then your code -->
+    <script src="opencpu/jquery-1.10.2.min.js"></script>
+    <script src="opencpu/opencpu-0.4.js"></script>
+
+    <script>
+    //init this script when the page has loaded
+    $(document).ready(function(){
+      $("#submitbutton").on("click", function(){
+        
+        //disable the button to prevent multiple clicks
+        $("#submitbutton").attr("disabled", "disabled");
+        
+        //create the plot area on the plotdiv element
+        var req = $("#plotdiv").rplot("bostonhist", {
+          variable : $("#variable").val(),
+        })
+
+        //if R returns an error, alert the error message
+        req.fail(function(){
+          alert("Server error: " + req.responseText);
+        });
+        
+        //after request complete, re-enable the button 
+        req.always(function(){
+          $("#submitbutton").removeAttr("disabled")
+        });
+      });
+    });
+    </script>
+    
+    <style>
+      #plotdiv {
+        position: relative;
+        width: 600px;
+        height: 400px;
+        border: solid gray 1px;
+      }
+    </style>
+    
+  </head>
+    
+  <body>
+    <h1>Shipping data with packages</h1>
+    
+    <p>The section on <a href="http://cran.r-project.org/doc/manuals/R-exts.html#Data-in-packages">data in packages</a> in the <i>writing r extentions</i> manual explains various ways of including data in packages. The appdemo package contains a couple of datasets; you can find these in the <code>data</code> directory of the <a href="http://github.com/opencpu/appdemo">source package</a> (these data were copied from MASS for illustration purposes).</p>
+
+    <p>The <a href="https://public.opencpu.org/api.html">OpenCPU API docs</a> explain how to access the data using the <code>/package/data/</code> endpoint. For example we can read "Boston" dataset using any of the output formats:</p>
+
+    <ul>
+      <li><a href="../data/">/data</a></li>
+      <li><a href="../data/Boston/print">/data/Boston/print</a></li>
+      <li><a href="../data/Boston/json">/data/Boston/json</a></li>
+      <li><a href="../data/Boston/csv">/data/Boston/csv</a></li>
+      <li><a href="../data/Boston/tab">/data/Boston/tab</a></li>
+      <li><a href="../data/Boston/ascii">/data/Boston/ascii</a></li>
+      <li> <a href="../data/Boston/rda">/data/Boston/rda</a></li>
+      <li> <a href="../data/Boston/rds">/data/Boston/rds</a></li>
+    </ul>
+
+    <p>Some other datasets in the package. Try reading them in other formats:</p>
+
+    <ul>
+      <li><a href="../data/biopsy">biopsy</a></li>
+      <li><a href="../data/nlschools">nlschools</a></li>
+      <li><a href="../data/motors">motors</a></li>
+    </ul>
+
+    <h2>Lazy Data</h2>
+
+    <p>If you want to use data sets in code or functions, make sure to read the section on <a href="http://cran.r-project.org/doc/manuals/R-exts.html#Data-in-packages">data in packages</a> in the <i>writing r extentions</i> manual. You either need to set <t>LazyData: true</t> in the package <a href="../DESCRIPTION">DESCRIPTION</a> file, or use the <code>data()</code> funcion in R.</p>
+
+    <h3> Plot Boston data</h3>
+
+    <b>Variable</b>
+    <select id="variable">
+      <option>crim</option>
+      <option>zn</option>
+      <option>indus</option>
+      <option>chas</option>
+      <option>nox</option>
+      <option>rm</option>
+      <option>age</option>
+      <option>dis</option>
+      <option>rad</option>
+      <option>tax</option>
+      <option>ptratio</option>
+      <option>black</option>
+      <option>lstat</option>
+      <option>medv</option>
+    </select> 
+    
+    <br />
+    <button id="submitbutton" type="button">Create plot</button>
+    
+    <div id="plotdiv"></div>      
+
+    <br />
+    
+  </body>
+</html>

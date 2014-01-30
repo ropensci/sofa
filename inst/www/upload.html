@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Uploading a file</title>
+    
+    <!-- Include order: first jquery, then opencpu.js, and then your code -->
+    <script src="opencpu/jquery-1.10.2.min.js"></script>
+    <script src="opencpu/opencpu-0.4.js"></script>
+
+    <script>
+    //init this script when the page has loaded
+    $(document).ready(function(){
+      $("#submitbutton").on("click", function(){
+
+        //arguments
+        var myheader = $("#header").val() == "true";
+        var myfile = $("#csvfile")[0].files[0];
+        
+        if(!myfile){
+          alert("No file selected.");
+          return;
+        }
+
+        //disable the button during upload
+        $("#submitbutton").attr("disabled", "disabled");
+
+        //perform the request
+        var req = ocpu.call("readcsvnew", {
+          file : myfile,
+          header : myheader
+        }, function(session){
+          $("#printlink").attr("href", session.getLoc() + "R/.val/print")
+          $("#rdalink").attr("href", session.getLoc() + "R/.val/rda")
+          $("#csvlink").attr("href", session.getLoc() + "R/.val/csv")
+          $("#tablink").attr("href", session.getLoc() + "R/.val/tab")
+          $("#jsonlink").attr("href", session.getLoc() + "R/.val/json")
+          $("#mdlink").attr("href", session.getLoc() + "R/.val/md")
+        });
+        
+        //if R returns an error, alert the error message
+        req.fail(function(){
+          alert("Server error: " + req.responseText);
+        });
+        
+        //after request complete, re-enable the button 
+        req.always(function(){
+          $("#submitbutton").removeAttr("disabled")
+        });        
+      });       
+    });
+    </script>
+    
+    <style>
+
+    </style>
+    
+  </head>
+    
+  <body>
+    <h1>Uploading a File</h1>
+    
+    <b>File</b> <input type="file" id="csvfile"> 
+    <br />
+    
+    <b>Header</b> <select id="header">
+      <option>true</option>
+      <option>false</option>
+    </select> 
+    
+    <br />
+    <button id="submitbutton" type="button">Upload CSV file!</button>
+    <br>
+
+    <p>Export the data frame:</p>
+
+    <ol>
+      <li><a target="_blank" id="rdalink">rdata</a></li>    
+      <li><a target="_blank" id="jsonlink">json</a></li>
+      <li><a target="_blank" id="csvlink">csv</a></li>
+      <li><a target="_blank" id="tablink">tab</a></li>
+      <li><a target="_blank" id="printlink">print</a></li>
+      <li><a target="_blank" id="mdlink">markdown</a></li>
+    </ol>
+
+    <p>
+     This page demonstrates how to upload a file. It works exactly the same as calling a function. We call <code>read.csav</code> so that it will be stored on the server as a data frame.
+    </p>
+    
+    <p>
+      <b>Note that HTML5 is required to upload files!</b> <br />
+      This means that this won't work in internet explorer version 9 or lower.
+      You need Firefox, Chrome, Safari or Internet Explorer 10+
+    </p>
+    
+  </body>
+</html>

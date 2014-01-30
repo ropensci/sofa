@@ -36,7 +36,7 @@ from github obviously
 ```ruby
 install.packages("devtools")
 library(devtools)
-install_github("sofa", "schamberlain")
+install_github("sofa", "sckott")
 library(sofa)
 ```
 
