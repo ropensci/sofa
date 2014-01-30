@@ -2,8 +2,8 @@
 \alias{sofa_view_get}
 \title{Get info on a design document (i.e., a view) in your CouchDB database.}
 \usage{
-  sofa_view_get(dbname, design_name,
-    endpoint = "http://127.0.0.1", port = 5984)
+sofa_view_get(dbname, design_name, endpoint = "http://127.0.0.1",
+  port = 5984)
 }
 \arguments{
   \item{dbname}{Database name}
@@ -16,8 +16,8 @@
   \item{port}{port to connect to, defaults to 5984}
 }
 \description{
-  Get info on a design document (i.e., a view) in your
-  CouchDB database.
+Get info on a design document (i.e., a view) in your
+CouchDB database.
 }
 \examples{
 \dontrun{

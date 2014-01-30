@@ -2,8 +2,8 @@
 \alias{sofa_view_del}
 \title{Delete a design document from your CouchDB database.}
 \usage{
-  sofa_view_del(dbname, design_name,
-    endpoint = "http://127.0.0.1", port = 5984)
+sofa_view_del(dbname, design_name, endpoint = "http://127.0.0.1",
+  port = 5984)
 }
 \arguments{
   \item{dbname}{Database name}
@@ -16,7 +16,7 @@
   \item{port}{port to connect to, defaults to 5984}
 }
 \description{
-  Delete a design document from your CouchDB database.
+Delete a design document from your CouchDB database.
 }
 \examples{
 \dontrun{

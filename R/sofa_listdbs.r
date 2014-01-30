@@ -30,20 +30,20 @@ sofa_listdbs <- function(endpoint="localhost", port=5984, username=NULL, pwd=NUL
   if(endpoint=="localhost"){
     endpoint <- "http://127.0.0.1"
     call_ <- paste(paste(endpoint, port, sep=":"), "/_all_dbs", sep="")
-    fromJSON(content(GET(call_)))
+    fromJSON(content(GET(call_), as="text"))
   } else
     if(endpoint=="cloudant"){
       if(is.null(username) | is.null(pwd)){
         auth <- get_pwd(username,pwd,"cloudant")
       } else { auth <- c(username, pwd) }
       url <- sprintf('https://%s:%s@%s.cloudant.com/_all_dbs', auth[[1]], auth[[2]], auth[[1]])
-      fromJSON(content(GET(url, add_headers("Content-Type" = "application/json"))))
+      fromJSON(content(GET(url, add_headers("Content-Type" = "application/json")), as="text"))
     } else
     {
       if(is.null(username) | is.null(pwd)){
         auth <- get_pwd(username,pwd,"iriscouch")
       } else { auth <- c(username, pwd) }
       url <- sprintf('https://%s.iriscouch.com/_all_dbs', auth[[1]])
-      fromJSON(content(GET(url, add_headers("Content-Type" = "application/json"))))
+      fromJSON(content(GET(url, add_headers("Content-Type" = "application/json")), as="text"))
     }
 }

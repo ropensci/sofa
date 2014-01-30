@@ -2,8 +2,8 @@
 \alias{sofa_attach}
 \title{Include an attachment either on an existing or new document.}
 \usage{
-  sofa_attach(endpoint = "http://127.0.0.1", port = 5984,
-    dbname, docid, attachment, attname)
+sofa_attach(endpoint = "http://127.0.0.1", port = 5984, dbname, docid,
+  attachment, attname)
 }
 \arguments{
   \item{dbname}{Database name. (charcter)}
@@ -20,8 +20,8 @@
   \item{port}{port to connect to, defaults to 5984}
 }
 \description{
-  Include an attachment either on an existing or new
-  document.
+Include an attachment either on an existing or new
+document.
 }
 \examples{
 # put on to an existing document

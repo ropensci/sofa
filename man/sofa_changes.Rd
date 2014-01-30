@@ -2,11 +2,10 @@
 \alias{sofa_changes}
 \title{List changes to a database.}
 \usage{
-  sofa_changes(endpoint = "localhost", port = 5984, dbname,
-    descending = NULL, startkey = NULL, endkey = NULL,
-    since = NULL, limit = NULL, include_docs = NULL,
-    feed = "normal", heartbeat = NULL, filter = NULL,
-    username = NULL, pwd = NULL)
+sofa_changes(endpoint = "localhost", port = 5984, dbname,
+  descending = NULL, startkey = NULL, endkey = NULL, since = NULL,
+  limit = NULL, include_docs = NULL, feed = "normal", heartbeat = NULL,
+  filter = NULL, username = NULL, pwd = NULL)
 }
 \arguments{
   \item{dbname}{Database name. (charcter)}
@@ -47,9 +46,9 @@
   \item{port}{port to connect to, defaults to 5984}
 }
 \description{
-  Of course it doesn't make much sense to use certain
-  options in _changes. For example, using feed=longpoll or
-  continuous doesn't make much sense within R itself.
+Of course it doesn't make much sense to use certain options
+in _changes. For example, using feed=longpoll or continuous
+doesn't make much sense within R itself.
 }
 \examples{
 sofa_changes(dbname="sofadb")

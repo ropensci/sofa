@@ -9,5 +9,5 @@
 sofa_getdoc <- function(endpoint="http://127.0.0.1", port=5984, dbname, docid)
 {
   call_ <- paste(paste(endpoint, port, sep=":"), "/", dbname, "/", docid, sep="")
-  fromJSON(content(GET(call_)))
+  fromJSON(content(GET(call_), as="text"))
 }

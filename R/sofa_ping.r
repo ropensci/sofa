@@ -13,16 +13,16 @@ sofa_ping <- function(endpoint="localhost", port=5984, username=NULL, pwd=NULL)
   
   if(endpoint=="localhost"){
     call_ <- sprintf("http://127.0.0.1:%s", port)
-    fromJSON(content(GET(call_)))
+    fromJSON(content(GET(call_), as="text"))
   } else
     if(endpoint=="cloudant"){
       auth <- get_pwd(username,pwd,"cloudant")
       call_ <- sprintf('https://%s:%s@%s.cloudant.com', auth[[1]], auth[[2]], auth[[1]])
-      fromJSON(content(GET(call_)))
+      fromJSON(content(GET(call_), as="text"))
     } else
     {
       auth <- get_pwd(username,pwd,"iriscouch")
       call_ <- sprintf('https://%s.iriscouch.com', auth[[1]])
-      fromJSON(content(GET(call_)))
+      fromJSON(content(GET(call_), as="text"))
     }  
 }

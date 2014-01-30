@@ -2,8 +2,8 @@
 \alias{sofa_view_search}
 \title{Search your CouchDB database using a view.}
 \usage{
-  sofa_view_search(dbname, design_name, query = NULL,
-    endpoint = "http://127.0.0.1", port = 5984)
+sofa_view_search(dbname, design_name, query = NULL,
+  endpoint = "http://127.0.0.1", port = 5984)
 }
 \arguments{
   \item{dbname}{Database name}
@@ -18,7 +18,7 @@
   \item{port}{port to connect to, defaults to 5984}
 }
 \description{
-  Search your CouchDB database using a view.
+Search your CouchDB database using a view.
 }
 \examples{
 \dontrun{

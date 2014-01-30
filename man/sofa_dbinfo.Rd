@@ -2,8 +2,8 @@
 \alias{sofa_dbinfo}
 \title{List database info.}
 \usage{
-  sofa_dbinfo(dbname, endpoint = "localhost", port = 5984,
-    username = NULL, pwd = NULL)
+sofa_dbinfo(dbname, endpoint = "localhost", port = 5984, username = NULL,
+  pwd = NULL)
 }
 \arguments{
   \item{endpoint}{One of localhost, cloudant, or iriscouch.
@@ -19,7 +19,7 @@
   \item{pwd}{Your cloudant or iriscouch password}
 }
 \description{
-  List database info.
+List database info.
 }
 \examples{
 \donttest{

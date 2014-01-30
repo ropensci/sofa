@@ -2,8 +2,8 @@
 \alias{sofa_deletedb}
 \title{Delete a database.}
 \usage{
-  sofa_deletedb(dbname, endpoint = "localhost",
-    port = 5984, username = NULL, pwd = NULL)
+sofa_deletedb(dbname, endpoint = "localhost", port = 5984,
+  username = NULL, pwd = NULL)
 }
 \arguments{
   \item{endpoint}{One of localhost, cloudant, or iriscouch.
@@ -19,7 +19,7 @@
   \item{pwd}{Your cloudant or iriscouch password}
 }
 \description{
-  Delete a database.
+Delete a database.
 }
 \examples{
 \donttest{
