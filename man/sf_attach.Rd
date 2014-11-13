@@ -7,6 +7,10 @@ sf_attach(endpoint = "http://127.0.0.1", port = 5984, dbname, docid,
   attachment, attname)
 }
 \arguments{
+\item{endpoint}{the endpoint, defaults to localhost (http://127.0.0.1)}
+
+\item{port}{port to connect to, defaults to 5984}
+
 \item{dbname}{Database name. (charcter)}
 
 \item{docid}{Document ID (character)}
@@ -22,7 +26,7 @@ Include an attachment either on an existing or new document.
 \donttest{
 # put on to an existing document
 doc <- '{"name":"guy","beer":"anybeerisfine"}'
-sofa_writedoc(dbname="sofadb", doc=doc, docid="guysbeer")
+writedoc(dbname="sofadb", doc=doc, docid="guysbeer")
 myattachment <- "just a simple text string"
 myattachment <- mtcars
 sf_attach(dbname="sofadb", docid="guysbeer", attachment=myattachment, attname="mtcarstable.csv")

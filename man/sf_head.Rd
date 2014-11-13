@@ -7,9 +7,19 @@ sf_head(endpoint = "localhost", port = 5984, dbname, docid,
   username = NULL, pwd = NULL, ...)
 }
 \arguments{
+\item{endpoint}{the endpoint, defaults to localhost (http://127.0.0.1)}
+
+\item{port}{port to connect to, defaults to 5984}
+
 \item{dbname}{Database name. (charcter)}
 
 \item{docid}{Document ID (character)}
+
+\item{username}{Your cloudant or iriscouch username}
+
+\item{pwd}{Your cloudant or iriscouch password}
+
+\item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }
 \description{
 Get header info for a document.

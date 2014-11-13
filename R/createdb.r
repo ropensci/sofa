@@ -31,7 +31,7 @@ createdb <- function(dbname, endpoint="localhost", port=5984, username=NULL,
   pwd=NULL, delifexists=FALSE, ...)
 {
   if(delifexists)
-    sofa_deletedb(dbname)
+    deletedb(dbname)
 
   endpoint <- match.arg(endpoint,choices=c("localhost","cloudant","iriscouch"))
 

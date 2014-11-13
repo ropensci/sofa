@@ -1,7 +1,7 @@
 #' Get header info for a document.
 #'
 #' @export
-#' @inheritParams sofa_ping
+#' @inheritParams ping
 #' @param dbname Database name. (charcter)
 #' @param docid Document ID (character)
 #' @examples \donttest{

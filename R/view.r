@@ -14,6 +14,7 @@
 #' view_put(dbname='alm_couchdb', design_name='almview5', value="[doc.baseurl,doc.queryargs]")
 #' }
 #' @export
+
 view_put <- function(dbname, design_name, fxnname='foo', key="null", value="doc", endpoint="http://127.0.0.1", port=5984)
 {
   call_ <- paste0(paste(endpoint, port, sep=":"), "/", dbname, "/_design/", design_name)
@@ -34,7 +35,7 @@ view_put <- function(dbname, design_name, fxnname='foo', key="null", value="doc"
 #' }
 view_del <- function(dbname, design_name, endpoint="http://127.0.0.1", port=5984)
 {
-  rev <- sofa_view_get(dbname=dbname, design_name=design_name)$`_rev`
+  rev <- view_get(dbname=dbname, design_name=design_name)$`_rev`
   call_ <- paste0(paste(endpoint, port, sep=":"), "/", dbname, "/_design/", design_name)
   content(DELETE(url=call_, query=list(rev=rev)))
 }
