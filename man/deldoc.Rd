@@ -3,7 +3,7 @@
 \alias{deldoc}
 \title{Delete a document in a database.}
 \usage{
-deldoc(endpoint = "http://127.0.0.1", port = 5984, dbname, docid)
+deldoc(endpoint = "http://127.0.0.1", port = 5984, dbname, docid, ...)
 }
 \arguments{
 \item{endpoint}{the endpoint, defaults to localhost (http://127.0.0.1)}
@@ -13,6 +13,8 @@ deldoc(endpoint = "http://127.0.0.1", port = 5984, dbname, docid)
 \item{dbname}{Database name. (charcter)}
 
 \item{docid}{Document ID (character)}
+
+\item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }
 \description{
 Delete a document in a database.
@@ -20,11 +22,11 @@ Delete a document in a database.
 \examples{
 \donttest{
 doc3 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
-writedoc(dbname="sofadb", doc=doc3, docid="somexml")
-deldoc(dbname="sofadb", docid="somexml")
+writedoc(dbname="sofadb", doc=doc3, docid="newxml")
+deldoc(dbname="sofadb", docid="newxml")
 
 # wrong docid name
-writedoc(dbname="sofadb", doc=doc3, docid="somexml")
+writedoc(dbname="sofadb", doc=doc3, docid="newxml")
 deldoc(dbname="sofadb", docid="wrongname")
 }
 }

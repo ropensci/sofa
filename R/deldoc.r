@@ -6,18 +6,16 @@
 #' @param docid Document ID (character)
 #' @examples \donttest{
 #' doc3 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
-#' writedoc(dbname="sofadb", doc=doc3, docid="somexml")
-#' deldoc(dbname="sofadb", docid="somexml")
+#' writedoc(dbname="sofadb", doc=doc3, docid="newxml")
+#' deldoc(dbname="sofadb", docid="newxml")
 #'
 #' # wrong docid name
-#' writedoc(dbname="sofadb", doc=doc3, docid="somexml")
+#' writedoc(dbname="sofadb", doc=doc3, docid="newxml")
 #' deldoc(dbname="sofadb", docid="wrongname")
 #' }
-deldoc <- function(endpoint="http://127.0.0.1", port=5984, dbname, docid)
+deldoc <- function(endpoint="http://127.0.0.1", port=5984, dbname, docid, ...)
 {
   revget <- getdoc(dbname=dbname, docid=docid)[["_rev"]]
   call_ <- paste(paste(endpoint, port, sep=":"), "/", dbname, "/", docid, "?rev=", revget, sep="")
-  out <- DELETE(call_)
-  stop_for_status(out)
-  message(sprintf("%s deleted", docid))
+  sofa_DELETE(call_, ...)
 }
