@@ -57,6 +57,11 @@ sofa_PUT <- function(url, ...){
   content(res)
 }
 
+sofa_POST <- function(url, ...){
+  res <- POST(url, ...)
+  stop_for_status(res)
+  content(res)
+}
 
 # get_pwd <- function(u,p,service)
 # {

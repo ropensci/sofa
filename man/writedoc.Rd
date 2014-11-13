@@ -4,7 +4,7 @@
 \title{Write documents to a database.}
 \usage{
 writedoc(endpoint = "localhost", port = 5984, dbname, doc, docid = NULL,
-  apicall = FALSE, baseurl, queryargs, username = NULL, pwd = NULL)
+  apicall = FALSE, baseurl, queryargs, username = NULL, pwd = NULL, ...)
 }
 \arguments{
 \item{endpoint}{the endpoint, defaults to localhost (http://127.0.0.1)}
@@ -31,6 +31,8 @@ writedoc(endpoint = "localhost", port = 5984, dbname, doc, docid = NULL,
 \item{username}{Your cloudant or iriscouch username}
 
 \item{pwd}{Your cloudant or iriscouch password}
+
+\item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }
 \description{
 Write documents to a database.
@@ -39,20 +41,27 @@ Write documents to a database.
 \donttest{
 # write a document WITH a name (uses PUT)
 doc1 <- '{"name":"drink","beer":"IPA"}'
-writedoc(dbname="sofadb", doc=doc1, docid="dudesbeer")
+writedoc(dbname="sofadb", doc=doc1, docid="abeer")
+getdoc(dbname = "sofadb", docid = "abeer")
 
 # write a json document WITHOUT a name (uses POST)
 doc2 <- '{"name":"food","icecream":"rocky road"}'
 writedoc(dbname="sofadb", doc=doc2)
 
+doc3 <- '{"planet":"mars","size":"smallish"}'
+writedoc(dbname="sofadb", doc=doc3)
+
 # write an xml document WITH a name (uses PUT). xml is written as xml in
 # couchdb, just wrapped in json, when you get it out it will be as xml
-doc3 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
-writedoc(dbname="sofadb", doc=doc3, docid="somexml")
+doc4 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
+writedoc(dbname="sofadb", doc=doc4, docid="somexml")
+getdoc(dbname = "sofadb", docid = "somexml")
 
 # write a document using web api storage format
 doc <- '{"downloads":10,"pageviews":5000,"tweets":300}'
-writedoc(dbname="sofadb", doc=doc, apicall=TRUE, baseurl="http://things...", queryargs="some args")
+writedoc(dbname="sofadb", doc=doc, docid="asdfg", apicall=TRUE, baseurl="http://things...",
+   queryargs="some args")
+getdoc(dbname = "sofadb", docid = "asdfg")
 }
 }
 

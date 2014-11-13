@@ -18,24 +18,31 @@
 #' @examples \donttest{
 #' # write a document WITH a name (uses PUT)
 #' doc1 <- '{"name":"drink","beer":"IPA"}'
-#' writedoc(dbname="sofadb", doc=doc1, docid="dudesbeer")
+#' writedoc(dbname="sofadb", doc=doc1, docid="abeer")
+#' getdoc(dbname = "sofadb", docid = "abeer")
 #'
 #' # write a json document WITHOUT a name (uses POST)
 #' doc2 <- '{"name":"food","icecream":"rocky road"}'
 #' writedoc(dbname="sofadb", doc=doc2)
 #'
+#' doc3 <- '{"planet":"mars","size":"smallish"}'
+#' writedoc(dbname="sofadb", doc=doc3)
+#'
 #' # write an xml document WITH a name (uses PUT). xml is written as xml in
 #' # couchdb, just wrapped in json, when you get it out it will be as xml
-#' doc3 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
-#' writedoc(dbname="sofadb", doc=doc3, docid="somexml")
+#' doc4 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
+#' writedoc(dbname="sofadb", doc=doc4, docid="somexml")
+#' getdoc(dbname = "sofadb", docid = "somexml")
 #'
 #' # write a document using web api storage format
 #' doc <- '{"downloads":10,"pageviews":5000,"tweets":300}'
-#' writedoc(dbname="sofadb", doc=doc, apicall=TRUE, baseurl="http://things...", queryargs="some args")
+#' writedoc(dbname="sofadb", doc=doc, docid="asdfg", apicall=TRUE, baseurl="http://things...",
+#'    queryargs="some args")
+#' getdoc(dbname = "sofadb", docid = "asdfg")
 #' }
 
-writedoc <- function(endpoint="localhost", port=5984, dbname, doc,
-                          docid=NULL, apicall=FALSE, baseurl, queryargs, username=NULL, pwd=NULL)
+writedoc <- function(endpoint="localhost", port=5984, dbname, doc, docid=NULL, apicall=FALSE,
+  baseurl, queryargs, username=NULL, pwd=NULL, ...)
 {
   endpoint <- match.arg(endpoint,choices=c("localhost","cloudant","iriscouch"))
 
@@ -52,31 +59,21 @@ writedoc <- function(endpoint="localhost", port=5984, dbname, doc,
     }
 
   if(apicall){
-#     doc2 <- paste('{"baseurl":', '"', baseurl, '",', '"queryargs":',
-#                   RJSONIO::toJSON(queryargs,collapse=""), ',', '"response":', doc, "}", sep="")
     doc2 <- paste('{"baseurl":', '"', baseurl, '",', '"queryargs":',
-                  toJSON(queryargs,collapse=""), ',', '"response":', doc, "}", sep="")
+                  toJSON(queryargs, collapse=""), ',', '"response":', doc, "}", sep="")
     if(!is.null(docid)){
       call_ <- paste0(call_, "/", docid)
-      fromJSON(content(PUT(call_, body=doc2)))
-    } else
-    {
-      fromJSON(content(POST(call_, body=doc2,
-                            config=list(httpheader='Content-Type: application/json'))))
+      sofa_PUT(call_, body=doc2, ...)
+    } else {
+      sofa_POST(call_, body=doc2, content_type_json(), ...)
     }
-  } else
-  {
+  } else {
     doc2 <- doc
-    if(grepl("<[A-Za-z]+>", doc))
-      doc2 <- paste('{"xml":', '"', doc, '"', '}', sep="")
-
+    if(grepl("<[A-Za-z]+>", doc)) doc2 <- paste('{"xml":', '"', doc, '"', '}', sep="")
     if(!is.null(docid)){
-      call_ <- paste0(call_, "/", docid)
-      fromJSON(content(PUT(call_, body=doc2)))
-    } else
-    {
-      fromJSON(content(POST(call_, body=doc2,
-                            config=list(httpheader='Content-Type: application/json'))))
+      sofa_PUT(paste0(call_, "/", docid), body=doc2, ...)
+    } else {
+      sofa_POST(call_, body=doc2, content_type_json(), ...)
     }
   }
 }
