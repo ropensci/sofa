@@ -35,7 +35,7 @@ cushion <- function(...)
   auth <- list(...)
   if(is.null(auth)) stop("You must enter values for auth")
   for(i in seq_along(auth)){
-    assign(names(auth[i]), auth[[i]], envir = sofa:::SofaAuthCache)
+    assign(names(auth[i]), auth[[i]], envir = SofaAuthCache)
   }
 }
 
@@ -43,12 +43,12 @@ cushion <- function(...)
 #' @rdname authentication
 sofa_profile <- function()
 {
-  if(length(ls(sofa:::SofaAuthCache)) == 0){
+  if(length(ls(SofaAuthCache)) == 0){
     vals <- names(.Options)
     temp <- .Options[grep('sofa', vals)]
   } else
   {
-    temp <- mget(ls(sofa:::SofaAuthCache), envir=sofa:::SofaAuthCache)
+    temp <- mget(ls(SofaAuthCache), envir=SofaAuthCache)
   }
   if(length(temp)==0)
     stop("No auth details found")
