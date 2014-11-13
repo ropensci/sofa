@@ -33,7 +33,7 @@ sofa_alldocs <- function(cushion="sofa_localhost", port=5984, dbname, asdf = TRU
   choices <- c("sofa_localhost","sofa_cloudant","sofa_iriscouch")
   thing <- paste0(strsplit(cushion,'_')[[1]][1:2],collapse="_")
   base_serv <- choices[agrep(thing, choices, ignore.case=TRUE)]
-  args <- compact(list(descending=descending, startkey=startkey,endkey=endkey,
+  args <- sc(list(descending=descending, startkey=startkey,endkey=endkey,
                        limit=limit,include_docs=include_docs))
 
   if(base_serv=="sofa_localhost"){

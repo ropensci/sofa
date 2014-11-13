@@ -16,7 +16,7 @@ elastic_search <- function(endpoint="http://127.0.0.1", port=9200, dbname, parse
                         verbose=TRUE, ...)
 {
   call_ <- paste(paste(endpoint, port, sep=":"), "/", dbname, "/_search", sep="")
-  args <- compact(list(...))
+  args <- sc(list(...))
   out <- GET(call_, query=args)
   stop_for_status(out)
   

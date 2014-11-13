@@ -30,7 +30,7 @@ sofa_changes <- function(endpoint="localhost", port=5984, dbname,
   feed="normal", heartbeat=NULL, filter=NULL, username=NULL, pwd=NULL)
 {
   endpoint <- match.arg(endpoint,choices=c("localhost","cloudant","iriscouch"))
-  args <- compact(list(descending=descending,startkey=startkey,endkey=endkey,
+  args <- sc(list(descending=descending,startkey=startkey,endkey=endkey,
                        since=since,limit=limit,include_docs=include_docs,feed=feed,
                        heartbeat=heartbeat,filter=filter))
   
