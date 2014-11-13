@@ -41,7 +41,7 @@ cushion(iriscouch_name='name', iriscouch_pwd='pwd')
 createdb(dbname="mustache", "iriscouch")
 
 # different login credentials than normal, just pass in to function call
-createdb(dbname='shit', "cloudant", username='<user>', pwd='<pwd>')
+createdb(dbname='stuff', "cloudant", username='<user>', pwd='<pwd>')
 }
 }
 

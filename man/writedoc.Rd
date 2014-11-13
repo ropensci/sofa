@@ -38,11 +38,11 @@ Write documents to a database.
 \examples{
 \donttest{
 # write a document WITH a name (uses PUT)
-doc1 <- '{"name":"dude","beer":"IPA"}'
+doc1 <- '{"name":"drink","beer":"IPA"}'
 writedoc(dbname="sofadb", doc=doc1, docid="dudesbeer")
 
 # write a json document WITHOUT a name (uses POST)
-doc2 <- '{"name":"dude","icecream":"rocky road"}'
+doc2 <- '{"name":"food","icecream":"rocky road"}'
 writedoc(dbname="sofadb", doc=doc2)
 
 # write an xml document WITH a name (uses PUT). xml is written as xml in
@@ -52,7 +52,7 @@ writedoc(dbname="sofadb", doc=doc3, docid="somexml")
 
 # write a document using web api storage format
 doc <- '{"downloads":10,"pageviews":5000,"tweets":300}'
-writedoc(dbname="sofadb", doc=doc, apicall=TRUE, baseurl="http://shit", queryargs="some args")
+writedoc(dbname="sofadb", doc=doc, apicall=TRUE, baseurl="http://things...", queryargs="some args")
 }
 }
 

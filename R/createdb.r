@@ -24,7 +24,7 @@
 #' createdb(dbname="mustache", "iriscouch")
 #'
 #' # different login credentials than normal, just pass in to function call
-#' createdb(dbname='shit', "cloudant", username='<user>', pwd='<pwd>')
+#' createdb(dbname='stuff', "cloudant", username='<user>', pwd='<pwd>')
 #' }
 
 createdb <- function(dbname, endpoint="localhost", port=5984, username=NULL,
