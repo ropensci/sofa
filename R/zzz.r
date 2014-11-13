@@ -19,7 +19,7 @@ SofaAuthCache <- new.env(hash=TRUE)
 #' }
 get_pwd <- function(u=NULL,p=NULL,service)
 {
-  auth <- sofa_profile()
+  auth <- profile()
 #   ser <- paste0('sofa_',service)
 
   if(is.null(u) | is.null(p)){
@@ -80,7 +80,7 @@ sofa_PUT <- function(url, ...){
 # #' get_pwd(service='cloudant')
 # get_pwd <- function(u=NULL,p=NULL,service)
 # {
-#   auth <- sofa_profile()
+#   auth <- profile()
 #   if(is.null(u) | is.null(p)){
 #     if(service == "cloudant"){
 #       temp <- grep('sofa_cloudant',names(auth))

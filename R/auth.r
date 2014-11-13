@@ -21,11 +21,11 @@
 #' function instead. See examples below on how to do this. Though using cusion()
 #' only stores them for the current session.
 #'
-#' \code{sofa_profile()} Looks first in the local environment SofaAuthCache, and if finds nothing,
+#' \code{profile()} Looks first in the local environment SofaAuthCache, and if finds nothing,
 #' looks in your \code{.Rprofile} file.
 #' @examples \donttest{
 #' cushion(sofa_cloudant=c('name','pwd'), sofa_iriscouch=c('name','pwd'))
-#' sofa_profile()
+#' profile()
 #' }
 
 #' @export
@@ -41,7 +41,7 @@ cushion <- function(...)
 
 #' @export
 #' @rdname authentication
-sofa_profile <- function()
+profile <- function()
 {
   if(length(ls(SofaAuthCache)) == 0){
     vals <- names(.Options)

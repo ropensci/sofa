@@ -2,12 +2,12 @@
 \name{authentication}
 \alias{authentication}
 \alias{cushion}
-\alias{sofa_profile}
+\alias{profile}
 \title{Put a cushion on the sofa, and get cushion info}
 \usage{
 cushion(...)
 
-sofa_profile()
+profile()
 }
 \arguments{
 \item{...}{Enter named sets of username and password.}
@@ -33,13 +33,13 @@ Though if you don't want to store them permanently, you can use the cushion()
 function instead. See examples below on how to do this. Though using cusion()
 only stores them for the current session.
 
-\code{sofa_profile()} Looks first in the local environment SofaAuthCache, and if finds nothing,
+\code{profile()} Looks first in the local environment SofaAuthCache, and if finds nothing,
 looks in your \code{.Rprofile} file.
 }
 \examples{
 \donttest{
 cushion(sofa_cloudant=c('name','pwd'), sofa_iriscouch=c('name','pwd'))
-sofa_profile()
+profile()
 }
 }
 
