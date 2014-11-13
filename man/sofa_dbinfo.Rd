@@ -4,7 +4,7 @@
 \title{List database info.}
 \usage{
 sofa_dbinfo(dbname, endpoint = "localhost", port = 5984, username = NULL,
-  pwd = NULL)
+  pwd = NULL, ...)
 }
 \arguments{
 \item{endpoint}{One of localhost, cloudant, or iriscouch. For local work
@@ -16,6 +16,8 @@ with those database services.}
 \item{username}{Your cloudant or iriscouch username}
 
 \item{pwd}{Your cloudant or iriscouch password}
+
+\item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }
 \description{
 List database info.
@@ -23,7 +25,7 @@ List database info.
 \examples{
 \donttest{
 # local databasees
-sofa_dbinfo(dbname="dudedb")
+sofa_dbinfo(dbname="sofadb")
 
 # databasees on cloudant
 ## passing username and password in function call
