@@ -22,7 +22,7 @@ The function returns a message 'elastic river stopped'. This function stops
    start indexing.
 }
 \examples{
-\dontrun{
+\donttest{
 elastic_stop(dbname = "ggggg")
 }
 }

@@ -7,7 +7,7 @@
 #'    elasticsearch from indexing the database in the dbname parameter. You may want 
 #'    stop indexing e.g., if you started indexing a database that you didn't mean to 
 #'    start indexing.
-#' @examples \dontrun{
+#' @examples \donttest{
 #' elastic_stop(dbname = "ggggg")
 #' }
 #' @export

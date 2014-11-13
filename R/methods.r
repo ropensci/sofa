@@ -3,9 +3,10 @@
 #' @param x input
 #' @param ... more stuff
 #' @export
-#' @examples
+#' @examples \donttest{
 #' results <- elasticsearch(dbname="rplos_db", q="scienceseeker")
 #' rawdata(results)
+#' }
 rawdata <- function(x, ...) UseMethod("rawdata")
 
 #' @method rawdata sofaes

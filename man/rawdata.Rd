@@ -14,7 +14,9 @@ rawdata(x, ...)
 Prints the raw results of the call.
 }
 \examples{
+\donttest{
 results <- elasticsearch(dbname="rplos_db", q="scienceseeker")
 rawdata(results)
+}
 }
 

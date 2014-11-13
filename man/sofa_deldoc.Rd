@@ -18,6 +18,7 @@ sofa_deldoc(endpoint = "http://127.0.0.1", port = 5984, dbname, docid)
 Delete a document in a database.
 }
 \examples{
+\donttest{
 doc3 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
 sofa_writedoc(dbname="sofadb", doc=doc3, docid="somexml")
 sofa_deldoc(dbname="sofadb", docid="somexml")
@@ -25,5 +26,6 @@ sofa_deldoc(dbname="sofadb", docid="somexml")
 # wrong docid name
 sofa_writedoc(dbname="sofadb", doc=doc3, docid="somexml")
 sofa_deldoc(dbname="sofadb", docid="wrongname")
+}
 }
 

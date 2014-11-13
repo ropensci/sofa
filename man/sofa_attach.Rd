@@ -23,11 +23,13 @@ sofa_attach(endpoint = "http://127.0.0.1", port = 5984, dbname, docid,
 Include an attachment either on an existing or new document.
 }
 \examples{
+\donttest{
 # put on to an existing document
 doc <- '{"name":"guy","beer":"anybeerisfine"}'
 sofa_writedoc(dbname="sofadb", doc=doc, docid="guysbeer")
 myattachment <- "just a simple text string"
 myattachment <- mtcars
 sofa_attach(dbname="sofadb", docid="guysbeer", attachment=myattachment, attname="mtcarstable.csv")
+}
 }
 

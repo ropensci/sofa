@@ -5,7 +5,7 @@
 #' @param dbname Database name. (charcter)
 #' @details The function returns TRUE. Though note that this can result even 
 #'    if the database does not exist in CouchDB. 
-#' @examples \dontrun{
+#' @examples \donttes{
 #' sofa_createdb(dbname='shitty2')
 #' elastic_start(dbname="shitty2")
 #' }

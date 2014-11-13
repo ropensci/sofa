@@ -6,7 +6,7 @@
 #' @param design_name Design document name
 #' @details If you are writing a complicated javascript function, better to do 
 #'    that in the Futon CouchDB interface or otherwise. 
-#' @examples \dontrun{
+#' @examples \donttest{
 #' sofa_view_put(dbname='alm_couchdb', design_name='almview1')
 #' sofa_view_put(dbname='alm_couchdb', design_name='almview2', value="doc.baseurl")
 #' sofa_view_put(dbname='alm_couchdb', design_name='almview5', value="[doc.baseurl,doc.queryargs]")

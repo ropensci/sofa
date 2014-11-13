@@ -15,7 +15,7 @@
 #' @param queryargs Web API query arguments to pass in to json with document
 #' @param username Your cloudant or iriscouch username
 #' @param pwd Your cloudant or iriscouch password
-#' @examples
+#' @examples \donttest{
 #' # write a document WITH a name (uses PUT)
 #' doc1 <- '{"name":"dude","beer":"IPA"}'
 #' sofa_writedoc(dbname="sofadb", doc=doc1, docid="dudesbeer")
@@ -32,6 +32,7 @@
 #' # write a document using web api storage format
 #' doc <- '{"downloads":10,"pageviews":5000,"tweets":300}'
 #' sofa_writedoc(dbname="sofadb", doc=doc, apicall=TRUE, baseurl="http://shit", queryargs="some args")
+#' }
 
 sofa_writedoc <- function(endpoint="localhost", port=5984, dbname, doc,
                           docid=NULL, apicall=FALSE, baseurl, queryargs, username=NULL, pwd=NULL)

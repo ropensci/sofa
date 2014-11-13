@@ -37,6 +37,7 @@ sofa_writedoc(endpoint = "localhost", port = 5984, dbname, doc,
 Write documents to a database.
 }
 \examples{
+\donttest{
 # write a document WITH a name (uses PUT)
 doc1 <- '{"name":"dude","beer":"IPA"}'
 sofa_writedoc(dbname="sofadb", doc=doc1, docid="dudesbeer")
@@ -53,5 +54,6 @@ sofa_writedoc(dbname="sofadb", doc=doc3, docid="somexml")
 # write a document using web api storage format
 doc <- '{"downloads":10,"pageviews":5000,"tweets":300}'
 sofa_writedoc(dbname="sofadb", doc=doc, apicall=TRUE, baseurl="http://shit", queryargs="some args")
+}
 }
 

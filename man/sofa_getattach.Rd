@@ -21,6 +21,8 @@ sofa_getattach(endpoint = "http://127.0.0.1", port = 5984, dbname, docid,
 Get an attachment.
 }
 \examples{
+\donttest{
 sofa_getattach(dbname="sofadb", docid="guysbeer")
+}
 }
 

@@ -1,18 +1,20 @@
 #' Include an attachment either on an existing or new document.
 #'
+#' @export
 #' @inheritParams sofa_ping
 #' @param dbname Database name. (charcter)
 #' @param docid Document ID (character)
 #' @param attachment The attachment object name
 #' @param attname Attachment name.
-#' @examples
+#' @examples \donttest{
 #' # put on to an existing document
 #' doc <- '{"name":"guy","beer":"anybeerisfine"}'
 #' sofa_writedoc(dbname="sofadb", doc=doc, docid="guysbeer")
 #' myattachment <- "just a simple text string"
 #' myattachment <- mtcars
 #' sofa_attach(dbname="sofadb", docid="guysbeer", attachment=myattachment, attname="mtcarstable.csv")
-#' @export
+#' }
+
 sofa_attach <- function(endpoint="http://127.0.0.1", port=5984, dbname, docid, attachment, attname)
 {
   message("needs work still")
