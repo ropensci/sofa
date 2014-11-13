@@ -38,13 +38,13 @@ listdbs <- function(endpoint="localhost", port=5984, username=NULL, pwd=NULL, ..
         auth <- get_pwd(username,pwd,"cloudant")
       } else { auth <- c(username, pwd) }
       url <- sprintf('https://%s:%s@%s.cloudant.com/_all_dbs', auth[[1]], auth[[2]], auth[[1]])
-      sofa_GET(url, add_headers("Content-Type" = "application/json"), ...)
+      sofa_GET(url, content_type_json(), ...)
     } else
     {
       if(is.null(username) | is.null(pwd)){
         auth <- get_pwd(username,pwd,"iriscouch")
       } else { auth <- c(username, pwd) }
       url <- sprintf('https://%s.iriscouch.com/_all_dbs', auth[[1]])
-      sofa_GET(url, add_headers("Content-Type" = "application/json"), ...)
+      sofa_GET(url, content_type_json(), ...)
     }
 }

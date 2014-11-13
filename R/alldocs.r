@@ -46,12 +46,12 @@ alldocs <- function(cushion="sofa_localhost", port=5984, dbname, asdf = TRUE,
     if(base_serv=="sofa_cloudant"){
       if(is.null(username) | is.null(pwd)){ auth <- get_pwd(username,pwd,cushion) } else { auth <- c(username, pwd) }
       url <- sprintf('https://%s:%s@%s.cloudant.com/%s/_all_docs', auth[[1]], auth[[2]], auth[[1]], dbname)
-      temp <- sofa_GET(url, args, add_headers("Content-Type" = "application/json"), ...)
+      temp <- sofa_GET(url, args, content_type_json(), ...)
     } else
       if(base_serv=="sofa_iriscouch"){
         if(is.null(username) | is.null(pwd)){ auth <- get_pwd(username,pwd,cushion) } else { auth <- c(username, pwd) }
         url <- sprintf('https://%s.iriscouch.com/%s/_all_docs', auth[[1]], dbname)
-        temp <- sofa_GET(url, args, add_headers("Content-Type" = "application/json"), ...)
+        temp <- sofa_GET(url, args, content_type_json(), ...)
       } else
         stop(paste0(base_serv, " is not supported yet"))
 

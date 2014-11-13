@@ -19,7 +19,7 @@
 #'
 #' ## or setting username and password in options() call
 #' cushion(cloudant_username='name', cloudant_pwd='pwd')
-#' dbinfo("foobardb")
+#' dbinfo("gaugesdb_ro", "cloudant")
 #' }
 
 dbinfo <- function(dbname, endpoint="localhost", port=5984, username=NULL, pwd=NULL, ...)
@@ -31,11 +31,11 @@ dbinfo <- function(dbname, endpoint="localhost", port=5984, username=NULL, pwd=N
     if(endpoint=="cloudant"){
       auth <- get_pwd(username,pwd,"cloudant")
       url <- sprintf('https://%s:%s@%s.cloudant.com/%s', auth[[1]], auth[[2]], auth[[1]], dbname)
-      sofa_GET(url, add_headers("Content-Type" = "application/json"), ...)
+      sofa_GET(url, content_type_json(), ...)
     } else
     {
       auth <- get_pwd(username,pwd,"iriscouch")
       url <- sprintf('https://%s.iriscouch.com/%s', auth[[1]], dbname)
-      sofa_GET(url, add_headers("Content-Type" = "application/json"), ...)
+      sofa_GET(url, content_type_json(), ...)
     }
 }

@@ -35,7 +35,7 @@ dbinfo("cloudant", username='yourusername', pwd='yourpassword')
 
 ## or setting username and password in options() call
 cushion(cloudant_username='name', cloudant_pwd='pwd')
-dbinfo("foobardb")
+dbinfo("gaugesdb_ro", "cloudant")
 }
 }
 

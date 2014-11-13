@@ -27,12 +27,12 @@ upload <- function(to="cloudant", port=5984, dbname, username=NULL, pwd=NULL, cr
     message(sprintf("Uploading to %s...", to))
     auth <- get_pwd(username,pwd,"cloudant")
     args <- toJSON(list(source=dbname, target=sprintf("https://%s:%s@%s.cloudant.com/%s", auth[[1]], auth[[2]], auth[[1]], dbname)))
-    fromJSON(content(POST(url, add_headers("Content-Type" = "application/json"), args)))
+    fromJSON(content(POST(url, content_type_json(), args)))
   } else
   {
     message(sprintf("Uploading to %s", to))
     auth <- get_pwd(username,pwd,"iriscouch")
     args <- toJSON(list(source=dbname, target=sprintf("https://%s.iriscouch.com/%s", auth[[1]], dbname)))
-    fromJSON(content(POST(url, add_headers("Content-Type" = "application/json"), args)))
+    fromJSON(content(POST(url, content_type_json(), args)))
   }
 }
