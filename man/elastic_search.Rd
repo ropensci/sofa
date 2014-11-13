@@ -13,6 +13,8 @@ elastic_search(endpoint = "http://127.0.0.1", port = 9200, dbname,
 
 \item{dbname}{Database name. (charcter)}
 
+\item{...}{Curl args passed on to \code{\link[httr]{GET}}}
+
 \item{docid}{Document ID (character)}
 
 \item{q}{Query terms.}

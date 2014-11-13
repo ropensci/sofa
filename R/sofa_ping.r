@@ -5,7 +5,7 @@
 #' @param port port to connect to, defaults to 5984
 #' @param username Your cloudant or iriscouch username
 #' @param pwd Your cloudant or iriscouch password
-#' @param
+#' @param ... Curl args passed on to \code{\link[httr]{GET}}
 #' @examples \donttest{
 #' sofa_ping()
 #' # sofa_ping("sofa_cloudant_heroku")

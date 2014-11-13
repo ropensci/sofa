@@ -38,6 +38,8 @@ List all docs in a given database.
 sofa_alldocs(dbname="sofadb")
 sofa_alldocs(dbname="mydb", limit=2)
 sofa_alldocs(dbname="mydb", limit=2, include_docs="true")
+library('httr')
+sofa_alldocs(dbname="sofadb", config=verbose())
 
 # different login credentials than normal, just pass in to function call
 ## you obviously need to fill in some details here, this won't work as is
