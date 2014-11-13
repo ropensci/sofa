@@ -8,14 +8,16 @@
 \title{Work with design documents (i.e., views) in your CouchDB's.}
 \usage{
 view_put(dbname, design_name, fxnname = "foo", key = "null",
-  value = "doc", endpoint = "http://127.0.0.1", port = 5984)
+  value = "doc", endpoint = "http://127.0.0.1", port = 5984, ...)
 
-view_del(dbname, design_name, endpoint = "http://127.0.0.1", port = 5984)
+view_del(dbname, design_name, endpoint = "http://127.0.0.1", port = 5984,
+  ...)
 
-view_get(dbname, design_name, endpoint = "http://127.0.0.1", port = 5984)
+view_get(dbname, design_name, endpoint = "http://127.0.0.1", port = 5984,
+  ...)
 
 view_search(dbname, design_name, query = NULL,
-  endpoint = "http://127.0.0.1", port = 5984)
+  endpoint = "http://127.0.0.1", port = 5984, ...)
 }
 \arguments{
 \item{dbname}{Database name}
@@ -31,6 +33,8 @@ view_search(dbname, design_name, query = NULL,
 \item{endpoint}{the endpoint, defaults to localhost (http://127.0.0.1)}
 
 \item{port}{port to connect to, defaults to 5984}
+
+\item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 
 \item{query}{Query terms}
 }

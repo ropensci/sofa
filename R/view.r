@@ -29,36 +29,36 @@
 #' @export
 #' @rdname views
 view_put <- function(dbname, design_name, fxnname='foo', key="null", value="doc",
-  endpoint="http://127.0.0.1", port=5984)
+  endpoint="http://127.0.0.1", port=5984, ...)
 {
   call_ <- paste0(paste(endpoint, port, sep=":"), "/", dbname, "/_design/", design_name)
   doc2 <- paste0('{"_id":',
            '"_design/', design_name, '",',
            '"views": {', '"', fxnname, '": {', '"map": "function(doc){emit(', key, ",", value, ')}"}}}')
-  fromJSON(content(PUT(url=call_, body=doc2)))
+  sofa_PUT(call_, body=doc2, ...)
 }
 
 #' @export
 #' @rdname views
-view_del <- function(dbname, design_name, endpoint="http://127.0.0.1", port=5984)
+view_del <- function(dbname, design_name, endpoint="http://127.0.0.1", port=5984, ...)
 {
   rev <- view_get(dbname=dbname, design_name=design_name)$`_rev`
   call_ <- paste0(paste(endpoint, port, sep=":"), "/", dbname, "/_design/", design_name)
-  content(DELETE(url=call_, query=list(rev=rev)))
+  sofa_DELETE(call_, query=list(rev=rev), ...)
 }
 
 #' @export
 #' @rdname views
-view_get <- function(dbname, design_name, endpoint="http://127.0.0.1", port=5984)
+view_get <- function(dbname, design_name, endpoint="http://127.0.0.1", port=5984, ...)
 {
   call_ <- paste0(paste(endpoint, port, sep=":"), "/", dbname, "/_design/", design_name)
-  fromJSON(content(GET(url=call_)))
+  sofa_GET(call_, ...)
 }
 
 #' @export
 #' @rdname views
-view_search <- function(dbname, design_name, query = NULL, endpoint="http://127.0.0.1", port=5984)
+view_search <- function(dbname, design_name, query = NULL, endpoint="http://127.0.0.1", port=5984, ...)
 {
   call_ <- paste0(paste(endpoint, port, sep=":"), "/", dbname, "/_design/", design_name, "/_view", "/foo")
-  fromJSON(content(GET(url=call_)))
+  sofa_GET(call_, ...)
 }
