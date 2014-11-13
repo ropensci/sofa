@@ -4,7 +4,7 @@
 \title{List all databases.}
 \usage{
 sofa_listdbs(endpoint = "localhost", port = 5984, username = NULL,
-  pwd = NULL)
+  pwd = NULL, ...)
 }
 \arguments{
 \item{endpoint}{One of localhost, cloudant, or iriscouch. For local work
@@ -16,6 +16,8 @@ with those database services.}
 \item{username}{Your cloudant or iriscouch username}
 
 \item{pwd}{Your cloudant or iriscouch password}
+
+\item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }
 \description{
 List all databases.
