@@ -5,9 +5,9 @@
 #' @param dbname Database name. (charcter)
 #' @param docid Document ID (character)
 #' @examples \donttest{
-#' sofa_head(dbname="sofadb", docid="beer")
+#' sf_head(dbname="sofadb", docid="beer")
 #' }
-sofa_head <- function(endpoint="localhost", port=5984, dbname, docid, username=NULL, pwd=NULL, ...)
+sf_head <- function(endpoint="localhost", port=5984, dbname, docid, username=NULL, pwd=NULL, ...)
 {
   if(endpoint=="localhost"){
     call_ <- sprintf("http://127.0.0.1:%s/%s/%s", port, dbname, docid)
