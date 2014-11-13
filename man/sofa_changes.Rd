@@ -6,7 +6,7 @@
 sofa_changes(endpoint = "localhost", port = 5984, dbname,
   descending = NULL, startkey = NULL, endkey = NULL, since = NULL,
   limit = NULL, include_docs = NULL, feed = "normal", heartbeat = NULL,
-  filter = NULL, username = NULL, pwd = NULL)
+  filter = NULL, username = NULL, pwd = NULL, ...)
 }
 \arguments{
 \item{endpoint}{the endpoint, defaults to localhost (http://127.0.0.1)}
@@ -38,6 +38,8 @@ feed alive indefinitely. (numeric (milliseconds))}
 \item{username}{User name}
 
 \item{pwd}{Password}
+
+\item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }
 \description{
 Of course it doesn't make much sense to use certain options in
@@ -45,10 +47,13 @@ Of course it doesn't make much sense to use certain options in
    within R itself.
 }
 \examples{
+\donttest{
 sofa_changes(dbname="sofadb")
 sofa_changes(dbname="sofadb", limit=2)
 
 # different login credentials than normal, just pass in to function call
-sofa_changes("cloudant", dbname='gaugesdb_ro', username='app16517180.heroku', pwd='DA1w5hbKJJAtcGnF74Ds3nVl', include_docs='true')
+cushion(sofa_cloudant_heroku=c('<user>','<pwd>'))
+sofa_changes("cloudant", dbname='gaugesdb_ro', include_docs='true')
+}
 }
 
