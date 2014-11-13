@@ -5,7 +5,7 @@
 \usage{
 sofa_alldocs(cushion = "sofa_localhost", port = 5984, dbname, asdf = TRUE,
   descending = NULL, startkey = NULL, endkey = NULL, limit = NULL,
-  include_docs = NULL, username = NULL, pwd = NULL)
+  include_docs = NULL, username = NULL, pwd = NULL, ...)
 }
 \arguments{
 \item{port}{port to connect to, defaults to 5984}
@@ -27,6 +27,8 @@ sofa_alldocs(cushion = "sofa_localhost", port = 5984, dbname, asdf = TRUE,
 \item{username}{Your cloudant or iriscouch username}
 
 \item{pwd}{Your cloudant or iriscouch password}
+
+\item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }
 \description{
 List all docs in a given database.
