@@ -4,7 +4,7 @@
 \title{Delete a database.}
 \usage{
 sofa_deletedb(dbname, endpoint = "localhost", port = 5984,
-  username = NULL, pwd = NULL)
+  username = NULL, pwd = NULL, ...)
 }
 \arguments{
 \item{endpoint}{One of localhost, cloudant, or iriscouch. For local work
@@ -16,6 +16,8 @@ with those database services.}
 \item{username}{Your cloudant or iriscouch username}
 
 \item{pwd}{Your cloudant or iriscouch password}
+
+\item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }
 \description{
 Delete a database.
@@ -23,11 +25,14 @@ Delete a database.
 \examples{
 \donttest{
 # local databasees
-sofa_deletedb(dbname="shitbutt")
+## create database first, then delete
+sofa_createdb('newdb')
+sofa_deletedb('newdb')
 
-## or setting username and password in options() call
-cushion(cloudant_username='name', cloudant_pwd='pwd')
-sofa_deletedb(dbname="foobardb", "cloudant")
+## with curl info while doing request
+library('httr')
+sofa_createdb('newdb')
+sofa_deletedb('newdb', config=verbose())
 }
 }
 

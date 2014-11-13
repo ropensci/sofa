@@ -59,9 +59,3 @@ sofa_alldocs <- function(cushion="sofa_localhost", port=5984, dbname, asdf = TRU
   } else
   { temp }
 }
-
-sofa_GET <- function(url, args = list(), ...){
-  tt <- GET(url, query=args, ...)
-  res <- content(tt, "text")
-  jsonlite::fromJSON(res, FALSE)
-}

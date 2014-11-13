@@ -41,6 +41,25 @@ get_pwd <- function(u=NULL,p=NULL,service)
 
 sc <- function (l) Filter(Negate(is.null), l)
 
+sofa_GET <- function(url, args = list(), ...){
+  tt <- GET(url, query=args, ...)
+  res <- content(tt, "text")
+  jsonlite::fromJSON(res, FALSE)
+}
+
+sofa_DELETE <- function(url, ...){
+  res <- DELETE(url, ...)
+  stop_for_status(res)
+  content(res)
+}
+
+sofa_PUT <- function(url, ...){
+  res <- PUT(url, ...)
+  stop_for_status(res)
+  content(res)
+}
+
+
 # get_pwd <- function(u,p,service)
 # {
 #   if(is.null(u) | is.null(p)){

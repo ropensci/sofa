@@ -4,7 +4,7 @@
 \title{Create a database.}
 \usage{
 sofa_createdb(dbname, endpoint = "localhost", port = 5984,
-  username = NULL, pwd = NULL, delifexists = FALSE)
+  username = NULL, pwd = NULL, delifexists = FALSE, ...)
 }
 \arguments{
 \item{endpoint}{One of localhost, cloudant, or iriscouch. For local work
@@ -19,13 +19,15 @@ with those database services.}
 
 \item{delifexists}{If TRUE, delete any database of the same name before creating it.
 This is useful for testing. Default is FALSE.}
+
+\item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }
 \description{
 Create a database.
 }
 \examples{
 \donttest{
-sofa_createdb(dbname='sofadb')
+sofa_createdb(dbname='leothelion')
 sofa_listdbs() # see if its there now
 
 ## or setting username and password in cushion() call
