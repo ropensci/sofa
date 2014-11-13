@@ -20,7 +20,7 @@ The function returns TRUE. Though note that this can result even
    if the database does not exist in CouchDB.
 }
 \examples{
-\donttes{
+\donttest{
 sofa_createdb(dbname='shitty2')
 elastic_start(dbname="shitty2")
 }

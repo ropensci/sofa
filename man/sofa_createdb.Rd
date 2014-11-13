@@ -39,7 +39,7 @@ cushion(iriscouch_name='name', iriscouch_pwd='pwd')
 sofa_createdb(dbname="mustache", "iriscouch")
 
 # different login credentials than normal, just pass in to function call
-sofa_createdb(dbname='shit', "cloudant", username='app16517180.heroku', pwd='DA1w5hbKJJAtcGnF74Ds3nVl')
+sofa_createdb(dbname='shit', "cloudant", username='<user>', pwd='<pwd>')
 }
 }
 

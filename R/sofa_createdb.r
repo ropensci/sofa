@@ -23,7 +23,7 @@
 #' sofa_createdb(dbname="mustache", "iriscouch")
 #'
 #' # different login credentials than normal, just pass in to function call
-#' sofa_createdb(dbname='shit', "cloudant", username='app16517180.heroku', pwd='DA1w5hbKJJAtcGnF74Ds3nVl')
+#' sofa_createdb(dbname='shit', "cloudant", username='<user>', pwd='<pwd>')
 #' }
 
 sofa_createdb <- function(dbname, endpoint="localhost", port=5984, username=NULL,
