@@ -1,7 +1,7 @@
 #' Write documents to a database.
 #'
 #' @export
-#' @inheritParams sofa_ping
+#' @inheritParams ping
 #' @param dbname Database name3
 #' @param doc Document content
 #' @param docid Document ID
@@ -18,23 +18,23 @@
 #' @examples \donttest{
 #' # write a document WITH a name (uses PUT)
 #' doc1 <- '{"name":"dude","beer":"IPA"}'
-#' sofa_writedoc(dbname="sofadb", doc=doc1, docid="dudesbeer")
+#' writedoc(dbname="sofadb", doc=doc1, docid="dudesbeer")
 #'
 #' # write a json document WITHOUT a name (uses POST)
 #' doc2 <- '{"name":"dude","icecream":"rocky road"}'
-#' sofa_writedoc(dbname="sofadb", doc=doc2)
+#' writedoc(dbname="sofadb", doc=doc2)
 #'
 #' # write an xml document WITH a name (uses PUT). xml is written as xml in
 #' # couchdb, just wrapped in json, when you get it out it will be as xml
 #' doc3 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
-#' sofa_writedoc(dbname="sofadb", doc=doc3, docid="somexml")
+#' writedoc(dbname="sofadb", doc=doc3, docid="somexml")
 #'
 #' # write a document using web api storage format
 #' doc <- '{"downloads":10,"pageviews":5000,"tweets":300}'
-#' sofa_writedoc(dbname="sofadb", doc=doc, apicall=TRUE, baseurl="http://shit", queryargs="some args")
+#' writedoc(dbname="sofadb", doc=doc, apicall=TRUE, baseurl="http://shit", queryargs="some args")
 #' }
 
-sofa_writedoc <- function(endpoint="localhost", port=5984, dbname, doc,
+writedoc <- function(endpoint="localhost", port=5984, dbname, doc,
                           docid=NULL, apicall=FALSE, baseurl, queryargs, username=NULL, pwd=NULL)
 {
   endpoint <- match.arg(endpoint,choices=c("localhost","cloudant","iriscouch"))

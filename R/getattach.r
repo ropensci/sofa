@@ -1,15 +1,15 @@
 #' Get an attachment.
 #'
 #' @export
-#' @inheritParams sofa_ping
+#' @inheritParams ping
 #' @param dbname Database name. (charcter)
 #' @param docid Document ID (character)
 #' @param attname Attachment name.
 #' @examples \donttest{
-#' sofa_getattach(dbname="sofadb", docid="guysbeer")
+#' getattach(dbname="sofadb", docid="guysbeer")
 #' }
 
-sofa_getattach <- function(endpoint="http://127.0.0.1", port=5984, dbname, docid, attname=NULL)
+getattach <- function(endpoint="http://127.0.0.1", port=5984, dbname, docid, attname=NULL)
 {
   if(is.null(attname)){
     call_ <- paste(paste(endpoint, port, sep=":"), "/", dbname, "/", docid, "?_attachments=true", sep="")

@@ -12,22 +12,22 @@
 #'    This is useful for testing. Default is FALSE.
 #' @param ... Curl args passed on to \code{\link[httr]{GET}}
 #' @examples \donttest{
-#' sofa_createdb(dbname='leothelion')
-#' sofa_listdbs() # see if its there now
+#' createdb(dbname='leothelion')
+#' listdbs() # see if its there now
 #'
 #' ## or setting username and password in cushion() call
 #' cushion(cloudant_name='name', cloudant_pwd='pwd')
-#' sofa_createdb(dbname="mustache", "cloudant")
+#' createdb(dbname="mustache", "cloudant")
 #'
 #' ## iriscouch
 #' cushion(iriscouch_name='name', iriscouch_pwd='pwd')
-#' sofa_createdb(dbname="mustache", "iriscouch")
+#' createdb(dbname="mustache", "iriscouch")
 #'
 #' # different login credentials than normal, just pass in to function call
-#' sofa_createdb(dbname='shit', "cloudant", username='<user>', pwd='<pwd>')
+#' createdb(dbname='shit', "cloudant", username='<user>', pwd='<pwd>')
 #' }
 
-sofa_createdb <- function(dbname, endpoint="localhost", port=5984, username=NULL,
+createdb <- function(dbname, endpoint="localhost", port=5984, username=NULL,
   pwd=NULL, delifexists=FALSE, ...)
 {
   if(delifexists)

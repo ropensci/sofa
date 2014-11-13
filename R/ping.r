@@ -7,10 +7,11 @@
 #' @param pwd Your cloudant or iriscouch password
 #' @param ... Curl args passed on to \code{\link[httr]{GET}}
 #' @examples \donttest{
-#' sofa_ping()
-#' # sofa_ping("sofa_cloudant_heroku")
+#' ping()
+#' # ping("sofa_cloudant_heroku")
 #' }
-sofa_ping <- function(endpoint="localhost", port=5984, username=NULL, pwd=NULL, ...)
+
+ping <- function(endpoint="localhost", port=5984, username=NULL, pwd=NULL, ...)
 {
   endpoint <- match.arg(endpoint, choices=c("localhost","cloudant","iriscouch"))
 

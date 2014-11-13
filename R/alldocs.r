@@ -3,7 +3,7 @@
 #' @export
 #' @import plyr
 #' @importFrom jsonlite fromJSON toJSON
-#' @inheritParams sofa_ping
+#' @inheritParams ping
 #' @param cushion A cushion name
 #' @param dbname Database name. (charcter)
 #' @param asdf Return as data.frame? defaults to TRUE (logical)
@@ -14,22 +14,22 @@
 #' @param include_docs If TRUE, returns docs themselves, in addition to IDs (logical)
 #' @param ... Curl args passed on to \code{\link[httr]{GET}}
 #' @examples \donttest{
-#' sofa_alldocs(dbname="sofadb")
-#' sofa_alldocs(dbname="mydb", limit=2)
-#' sofa_alldocs(dbname="mydb", limit=2, include_docs="true")
+#' alldocs(dbname="sofadb")
+#' alldocs(dbname="mydb", limit=2)
+#' alldocs(dbname="mydb", limit=2, include_docs="true")
 #' library('httr')
-#' sofa_alldocs(dbname="sofadb", config=verbose())
+#' alldocs(dbname="sofadb", config=verbose())
 #'
 #' # different login credentials than normal, just pass in to function call
 #' ## you obviously need to fill in some details here, this won't work as is
-#' sofa_alldocs(cushion="sofa_cloudant", dbname='dbname', username='username', pwd='password')
+#' alldocs(cushion="sofa_cloudant", dbname='dbname', username='username', pwd='password')
 #'
 #' # this works for the package author, but not for you
 #' cushion(sofa_cloudant_heroku=c('<name>','<pwd>'))
-#' sofa_alldocs(cushion="sofa_cloudant_heroku", dbname='gaugesdb_ro', include_docs='true')
+#' alldocs(cushion="sofa_cloudant_heroku", dbname='gaugesdb_ro', include_docs='true')
 #' }
 
-sofa_alldocs <- function(cushion="sofa_localhost", port=5984, dbname, asdf = TRUE,
+alldocs <- function(cushion="sofa_localhost", port=5984, dbname, asdf = TRUE,
   descending=NULL, startkey=NULL, endkey=NULL, limit=NULL, include_docs=NULL,
   username=NULL, pwd=NULL, ...)
 {

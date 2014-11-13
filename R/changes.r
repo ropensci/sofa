@@ -1,7 +1,7 @@
 #' List changes to a database.
 #'
 #' @export
-#' @inheritParams sofa_ping
+#' @inheritParams ping
 #' @param dbname Database name. (charcter)
 #' @param descending Return in descending order? (logical)
 #' @param startkey Document ID to start at. (character)
@@ -20,15 +20,15 @@
 #'    _changes. For example, using feed=longpoll or continuous doesn't make much sense
 #'    within R itself.
 #' @examples \donttest{
-#' sofa_changes(dbname="sofadb")
-#' sofa_changes(dbname="sofadb", limit=2)
+#' changes(dbname="sofadb")
+#' changes(dbname="sofadb", limit=2)
 #'
 #' # different login credentials than normal, just pass in to function call
 #' cushion(sofa_cloudant_heroku=c('<user>','<pwd>'))
-#' sofa_changes("cloudant", dbname='gaugesdb_ro', include_docs='true')
+#' changes("cloudant", dbname='gaugesdb_ro', include_docs='true')
 #' }
 
-sofa_changes <- function(endpoint="localhost", port=5984, dbname,
+changes <- function(endpoint="localhost", port=5984, dbname,
   descending=NULL, startkey=NULL, endkey=NULL, since=NULL, limit=NULL, include_docs=NULL,
   feed="normal", heartbeat=NULL, filter=NULL, username=NULL, pwd=NULL, ...)
 {
