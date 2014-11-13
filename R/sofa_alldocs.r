@@ -16,6 +16,8 @@
 #' sofa_alldocs(dbname="sofadb")
 #' sofa_alldocs(dbname="mydb", limit=2)
 #' sofa_alldocs(dbname="mydb", limit=2, include_docs="true")
+#' library('httr')
+#' sofa_alldocs(dbname="sofadb", config=verbose())
 #'
 #' # different login credentials than normal, just pass in to function call
 #' ## you obviously need to fill in some details here, this won't work as is
@@ -58,7 +60,7 @@ sofa_alldocs <- function(cushion="sofa_localhost", port=5984, dbname, asdf = TRU
   { temp }
 }
 
-sofa_GET <- function(url, args, ...){
+sofa_GET <- function(url, args = list(), ...){
   tt <- GET(url, query=args, ...)
   res <- content(tt, "text")
   jsonlite::fromJSON(res, FALSE)
