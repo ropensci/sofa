@@ -4,6 +4,7 @@
 #' @import plyr
 #' @importFrom jsonlite fromJSON toJSON
 #' @inheritParams sofa_ping
+#' @param cushion A cushion name
 #' @param dbname Database name. (charcter)
 #' @param asdf Return as data.frame? defaults to TRUE (logical)
 #' @param descending Return in descending order? (logical)

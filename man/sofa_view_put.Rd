@@ -11,6 +11,12 @@ sofa_view_put(dbname, design_name, fxnname = "foo", key = "null",
 
 \item{design_name}{Design document name}
 
+\item{fxnname}{A function name}
+
+\item{key}{Key}
+
+\item{value}{Value}
+
 \item{endpoint}{the endpoint, defaults to localhost (http://127.0.0.1)}
 
 \item{port}{port to connect to, defaults to 5984}

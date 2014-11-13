@@ -8,6 +8,8 @@ sofa_alldocs(cushion = "sofa_localhost", port = 5984, dbname, asdf = TRUE,
   include_docs = NULL, username = NULL, pwd = NULL, ...)
 }
 \arguments{
+\item{cushion}{A cushion name}
+
 \item{port}{port to connect to, defaults to 5984}
 
 \item{dbname}{Database name. (charcter)}

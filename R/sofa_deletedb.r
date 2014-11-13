@@ -2,6 +2,7 @@
 #'
 #' @export
 #' @import httr
+#' @param dbname Database name
 #' @param endpoint One of localhost, cloudant, or iriscouch. For local work
 #'    use the default localhost. For cloudant or iriscouch you will need accounts
 #'    with those database services.

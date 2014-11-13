@@ -7,6 +7,8 @@ sofa_deletedb(dbname, endpoint = "localhost", port = 5984,
   username = NULL, pwd = NULL, ...)
 }
 \arguments{
+\item{dbname}{Database name}
+
 \item{endpoint}{One of localhost, cloudant, or iriscouch. For local work
 use the default localhost. For cloudant or iriscouch you will need accounts
 with those database services.}
