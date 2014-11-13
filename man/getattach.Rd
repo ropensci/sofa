@@ -4,7 +4,7 @@
 \title{Get an attachment.}
 \usage{
 getattach(endpoint = "http://127.0.0.1", port = 5984, dbname, docid,
-  attname = NULL)
+  attname = NULL, ...)
 }
 \arguments{
 \item{endpoint}{the endpoint, defaults to localhost (http://127.0.0.1)}
@@ -16,13 +16,15 @@ getattach(endpoint = "http://127.0.0.1", port = 5984, dbname, docid,
 \item{docid}{Document ID (character)}
 
 \item{attname}{Attachment name.}
+
+\item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }
 \description{
 Get an attachment.
 }
 \examples{
 \donttest{
-getattach(dbname="sofadb", docid="guysbeer")
+getattach(dbname="sofadb", docid="abeer")
 }
 }
 
