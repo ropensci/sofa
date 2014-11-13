@@ -2,6 +2,7 @@
 #'
 #' @export
 #' @import plyr
+#' @importFrom jsonlite fromJSON
 #' @inheritParams sofa_ping
 #' @param dbname Database name. (charcter)
 #' @param asdf Return as data.frame? defaults to TRUE (logical)
