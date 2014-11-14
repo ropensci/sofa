@@ -3,10 +3,11 @@
 \alias{sf_attach}
 \title{Include an attachment either on an existing or new document.}
 \usage{
-sf_attach(endpoint = "http://127.0.0.1", port = 5984, dbname, docid,
-  attachment, attname)
+sf_attach(cushion = "localhost", dbname, docid, attachment, attname, ...)
 }
 \arguments{
+\item{cushion}{A cushion name}
+
 \item{dbname}{Database name. (charcter)}
 
 \item{docid}{Document ID (character)}
@@ -14,6 +15,8 @@ sf_attach(endpoint = "http://127.0.0.1", port = 5984, dbname, docid,
 \item{attachment}{The attachment object name}
 
 \item{attname}{Attachment name.}
+
+\item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }
 \description{
 Include an attachment either on an existing or new document.

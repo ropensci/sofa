@@ -15,7 +15,7 @@
 #' sf_attach(dbname="sofadb", docid="guysbeer", attachment=myattachment, attname="mtcarstable.csv")
 #' }
 
-sf_attach <- function(endpoint="http://127.0.0.1", port=5984, dbname, docid, attachment, attname)
+sf_attach <- function(cushion="localhost", dbname, docid, attachment, attname, ...)
 {
   message("needs work still")
   #   revget <- getdoc(dbname=dbname, docid=docid)[["_rev"]]
