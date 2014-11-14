@@ -4,6 +4,7 @@
 #' @export
 #' @param cushion A cushion name
 #' @param count (numeric) Number of uuids to return. Default: 1
+#' @param as (character) One of list (default) or json
 #' @param ... Curl args passed on to \code{\link[httr]{GET}}
 #' @examples \donttest{
 #' uuids()

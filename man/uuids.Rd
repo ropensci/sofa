@@ -10,6 +10,8 @@ uuids(cushion = "localhost", count = 1, as = "list", ...)
 
 \item{count}{(numeric) Number of uuids to return. Default: 1}
 
+\item{as}{(character) One of list (default) or json}
+
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }
 \description{
