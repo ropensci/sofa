@@ -3,7 +3,13 @@
 #' That is, set up config for remote CouchDB databases, or get auth info
 #'
 #' @name authentication
-#' @param ... Enter named sets of username and password.
+#' @param name Name for the cushion. This is what you'll call in sofa functions to get these
+#' details.
+#' @param user A user name
+#' @param pwd A password
+#' @param type One of localhost, cloudant, or iriscouch. This is what's used to determine
+#' how to structure the URL to make the request.
+#' @param port Port. Only applies when type is localhost.
 #' @details Setup for authentication:
 #' For localhost you don't need to authenticate, but of course you may have set
 #' up a username and password in which case use 'localhost'.

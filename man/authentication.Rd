@@ -10,7 +10,17 @@ cushion(name, user = NULL, pwd = NULL, type, port = NULL)
 profiles()
 }
 \arguments{
-\item{...}{Enter named sets of username and password.}
+\item{name}{Name for the cushion. This is what you'll call in sofa functions to get these
+details.}
+
+\item{user}{A user name}
+
+\item{pwd}{A password}
+
+\item{type}{One of localhost, cloudant, or iriscouch. This is what's used to determine
+how to structure the URL to make the request.}
+
+\item{port}{Port. Only applies when type is localhost.}
 }
 \description{
 That is, set up config for remote CouchDB databases, or get auth info
