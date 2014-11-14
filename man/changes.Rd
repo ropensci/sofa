@@ -33,10 +33,6 @@ feed alive indefinitely. (numeric (milliseconds))}
 \item{filter}{Reference a filter function from a design document to selectively get updates.}
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
-
-\item{username}{User name}
-
-\item{pwd}{Password}
 }
 \description{
 Of course it doesn't make much sense to use certain options in

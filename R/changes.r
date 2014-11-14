@@ -14,8 +14,6 @@
 #'    Only applicable for longpoll or continuous feeds. Overrides any timeout to keep the
 #'    feed alive indefinitely. (numeric (milliseconds))
 #' @param filter Reference a filter function from a design document to selectively get updates.
-#' @param username User name
-#' @param pwd Password
 #' @description Of course it doesn't make much sense to use certain options in
 #'    _changes. For example, using feed=longpoll or continuous doesn't make much sense
 #'    within R itself.
