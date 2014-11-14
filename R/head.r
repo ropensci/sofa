@@ -6,21 +6,18 @@
 #' @param docid Document ID (character)
 #' @examples \donttest{
 #' sf_head(dbname="sofadb", docid="beer")
+#' sf_head("cloudant", dbname="animaldb", docid="badger")
+#' sf_head("iriscouch", dbname="helloworld", docid="ggg")
 #' }
-sf_head <- function(endpoint="localhost", port=5984, dbname, docid, username=NULL, pwd=NULL, ...)
+sf_head <- function(cushion="localhost", dbname, docid, ...)
 {
-  if(endpoint=="localhost"){
-    call_ <- sprintf("http://127.0.0.1:%s/%s/%s", port, dbname, docid)
-  } else
-    if(endpoint=="cloudant"){
-      auth <- get_pwd(username,pwd,"cloudant")
-      call_ <- sprintf("https://%s:%s@%s.cloudant.com/%s/%s", auth[[1]], auth[[2]], auth[[1]], dbname, docid)
-    } else
-    {
-      auth <- get_pwd(username,pwd,"iriscouch")
-      call_ <- sprintf("https://%s.iriscouch.com/%s/%s", auth[[1]], dbname, docid)
-    }
+  cushion <- get_cushion(cushion)
+  if(cushion$type=="localhost"){
+    call_ <- sprintf("http://127.0.0.1:%s/%s/%s", cushion$port, dbname, docid)
+  } else if(cushion$type %in% c("cloudant",'iriscouch')){
+    call_ <- remote_url(cushion, dbname)
+  }
   out <- HEAD(call_, ...)
   stop_for_status(out)
-  out$headers
+  out$all_headers
 }

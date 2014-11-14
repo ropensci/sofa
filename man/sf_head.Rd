@@ -3,19 +3,14 @@
 \alias{sf_head}
 \title{Get header info for a document.}
 \usage{
-sf_head(endpoint = "localhost", port = 5984, dbname, docid,
-  username = NULL, pwd = NULL, ...)
+sf_head(cushion = "localhost", dbname, docid, ...)
 }
 \arguments{
-\item{port}{port to connect to, defaults to 5984}
+\item{cushion}{A cushion name}
 
 \item{dbname}{Database name. (charcter)}
 
 \item{docid}{Document ID (character)}
-
-\item{username}{Your cloudant or iriscouch username}
-
-\item{pwd}{Your cloudant or iriscouch password}
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }
@@ -25,6 +20,8 @@ Get header info for a document.
 \examples{
 \donttest{
 sf_head(dbname="sofadb", docid="beer")
+sf_head("cloudant", dbname="animaldb", docid="badger")
+sf_head("iriscouch", dbname="helloworld", docid="ggg")
 }
 }
 
