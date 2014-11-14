@@ -2,7 +2,7 @@ Package: sofa
 Maintainer: Scott Chamberlain <myrmecocystus@gmail.com>
 Author: Scott Chamberlain
 Version: 0.1.5.99
-License: CC0
+License: MIT + file LICENSE
 Title: Easy R connector to CouchDB
 Description: Easy R connector to CouchDB.
 URL: https://github.com/schamberlain/sofa
