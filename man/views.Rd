@@ -8,13 +8,14 @@
 \title{Work with design documents (i.e., views) in your CouchDB's.}
 \usage{
 view_put(cushion = "localhost", dbname, design_name, fxnname = "foo",
-  key = "null", value = "doc", ...)
+  key = "null", value = "doc", as = "json", ...)
 
-view_del(cushion = "localhost", dbname, design_name, ...)
+view_del(cushion = "localhost", dbname, design_name, as = "json", ...)
 
-view_get(cushion = "localhost", dbname, design_name, ...)
+view_get(cushion = "localhost", dbname, design_name, as = "json", ...)
 
-view_search(cushion = "localhost", dbname, design_name, query = NULL, ...)
+view_search(cushion = "localhost", dbname, design_name, query = NULL,
+  as = "json", ...)
 }
 \arguments{
 \item{cushion}{A cushion name}
@@ -29,6 +30,8 @@ view_search(cushion = "localhost", dbname, design_name, query = NULL, ...)
 
 \item{value}{Value}
 
+\item{as}{(character) One of list (default) or json}
+
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 
 \item{query}{Query terms}
@@ -38,7 +41,7 @@ Work with design documents (i.e., views) in your CouchDB's.
 }
 \details{
 If you are writing a complicated javascript function, better to do
-   that in the Futon CouchDB interface or otherwise.
+that in the Futon CouchDB interface or otherwise.
 }
 \examples{
 \donttest{

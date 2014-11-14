@@ -57,10 +57,11 @@ sofa_PUT <- function(url, as = 'list', ...){
   if(as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
 }
 
-sofa_POST <- function(url, ...){
+sofa_POST <- function(url, as = 'list', ...){
   res <- POST(url, ...)
   stop_for_status(res)
-  jsonlite::fromJSON(content(res, "text"), FALSE)
+  tt <- content(res, "text")
+  if(as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
 }
 
 pick_url <- function(x){

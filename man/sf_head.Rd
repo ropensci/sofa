@@ -3,7 +3,7 @@
 \alias{sf_head}
 \title{Get header info for a document.}
 \usage{
-sf_head(cushion = "localhost", dbname, docid, ...)
+sf_head(cushion = "localhost", dbname, docid, as = "list", ...)
 }
 \arguments{
 \item{cushion}{A cushion name}
@@ -12,6 +12,8 @@ sf_head(cushion = "localhost", dbname, docid, ...)
 
 \item{docid}{Document ID (character)}
 
+\item{as}{(character) One of list (default) or json}
+
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }
 \description{
@@ -19,7 +21,8 @@ Get header info for a document.
 }
 \examples{
 \donttest{
-sf_head(dbname="sofadb", docid="beer")
+sf_head(dbname="sofadb", docid="a_beer")
+sf_head(dbname="sofadb", docid="a_beer", as='json')
 sf_head("cloudant", dbname="animaldb", docid="badger")
 sf_head("iriscouch", dbname="helloworld", docid="ggg")
 }

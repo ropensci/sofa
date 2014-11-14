@@ -4,7 +4,7 @@
 \title{Write documents to a database.}
 \usage{
 writedoc(cushion = "localhost", dbname, doc, docid = NULL,
-  apicall = FALSE, baseurl, queryargs, ...)
+  apicall = FALSE, baseurl, queryargs, as = "list", ...)
 }
 \arguments{
 \item{cushion}{A cushion name}
@@ -26,6 +26,8 @@ writedoc(cushion = "localhost", dbname, doc, docid = NULL,
 
 \item{queryargs}{Web API query arguments to pass in to json with document}
 
+\item{as}{(character) One of list (default) or json}
+
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }
 \description{
@@ -36,6 +38,7 @@ Write documents to a database.
 # write a document WITH a name (uses PUT)
 doc1 <- '{"name":"drink","beer":"IPA"}'
 writedoc(dbname="sofadb", doc=doc1, docid="abeer")
+writedoc(dbname="sofadb", doc=doc1, docid="morebeer", as='json')
 getdoc(dbname = "sofadb", docid = "abeer")
 
 # write a json document WITHOUT a name (uses POST)

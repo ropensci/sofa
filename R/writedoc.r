@@ -18,6 +18,7 @@
 #' # write a document WITH a name (uses PUT)
 #' doc1 <- '{"name":"drink","beer":"IPA"}'
 #' writedoc(dbname="sofadb", doc=doc1, docid="abeer")
+#' writedoc(dbname="sofadb", doc=doc1, docid="morebeer", as='json')
 #' getdoc(dbname = "sofadb", docid = "abeer")
 #'
 #' # write a json document WITHOUT a name (uses POST)
@@ -46,7 +47,7 @@
 #' }
 
 writedoc <- function(cushion="localhost", dbname, doc, docid=NULL, apicall=FALSE, baseurl,
-  queryargs, ...)
+  queryargs, as='list', ...)
 {
   cushion <- get_cushion(cushion)
   if(cushion$type=="localhost"){
@@ -60,17 +61,17 @@ writedoc <- function(cushion="localhost", dbname, doc, docid=NULL, apicall=FALSE
                   toJSON(queryargs, collapse=""), ',', '"response":', doc, "}", sep="")
     if(!is.null(docid)){
       call_ <- paste0(call_, "/", docid)
-      sofa_PUT(call_, body=doc2, ...)
+      sofa_PUT(call_, as, body=doc2, ...)
     } else {
-      sofa_POST(call_, body=doc2, content_type_json(), ...)
+      sofa_POST(call_, as, body=doc2, content_type_json(), ...)
     }
   } else {
     doc2 <- doc
     if(grepl("<[A-Za-z]+>", doc)) doc2 <- paste('{"xml":', '"', doc, '"', '}', sep="")
     if(!is.null(docid)){
-      sofa_PUT(paste0(call_, "/", docid), body=doc2, ...)
+      sofa_PUT(paste0(call_, "/", docid), as, body=doc2, ...)
     } else {
-      sofa_POST(call_, body=doc2, content_type_json(), ...)
+      sofa_POST(call_, as, body=doc2, content_type_json(), ...)
     }
   }
 }

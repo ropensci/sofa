@@ -3,7 +3,7 @@
 \alias{getdoc}
 \title{Get a document from a database.}
 \usage{
-getdoc(cushion = "localhost", dbname, docid, ...)
+getdoc(cushion = "localhost", dbname, docid, as = "list", ...)
 }
 \arguments{
 \item{cushion}{A cushion name}
@@ -12,6 +12,8 @@ getdoc(cushion = "localhost", dbname, docid, ...)
 
 \item{docid}{Document ID}
 
+\item{as}{(character) One of list (default) or json}
+
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }
 \description{
@@ -19,7 +21,8 @@ Get a document from a database.
 }
 \examples{
 \donttest{
-getdoc(dbname="sofadb", docid="beer")
+getdoc(dbname="sofadb", docid="a_beer")
+getdoc(dbname="sofadb", docid="a_beer", as='json')
 getdoc("cloudant", dbname='gaugesdb_ro', docid='017ba8075b92656bbca20b8ab6fdb21d')
 getdoc("iriscouch", dbname='helloworld', docid="0c0858b75a81c464a74119ca24000543")
 }

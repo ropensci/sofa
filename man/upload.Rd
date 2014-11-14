@@ -3,7 +3,8 @@
 \alias{upload}
 \title{Upload a local database to a remote database server, e.g., Cloudant, Iriscouch}
 \usage{
-upload(from = "localhost", to = "cloudant", dbname, createdb = FALSE, ...)
+upload(from = "localhost", to = "cloudant", dbname, createdb = FALSE,
+  as = "list", ...)
 }
 \arguments{
 \item{from}{Couch to replicate from, Default: localhost}
@@ -15,6 +16,8 @@ upload(from = "localhost", to = "cloudant", dbname, createdb = FALSE, ...)
 \item{createdb}{If TRUE, the function creates the db on the remote server before
 uploading. The db has to exist before uploading, so either you do it separately
 or this fxn can do it for you. Default = FALSE}
+
+\item{as}{(character) One of list (default) or json}
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }

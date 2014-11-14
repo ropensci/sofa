@@ -3,7 +3,8 @@
 \alias{getattach}
 \title{Get an attachment.}
 \usage{
-getattach(cushion = "localhost", dbname, docid, attname = NULL, ...)
+getattach(cushion = "localhost", dbname, docid, attname = NULL,
+  as = "list", ...)
 }
 \arguments{
 \item{cushion}{A cushion name}
@@ -13,6 +14,8 @@ getattach(cushion = "localhost", dbname, docid, attname = NULL, ...)
 \item{docid}{Document ID (character)}
 
 \item{attname}{Attachment name.}
+
+\item{as}{(character) One of list (default) or json}
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }

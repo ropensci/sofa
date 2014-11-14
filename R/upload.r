@@ -25,7 +25,7 @@
 #' deletedb('cloudant', 'hello_earth')
 #' }
 
-upload <- function(from='localhost', to="cloudant", dbname, createdb=FALSE, ...){
+upload <- function(from='localhost', to="cloudant", dbname, createdb=FALSE, as='list', ...){
   cushion <- get_cushion(to)
   if(createdb) createdb(cushion, dbname)
   fromcushion <- get_cushion(from)
@@ -38,6 +38,6 @@ upload <- function(from='localhost', to="cloudant", dbname, createdb=FALSE, ...)
     message(sprintf("Uploading to %s...", to))
     args <- list(source = unbox(dbname),
                  target = unbox(cloudant_url(cushion, dbname)))
-    sofa_POST(url, content_type_json(), body=args, encode="json", ...)
+    sofa_POST(url, as, content_type_json(), body=args, encode="json", ...)
   } else stop(paste0(cushion$type, " is not supported yet"))
 }

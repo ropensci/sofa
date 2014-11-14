@@ -9,7 +9,7 @@
 #' getattach(dbname="sofadb", docid="abeer")
 #' }
 
-getattach <- function(cushion="localhost", dbname, docid, attname=NULL, ...)
+getattach <- function(cushion="localhost", dbname, docid, attname=NULL, as='list', ...)
 {
   cushion <- get_cushion(cushion)
   url <- pick_url(cushion)
@@ -19,5 +19,5 @@ getattach <- function(cushion="localhost", dbname, docid, attname=NULL, ...)
   {
     call_ <- paste(url, "/", dbname, "/", docid, "/", attname, sep="")
   }
-  sofa_GET(call_, NULL, content_type_json(), ...)
+  sofa_GET(call_, NULL, as, content_type_json(), ...)
 }

@@ -5,11 +5,12 @@
 #' @param dbname Database name. (charcter)
 #' @param docid Document ID (character)
 #' @examples \donttest{
-#' sf_head(dbname="sofadb", docid="beer")
+#' sf_head(dbname="sofadb", docid="a_beer")
+#' sf_head(dbname="sofadb", docid="a_beer", as='json')
 #' sf_head("cloudant", dbname="animaldb", docid="badger")
 #' sf_head("iriscouch", dbname="helloworld", docid="ggg")
 #' }
-sf_head <- function(cushion="localhost", dbname, docid, ...)
+sf_head <- function(cushion="localhost", dbname, docid, as='list', ...)
 {
   cushion <- get_cushion(cushion)
   if(cushion$type=="localhost"){
@@ -19,5 +20,5 @@ sf_head <- function(cushion="localhost", dbname, docid, ...)
   }
   out <- HEAD(call_, ...)
   stop_for_status(out)
-  out$all_headers
+  if(as=='lis') out$all_headers else jsonlite::toJSON(out$all_header)
 }

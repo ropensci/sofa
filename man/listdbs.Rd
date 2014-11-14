@@ -3,10 +3,12 @@
 \alias{listdbs}
 \title{List all databases.}
 \usage{
-listdbs(cushion = "localhost", ...)
+listdbs(cushion = "localhost", as = "list", ...)
 }
 \arguments{
 \item{cushion}{A cushion name}
+
+\item{as}{(character) One of list (default) or json}
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }
@@ -17,6 +19,7 @@ List all databases.
 \donttest{
 # local databasees
 listdbs()
+listdbs(as='json')
 listdbs("cloudant")
 listdbs("iriscouch")
 }

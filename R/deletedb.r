@@ -28,6 +28,6 @@ deletedb <- function(cushion="localhost", dbname, as='list', ...)
   if(cushion$type=="localhost"){
     sofa_DELETE(sprintf("http://127.0.0.1:%s/%s", cushion$port, dbname), as, ...)
   } else if(cushion$type %in% c("cloudant",'iriscouch')){
-    sofa_DELETE(remote_url(cushion, dbname), content_type_json(), as, ...)
+    sofa_DELETE(remote_url(cushion, dbname), as, content_type_json(), ...)
   }
 }
