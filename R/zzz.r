@@ -1,10 +1,10 @@
-.onAttach <- function(...) {
-  packageStartupMessage("
-    Start CouchDB on your command line by typing 'couchdb'
-    New to sofa? Tutorial at https://github.com/sckott/sofa
-    Use suppressPackageStartupMessages() to suppress these startup messages in the future\n
-  ")
-}
+# .onAttach <- function(...) {
+#   packageStartupMessage("
+#     Start CouchDB on your command line by typing 'couchdb'
+#     New to sofa? Tutorial at https://github.com/sckott/sofa
+#     Use suppressPackageStartupMessages() to suppress these startup messages in the future\n
+#   ")
+# }
 
 remote_url <- function(cushion, dbname=NULL, endpt=NULL){
   switch(cushion$type,
