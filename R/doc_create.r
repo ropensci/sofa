@@ -17,36 +17,36 @@
 #' @examples \donttest{
 #' # write a document WITH a name (uses PUT)
 #' doc1 <- '{"name":"drink","beer":"IPA"}'
-#' writedoc(dbname="sofadb", doc=doc1, docid="abeer")
-#' writedoc(dbname="sofadb", doc=doc1, docid="morebeer", as='json')
-#' getdoc(dbname = "sofadb", docid = "abeer")
+#' doc_create(dbname="sofadb", doc=doc1, docid="abeer")
+#' doc_create(dbname="sofadb", doc=doc1, docid="morebeer", as='json')
+#' doc_get(dbname = "sofadb", docid = "abeer")
 #'
 #' # write a json document WITHOUT a name (uses POST)
 #' doc2 <- '{"name":"food","icecream":"rocky road"}'
-#' writedoc(dbname="sofadb", doc=doc2)
+#' doc_create(dbname="sofadb", doc=doc2)
 #'
 #' doc3 <- '{"planet":"mars","size":"smallish"}'
-#' writedoc(dbname="sofadb", doc=doc3)
+#' doc_create(dbname="sofadb", doc=doc3)
 #'
 #' # write an xml document WITH a name (uses PUT). xml is written as xml in
 #' # couchdb, just wrapped in json, when you get it out it will be as xml
 #' doc4 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
-#' writedoc(dbname="sofadb", doc=doc4, docid="somexml")
-#' getdoc(dbname = "sofadb", docid = "somexml")
+#' doc_create(dbname="sofadb", doc=doc4, docid="somexml")
+#' doc_get(dbname = "sofadb", docid = "somexml")
 #'
 #' # write a document using web api storage format
 #' doc <- '{"downloads":10,"pageviews":5000,"tweets":300}'
-#' writedoc(dbname="sofadb", doc=doc, docid="asdfg", apicall=TRUE, baseurl="http://things...",
+#' doc_create(dbname="sofadb", doc=doc, docid="asdfg", apicall=TRUE, baseurl="http://things...",
 #'    queryargs="some args")
-#' getdoc(dbname = "sofadb", docid = "asdfg")
+#' doc_get(dbname = "sofadb", docid = "asdfg")
 #'
 #' # in iriscouch
-#' writedoc("iriscouch", dbname='helloworld', doc='{"things":"stuff"}', docid="ggg")
-#' getdoc("iriscouch", dbname='helloworld', docid="ggg")
-#' deldoc("iriscouch", dbname='helloworld', docid="ggg")
+#' doc_create("iriscouch", dbname='helloworld', doc='{"things":"stuff"}', docid="ggg")
+#' doc_get("iriscouch", dbname='helloworld', docid="ggg")
+#' doc_delete("iriscouch", dbname='helloworld', docid="ggg")
 #' }
 
-writedoc <- function(cushion="localhost", dbname, doc, docid=NULL, apicall=FALSE, baseurl,
+doc_create <- function(cushion="localhost", dbname, doc, docid=NULL, apicall=FALSE, baseurl,
   queryargs, as='list', ...)
 {
   cushion <- get_cushion(cushion)
@@ -63,7 +63,7 @@ writedoc <- function(cushion="localhost", dbname, doc, docid=NULL, apicall=FALSE
       call_ <- paste0(call_, "/", docid)
       sofa_PUT(call_, as, body=doc2, ...)
     } else {
-      sofa_POST(call_, as, body=doc2, content_type_json(), ...)
+      sofa_POST(call_, as, body=doc2, ...)
     }
   } else {
     doc2 <- doc
@@ -71,7 +71,7 @@ writedoc <- function(cushion="localhost", dbname, doc, docid=NULL, apicall=FALSE
     if(!is.null(docid)){
       sofa_PUT(paste0(call_, "/", docid), as, body=doc2, ...)
     } else {
-      sofa_POST(call_, as, body=doc2, content_type_json(), ...)
+      sofa_POST(call_, as, body=doc2, ...)
     }
   }
 }

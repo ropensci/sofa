@@ -44,14 +44,14 @@ asl <- function(x){
 
 sofa_GET <- function(url, args = list(), as = 'list', ...){
   as <- match.arg(as, c('list','json'))
-  res <- GET(url, query=args, ...)
+  res <- GET(url, query=args, content_type_json(), ...)
   tt <- content(res, "text")
   if(as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
 }
 
 sofa_DELETE <- function(url, as = 'list',...){
   as <- match.arg(as, c('list','json'))
-  res <- DELETE(url, ...)
+  res <- DELETE(url, content_type_json(), ...)
   stop_for_status(res)
   tt <- content(res, "text")
   if(as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
@@ -59,14 +59,14 @@ sofa_DELETE <- function(url, as = 'list',...){
 
 sofa_PUT <- function(url, as = 'list', ...){
   as <- match.arg(as, c('list','json'))
-  res <- PUT(url, ...)
+  res <- PUT(url, content_type_json(), ...)
   stop_for_status(res)
   tt <- content(res, "text")
   if(as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
 }
 
 sofa_POST <- function(url, as = 'list', ...){
-  res <- POST(url, ...)
+  res <- POST(url, content_type_json(), ...)
   stop_for_status(res)
   tt <- content(res, "text")
   if(as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
