@@ -1,4 +1,4 @@
-#' Upload a local database to a remote database server, e.g., Cloudant, Iriscouch
+#' Upload (replicate) a local database to a remote database server, e.g., Cloudant, Iriscouch
 #'
 #' @export
 #' @inheritParams ping
@@ -13,8 +13,8 @@
 #' listdbs()
 #' createdb('hello_earth')
 #'
-#' # Upload to a remote server
-#' upload(to="cloudant", dbname="hello_earth", createdb=TRUE)
+#' # replicate to a remote server
+#' replicate(to="cloudant", dbname="hello_earth", createdb=TRUE)
 #' changes("cloudant", dbname = "hello_earth")
 #' writedoc("cloudant", dbname = "hello_earth", doc = '{"language":"python","library":"requests"}')
 #' changes("cloudant", dbname = "hello_earth")
@@ -25,7 +25,7 @@
 #' deletedb('cloudant', 'hello_earth')
 #' }
 
-upload <- function(from='localhost', to="cloudant", dbname, createdb=FALSE, as='list', ...){
+replicate <- function(from='localhost', to="cloudant", dbname, createdb=FALSE, as='list', ...){
   cushion <- get_cushion(to)
   if(createdb) createdb(cushion, dbname)
   fromcushion <- get_cushion(from)
