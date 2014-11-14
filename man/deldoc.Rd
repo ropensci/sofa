@@ -3,7 +3,7 @@
 \alias{deldoc}
 \title{Delete a document in a database.}
 \usage{
-deldoc(cushion = "localhost", dbname, docid, ...)
+deldoc(cushion = "localhost", dbname, docid, as = "list", ...)
 }
 \arguments{
 \item{cushion}{A cushion name}
@@ -11,6 +11,8 @@ deldoc(cushion = "localhost", dbname, docid, ...)
 \item{dbname}{Database name. (charcter)}
 
 \item{docid}{Document ID (character)}
+
+\item{as}{(character) One of list (default) or json}
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }
@@ -22,6 +24,7 @@ Delete a document in a database.
 doc3 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
 writedoc(dbname="sofadb", doc=doc3, docid="newnewxml")
 deldoc(dbname="sofadb", docid="newnewxml")
+getdoc(dbname="sofadb", docid="newnewxml")
 
 # wrong docid name
 writedoc(dbname="sofadb", doc=doc3, docid="newxml")

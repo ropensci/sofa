@@ -19,10 +19,12 @@
 #'    within R itself.
 #' @examples \donttest{
 #' changes(dbname="sofadb")
+#' changes(dbname="sofadb", as='json')
 #' changes(dbname="sofadb", limit=2)
 #'
 #' # different login credentials than normal, just pass in to function call
 #' changes("cloudant", dbname='gaugesdb_ro')
+#' changes("cloudant", dbname='gaugesdb_ro', as='json')
 #' changes("cloudant", dbname='gaugesdb_ro', include_docs='true')
 #'
 #' # irishcouch
@@ -31,7 +33,8 @@
 #' }
 
 changes <- function(cushion='localhost', dbname, descending=NULL, startkey=NULL, endkey=NULL,
-  since=NULL, limit=NULL, include_docs=NULL, feed="normal", heartbeat=NULL, filter=NULL, ...)
+  since=NULL, limit=NULL, include_docs=NULL, feed="normal", heartbeat=NULL,
+  filter=NULL, as='list', ...)
 {
   cushion <- get_cushion(cushion)
   args <- sc(list(descending=descending,startkey=startkey,endkey=endkey,
@@ -40,8 +43,8 @@ changes <- function(cushion='localhost', dbname, descending=NULL, startkey=NULL,
 
   if(cushion$type == "localhost"){
     call_ <- sprintf("http://127.0.0.1:%s/%s/_changes", cushion$port, dbname)
-    sofa_GET(call_, args, ...)
+    sofa_GET(call_, args, as, ...)
   } else if(cushion$type %in% c("cloudant",'iriscouch')){
-    sofa_GET(remote_url(cushion, dbname, "_changes"), args, content_type_json(), ...)
+    sofa_GET(remote_url(cushion, dbname, "_changes"), args, as, content_type_json(), ...)
   }
 }

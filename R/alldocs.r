@@ -15,6 +15,7 @@
 #' @param ... Curl args passed on to \code{\link[httr]{GET}}
 #' @examples \donttest{
 #' alldocs(dbname="sofadb")
+#' alldocs(dbname="sofadb", as='json')
 #' alldocs(dbname="mydb", limit=2)
 #' alldocs(dbname="mydb", limit=2, include_docs="true")
 #' library('httr')
@@ -32,7 +33,7 @@
 #' }
 
 alldocs <- function(cushion="localhost", dbname, asdf = TRUE,
-  descending=NULL, startkey=NULL, endkey=NULL, limit=NULL, include_docs=NULL, ...)
+  descending=NULL, startkey=NULL, endkey=NULL, limit=NULL, include_docs=NULL, as='list', ...)
 {
   cushion <- get_cushion(cushion)
   args <- sc(list(descending=descending, startkey=startkey,endkey=endkey,
@@ -40,10 +41,12 @@ alldocs <- function(cushion="localhost", dbname, asdf = TRUE,
 
   if(cushion$type=="localhost"){
     call_ <- sprintf("http://127.0.0.1:%s/%s/_all_docs", cushion$port, dbname)
-    temp <- sofa_GET(call_, args, ...)
+    temp <- sofa_GET(call_, args, as, ...)
   } else if(cushion$type %in% c("cloudant",'iriscouch')){
-    temp <- sofa_GET(remote_url(cushion, dbname, "_all_docs"), args, content_type_json(), ...)
+    temp <- sofa_GET(remote_url(cushion, dbname, "_all_docs"), args, as, content_type_json(), ...)
   } else stop(paste0(cushion$type, " is not supported yet"))
 
-  if(asdf & is.null(include_docs)) ldply(temp$rows, function(x) as.data.frame(x)) else temp
+  if(as=='json'){ temp } else {
+    if(asdf & is.null(include_docs)) ldply(temp$rows, function(x) as.data.frame(x)) else temp
+  }
 }

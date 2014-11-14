@@ -3,12 +3,14 @@
 \alias{dbinfo}
 \title{List database info.}
 \usage{
-dbinfo(cushion = "localhost", dbname, ...)
+dbinfo(cushion = "localhost", dbname, as = "list", ...)
 }
 \arguments{
 \item{cushion}{A cushion name}
 
 \item{dbname}{Database name}
+
+\item{as}{(character) One of list (default) or json}
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }
@@ -19,6 +21,7 @@ List database info.
 \donttest{
 # local databasees
 dbinfo(dbname="sofadb")
+dbinfo(dbname="sofadb", as='json')
 
 # a database on cloudant or iriscouch
 dbinfo("cloudant", "gaugesdb_ro")

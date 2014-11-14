@@ -5,7 +5,7 @@
 \usage{
 changes(cushion = "localhost", dbname, descending = NULL, startkey = NULL,
   endkey = NULL, since = NULL, limit = NULL, include_docs = NULL,
-  feed = "normal", heartbeat = NULL, filter = NULL, ...)
+  feed = "normal", heartbeat = NULL, filter = NULL, as = "list", ...)
 }
 \arguments{
 \item{cushion}{A cushion name}
@@ -32,6 +32,8 @@ feed alive indefinitely. (numeric (milliseconds))}
 
 \item{filter}{Reference a filter function from a design document to selectively get updates.}
 
+\item{as}{(character) One of list (default) or json}
+
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }
 \description{
@@ -42,10 +44,12 @@ Of course it doesn't make much sense to use certain options in
 \examples{
 \donttest{
 changes(dbname="sofadb")
+changes(dbname="sofadb", as='json')
 changes(dbname="sofadb", limit=2)
 
 # different login credentials than normal, just pass in to function call
 changes("cloudant", dbname='gaugesdb_ro')
+changes("cloudant", dbname='gaugesdb_ro', as='json')
 changes("cloudant", dbname='gaugesdb_ro', include_docs='true')
 
 # irishcouch

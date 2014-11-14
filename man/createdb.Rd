@@ -3,7 +3,8 @@
 \alias{createdb}
 \title{Create a database.}
 \usage{
-createdb(cushion = "localhost", dbname, delifexists = FALSE, ...)
+createdb(cushion = "localhost", dbname, delifexists = FALSE, as = "list",
+  ...)
 }
 \arguments{
 \item{cushion}{A cushion name}
@@ -12,6 +13,8 @@ createdb(cushion = "localhost", dbname, delifexists = FALSE, ...)
 
 \item{delifexists}{If TRUE, delete any database of the same name before creating it.
 This is useful for testing. Default is FALSE.}
+
+\item{as}{(character) One of list (default) or json}
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }

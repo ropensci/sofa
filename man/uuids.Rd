@@ -3,7 +3,7 @@
 \alias{uuids}
 \title{Get uuids.}
 \usage{
-uuids(cushion = "localhost", count = 1, ...)
+uuids(cushion = "localhost", count = 1, as = "list", ...)
 }
 \arguments{
 \item{cushion}{A cushion name}
@@ -18,6 +18,7 @@ Get uuids.
 \examples{
 \donttest{
 uuids()
+uuids(as = 'json')
 uuids("cloudant")
 uuids("iriscouch")
 }

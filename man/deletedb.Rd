@@ -3,12 +3,14 @@
 \alias{deletedb}
 \title{Delete a database.}
 \usage{
-deletedb(cushion = "localhost", dbname, ...)
+deletedb(cushion = "localhost", dbname, as = "list", ...)
 }
 \arguments{
 \item{cushion}{A cushion name}
 
 \item{dbname}{Database name}
+
+\item{as}{(character) One of list (default) or json}
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }

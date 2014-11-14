@@ -34,21 +34,27 @@ iris_url <- function(cushion, dbname=NULL, endpt=NULL){
 
 sc <- function (l) Filter(Negate(is.null), l)
 
-sofa_GET <- function(url, args = list(), ...){
+sofa_GET <- function(url, args = list(), as = 'list', ...){
+  as <- match.arg(as, c('list','json'))
   res <- GET(url, query=args, ...)
-  jsonlite::fromJSON(content(res, "text"), FALSE)
+  tt <- content(res, "text")
+  if(as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
 }
 
-sofa_DELETE <- function(url, ...){
+sofa_DELETE <- function(url, as = 'list',...){
+  as <- match.arg(as, c('list','json'))
   res <- DELETE(url, ...)
   stop_for_status(res)
-  jsonlite::fromJSON(content(res, "text"), FALSE)
+  tt <- content(res, "text")
+  if(as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
 }
 
-sofa_PUT <- function(url, ...){
+sofa_PUT <- function(url, as = 'list', ...){
+  as <- match.arg(as, c('list','json'))
   res <- PUT(url, ...)
   stop_for_status(res)
-  jsonlite::fromJSON(content(res, "text"), FALSE)
+  tt <- content(res, "text")
+  if(as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
 }
 
 sofa_POST <- function(url, ...){

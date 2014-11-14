@@ -7,12 +7,13 @@
 #' @param ... Curl args passed on to \code{\link[httr]{GET}}
 #' @examples \donttest{
 #' uuids()
+#' uuids(as = 'json')
 #' uuids("cloudant")
 #' uuids("iriscouch")
 #' }
 
-uuids <- function(cushion="localhost", count=1, ...)
+uuids <- function(cushion="localhost", count=1, as='list', ...)
 {
   cushion <- get_cushion(cushion)
-  sofa_GET(paste0(pick_url(cushion), '_uuids'), list(count=count), ...)
+  sofa_GET(paste0(pick_url(cushion), '_uuids'), list(count=count), as=as, ...)
 }

@@ -3,10 +3,12 @@
 \alias{ping}
 \title{Ping a couchdb server.}
 \usage{
-ping(cushion = "localhost", ...)
+ping(cushion = "localhost", as = "list", ...)
 }
 \arguments{
 \item{cushion}{A cushion name}
+
+\item{as}{(character) One of list (default) or json}
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }

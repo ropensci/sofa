@@ -5,7 +5,7 @@
 \usage{
 alldocs(cushion = "localhost", dbname, asdf = TRUE, descending = NULL,
   startkey = NULL, endkey = NULL, limit = NULL, include_docs = NULL,
-  ...)
+  as = "list", ...)
 }
 \arguments{
 \item{cushion}{A cushion name}
@@ -24,6 +24,8 @@ alldocs(cushion = "localhost", dbname, asdf = TRUE, descending = NULL,
 
 \item{include_docs}{If TRUE, returns docs themselves, in addition to IDs (logical)}
 
+\item{as}{(character) One of list (default) or json}
+
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }
 \description{
@@ -32,6 +34,7 @@ List all docs in a given database.
 \examples{
 \donttest{
 alldocs(dbname="sofadb")
+alldocs(dbname="sofadb", as='json')
 alldocs(dbname="mydb", limit=2)
 alldocs(dbname="mydb", limit=2, include_docs="true")
 library('httr')
