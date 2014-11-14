@@ -11,6 +11,7 @@
 #'  \item \code{\link{doc_get}} - Get a document
 #'  \item \code{\link{doc_delete}} - Delete a document
 #'  \item \code{\link{doc_head}} - Get headers for a document
+#'  \item \code{\link{doc_attach}} - Attach something to a document
 #'  \item \code{\link{alldocs}} - Get all documents
 #'  \item \code{\link{revisions}} - Get revisions for a document
 #' }
