@@ -58,8 +58,9 @@ writedoc(dbname="sofadb", doc=doc, docid="asdfg", apicall=TRUE, baseurl="http://
 getdoc(dbname = "sofadb", docid = "asdfg")
 
 # in iriscouch
-writedoc(cushion="iriscouch", dbname='helloworld', doc='{"things":"stuff"}', docid="ggg")
-getdoc(cushion="iriscouch", dbname='helloworld', docid="ggg")
+writedoc("iriscouch", dbname='helloworld', doc='{"things":"stuff"}', docid="ggg")
+getdoc("iriscouch", dbname='helloworld', docid="ggg")
+deldoc("iriscouch", dbname='helloworld', docid="ggg")
 }
 }
 

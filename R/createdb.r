@@ -25,5 +25,5 @@ createdb <- function(cushion="localhost", dbname, delifexists=FALSE, ...)
     sofa_PUT(sprintf("http://127.0.0.1:%s/%s", cushion$port, dbname), ...)
   } else if(cushion$type %in% c("cloudant",'iriscouch')){
     sofa_PUT(remote_url(cushion, dbname), content_type_json(), ...)
-  } else stop(paste0(cushion$type, " is not supported yet"))
+  }
 }

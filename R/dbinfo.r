@@ -19,6 +19,6 @@ dbinfo <- function(cushion="localhost", dbname, ...)
   if(cushion$type=="localhost"){
     sofa_GET(sprintf("http://127.0.0.1:%s/%s", cushion$port, dbname), ...)
   } else if(cushion$type %in% c("cloudant",'iriscouch')){
-    sofa_GET(remote_url(cushion, dbname), content_type_json(), ...)
+    sofa_GET(remote_url(cushion, dbname), NULL, content_type_json(), ...)
   }
 }

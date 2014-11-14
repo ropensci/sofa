@@ -15,8 +15,8 @@ getdoc <- function(cushion="localhost", dbname, docid, ...)
 {
   cushion <- get_cushion(cushion)
   if(cushion$type=="localhost"){
-    sofa_GET(sprintf("http://127.0.0.1:%s/%s/%s", cushion$port, dbname, docid), ...)
+    sofa_GET(sprintf("http://127.0.0.1:%s/%s/%s", cushion$port, dbname, docid), NULL, ...)
   } else if(cushion$type %in% c("cloudant",'iriscouch')){
-    sofa_GET(paste0(remote_url(cushion, dbname), docid), content_type_json(), ...)
+    sofa_GET(file.path(remote_url(cushion, dbname), docid), NULL, content_type_json(), ...)
   }
 }

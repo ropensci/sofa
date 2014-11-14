@@ -43,5 +43,5 @@ changes <- function(cushion='localhost', dbname, descending=NULL, startkey=NULL,
     sofa_GET(call_, args, ...)
   } else if(cushion$type %in% c("cloudant",'iriscouch')){
     sofa_GET(remote_url(cushion, dbname, "_changes"), args, content_type_json(), ...)
-  } else stop(paste0(cushion$type, " is not supported yet"))
+  }
 }

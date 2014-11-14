@@ -28,5 +28,5 @@ deletedb <- function(cushion="localhost", dbname, ...)
     sofa_DELETE(sprintf("http://127.0.0.1:%s/%s", cushion$port, dbname), ...)
   } else if(cushion$type %in% c("cloudant",'iriscouch')){
     sofa_DELETE(remote_url(cushion, dbname), content_type_json(), ...)
-  } else stop(paste0(cushion$type, " is not supported yet"))
+  }
 }

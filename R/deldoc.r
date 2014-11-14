@@ -21,11 +21,11 @@
 #' }
 deldoc <- function(cushion="localhost", dbname, docid, ...)
 {
-  cushion <- get_cushion(cushion)
   revget <- getdoc(cushion, dbname, docid)[["_rev"]]
+  cushion <- get_cushion(cushion)
   if(cushion$type=="localhost"){
     sofa_DELETE(sprintf("http://127.0.0.1:%s/%s/%s", cushion$port, dbname, docid), query=list(rev=revget), ...)
   } else if(cushion$type %in% c("cloudant",'iriscouch')){
-    sofa_DELETE(paste0(remote_url(cushion, dbname), docid), content_type_json(), query=list(rev=revget), ...)
+    sofa_DELETE(file.path(remote_url(cushion, dbname), docid), content_type_json(), query=list(rev=revget), ...)
   }
 }

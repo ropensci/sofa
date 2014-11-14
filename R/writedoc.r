@@ -40,8 +40,9 @@
 #' getdoc(dbname = "sofadb", docid = "asdfg")
 #'
 #' # in iriscouch
-#' writedoc(cushion="iriscouch", dbname='helloworld', doc='{"things":"stuff"}', docid="ggg")
-#' getdoc(cushion="iriscouch", dbname='helloworld', docid="ggg")
+#' writedoc("iriscouch", dbname='helloworld', doc='{"things":"stuff"}', docid="ggg")
+#' getdoc("iriscouch", dbname='helloworld', docid="ggg")
+#' deldoc("iriscouch", dbname='helloworld', docid="ggg")
 #' }
 
 writedoc <- function(cushion="localhost", dbname, doc, docid=NULL, apicall=FALSE, baseurl,
@@ -52,7 +53,7 @@ writedoc <- function(cushion="localhost", dbname, doc, docid=NULL, apicall=FALSE
     call_ <- sprintf("http://127.0.0.1:%s/%s", cushion$port, dbname)
   } else if(cushion$type %in% c("cloudant",'iriscouch')){
     call_ <- remote_url(cushion, dbname)
-  } else stop(paste0(cushion$type, " is not supported yet"))
+  }
 
   if(apicall){
     doc2 <- paste('{"baseurl":', '"', baseurl, '",', '"queryargs":',
