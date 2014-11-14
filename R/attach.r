@@ -9,13 +9,13 @@
 #' @examples \donttest{
 #' # put on to an existing document
 #' doc <- '{"name":"guy","beer":"anybeerisfine"}'
-#' writedoc(dbname="sofadb", doc=doc, docid="guysbeer")
+#' doc_create(dbname="sofadb", doc=doc, docid="guysbeer")
 #' myattachment <- "just a simple text string"
 #' myattachment <- mtcars
-#' sf_attach(dbname="sofadb", docid="guysbeer", attachment=myattachment, attname="mtcarstable.csv")
+#' doc_attach(dbname="sofadb", docid="guysbeer", attachment=myattachment, attname="mtcarstable.csv")
 #' }
 
-sf_attach <- function(cushion="localhost", dbname, docid, attachment, attname, ...)
+doc_attach <- function(cushion="localhost", dbname, docid, attachment, attname, ...)
 {
   message("needs work still")
   #   revget <- getdoc(dbname=dbname, docid=docid)[["_rev"]]
