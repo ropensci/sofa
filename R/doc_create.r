@@ -1,4 +1,4 @@
-#' Write documents to a database.
+#' Create documents to a database.
 #'
 #' @export
 #' @inheritParams ping

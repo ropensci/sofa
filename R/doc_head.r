@@ -5,13 +5,13 @@
 #' @param dbname Database name. (charcter)
 #' @param docid Document ID (character)
 #' @examples \donttest{
-#' headdoc(dbname="sofadb", docid="a_beer")
-#' headdoc(dbname="sofadb", docid="a_beer", as='json')
-#' headdoc("cloudant", dbname="animaldb", docid="badger")
-#' headdoc("iriscouch", dbname="helloworld", docid="ggg")
+#' doc_head(dbname="sofadb", docid="a_beer")
+#' doc_head(dbname="sofadb", docid="a_beer", as='json')
+#' doc_head("cloudant", dbname="animaldb", docid="badger")
+#' doc_head("iriscouch", dbname="helloworld", docid="ggg")
 #' }
 
-headdoc <- function(cushion="localhost", dbname, docid, as='list', ...)
+doc_head <- function(cushion="localhost", dbname, docid, as='list', ...)
 {
   cushion <- get_cushion(cushion)
   if(cushion$type=="localhost"){
