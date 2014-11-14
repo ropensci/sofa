@@ -59,7 +59,7 @@ sofa_POST <- function(url, ...){
 
 pick_url <- function(x){
   switch(x$type,
-         localhost = paste0("http://127.0.0.1:", x$port),
+         localhost = sprintf("http://127.0.0.1:%s/", x$port),
          cloudant = cloudant_url(x),
          iriscouch = iris_url(x)
   )
