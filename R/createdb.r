@@ -22,7 +22,7 @@ createdb <- function(cushion="localhost", dbname, delifexists=FALSE, ...)
   if(delifexists) deletedb(cushion, dbname, ...)
   cushion <- get_cushion(cushion)
   if(cushion$type=="localhost"){
-    sofa_PUT(sprintf("http://127.0.0.1:%s/%s", port, dbname), ...)
+    sofa_PUT(sprintf("http://127.0.0.1:%s/%s", cushion$port, dbname), ...)
   } else if(cushion$type %in% c("cloudant",'iriscouch')){
     sofa_PUT(remote_url(cushion, dbname), content_type_json(), ...)
   } else stop(paste0(cushion$type, " is not supported yet"))

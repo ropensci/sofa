@@ -3,21 +3,12 @@
 \alias{dbinfo}
 \title{List database info.}
 \usage{
-dbinfo(dbname, endpoint = "localhost", port = 5984, username = NULL,
-  pwd = NULL, ...)
+dbinfo(cushion = "localhost", dbname, ...)
 }
 \arguments{
+\item{cushion}{A cushion name}
+
 \item{dbname}{Database name}
-
-\item{endpoint}{One of localhost, cloudant, or iriscouch. For local work
-use the default localhost. For cloudant or iriscouch you will need accounts
-with those database services.}
-
-\item{port}{The port to use. Only applicable if using endpoint="localhost".}
-
-\item{username}{Your cloudant or iriscouch username}
-
-\item{pwd}{Your cloudant or iriscouch password}
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }
@@ -29,13 +20,9 @@ List database info.
 # local databasees
 dbinfo(dbname="sofadb")
 
-# databasees on cloudant
-## passing username and password in function call
-dbinfo("cloudant", username='yourusername', pwd='yourpassword')
-
-## or setting username and password in options() call
-cushion(cloudant_username='name', cloudant_pwd='pwd')
-dbinfo("gaugesdb_ro", "cloudant")
+# a database on cloudant or iriscouch
+dbinfo("cloudant", "gaugesdb_ro")
+dbinfo("iriscouch", "helloworld")
 }
 }
 
