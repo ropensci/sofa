@@ -3,10 +3,10 @@
 \alias{deldoc}
 \title{Delete a document in a database.}
 \usage{
-deldoc(endpoint = "http://127.0.0.1", port = 5984, dbname, docid, ...)
+deldoc(cushion = "localhost", dbname, docid, ...)
 }
 \arguments{
-\item{port}{port to connect to, defaults to 5984}
+\item{cushion}{A cushion name}
 
 \item{dbname}{Database name. (charcter)}
 
@@ -20,12 +20,18 @@ Delete a document in a database.
 \examples{
 \donttest{
 doc3 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
-writedoc(dbname="sofadb", doc=doc3, docid="newxml")
-deldoc(dbname="sofadb", docid="newxml")
+writedoc(dbname="sofadb", doc=doc3, docid="newnewxml")
+deldoc(dbname="sofadb", docid="newnewxml")
 
 # wrong docid name
 writedoc(dbname="sofadb", doc=doc3, docid="newxml")
 deldoc(dbname="sofadb", docid="wrongname")
+
+# remote
+doc3 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
+writedoc("cloudant", dbname="mustache", doc=doc3, docid="bbbb")
+getdoc("cloudant", dbname='mustache', docid='bbbb')
+deldoc("cloudant", dbname='mustache', docid='bbbb')
 }
 }
 
