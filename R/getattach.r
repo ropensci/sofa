@@ -9,13 +9,15 @@
 #' getattach(dbname="sofadb", docid="abeer")
 #' }
 
-getattach <- function(endpoint="http://127.0.0.1", port=5984, dbname, docid, attname=NULL, ...)
+getattach <- function(cushion="localhost", dbname, docid, attname=NULL, ...)
 {
+  cushion <- get_cushion(cushion)
+  url <- pick_url(cushion)
   if(is.null(attname)){
-    call_ <- paste(paste(endpoint, port, sep=":"), "/", dbname, "/", docid, "?_attachments=true", sep="")
+    call_ <- paste(url, "/", dbname, "/", docid, "?_attachments=true", sep="")
   } else
   {
-    call_ <- paste(paste(endpoint, port, sep=":"), "/", dbname, "/", docid, "/", attname, sep="")
+    call_ <- paste(url, "/", dbname, "/", docid, "/", attname, sep="")
   }
-  sofa_GET(call_, ...)
+  sofa_GET(call_, NULL, content_type_json(), ...)
 }

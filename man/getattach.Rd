@@ -3,10 +3,11 @@
 \alias{getattach}
 \title{Get an attachment.}
 \usage{
-getattach(endpoint = "http://127.0.0.1", port = 5984, dbname, docid,
-  attname = NULL, ...)
+getattach(cushion = "localhost", dbname, docid, attname = NULL, ...)
 }
 \arguments{
+\item{cushion}{A cushion name}
+
 \item{dbname}{Database name. (charcter)}
 
 \item{docid}{Document ID (character)}
