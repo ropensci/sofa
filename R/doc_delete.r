@@ -23,7 +23,7 @@
 
 doc_delete <- function(cushion="localhost", dbname, docid, as='list', ...)
 {
-  revget <- getdoc(cushion, dbname, docid)[["_rev"]]
+  revget <- doc_get(cushion, dbname, docid)[["_rev"]]
   cushion <- get_cushion(cushion)
   if(cushion$type=="localhost"){
     sofa_DELETE(sprintf("http://127.0.0.1:%s/%s/%s", cushion$port, dbname, docid), as, query=list(rev=revget), ...)
