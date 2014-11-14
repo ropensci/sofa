@@ -3,9 +3,10 @@
 \alias{getdoc}
 \title{Get a document from a database.}
 \usage{
-getdoc(cushion = "localhost", dbname, docid, attachments = FALSE,
-  deleted = FALSE, revs = FALSE, revs_info = FALSE, conflicts = FALSE,
-  deleted_conflicts = FALSE, local_seq = FALSE, as = "list", ...)
+getdoc(cushion = "localhost", dbname, docid, rev = NULL,
+  attachments = FALSE, deleted = FALSE, revs = FALSE, revs_info = FALSE,
+  conflicts = FALSE, deleted_conflicts = FALSE, local_seq = FALSE,
+  as = "list", ...)
 }
 \arguments{
 \item{cushion}{A cushion name}
@@ -13,6 +14,8 @@ getdoc(cushion = "localhost", dbname, docid, attachments = FALSE,
 \item{dbname}{Database name}
 
 \item{docid}{Document ID}
+
+\item{rev}{Revision id of the document to get. If NULL, gets current revision}
 
 \item{attachments}{(logical) Whether to include _attachments field.}
 
@@ -38,6 +41,9 @@ Get a document from a database.
 \examples{
 \donttest{
 getdoc(dbname="sofadb", docid="a_beer")
+revs <- revisions(dbname="sofadb", docid="a_beer")
+getdoc(dbname="sofadb", docid="a_beer", rev=revs[1])
+getdoc(dbname="sofadb", docid="a_beer", rev=revs[2])
 getdoc(dbname="sofadb", docid="a_beer", as='json')
 getdoc(dbname="sofadb", docid="a_beer", revs=TRUE)
 getdoc(dbname="sofadb", docid="a_beer", revs=TRUE, local_seq=TRUE)
