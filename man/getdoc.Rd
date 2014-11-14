@@ -3,7 +3,9 @@
 \alias{getdoc}
 \title{Get a document from a database.}
 \usage{
-getdoc(cushion = "localhost", dbname, docid, as = "list", ...)
+getdoc(cushion = "localhost", dbname, docid, attachments = FALSE,
+  deleted = FALSE, revs = FALSE, revs_info = FALSE, conflicts = FALSE,
+  deleted_conflicts = FALSE, local_seq = FALSE, as = "list", ...)
 }
 \arguments{
 \item{cushion}{A cushion name}
@@ -11,6 +13,20 @@ getdoc(cushion = "localhost", dbname, docid, as = "list", ...)
 \item{dbname}{Database name}
 
 \item{docid}{Document ID}
+
+\item{attachments}{(logical) Whether to include _attachments field.}
+
+\item{deleted}{(logical) Whether to include _deleted field.}
+
+\item{revs}{(logical) Whether to include _revisions field.}
+
+\item{revs_info}{(logical) Whether to include _revs_info field.}
+
+\item{conflicts}{(logical) Whether to include _conflicts field.}
+
+\item{deleted_conflicts}{(logical) Whether to include _deleted_conflicts field.}
+
+\item{local_seq}{(logical) Whether to include _local_seq field.}
 
 \item{as}{(character) One of list (default) or json}
 
@@ -23,6 +39,8 @@ Get a document from a database.
 \donttest{
 getdoc(dbname="sofadb", docid="a_beer")
 getdoc(dbname="sofadb", docid="a_beer", as='json')
+getdoc(dbname="sofadb", docid="a_beer", revs=TRUE)
+getdoc(dbname="sofadb", docid="a_beer", revs=TRUE, local_seq=TRUE)
 getdoc("cloudant", dbname='gaugesdb_ro', docid='017ba8075b92656bbca20b8ab6fdb21d')
 getdoc("iriscouch", dbname='helloworld', docid="0c0858b75a81c464a74119ca24000543")
 }

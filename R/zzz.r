@@ -34,6 +34,14 @@ iris_url <- function(cushion, dbname=NULL, endpt=NULL){
 
 sc <- function (l) Filter(Negate(is.null), l)
 
+asl <- function(x){
+  if(is.null(x)){
+    NULL
+  } else {
+    if(x) 'true' else 'false'
+  }
+}
+
 sofa_GET <- function(url, args = list(), as = 'list', ...){
   as <- match.arg(as, c('list','json'))
   res <- GET(url, query=args, ...)
