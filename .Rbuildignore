@@ -2,3 +2,4 @@
 ^\.Rproj\.user$
 .scott_auth.r
 Makefile
+README.Rmd
