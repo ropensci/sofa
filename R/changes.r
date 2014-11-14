@@ -24,31 +24,26 @@
 #' changes(dbname="sofadb", limit=2)
 #'
 #' # different login credentials than normal, just pass in to function call
-#' cushion(sofa_cloudant_heroku=c('<user>','<pwd>'))
+#' changes("cloudant", dbname='gaugesdb_ro')
 #' changes("cloudant", dbname='gaugesdb_ro', include_docs='true')
+#'
+#' # irishcouch
+#' changes(cushion="iriscouch", dbname='helloworld')
+#' changes(cushion="iriscouch", dbname='helloworld', include_docs='true')
 #' }
 
-changes <- function(endpoint="localhost", port=5984, dbname,
-  descending=NULL, startkey=NULL, endkey=NULL, since=NULL, limit=NULL, include_docs=NULL,
-  feed="normal", heartbeat=NULL, filter=NULL, username=NULL, pwd=NULL, ...)
+changes <- function(cushion='localhost', dbname, descending=NULL, startkey=NULL, endkey=NULL,
+  since=NULL, limit=NULL, include_docs=NULL, feed="normal", heartbeat=NULL, filter=NULL, ...)
 {
-  endpoint <- match.arg(endpoint,choices=c("localhost","cloudant","iriscouch"))
+  cushion <- get_cushion(cushion)
   args <- sc(list(descending=descending,startkey=startkey,endkey=endkey,
-                       since=since,limit=limit,include_docs=include_docs,feed=feed,
-                       heartbeat=heartbeat,filter=filter))
+                  since=since,limit=limit,include_docs=include_docs,feed=feed,
+                  heartbeat=heartbeat,filter=filter))
 
-  if(endpoint=="localhost"){
-    call_ <- sprintf("http://127.0.0.1:%s/%s/_changes", port, dbname)
+  if(cushion$type == "localhost"){
+    call_ <- sprintf("http://127.0.0.1:%s/%s/_changes", cushion$port, dbname)
     sofa_GET(call_, args, ...)
-  } else
-    if(endpoint=="cloudant"){
-      if(is.null(username) | is.null(pwd)){ auth <- get_pwd(username,pwd,"cloudant") } else { auth <- c(username, pwd) }
-      call_ <- sprintf('https://%s:%s@%s.cloudant.com/%s/_changes', auth[[1]], auth[[2]], auth[[1]], dbname)
-      sofa_GET(call_, args, add_headers("Content-Type" = "application/json"), ...)
-    } else
-    {
-      if(is.null(username) | is.null(pwd)){ auth <- get_pwd(username,pwd,"iriscouch") } else { auth <- c(username, pwd) }
-      call_ <- sprintf('https://%s.iriscouch.com/%s/_changes', auth[[1]], dbname)
-      sofa_GET(url, add_headers("Content-Type" = "application/json"))
-    }
+  } else if(cushion$type %in% c("cloudant",'iriscouch')){
+    sofa_GET(remote_url(cushion, dbname, "_changes"), args, content_type_json(), ...)
+  } else stop(paste0(cushion$type, " is not supported yet"))
 }

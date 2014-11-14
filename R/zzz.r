@@ -1,6 +1,3 @@
-# sofa environment
-SofaAuthCache <- new.env(hash=TRUE)
-
 .onAttach <- function(...) {
   packageStartupMessage("
     Start CouchDB on your command line by typing 'couchdb'
@@ -9,102 +6,47 @@ SofaAuthCache <- new.env(hash=TRUE)
   ")
 }
 
-#' Get auth info for a cushion
-#' @param u username
-#' @param p password
-#' @param service one of iriscouch, cloudant, etc.
-#' @export
-#' @examples \dontrun{
-#' get_pwd(service='cloudant')
-#' }
-get_pwd <- function(u=NULL,p=NULL,service)
-{
-  auth <- profile()
-#   ser <- paste0('sofa_',service)
+remote_url <- function(cushion, dbname=NULL, endpt=NULL){
+  switch(cushion$type,
+         cloudant = cloudant_url(cushion, dbname, endpt),
+         iriscouch = iris_url(cushion, dbname, endpt))
+}
 
-  if(is.null(u) | is.null(p)){
-    temp <- grep(service,names(auth))
-    if(identical(temp,integer(0)))
-      stop('Auth details for sofa_cloudant not found')
-    username <- auth[temp][[1]][[1]]
-    pwd <- auth[temp][[1]][[2]]
-    out <- list(username,pwd)
-  }
+cloudant_url <- function(cushion, dbname=NULL, endpt=NULL){
+  if(is.null(dbname))
+    paste(sprintf('https://%s:%s@%s.cloudant.com', cushion$user, cushion$pwd, cushion$user), endpt, sep="/")
+  else
+    paste(sprintf('https://%s:%s@%s.cloudant.com', cushion$user, cushion$pwd, cushion$user), dbname, endpt, sep="/")
+}
 
-  if(is.null(username) | is.null(pwd))
-    stop("You must supply your username and password for Cloudant or Iriscouch\nOptionally, set your username and password in options, see vignette")
-
-  return(out)
+iris_url <- function(cushion, dbname=NULL, endpt=NULL){
+  if(is.null(dbname))
+    paste(sprintf('https://%s.iriscouch.com', cushion$user), endpt, sep = "/")
+  else
+    paste(sprintf('https://%s.iriscouch.com', cushion$user), dbname, endpt, sep = "/")
 }
 
 sc <- function (l) Filter(Negate(is.null), l)
 
 sofa_GET <- function(url, args = list(), ...){
-  tt <- GET(url, query=args, ...)
-  res <- content(tt, "text")
-  jsonlite::fromJSON(res, FALSE)
+  res <- GET(url, query=args, ...)
+  jsonlite::fromJSON(content(res, "text"), FALSE)
 }
 
 sofa_DELETE <- function(url, ...){
   res <- DELETE(url, ...)
   stop_for_status(res)
-  content(res)
+  jsonlite::fromJSON(content(res, "text"), FALSE)
 }
 
 sofa_PUT <- function(url, ...){
   res <- PUT(url, ...)
   stop_for_status(res)
-  content(res)
+  jsonlite::fromJSON(content(res, "text"), FALSE)
 }
 
 sofa_POST <- function(url, ...){
   res <- POST(url, ...)
   stop_for_status(res)
-  content(res)
+  jsonlite::fromJSON(content(res, "text"), FALSE)
 }
-
-# get_pwd <- function(u,p,service)
-# {
-#   if(is.null(u) | is.null(p)){
-#     if(service == "cloudant"){
-#       username <- getOption("cloudant.name")
-#       pwd <- getOption("cloudant.pwd")
-#       out <- list(username,pwd)
-#     } else
-#       if(service == "iriscouch"){
-#         username <- getOption("iriscouch.name")
-#         pwd <- getOption("iriscouch.pwd")
-#         out <- list(username,pwd)
-#       }
-#     if(is.null(username) | is.null(pwd))
-#       stop("You must supply your username and password for Cloudant or Iriscouch\nOptionally, set your username and password in options, see vignette")
-#   }
-#   return(out)
-# }
-#
-# #' get_pwd(service='cloudant')
-# get_pwd <- function(u=NULL,p=NULL,service)
-# {
-#   auth <- profile()
-#   if(is.null(u) | is.null(p)){
-#     if(service == "cloudant"){
-#       temp <- grep('sofa_cloudant',names(auth))
-#       if(identical(temp,integer(0)))
-#         stop('Auth details for sofa_cloudant not found')
-#       username <- auth[temp][[1]][[1]]
-#       pwd <- auth[temp][[1]][[2]]
-#       out <- list(username,pwd)
-#     } else
-#       if(service == "iriscouch"){
-#         temp <- grep('sofa_iriscouch',names(auth))
-#         if(identical(temp,integer(0)))
-#           stop('Auth details for sofa_iriscouch not found')
-#         username <- auth[temp][[1]][[1]]
-#         pwd <- auth[temp][[1]][[2]]
-#         out <- list(username,pwd)
-#       }
-#     if(is.null(username) | is.null(pwd))
-#       stop("You must supply your username and password for Cloudant or Iriscouch\nOptionally, set your username and password in options, see vignette")
-#   }
-#   return(out)
-# }

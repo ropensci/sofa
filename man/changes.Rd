@@ -3,15 +3,12 @@
 \alias{changes}
 \title{List changes to a database.}
 \usage{
-changes(endpoint = "localhost", port = 5984, dbname, descending = NULL,
-  startkey = NULL, endkey = NULL, since = NULL, limit = NULL,
-  include_docs = NULL, feed = "normal", heartbeat = NULL, filter = NULL,
-  username = NULL, pwd = NULL, ...)
+changes(cushion = "localhost", dbname, descending = NULL, startkey = NULL,
+  endkey = NULL, since = NULL, limit = NULL, include_docs = NULL,
+  feed = "normal", heartbeat = NULL, filter = NULL, ...)
 }
 \arguments{
-\item{endpoint}{the endpoint, defaults to localhost (http://127.0.0.1)}
-
-\item{port}{port to connect to, defaults to 5984}
+\item{cushion}{A cushion name}
 
 \item{dbname}{Database name. (charcter)}
 
@@ -35,11 +32,11 @@ feed alive indefinitely. (numeric (milliseconds))}
 
 \item{filter}{Reference a filter function from a design document to selectively get updates.}
 
+\item{...}{Curl args passed on to \code{\link[httr]{GET}}}
+
 \item{username}{User name}
 
 \item{pwd}{Password}
-
-\item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }
 \description{
 Of course it doesn't make much sense to use certain options in
@@ -52,8 +49,12 @@ changes(dbname="sofadb")
 changes(dbname="sofadb", limit=2)
 
 # different login credentials than normal, just pass in to function call
-cushion(sofa_cloudant_heroku=c('<user>','<pwd>'))
+changes("cloudant", dbname='gaugesdb_ro')
 changes("cloudant", dbname='gaugesdb_ro', include_docs='true')
+
+# irishcouch
+changes(cushion="iriscouch", dbname='helloworld')
+changes(cushion="iriscouch", dbname='helloworld', include_docs='true')
 }
 }
 

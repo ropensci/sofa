@@ -3,21 +3,12 @@
 \alias{deletedb}
 \title{Delete a database.}
 \usage{
-deletedb(dbname, endpoint = "localhost", port = 5984, username = NULL,
-  pwd = NULL, ...)
+deletedb(cushion = "localhost", dbname, ...)
 }
 \arguments{
+\item{cushion}{A cushion name}
+
 \item{dbname}{Database name}
-
-\item{endpoint}{One of localhost, cloudant, or iriscouch. For local work
-use the default localhost. For cloudant or iriscouch you will need accounts
-with those database services.}
-
-\item{port}{The port to use. Only applicable if using endpoint="localhost".}
-
-\item{username}{Your cloudant or iriscouch username}
-
-\item{pwd}{Your cloudant or iriscouch password}
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }
@@ -30,6 +21,11 @@ Delete a database.
 ## create database first, then delete
 createdb('newdb')
 deletedb('newdb')
+
+# cloudant
+createdb("cloudant", "stuffthings")
+listdbs("cloudant")
+deletedb("cloudant", "stuffthings")
 
 ## with curl info while doing request
 library('httr')

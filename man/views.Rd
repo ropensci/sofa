@@ -30,8 +30,6 @@ view_search(dbname, design_name, query = NULL,
 
 \item{value}{Value}
 
-\item{endpoint}{the endpoint, defaults to localhost (http://127.0.0.1)}
-
 \item{port}{port to connect to, defaults to 5984}
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}

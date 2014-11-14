@@ -3,19 +3,10 @@
 \alias{listdbs}
 \title{List all databases.}
 \usage{
-listdbs(endpoint = "localhost", port = 5984, username = NULL,
-  pwd = NULL, ...)
+listdbs(cushion = "localhost", ...)
 }
 \arguments{
-\item{endpoint}{One of localhost, cloudant, or iriscouch. For local work
-use the default localhost. For cloudant or iriscouch you will need accounts
-with those database services.}
-
-\item{port}{The port to use. Only applicable if using endpoint="localhost".}
-
-\item{username}{Your cloudant or iriscouch username}
-
-\item{pwd}{Your cloudant or iriscouch password}
+\item{cushion}{A cushion name}
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }
@@ -26,17 +17,8 @@ List all databases.
 \donttest{
 # local databasees
 listdbs()
-
-# databasees on cloudant
-## passing username and password in function call
-listdbs("cloudant", username='yourusername', pwd='yourpassword')
-
-## or setting username and password in options() call
-cushion(cloudant_username='name', cloudant_pwd='pwd')
 listdbs("cloudant")
-
-# different login credentials than normal, just pass in to function call
-listdbs("cloudant", username='appid.heroku', pwd='password')
+listdbs("iriscouch")
 }
 }
 

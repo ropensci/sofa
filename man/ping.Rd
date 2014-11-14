@@ -3,11 +3,11 @@
 \alias{ping}
 \title{Ping a couchdb server.}
 \usage{
-ping(endpoint = "localhost", port = 5984, username = NULL, pwd = NULL,
+ping(cushion = "localhost", port = 5984, username = NULL, pwd = NULL,
   ...)
 }
 \arguments{
-\item{endpoint}{the endpoint, defaults to localhost (http://127.0.0.1)}
+\item{cushion}{A cushion name}
 
 \item{port}{port to connect to, defaults to 5984}
 
@@ -23,7 +23,8 @@ Ping a couchdb server.
 \examples{
 \donttest{
 ping()
-# ping("sofa_cloudant_heroku")
+ping("cloudant")
+ping("iriscouch")
 }
 }
 

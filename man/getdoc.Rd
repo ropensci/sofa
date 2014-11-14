@@ -3,12 +3,10 @@
 \alias{getdoc}
 \title{Get a document from a database.}
 \usage{
-getdoc(endpoint = "http://127.0.0.1", port = 5984, dbname, docid, ...)
+getdoc(cushion = "localhost", dbname, docid, ...)
 }
 \arguments{
-\item{endpoint}{the endpoint, defaults to localhost (http://127.0.0.1)}
-
-\item{port}{port to connect to, defaults to 5984}
+\item{cushion}{A cushion name}
 
 \item{dbname}{Database name}
 
@@ -22,6 +20,8 @@ Get a document from a database.
 \examples{
 \donttest{
 getdoc(dbname="sofadb", docid="beer")
+getdoc("cloudant", dbname='gaugesdb_ro', docid='017ba8075b92656bbca20b8ab6fdb21d')
+getdoc("iriscouch", dbname='helloworld', docid="0c0858b75a81c464a74119ca24000543")
 }
 }
 

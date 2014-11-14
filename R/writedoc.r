@@ -2,6 +2,7 @@
 #'
 #' @export
 #' @inheritParams ping
+#' @param cushion A cushion name
 #' @param dbname Database name3
 #' @param doc Document content
 #' @param docid Document ID
@@ -13,8 +14,6 @@
 #'    }
 #' @param baseurl Base url for the web API call
 #' @param queryargs Web API query arguments to pass in to json with document
-#' @param username Your cloudant or iriscouch username
-#' @param pwd Your cloudant or iriscouch password
 #' @examples \donttest{
 #' # write a document WITH a name (uses PUT)
 #' doc1 <- '{"name":"drink","beer":"IPA"}'
@@ -39,24 +38,21 @@
 #' writedoc(dbname="sofadb", doc=doc, docid="asdfg", apicall=TRUE, baseurl="http://things...",
 #'    queryargs="some args")
 #' getdoc(dbname = "sofadb", docid = "asdfg")
+#'
+#' # in iriscouch
+#' writedoc(cushion="iriscouch", dbname='helloworld', doc='{"things":"stuff"}', docid="ggg")
+#' getdoc(cushion="iriscouch", dbname='helloworld', docid="ggg")
 #' }
 
-writedoc <- function(endpoint="localhost", port=5984, dbname, doc, docid=NULL, apicall=FALSE,
-  baseurl, queryargs, username=NULL, pwd=NULL, ...)
+writedoc <- function(cushion="localhost", dbname, doc, docid=NULL, apicall=FALSE, baseurl,
+  queryargs, ...)
 {
-  endpoint <- match.arg(endpoint,choices=c("localhost","cloudant","iriscouch"))
-
-  if(endpoint=="localhost"){
-    call_ <- sprintf("http://127.0.0.1:%s/%s", port, dbname)
-  } else
-    if(endpoint=="cloudant"){
-      auth <- get_pwd(username,pwd,"cloudant")
-      call_ <- sprintf('https://%s:%s@%s.cloudant.com/%s', auth[[1]], auth[[2]], auth[[1]], dbname)
-    } else
-    {
-      auth <- get_pwd(username,pwd,"iriscouch")
-      call_ <- sprintf('https://%s.iriscouch.com/%s', auth[[1]], dbname)
-    }
+  cushion <- get_cushion(cushion)
+  if(cushion$type=="localhost"){
+    call_ <- sprintf("http://127.0.0.1:%s/%s", cushion$port, dbname)
+  } else if(cushion$type %in% c("cloudant",'iriscouch')){
+    call_ <- remote_url(cushion, dbname)
+  } else stop(paste0(cushion$type, " is not supported yet"))
 
   if(apicall){
     doc2 <- paste('{"baseurl":', '"', baseurl, '",', '"queryargs":',

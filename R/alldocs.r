@@ -2,7 +2,7 @@
 #'
 #' @export
 #' @import plyr
-#' @importFrom jsonlite fromJSON toJSON
+#' @importFrom jsonlite fromJSON toJSON unbox
 #' @inheritParams ping
 #' @param cushion A cushion name
 #' @param dbname Database name. (charcter)
@@ -22,41 +22,28 @@
 #'
 #' # different login credentials than normal, just pass in to function call
 #' ## you obviously need to fill in some details here, this won't work as is
-#' alldocs(cushion="sofa_cloudant", dbname='dbname', username='username', pwd='password')
+#' alldocs("cloudant", dbname='dbname')
 #'
 #' # this works for the package author, but not for you
-#' cushion(sofa_cloudant_heroku=c('<name>','<pwd>'))
-#' alldocs(cushion="sofa_cloudant_heroku", dbname='gaugesdb_ro', include_docs='true')
+#' alldocs(cushion="cloudant", dbname='gaugesdb_ro')
+#'
+#' # irishcouch
+#' alldocs(cushion="iriscouch", dbname='helloworld')
 #' }
 
-alldocs <- function(cushion="sofa_localhost", port=5984, dbname, asdf = TRUE,
-  descending=NULL, startkey=NULL, endkey=NULL, limit=NULL, include_docs=NULL,
-  username=NULL, pwd=NULL, ...)
+alldocs <- function(cushion="localhost", dbname, asdf = TRUE,
+  descending=NULL, startkey=NULL, endkey=NULL, limit=NULL, include_docs=NULL, ...)
 {
-  choices <- c("sofa_localhost","sofa_cloudant","sofa_iriscouch")
-  thing <- paste0(strsplit(cushion,'_')[[1]][1:2],collapse="_")
-  base_serv <- choices[agrep(thing, choices, ignore.case=TRUE)]
+  cushion <- get_cushion(cushion)
   args <- sc(list(descending=descending, startkey=startkey,endkey=endkey,
                        limit=limit,include_docs=include_docs))
 
-  if(base_serv=="sofa_localhost"){
-    call_ <- sprintf("http://127.0.0.1:%s/%s/_all_docs", port, dbname)
+  if(cushion$type=="localhost"){
+    call_ <- sprintf("http://127.0.0.1:%s/%s/_all_docs", cushion$port, dbname)
     temp <- sofa_GET(call_, args, ...)
-  } else
-    if(base_serv=="sofa_cloudant"){
-      if(is.null(username) | is.null(pwd)){ auth <- get_pwd(username,pwd,cushion) } else { auth <- c(username, pwd) }
-      url <- sprintf('https://%s:%s@%s.cloudant.com/%s/_all_docs', auth[[1]], auth[[2]], auth[[1]], dbname)
-      temp <- sofa_GET(url, args, content_type_json(), ...)
-    } else
-      if(base_serv=="sofa_iriscouch"){
-        if(is.null(username) | is.null(pwd)){ auth <- get_pwd(username,pwd,cushion) } else { auth <- c(username, pwd) }
-        url <- sprintf('https://%s.iriscouch.com/%s/_all_docs', auth[[1]], dbname)
-        temp <- sofa_GET(url, args, content_type_json(), ...)
-      } else
-        stop(paste0(base_serv, " is not supported yet"))
+  } else if(cushion$type %in% c("cloudant",'iriscouch')){
+    temp <- sofa_GET(remote_url(cushion, dbname, "_all_docs"), args, content_type_json(), ...)
+  } else stop(paste0(cushion$type, " is not supported yet"))
 
-  if(asdf & is.null(include_docs)){
-    return( ldply(temp$rows, function(x) as.data.frame(x)) )
-  } else
-  { temp }
+  if(asdf & is.null(include_docs)) ldply(temp$rows, function(x) as.data.frame(x)) else temp
 }

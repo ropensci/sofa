@@ -15,7 +15,7 @@
 #' You can permanently store your auth details in your .Rprofile by putting in
 #' entries like this:
 #'
-#' options(sofa_cloudant = c("username","yourcoolpassword"))
+#' options(cloudant = list(user='name', pwd='pwd'))
 #'
 #' Though if you don't want to store them permanently, you can use the cushion()
 #' function instead. See examples below on how to do this. Though using cusion()
@@ -24,34 +24,73 @@
 #' \code{profile()} Looks first in the local environment SofaAuthCache, and if finds nothing,
 #' looks in your \code{.Rprofile} file.
 #' @examples \donttest{
-#' cushion(sofa_cloudant=c('name','pwd'), sofa_iriscouch=c('name','pwd'))
-#' profile()
+#' cushion('cloudant', user='name', pwd='pwd', type="cloudant")
+#' cushion('iriscouch', user='name', pwd='pwd', type="iriscouch")
+#' cushion('julies_iris', user='name', pwd='pwd', type="iriscouch")
+#'
+#' cushion(localhost = list(type="localhost", port=5984))
+#' profiles()
 #' }
 
 #' @export
 #' @rdname authentication
-cushion <- function(...)
-{
-  auth <- list(...)
-  if(is.null(auth)) stop("You must enter values for auth")
-  for(i in seq_along(auth)){
-    assign(names(auth[i]), auth[[i]], envir = SofaAuthCache)
-  }
+cushion <- function(name, user=NULL, pwd=NULL, type, port=NULL){
+  assign(name, list(user=user, pwd=pwd, type=type, port=port), envir = SofaAuthCache)
 }
 
 #' @export
 #' @rdname authentication
-profile <- function()
+profiles <- function()
 {
   if(length(ls(SofaAuthCache)) == 0){
     vals <- names(.Options)
     temp <- .Options[grep('sofa', vals)]
-  } else
-  {
-    temp <- mget(ls(SofaAuthCache), envir=SofaAuthCache)
-  }
-  if(length(temp)==0)
+  } else { temp <- mget(ls(SofaAuthCache), envir=SofaAuthCache) }
+  if(length(temp) == 0)
     stop("No auth details found")
   else
-    temp
+    lapply(temp, function(x) structure(x, class="sofa_profiles"))
 }
+
+#' @export
+print.sofa_profiles <- function(x, ...){
+  cat("<sofa profile> ", sep = "\n")
+  cat(paste0("   user : ", x$user), sep = "\n")
+  cat(paste0("   pwd  : ", x$pwd), sep = "\n")
+  cat(paste0("   type : ", x$type), sep = "\n")
+  cat(paste0("   port : ", x$port), sep = "\n")
+}
+
+# sofa environment
+SofaAuthCache <- new.env(hash=TRUE)
+
+.onLoad <- function(...) {
+  assign("localhost", list(user=NULL, pwd=NULL, type="localhost", port=5984), envir = SofaAuthCache)
+}
+
+get_cushion <- function(x){
+  profs <- profiles()
+  res <- profs[ names(profs) %in% x ]
+  if(length(res) == 0) stop(paste0(x, " not found, see ?cushion and ?profiles")) else res[[1]]
+}
+
+
+# get_pwd <- function(u=NULL,p=NULL,service)
+# {
+#   auth <- profiles()
+# #   ser <- paste0('sofa_',service)
+#
+#   if(is.null(u) | is.null(p)){
+#     temp <- grep(service, names(auth))
+#     if(identical(temp,integer(0)))
+#       stop('Auth details not found')
+#     username <- auth[temp][[1]][[1]]
+#     pwd <- auth[temp][[1]][[2]]
+#     out <- list(username,pwd)
+#   }
+#
+#   if(is.null(username) | is.null(pwd))
+#     stop("You must supply your username and password for Cloudant or Iriscouch\nOptionally, set your username and password in options, see vignette")
+#
+#   return(out)
+# }

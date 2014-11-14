@@ -7,8 +7,6 @@ getattach(endpoint = "http://127.0.0.1", port = 5984, dbname, docid,
   attname = NULL, ...)
 }
 \arguments{
-\item{endpoint}{the endpoint, defaults to localhost (http://127.0.0.1)}
-
 \item{port}{port to connect to, defaults to 5984}
 
 \item{dbname}{Database name. (charcter)}

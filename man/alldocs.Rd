@@ -3,14 +3,12 @@
 \alias{alldocs}
 \title{List all docs in a given database.}
 \usage{
-alldocs(cushion = "sofa_localhost", port = 5984, dbname, asdf = TRUE,
-  descending = NULL, startkey = NULL, endkey = NULL, limit = NULL,
-  include_docs = NULL, username = NULL, pwd = NULL, ...)
+alldocs(cushion = "localhost", dbname, asdf = TRUE, descending = NULL,
+  startkey = NULL, endkey = NULL, limit = NULL, include_docs = NULL,
+  ...)
 }
 \arguments{
 \item{cushion}{A cushion name}
-
-\item{port}{port to connect to, defaults to 5984}
 
 \item{dbname}{Database name. (charcter)}
 
@@ -25,10 +23,6 @@ alldocs(cushion = "sofa_localhost", port = 5984, dbname, asdf = TRUE,
 \item{limit}{Number document IDs to return. (numeric)}
 
 \item{include_docs}{If TRUE, returns docs themselves, in addition to IDs (logical)}
-
-\item{username}{Your cloudant or iriscouch username}
-
-\item{pwd}{Your cloudant or iriscouch password}
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }
@@ -45,11 +39,13 @@ alldocs(dbname="sofadb", config=verbose())
 
 # different login credentials than normal, just pass in to function call
 ## you obviously need to fill in some details here, this won't work as is
-alldocs(cushion="sofa_cloudant", dbname='dbname', username='username', pwd='password')
+alldocs("cloudant", dbname='dbname')
 
 # this works for the package author, but not for you
-cushion(sofa_cloudant_heroku=c('<name>','<pwd>'))
-alldocs(cushion="sofa_cloudant_heroku", dbname='gaugesdb_ro', include_docs='true')
+alldocs(cushion="cloudant", dbname='gaugesdb_ro')
+
+# irishcouch
+alldocs(cushion="iriscouch", dbname='helloworld')
 }
 }
 

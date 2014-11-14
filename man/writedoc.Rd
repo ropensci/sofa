@@ -3,13 +3,11 @@
 \alias{writedoc}
 \title{Write documents to a database.}
 \usage{
-writedoc(endpoint = "localhost", port = 5984, dbname, doc, docid = NULL,
-  apicall = FALSE, baseurl, queryargs, username = NULL, pwd = NULL, ...)
+writedoc(cushion = "localhost", dbname, doc, docid = NULL,
+  apicall = FALSE, baseurl, queryargs, ...)
 }
 \arguments{
-\item{endpoint}{the endpoint, defaults to localhost (http://127.0.0.1)}
-
-\item{port}{port to connect to, defaults to 5984}
+\item{cushion}{A cushion name}
 
 \item{dbname}{Database name3}
 
@@ -27,10 +25,6 @@ writedoc(endpoint = "localhost", port = 5984, dbname, doc, docid = NULL,
 \item{baseurl}{Base url for the web API call}
 
 \item{queryargs}{Web API query arguments to pass in to json with document}
-
-\item{username}{Your cloudant or iriscouch username}
-
-\item{pwd}{Your cloudant or iriscouch password}
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }
@@ -62,6 +56,10 @@ doc <- '{"downloads":10,"pageviews":5000,"tweets":300}'
 writedoc(dbname="sofadb", doc=doc, docid="asdfg", apicall=TRUE, baseurl="http://things...",
    queryargs="some args")
 getdoc(dbname = "sofadb", docid = "asdfg")
+
+# in iriscouch
+writedoc(cushion="iriscouch", dbname='helloworld', doc='{"things":"stuff"}', docid="ggg")
+getdoc(cushion="iriscouch", dbname='helloworld', docid="ggg")
 }
 }
 

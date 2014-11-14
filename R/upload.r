@@ -1,38 +1,43 @@
 #' Upload a local database to a remote database server, e.g., Cloudant, Iriscouch
 #'
+#' @export
 #' @inheritParams ping
+#' @param from Couch to replicate from, Default: localhost
 #' @param to Remote service name to upload to. One of cloudant, iriscouch.
 #' @param dbname Database name.
 #' @param createdb If TRUE, the function creates the db on the remote server before
 #'    uploading. The db has to exist before uploading, so either you do it separately
 #'    or this fxn can do it for you. Default = FALSE
-#' @export
 #' @examples \donttest{
 #' # Create a database locally
+#' listdbs()
 #' createdb('hello_earth')
 #'
 #' # Upload to a remote server
 #' upload(to="cloudant", dbname="hello_earth", createdb=TRUE)
-#' upload(to="iriscouch", dbname="hello_earth", createdb=TRUE)
+#' changes("cloudant", dbname = "hello_earth")
+#' writedoc("cloudant", dbname = "hello_earth", doc = '{"language":"python","library":"requests"}')
+#' changes("cloudant", dbname = "hello_earth")
+#'
+#' writedoc("cloudant", dbname = "hello_earth", doc = '{"language":"R"}', docid="R_rules")
+#' getdoc("cloudant", dbname = "hello_earth", docid='R_rules')
+#'
+#' deletedb('cloudant', 'hello_earth')
 #' }
 
-upload <- function(to="cloudant", port=5984, dbname, username=NULL, pwd=NULL, createdb=FALSE)
-{
-  if(createdb)
-    createdb(dbname, to)
+upload <- function(from='localhost', to="cloudant", dbname, createdb=FALSE, ...){
+  cushion <- get_cushion(to)
+  if(createdb) createdb(cushion, dbname)
+  fromcushion <- get_cushion(from)
+  if(fromcushion$type=="localhost")
+    url <- sprintf('http://localhost:%s/_replicate', fromcushion$port)
+  else
+    url <- remote_url(fromcushion, endpt = '_replicate')
 
-  url <- sprintf('http://localhost:%s/_replicate', port)
-
-  if(to=="cloudant"){
+  if(cushion$type %in% c("cloudant",'iriscouch')){
     message(sprintf("Uploading to %s...", to))
-    auth <- get_pwd(username,pwd,"cloudant")
-    args <- toJSON(list(source=dbname, target=sprintf("https://%s:%s@%s.cloudant.com/%s", auth[[1]], auth[[2]], auth[[1]], dbname)))
-    fromJSON(content(POST(url, content_type_json(), args)))
-  } else
-  {
-    message(sprintf("Uploading to %s", to))
-    auth <- get_pwd(username,pwd,"iriscouch")
-    args <- toJSON(list(source=dbname, target=sprintf("https://%s.iriscouch.com/%s", auth[[1]], dbname)))
-    fromJSON(content(POST(url, content_type_json(), args)))
-  }
+    args <- list(source = unbox(dbname),
+                 target = unbox(cloudant_url(cushion, dbname)))
+    sofa_POST(url, content_type_json(), body=args, encode="json", ...)
+  } else stop(paste0(cushion$type, " is not supported yet"))
 }

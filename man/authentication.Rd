@@ -2,12 +2,12 @@
 \name{authentication}
 \alias{authentication}
 \alias{cushion}
-\alias{profile}
+\alias{profiles}
 \title{Put a cushion on the sofa, and get cushion info}
 \usage{
-cushion(...)
+cushion(name, user = NULL, pwd = NULL, type, port = NULL)
 
-profile()
+profiles()
 }
 \arguments{
 \item{...}{Enter named sets of username and password.}
@@ -27,7 +27,7 @@ You can use other named username/password sets too.
 You can permanently store your auth details in your .Rprofile by putting in
 entries like this:
 
-options(sofa_cloudant = c("username","yourcoolpassword"))
+options(cloudant = list(user='name', pwd='pwd'))
 
 Though if you don't want to store them permanently, you can use the cushion()
 function instead. See examples below on how to do this. Though using cusion()
@@ -38,8 +38,12 @@ looks in your \code{.Rprofile} file.
 }
 \examples{
 \donttest{
-cushion(sofa_cloudant=c('name','pwd'), sofa_iriscouch=c('name','pwd'))
-profile()
+cushion('cloudant', user='name', pwd='pwd', type="cloudant")
+cushion('iriscouch', user='name', pwd='pwd', type="iriscouch")
+cushion('julies_iris', user='name', pwd='pwd', type="iriscouch")
+
+cushion(localhost = list(type="localhost", port=5984))
+profiles()
 }
 }
 

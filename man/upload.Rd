@@ -3,23 +3,20 @@
 \alias{upload}
 \title{Upload a local database to a remote database server, e.g., Cloudant, Iriscouch}
 \usage{
-upload(to = "cloudant", port = 5984, dbname, username = NULL,
-  pwd = NULL, createdb = FALSE)
+upload(from = "localhost", to = "cloudant", dbname, createdb = FALSE, ...)
 }
 \arguments{
+\item{from}{Couch to replicate from, Default: localhost}
+
 \item{to}{Remote service name to upload to. One of cloudant, iriscouch.}
 
-\item{port}{port to connect to, defaults to 5984}
-
 \item{dbname}{Database name.}
-
-\item{username}{Your cloudant or iriscouch username}
-
-\item{pwd}{Your cloudant or iriscouch password}
 
 \item{createdb}{If TRUE, the function creates the db on the remote server before
 uploading. The db has to exist before uploading, so either you do it separately
 or this fxn can do it for you. Default = FALSE}
+
+\item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }
 \description{
 Upload a local database to a remote database server, e.g., Cloudant, Iriscouch
@@ -27,11 +24,19 @@ Upload a local database to a remote database server, e.g., Cloudant, Iriscouch
 \examples{
 \donttest{
 # Create a database locally
+listdbs()
 createdb('hello_earth')
 
 # Upload to a remote server
 upload(to="cloudant", dbname="hello_earth", createdb=TRUE)
-upload(to="iriscouch", dbname="hello_earth", createdb=TRUE)
+changes("cloudant", dbname = "hello_earth")
+writedoc("cloudant", dbname = "hello_earth", doc = '{"language":"python","library":"requests"}')
+changes("cloudant", dbname = "hello_earth")
+
+writedoc("cloudant", dbname = "hello_earth", doc = '{"language":"R"}', docid="R_rules")
+getdoc("cloudant", dbname = "hello_earth", docid='R_rules')
+
+deletedb('cloudant', 'hello_earth')
 }
 }
 
