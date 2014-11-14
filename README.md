@@ -81,11 +81,11 @@ ping()
 #> [1] "2c10f0c6d9bd17205b692ae93cd4cf1d"
 #> 
 #> $version
-#> [1] "1.5.0"
+#> [1] "1.6.0"
 #> 
 #> $vendor
 #> $vendor$version
-#> [1] "1.5.0-1"
+#> [1] "1.6.0-1"
 #> 
 #> $vendor$name
 #> [1] "Homebrew"
@@ -148,7 +148,7 @@ listdbs()
 
 ```r
 doc1 <- '{"name":"sofa","beer":"IPA"}'
-writedoc(dbname="sofadb", doc=doc1, docid="a_beer")
+doc_create(dbname="sofadb", doc=doc1, docid="a_beer")
 #> $ok
 #> [1] TRUE
 #> 
@@ -164,12 +164,12 @@ writedoc(dbname="sofadb", doc=doc1, docid="a_beer")
 
 ```r
 doc2 <- '{"name":"sofa","icecream":"rocky road"}'
-writedoc(dbname="sofadb", doc=doc2)
+doc_create(dbname="sofadb", doc=doc2)
 #> $ok
 #> [1] TRUE
 #> 
 #> $id
-#> [1] "822dd9c93ba0a7f149d75edf06006434"
+#> [1] "1c4d13b6afe7c139ca3b6c92c2023c67"
 #> 
 #> $rev
 #> [1] "1-fd0da7fcb8d3afbfc5757d065c92362c"
@@ -184,7 +184,7 @@ write the xml
 
 ```r
 doc3 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
-writedoc(dbname="sofadb", doc=doc3, docid="somexml")
+doc_create(dbname="sofadb", doc=doc3, docid="somexml")
 #> $ok
 #> [1] TRUE
 #> 
@@ -199,7 +199,7 @@ get the doc back out
 
 
 ```r
-getdoc(dbname="sofadb", docid="somexml")
+doc_get(dbname="sofadb", docid="somexml")
 #> $`_id`
 #> [1] "somexml"
 #> 
@@ -214,7 +214,7 @@ get just the xml out
 
 
 ```r
-getdoc(dbname="sofadb", docid="somexml")[["xml"]]
+doc_get(dbname="sofadb", docid="somexml")[["xml"]]
 #> [1] "<top><a/><b/><c><d/><e>bob</e></c></top>"
 ```
 
@@ -234,14 +234,7 @@ Write a view - here letting key be the default of null
 
 ```r
 view_put(dbname='alm_couchdb', design_name='almview2', value="doc.baseurl")
-#> $ok
-#> [1] TRUE
-#> 
-#> $id
-#> [1] "_design/almview2"
-#> 
-#> $rev
-#> [1] "1-e7c17cff1b96e4595c3781da53e16ad8"
+#> [1] "{\"ok\":true,\"id\":\"_design/almview2\",\"rev\":\"1-e7c17cff1b96e4595c3781da53e16ad8\"}\n"
 ```
 
 get info on your new view
@@ -249,16 +242,7 @@ get info on your new view
 
 ```r
 view_get(dbname='alm_couchdb', design_name='almview2')
-#> $`_id`
-#> [1] "_design/almview2"
-#> 
-#> $`_rev`
-#> [1] "1-e7c17cff1b96e4595c3781da53e16ad8"
-#> 
-#> $views
-#> $views$foo
-#> $views$foo$map
-#> [1] "function(doc){emit(null,doc.baseurl)}"
+#> [1] "{\"_id\":\"_design/almview2\",\"_rev\":\"1-e7c17cff1b96e4595c3781da53e16ad8\",\"views\":{\"foo\":{\"map\":\"function(doc){emit(null,doc.baseurl)}\"}}}\n"
 ```
 
 get data using a view
@@ -266,14 +250,7 @@ get data using a view
 
 ```r
 view_search(dbname='alm_couchdb', design_name='almview2')
-#> $total_rows
-#> [1] 0
-#> 
-#> $offset
-#> [1] 0
-#> 
-#> $rows
-#> list()
+#> [1] "{\"total_rows\":0,\"offset\":0,\"rows\":[\r\n\r\n]}\n"
 ```
 
 delete the view
@@ -281,14 +258,7 @@ delete the view
 
 ```r
 view_del(dbname='alm_couchdb', design_name='almview2')
-#> $ok
-#> [1] TRUE
-#> 
-#> $id
-#> [1] "_design/almview2"
-#> 
-#> $rev
-#> [1] "2-9a57913471486e8e761651c85fd26d4b"
+#> Error in view_get(cushion, dbname, design_name)$`_rev`: $ operator is invalid for atomic vectors
 ```
 
 

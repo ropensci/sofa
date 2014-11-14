@@ -103,14 +103,14 @@ listdbs()
 
 ```{r}
 doc1 <- '{"name":"sofa","beer":"IPA"}'
-writedoc(dbname="sofadb", doc=doc1, docid="a_beer")
+doc_create(dbname="sofadb", doc=doc1, docid="a_beer")
 ```
 
 #### Write a json document WITHOUT a name (uses POST)
 
 ```{r}
 doc2 <- '{"name":"sofa","icecream":"rocky road"}'
-writedoc(dbname="sofadb", doc=doc2)
+doc_create(dbname="sofadb", doc=doc2)
 ```
 
 #### XML? 
@@ -121,19 +121,19 @@ write the xml
 
 ```{r}
 doc3 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
-writedoc(dbname="sofadb", doc=doc3, docid="somexml")
+doc_create(dbname="sofadb", doc=doc3, docid="somexml")
 ```
 
 get the doc back out
 
 ```{r}
-getdoc(dbname="sofadb", docid="somexml")
+doc_get(dbname="sofadb", docid="somexml")
 ```
 
 get just the xml out
 
 ```{r}
-getdoc(dbname="sofadb", docid="somexml")[["xml"]]
+doc_get(dbname="sofadb", docid="somexml")[["xml"]]
 ```
 
 ### Views
