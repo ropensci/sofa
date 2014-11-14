@@ -7,19 +7,18 @@
 \alias{views}
 \title{Work with design documents (i.e., views) in your CouchDB's.}
 \usage{
-view_put(dbname, design_name, fxnname = "foo", key = "null",
-  value = "doc", endpoint = "http://127.0.0.1", port = 5984, ...)
+view_put(cushion = "localhost", dbname, design_name, fxnname = "foo",
+  key = "null", value = "doc", ...)
 
-view_del(dbname, design_name, endpoint = "http://127.0.0.1", port = 5984,
-  ...)
+view_del(cushion = "localhost", dbname, design_name, ...)
 
-view_get(dbname, design_name, endpoint = "http://127.0.0.1", port = 5984,
-  ...)
+view_get(cushion = "localhost", dbname, design_name, ...)
 
-view_search(dbname, design_name, query = NULL,
-  endpoint = "http://127.0.0.1", port = 5984, ...)
+view_search(cushion = "localhost", dbname, design_name, query = NULL, ...)
 }
 \arguments{
+\item{cushion}{A cushion name}
+
 \item{dbname}{Database name}
 
 \item{design_name}{Design document name}
@@ -29,8 +28,6 @@ view_search(dbname, design_name, query = NULL,
 \item{key}{Key}
 
 \item{value}{Value}
-
-\item{port}{port to connect to, defaults to 5984}
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 

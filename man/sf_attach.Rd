@@ -7,8 +7,6 @@ sf_attach(endpoint = "http://127.0.0.1", port = 5984, dbname, docid,
   attachment, attname)
 }
 \arguments{
-\item{port}{port to connect to, defaults to 5984}
-
 \item{dbname}{Database name. (charcter)}
 
 \item{docid}{Document ID (character)}

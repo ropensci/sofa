@@ -3,17 +3,10 @@
 \alias{ping}
 \title{Ping a couchdb server.}
 \usage{
-ping(cushion = "localhost", port = 5984, username = NULL, pwd = NULL,
-  ...)
+ping(cushion = "localhost", ...)
 }
 \arguments{
 \item{cushion}{A cushion name}
-
-\item{port}{port to connect to, defaults to 5984}
-
-\item{username}{Your cloudant or iriscouch username}
-
-\item{pwd}{Your cloudant or iriscouch password}
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }

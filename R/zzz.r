@@ -13,17 +13,25 @@ remote_url <- function(cushion, dbname=NULL, endpt=NULL){
 }
 
 cloudant_url <- function(cushion, dbname=NULL, endpt=NULL){
-  if(is.null(dbname))
-    paste(sprintf('https://%s:%s@%s.cloudant.com', cushion$user, cushion$pwd, cushion$user), endpt, sep="/")
-  else
-    paste(sprintf('https://%s:%s@%s.cloudant.com', cushion$user, cushion$pwd, cushion$user), dbname, endpt, sep="/")
+  if(is.null(dbname)){
+    url <- paste(sprintf('https://%s:%s@%s.cloudant.com', cushion$user, cushion$pwd, cushion$user), endpt, sep="/")
+  } else if(is.null(endpt)){
+    url <- paste(sprintf('https://%s:%s@%s.cloudant.com', cushion$user, cushion$pwd, cushion$user), dbname, sep="/")
+  } else {
+    url <- paste(sprintf('https://%s:%s@%s.cloudant.com', cushion$user, cushion$pwd, cushion$user), dbname, endpt, sep="/")
+  }
+  sub("/$", "", url)
 }
 
 iris_url <- function(cushion, dbname=NULL, endpt=NULL){
-  if(is.null(dbname))
-    paste(sprintf('https://%s.iriscouch.com', cushion$user), endpt, sep = "/")
-  else
-    paste(sprintf('https://%s.iriscouch.com', cushion$user), dbname, endpt, sep = "/")
+  if(is.null(dbname)){
+    url <- paste(sprintf('https://%s.iriscouch.com', cushion$user), endpt, sep = "/")
+  } else if(is.null(endpt)){
+    url <- paste(sprintf('https://%s.iriscouch.com', cushion$user), dbname, sep="/")
+  } else {
+    url <- paste(sprintf('https://%s.iriscouch.com', cushion$user), dbname, endpt, sep = "/")
+  }
+  sub("/$", "", url)
 }
 
 sc <- function (l) Filter(Negate(is.null), l)
@@ -49,4 +57,12 @@ sofa_POST <- function(url, ...){
   res <- POST(url, ...)
   stop_for_status(res)
   jsonlite::fromJSON(content(res, "text"), FALSE)
+}
+
+pick_url <- function(x){
+  switch(x$type,
+         localhost = paste0("http://127.0.0.1:", x$port),
+         cloudant = cloudant_url(x),
+         iriscouch = iris_url(x)
+  )
 }

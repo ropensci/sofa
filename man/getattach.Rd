@@ -7,8 +7,6 @@ getattach(endpoint = "http://127.0.0.1", port = 5984, dbname, docid,
   attname = NULL, ...)
 }
 \arguments{
-\item{port}{port to connect to, defaults to 5984}
-
 \item{dbname}{Database name. (charcter)}
 
 \item{docid}{Document ID (character)}

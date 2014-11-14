@@ -28,10 +28,12 @@
 
 #' @export
 #' @rdname views
-view_put <- function(dbname, design_name, fxnname='foo', key="null", value="doc",
-  endpoint="http://127.0.0.1", port=5984, ...)
+view_put <- function(cushion="localhost", dbname, design_name, fxnname='foo',
+  key="null", value="doc", ...)
 {
-  call_ <- paste0(paste(endpoint, port, sep=":"), "/", dbname, "/_design/", design_name)
+  cushion <- get_cushion(cushion)
+  url <- pick_url(cushion)
+  call_ <- paste0(url, "/", dbname, "/_design/", design_name)
   doc2 <- paste0('{"_id":',
            '"_design/', design_name, '",',
            '"views": {', '"', fxnname, '": {', '"map": "function(doc){emit(', key, ",", value, ')}"}}}')
@@ -40,25 +42,30 @@ view_put <- function(dbname, design_name, fxnname='foo', key="null", value="doc"
 
 #' @export
 #' @rdname views
-view_del <- function(dbname, design_name, endpoint="http://127.0.0.1", port=5984, ...)
+view_del <- function(cushion="localhost", dbname, design_name, ...)
 {
-  rev <- view_get(dbname=dbname, design_name=design_name)$`_rev`
-  call_ <- paste0(paste(endpoint, port, sep=":"), "/", dbname, "/_design/", design_name)
+  cushion <- get_cushion(cushion)
+  url <- pick_url(cushion)
+  rev <- view_get(cushion, dbname, design_name)$`_rev`
+  call_ <- paste0(url, "/", dbname, "/_design/", design_name)
   sofa_DELETE(call_, query=list(rev=rev), ...)
 }
 
 #' @export
 #' @rdname views
-view_get <- function(dbname, design_name, endpoint="http://127.0.0.1", port=5984, ...)
+view_get <- function(cushion="localhost", dbname, design_name, ...)
 {
-  call_ <- paste0(paste(endpoint, port, sep=":"), "/", dbname, "/_design/", design_name)
-  sofa_GET(call_, ...)
+  cushion <- get_cushion(cushion)
+  url <- pick_url(cushion)
+  sofa_GET(paste0(url, "/", dbname, "/_design/", design_name), ...)
 }
 
 #' @export
 #' @rdname views
-view_search <- function(dbname, design_name, query = NULL, endpoint="http://127.0.0.1", port=5984, ...)
+view_search <- function(cushion="localhost", dbname, design_name, query = NULL, ...)
 {
-  call_ <- paste0(paste(endpoint, port, sep=":"), "/", dbname, "/_design/", design_name, "/_view", "/foo")
+  cushion <- get_cushion(cushion)
+  url <- pick_url(cushion)
+  call_ <- paste0(url, "/", dbname, "/_design/", design_name, "/_view", "/foo")
   sofa_GET(call_, ...)
 }
