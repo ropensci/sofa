@@ -7,13 +7,13 @@
 #' @param ... Curl args passed on to \code{\link[httr]{GET}}
 #' @examples \donttest{
 #' # local databasees
-#' listdbs()
-#' listdbs(as='json')
-#' listdbs("cloudant")
-#' listdbs("iriscouch")
+#' db_list()
+#' db_list(as='json')
+#' db_list("cloudant")
+#' db_list("iriscouch")
 #' }
 
-listdbs <- function(cushion="localhost", simplify=TRUE, as='list', ...)
+db_list <- function(cushion="localhost", simplify=TRUE, as='list', ...)
 {
   cushion <- get_cushion(cushion)
   if(cushion$type=="localhost"){
