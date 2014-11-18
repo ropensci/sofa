@@ -10,22 +10,22 @@
 #'    or this fxn can do it for you. Default = FALSE
 #' @examples \donttest{
 #' # Create a database locally
-#' listdbs()
-#' createdb('hello_earth')
+#' db_list()
+#' db_create('hello_earth')
 #'
 #' # replicate to a remote server
-#' replicate(to="cloudant", dbname="hello_earth", createdb=TRUE)
+#' db_replicate(to="cloudant", dbname="hello_earth", createdb=TRUE)
 #' changes("cloudant", dbname = "hello_earth")
-#' writedoc("cloudant", dbname = "hello_earth", doc = '{"language":"python","library":"requests"}')
+#' doc_create("cloudant", dbname = "hello_earth", doc = '{"language":"python","library":"requests"}')
 #' changes("cloudant", dbname = "hello_earth")
 #'
-#' writedoc("cloudant", dbname = "hello_earth", doc = '{"language":"R"}', docid="R_rules")
-#' getdoc("cloudant", dbname = "hello_earth", docid='R_rules')
+#' doc_create("cloudant", dbname = "hello_earth", doc = '{"language":"R"}', docid="R_rules")
+#' doc_get("cloudant", dbname = "hello_earth", docid='R_rules')
 #'
-#' deletedb('cloudant', 'hello_earth')
+#' db_delete('cloudant', 'hello_earth')
 #' }
 
-replicate <- function(from='localhost', to="cloudant", dbname, createdb=FALSE, as='list', ...){
+db_replicate <- function(from='localhost', to="cloudant", dbname, createdb=FALSE, as='list', ...){
   cushion <- get_cushion(to)
   if(createdb) createdb(cushion, dbname)
   fromcushion <- get_cushion(from)
