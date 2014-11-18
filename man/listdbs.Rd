@@ -3,7 +3,7 @@
 \alias{listdbs}
 \title{List all databases.}
 \usage{
-listdbs(cushion = "localhost", as = "list", ...)
+listdbs(cushion = "localhost", simplify = TRUE, as = "list", ...)
 }
 \arguments{
 \item{cushion}{A cushion name}

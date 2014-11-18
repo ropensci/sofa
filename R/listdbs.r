@@ -12,12 +12,13 @@
 #' listdbs("iriscouch")
 #' }
 
-listdbs <- function(cushion="localhost", as='list', ...)
+listdbs <- function(cushion="localhost", simplify=TRUE, as='list', ...)
 {
   cushion <- get_cushion(cushion)
   if(cushion$type=="localhost"){
-    sofa_GET(sprintf("http://127.0.0.1:%s/%s", cushion$port, "_all_dbs"), NULL, as, ...)
+    tmp <- sofa_GET(sprintf("http://127.0.0.1:%s/%s", cushion$port, "_all_dbs"), NULL, as, ...)
   } else if(cushion$type %in% c("cloudant",'iriscouch')){
-    sofa_GET(remote_url(cushion, endpt = "_all_dbs"), NULL, as, content_type_json(), ...)
+    tmp <- sofa_GET(remote_url(cushion, endpt = "_all_dbs"), NULL, as, content_type_json(), ...)
   }
+  if(simplify && as=='list') do.call(c, tmp) else tmp
 }
