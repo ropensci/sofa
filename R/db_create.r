@@ -8,17 +8,17 @@
 #' @param as (character) One of list (default) or json
 #' @param ... Curl args passed on to \code{\link[httr]{GET}}
 #' @examples \donttest{
-#' createdb(dbname='leothelion')
-#' listdbs() # see if its there now
+#' db_create(dbname='leothelion')
+#' db_list() # see if its there now
 #'
 #' ## or setting username and password in cushion() call
-#' createdb("cloudant", "mustache")
+#' db_create("cloudant", "mustache")
 #'
 #' ## iriscouch
-#' createdb("iriscouch", "beard")
+#' db_create("iriscouch", "beard")
 #' }
 
-createdb <- function(cushion="localhost", dbname, delifexists=FALSE, as='list', ...)
+db_create <- function(cushion="localhost", dbname, delifexists=FALSE, as='list', ...)
 {
   if(delifexists) deletedb(cushion, dbname, ...)
   cushion <- get_cushion(cushion)
