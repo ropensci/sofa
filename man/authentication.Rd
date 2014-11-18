@@ -2,12 +2,12 @@
 \name{authentication}
 \alias{authentication}
 \alias{cushion}
-\alias{profiles}
+\alias{cushions}
 \title{Put a cushion on the sofa, and get cushion info}
 \usage{
 cushion(name, user = NULL, pwd = NULL, type, port = NULL)
 
-profiles()
+cushions()
 }
 \arguments{
 \item{name}{Name for the cushion. This is what you'll call in sofa functions to get these
@@ -43,7 +43,7 @@ Though if you don't want to store them permanently, you can use the cushion()
 function instead. See examples below on how to do this. Though using cusion()
 only stores them for the current session.
 
-\code{profile()} Looks first in the local environment SofaAuthCache, and if finds nothing,
+\code{cushions()} Looks first in the local environment SofaAuthCache, and if finds nothing,
 looks in your \code{.Rprofile} file.
 }
 \examples{
@@ -53,7 +53,7 @@ cushion('iriscouch', user='name', pwd='pwd', type="iriscouch")
 cushion('julies_iris', user='name', pwd='pwd', type="iriscouch")
 
 cushion(localhost = list(type="localhost", port=5984))
-profiles()
+cushions()
 }
 }
 

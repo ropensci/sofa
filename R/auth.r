@@ -27,7 +27,7 @@
 #' function instead. See examples below on how to do this. Though using cusion()
 #' only stores them for the current session.
 #'
-#' \code{profile()} Looks first in the local environment SofaAuthCache, and if finds nothing,
+#' \code{cushions()} Looks first in the local environment SofaAuthCache, and if finds nothing,
 #' looks in your \code{.Rprofile} file.
 #' @examples \donttest{
 #' cushion('cloudant', user='name', pwd='pwd', type="cloudant")
@@ -35,7 +35,7 @@
 #' cushion('julies_iris', user='name', pwd='pwd', type="iriscouch")
 #'
 #' cushion(localhost = list(type="localhost", port=5984))
-#' profiles()
+#' cushions()
 #' }
 
 #' @export
@@ -46,7 +46,7 @@ cushion <- function(name, user=NULL, pwd=NULL, type, port=NULL){
 
 #' @export
 #' @rdname authentication
-profiles <- function()
+cushions <- function()
 {
   if(length(ls(SofaAuthCache)) == 0){
     vals <- names(.Options)
@@ -75,7 +75,7 @@ SofaAuthCache <- new.env(hash=TRUE)
 }
 
 get_cushion <- function(x){
-  profs <- profiles()
+  profs <- cushions()
   res <- profs[ names(profs) %in% x ]
   if(length(res) == 0) stop(paste0(x, " not found, see ?cushion and ?profiles")) else res[[1]]
 }
@@ -83,7 +83,7 @@ get_cushion <- function(x){
 
 # get_pwd <- function(u=NULL,p=NULL,service)
 # {
-#   auth <- profiles()
+#   auth <- cushions()
 # #   ser <- paste0('sofa_',service)
 #
 #   if(is.null(u) | is.null(p)){
