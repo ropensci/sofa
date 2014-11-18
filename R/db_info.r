@@ -7,15 +7,15 @@
 #' @param ... Curl args passed on to \code{\link[httr]{GET}}
 #' @examples \donttest{
 #' # local databasees
-#' dbinfo(dbname="sofadb")
-#' dbinfo(dbname="sofadb", as='json')
+#' db_info(dbname="sofadb")
+#' db_info(dbname="sofadb", as='json')
 #'
 #' # a database on cloudant or iriscouch
-#' dbinfo("cloudant", "gaugesdb_ro")
-#' dbinfo("iriscouch", "helloworld")
+#' db_info("cloudant", "gaugesdb_ro")
+#' db_info("iriscouch", "helloworld")
 #' }
 
-dbinfo <- function(cushion="localhost", dbname, as='list', ...)
+db_info <- function(cushion="localhost", dbname, as='list', ...)
 {
   cushion <- get_cushion(cushion)
   if(cushion$type=="localhost"){
