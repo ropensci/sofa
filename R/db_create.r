@@ -20,7 +20,7 @@
 
 db_create <- function(cushion="localhost", dbname, delifexists=FALSE, as='list', ...)
 {
-  if(delifexists) deletedb(cushion, dbname, ...)
+  if(delifexists) db_delete(cushion, dbname, ...)
   cushion <- get_cushion(cushion)
   if(cushion$type=="localhost"){
     sofa_PUT(sprintf("http://127.0.0.1:%s/%s", cushion$port, dbname), as, ...)
