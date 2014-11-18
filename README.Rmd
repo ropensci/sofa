@@ -84,17 +84,17 @@ Nice, it's working.
 ### Create a new database, and list available databases
 
 ```{r echo=FALSE}
-deletedb(dbname='sofadb')
+db_delete(dbname='sofadb')
 ```
 
 ```{r}
-createdb(dbname='sofadb')
+db_create(dbname='sofadb')
 ```
 
 see if its there now
 
 ```{r}
-listdbs()
+db_list()
 ```
 
 ### Create documents
@@ -138,10 +138,17 @@ doc_get(dbname="sofadb", docid="somexml")[["xml"]]
 
 ### Views
 
+Still working on these functions, check back later...
+
+<!-- 
 First, create a database
 
+```{r echo=FALSE}
+if(is.null(db_info(dbname = "sofadb")$error)) db_delete(dbname='sofadb')
+```
+
 ```{r}
-createdb(dbname='alm_couchdb')
+db_create(dbname='alm_couchdb')
 ```
 
 Write a view - here letting key be the default of null
@@ -167,7 +174,7 @@ delete the view
 ```{r}
 view_del(dbname='alm_couchdb', design_name='almview2')
 ```
-
+-->
 
 ### Full text search? por sepuesto
 

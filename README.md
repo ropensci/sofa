@@ -97,13 +97,12 @@ Nice, it's working.
 
 
 ```
-#> $ok
-#> [1] TRUE
+#> Error in sofa_DELETE(sprintf("http://127.0.0.1:%s/%s", cushion$port, dbname), : client error: (404) Not Found
 ```
 
 
 ```r
-createdb(dbname='sofadb')
+db_create(dbname='sofadb')
 #> $ok
 #> [1] TRUE
 ```
@@ -112,7 +111,7 @@ see if its there now
 
 
 ```r
-listdbs()
+db_list()
 #>  [1] "_replicator" "_users"      "alm_couchdb" "cachecall"   "hello_earth"
 #>  [6] "leothelion"  "mran"        "mydb"        "newdbs"      "sofadb"
 ```
@@ -145,7 +144,7 @@ doc_create(dbname="sofadb", doc=doc2)
 #> [1] TRUE
 #> 
 #> $id
-#> [1] "c5c5c332c25cf62cc584647a81001b6f"
+#> [1] "c5c5c332c25cf62cc584647a81006adc"
 #> 
 #> $rev
 #> [1] "1-fd0da7fcb8d3afbfc5757d065c92362c"
@@ -196,11 +195,20 @@ doc_get(dbname="sofadb", docid="somexml")[["xml"]]
 
 ### Views
 
+Still working on these functions, check back later...
+
+<!-- 
 First, create a database
 
 
+```
+#> $ok
+#> [1] TRUE
+```
+
+
 ```r
-createdb(dbname='alm_couchdb')
+db_create(dbname='alm_couchdb')
 #> Error in sofa_PUT(sprintf("http://127.0.0.1:%s/%s", cushion$port, dbname), : client error: (412) Precondition Failed
 ```
 
@@ -235,7 +243,7 @@ delete the view
 view_del(dbname='alm_couchdb', design_name='almview2')
 #> Error in view_get(cushion, dbname, design_name)$`_rev`: $ operator is invalid for atomic vectors
 ```
-
+-->
 
 ### Full text search? por sepuesto
 
