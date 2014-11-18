@@ -8,6 +8,8 @@ listdbs(cushion = "localhost", simplify = TRUE, as = "list", ...)
 \arguments{
 \item{cushion}{A cushion name}
 
+\item{simplify}{(logical) Simplify to character vector, ignored if \code{as="json"}}
+
 \item{as}{(character) One of list (default) or json}
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
