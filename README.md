@@ -113,32 +113,8 @@ see if its there now
 
 ```r
 listdbs()
-#> [[1]]
-#> [1] "_replicator"
-#> 
-#> [[2]]
-#> [1] "_users"
-#> 
-#> [[3]]
-#> [1] "cachecall"
-#> 
-#> [[4]]
-#> [1] "hello_earth"
-#> 
-#> [[5]]
-#> [1] "leothelion"
-#> 
-#> [[6]]
-#> [1] "mran"
-#> 
-#> [[7]]
-#> [1] "mydb"
-#> 
-#> [[8]]
-#> [1] "newdbs"
-#> 
-#> [[9]]
-#> [1] "sofadb"
+#>  [1] "_replicator" "_users"      "alm_couchdb" "cachecall"   "hello_earth"
+#>  [6] "leothelion"  "mran"        "mydb"        "newdbs"      "sofadb"
 ```
 
 ### Create documents
@@ -169,7 +145,7 @@ doc_create(dbname="sofadb", doc=doc2)
 #> [1] TRUE
 #> 
 #> $id
-#> [1] "1c4d13b6afe7c139ca3b6c92c2023c67"
+#> [1] "c5c5c332c25cf62cc584647a81001b6f"
 #> 
 #> $rev
 #> [1] "1-fd0da7fcb8d3afbfc5757d065c92362c"
@@ -225,8 +201,7 @@ First, create a database
 
 ```r
 createdb(dbname='alm_couchdb')
-#> $ok
-#> [1] TRUE
+#> Error in sofa_PUT(sprintf("http://127.0.0.1:%s/%s", cushion$port, dbname), : client error: (412) Precondition Failed
 ```
 
 Write a view - here letting key be the default of null
@@ -234,7 +209,7 @@ Write a view - here letting key be the default of null
 
 ```r
 view_put(dbname='alm_couchdb', design_name='almview2', value="doc.baseurl")
-#> [1] "{\"ok\":true,\"id\":\"_design/almview2\",\"rev\":\"1-e7c17cff1b96e4595c3781da53e16ad8\"}\n"
+#> Error in sofa_PUT(call_, as, body = doc2, ...): client error: (409) Conflict
 ```
 
 get info on your new view
