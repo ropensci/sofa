@@ -8,21 +8,21 @@
 #' @examples \donttest{
 #' # local databasees
 #' ## create database first, then delete
-#' createdb('newdb')
-#' deletedb('newdb')
+#' db_create('newdb')
+#' db_delete('newdb')
 #'
 #' # cloudant
-#' createdb("cloudant", "stuffthings")
+#' db_create("cloudant", "stuffthings")
 #' listdbs("cloudant")
-#' deletedb("cloudant", "stuffthings")
+#' db_delete("cloudant", "stuffthings")
 #'
 #' ## with curl info while doing request
 #' library('httr')
-#' createdb('newdb')
-#' deletedb('newdb', config=verbose())
+#' db_create('newdb')
+#' db_delete('newdb', config=verbose())
 #' }
 
-deletedb <- function(cushion="localhost", dbname, as='list', ...)
+db_delete <- function(cushion="localhost", dbname, as='list', ...)
 {
   cushion <- get_cushion(cushion)
   if(cushion$type=="localhost"){
