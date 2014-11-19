@@ -5,7 +5,7 @@
 \alias{cushions}
 \title{Put a cushion on the sofa, and get cushion info}
 \usage{
-cushion(name, user = NULL, pwd = NULL, type, port = NULL)
+cushion(name, user = NULL, pwd = NULL, type, port = 5984)
 
 cushions()
 }
@@ -20,7 +20,7 @@ details.}
 \item{type}{One of localhost, cloudant, or iriscouch. This is what's used to determine
 how to structure the URL to make the request.}
 
-\item{port}{Port. Only applies when type is localhost.}
+\item{port}{Port. Only applies when type is localhost. Default: 5984}
 }
 \description{
 That is, set up config for remote CouchDB databases, or get auth info
@@ -51,8 +51,6 @@ looks in your \code{.Rprofile} file.
 cushion('cloudant', user='name', pwd='pwd', type="cloudant")
 cushion('iriscouch', user='name', pwd='pwd', type="iriscouch")
 cushion('julies_iris', user='name', pwd='pwd', type="iriscouch")
-
-cushion(localhost = list(type="localhost", port=5984))
 cushions()
 }
 }

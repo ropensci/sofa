@@ -9,7 +9,7 @@
 #' @param pwd A password
 #' @param type One of localhost, cloudant, or iriscouch. This is what's used to determine
 #' how to structure the URL to make the request.
-#' @param port Port. Only applies when type is localhost.
+#' @param port Port. Only applies when type is localhost. Default: 5984
 #' @details Setup for authentication:
 #' For localhost you don't need to authenticate, but of course you may have set
 #' up a username and password in which case use 'localhost'.
@@ -33,14 +33,12 @@
 #' cushion('cloudant', user='name', pwd='pwd', type="cloudant")
 #' cushion('iriscouch', user='name', pwd='pwd', type="iriscouch")
 #' cushion('julies_iris', user='name', pwd='pwd', type="iriscouch")
-#'
-#' cushion(localhost = list(type="localhost", port=5984))
 #' cushions()
 #' }
 
 #' @export
 #' @rdname authentication
-cushion <- function(name, user=NULL, pwd=NULL, type, port=NULL){
+cushion <- function(name, user=NULL, pwd=NULL, type, port=5984){
   assign(name, list(user=user, pwd=pwd, type=type, port=port), envir = SofaAuthCache)
 }
 
