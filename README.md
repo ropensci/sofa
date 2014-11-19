@@ -63,11 +63,11 @@ Break down of parameters:
 * `user`: User name for the service.
 * `pwd`: Password for the service, if any.
 * `type`: Type of cushion. This is important. Only `localhost`, `cloudant`, and `iriscouch` are supported right now. Internally in `sofa` functions this variable determines how urls are constructed for http requests. 
-* `port`: The port to connect to
+* `port`: The port to connect to. Default: 5984
 
 Of course by default there is a built in `cushion` for localhost so you don't have to do that, unless you want to change those details, e.g., the port number.
 
-Right now cushions aren't preserved across R sessions, but working on that.
+You can preserve cushions across sessions by storing them in a hidden file. See `?authentication` for details.
 
 ### Ping the server
 
