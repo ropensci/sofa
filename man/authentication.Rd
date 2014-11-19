@@ -7,7 +7,7 @@
 \usage{
 cushion(name, user = NULL, pwd = NULL, type, port = 5984)
 
-cushions()
+cushions(authfile = "~/.sofa-auth")
 }
 \arguments{
 \item{name}{Name for the cushion. This is what you'll call in sofa functions to get these
@@ -21,6 +21,8 @@ details.}
 how to structure the URL to make the request.}
 
 \item{port}{Port. Only applies when type is localhost. Default: 5984}
+
+\item{authfile}{Path to file with cushions (authentication details)}
 }
 \description{
 That is, set up config for remote CouchDB databases, or get auth info
@@ -34,23 +36,26 @@ Others supported are 'cloudant' and 'iriscouch'.
 
 You can use other named username/password sets too.
 
-You can permanently store your auth details in your .Rprofile by putting in
-entries like this:
+You can permanently store your auth details in a hidden file ~/.sofa-auth by putting in
+entries like this, each on a new line:
 
-options(cloudant = list(user='name', pwd='pwd'))
+list(name="iriscouch", user="jane_doe", pwd="my_password", type="iriscouch")
 
-Though if you don't want to store them permanently, you can use the cushion()
-function instead. See examples below on how to do this. Though using cusion()
-only stores them for the current session.
+Though if you don't want to store them permanently, you can use the \code{cushion}
+function instead. See examples below on how to do this. Using \code{cushion} only
+stores them for the current session.
 
 \code{cushions()} Looks first in the local environment SofaAuthCache, and if finds nothing,
-looks in your \code{.Rprofile} file.
+looks in your \code{~/.sofa-auth} file, or wherver you set \code{authfilie} parameter to.
+
+Beware that you should use unique names for each cushion, that is, in the \code{name} parameter.
 }
 \examples{
 \donttest{
 cushion('cloudant', user='name', pwd='pwd', type="cloudant")
 cushion('iriscouch', user='name', pwd='pwd', type="iriscouch")
 cushion('julies_iris', user='name', pwd='pwd', type="iriscouch")
+cushion('adfafafafadf', user='name', pwd='pwd', type="localhost", port=2300)
 cushions()
 }
 }
