@@ -51,7 +51,7 @@ looks in your \code{~/.sofa-auth} file, or wherver you set \code{authfilie} para
 Beware that you should use unique names for each cushion, that is, in the \code{name} parameter.
 }
 \examples{
-\donttest{
+\dontrun{
 cushion('cloudant', user='name', pwd='pwd', type="cloudant")
 cushion('iriscouch', user='name', pwd='pwd', type="iriscouch")
 cushion('julies_iris', user='name', pwd='pwd', type="iriscouch")
