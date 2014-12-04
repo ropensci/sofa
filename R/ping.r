@@ -14,5 +14,5 @@
 ping <- function(cushion="localhost", as='list', ...)
 {
   cushion <- get_cushion(cushion)
-  sofa_GET(pick_url(cushion), args=NULL, as=as, ...)
+  sofa_GET(pick_url(cushion), as=as, args=NULL, ...)
 }

@@ -41,9 +41,9 @@ alldocs <- function(cushion="localhost", dbname, asdf = TRUE,
 
   if(cushion$type=="localhost"){
     call_ <- sprintf("http://127.0.0.1:%s/%s/_all_docs", cushion$port, dbname)
-    temp <- sofa_GET(call_, args, as, ...)
+    temp <- sofa_GET(call_, as, query=args, ...)
   } else if(cushion$type %in% c("cloudant",'iriscouch')){
-    temp <- sofa_GET(remote_url(cushion, dbname, "_all_docs"), args, as, content_type_json(), ...)
+    temp <- sofa_GET(remote_url(cushion, dbname, "_all_docs"), as, query=args, content_type_json(), ...)
   } else stop(paste0(cushion$type, " is not supported yet"))
 
   if(as=='json'){ temp } else {

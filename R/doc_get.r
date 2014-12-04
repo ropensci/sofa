@@ -34,8 +34,8 @@ doc_get <- function(cushion="localhost", dbname, docid, rev=NULL, attachments=FA
                   revs_info=asl(revs_info), conflicts=asl(conflicts),
                   deleted_conflicts=asl(deleted_conflicts), local_seq=asl(local_seq)))
   if(cushion$type=="localhost"){
-    sofa_GET(sprintf("http://127.0.0.1:%s/%s/%s", cushion$port, dbname, docid), args, as, ...)
+    sofa_GET(sprintf("http://127.0.0.1:%s/%s/%s", cushion$port, dbname, docid), as, query=args, ...)
   } else if(cushion$type %in% c("cloudant",'iriscouch')){
-    sofa_GET(file.path(remote_url(cushion, dbname), docid), args, as, ...)
+    sofa_GET(file.path(remote_url(cushion, dbname), docid), as, query=args, ...)
   }
 }

@@ -30,12 +30,12 @@ document update.
 \examples{
 \donttest{
 doc1 <- '{"name":"drink","beer":"IPA"}'
-doc_create(dbname="sofadb", doc=doc1, docid="a_beer")
-doc_get(dbname = "sofadb", docid = "a_beer")
-revs <- revisions(dbname = "sofadb", docid = "a_beer")
+doc_create(dbname="sofadb", doc=doc1, docid="b_beer")
+doc_get(dbname = "sofadb", docid = "b_beer")
+revs <- revisions(dbname = "sofadb", docid = "b_beer")
 doc2 <- '{"name":"drink","beer":"IPA","note":"yummy","note2":"yay"}'
-doc_update(dbname="sofadb", doc=doc2, docid="a_beer", rev=revs[1])
-revisions(dbname = "sofadb", docid = "a_beer")
+doc_update(dbname="sofadb", doc=doc2, docid="b_beer", rev=revs[1])
+revisions(dbname = "sofadb", docid = "b_beer")
 }
 }
 

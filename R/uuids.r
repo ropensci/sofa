@@ -16,5 +16,5 @@
 uuids <- function(cushion="localhost", count=1, as='list', ...)
 {
   cushion <- get_cushion(cushion)
-  sofa_GET(paste0(pick_url(cushion), '_uuids'), list(count=count), as=as, ...)
+  sofa_GET(paste0(pick_url(cushion), '_uuids'), as=as, query=list(count=count), ...)
 }

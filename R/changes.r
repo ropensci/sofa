@@ -43,8 +43,8 @@ changes <- function(cushion='localhost', dbname, descending=NULL, startkey=NULL,
 
   if(cushion$type == "localhost"){
     call_ <- sprintf("http://127.0.0.1:%s/%s/_changes", cushion$port, dbname)
-    sofa_GET(call_, args, as, ...)
+    sofa_GET(call_, as, query=args, ...)
   } else if(cushion$type %in% c("cloudant",'iriscouch')){
-    sofa_GET(remote_url(cushion, dbname, "_changes"), args, as, content_type_json(), ...)
+    sofa_GET(remote_url(cushion, dbname, "_changes"), as, query=args, content_type_json(), ...)
   }
 }

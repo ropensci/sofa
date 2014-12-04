@@ -21,8 +21,8 @@ Delete a database.
 \donttest{
 # local databasees
 ## create database first, then delete
-db_create('newdb')
-db_delete('newdb')
+db_create(dbname='newdb')
+db_delete(dbname='newdb')
 
 # cloudant
 db_create("cloudant", "stuffthings")

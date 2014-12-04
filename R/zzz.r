@@ -42,9 +42,9 @@ asl <- function(x){
   }
 }
 
-sofa_GET <- function(url, args = list(), as = 'list', ...){
+sofa_GET <- function(url, as = 'list', ...){
   as <- match.arg(as, c('list','json'))
-  res <- GET(url, query=args, content_type_json(), ...)
+  res <- GET(url, content_type_json(), ...)
   tt <- content(res, "text")
   if(as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
 }
@@ -71,6 +71,28 @@ sofa_POST <- function(url, as = 'list', ...){
   tt <- content(res, "text")
   if(as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
 }
+
+sofa_COPY <- function(url, as = 'list',...){
+  as <- match.arg(as, c('list','json'))
+  res <- VERB("COPY", url, content_type_json(), ...)
+  stop_for_status(res)
+  tt <- content(res, "text")
+  if(as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
+}
+
+# sofa_GET <- function(url, as = 'list', ...) sofa_verb("GET", url, as, ...)
+# sofa_DELETE <- function(url, as = 'list', ...) sofa_verb("DELETE", url, as, ...)
+# sofa_PUT <- function(url, as = 'list', ...) sofa_verb("PUT", url, as, ...)
+# sofa_POST <- function(url, as = 'list', ...) sofa_verb("POST", url, as, ...)
+# sofa_COPY <- function(url, as = 'list', ...) sofa_verb("COPY", url, as, ...)
+#
+# sofa_verb <- function(verb, url, as = 'list',...){
+#   as <- match.arg(as, c('list','json'))
+#   res <- VERB(verb, url, content_type_json(), ...)
+#   stop_for_status(res)
+#   tt <- content(res, "text")
+#   if(as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
+# }
 
 pick_url <- function(x){
   switch(x$type,
