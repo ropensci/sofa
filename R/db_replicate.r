@@ -27,7 +27,7 @@
 
 db_replicate <- function(from='localhost', to="cloudant", dbname, createdb=FALSE, as='list', ...){
   cushion <- get_cushion(to)
-  if(createdb) createdb(cushion, dbname)
+  if(createdb) db_create(cushion, dbname)
   fromcushion <- get_cushion(from)
   if(fromcushion$type=="localhost")
     url <- sprintf('http://localhost:%s/_replicate', fromcushion$port)
