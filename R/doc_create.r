@@ -4,7 +4,9 @@
 #' @inheritParams ping
 #' @param cushion A cushion name
 #' @param dbname Database name3
-#' @param doc Document content
+#' @param doc Document content, can be character string, a list. The character type can be
+#' XML as well, which is embedded in json. When the document is retrieved via
+#' \code{\link{doc_get}}, the XML is given back and you can parse it as normal.
 #' @param docid Document ID
 #' @param apicall If TRUE, write with json format e.g.:
 #'    {
@@ -49,6 +51,10 @@
 #' doc_create("iriscouch", dbname='helloworld', doc='{"things":"stuff"}', docid="ggg")
 #' doc_get("iriscouch", dbname='helloworld', docid="ggg")
 #' doc_delete("iriscouch", dbname='helloworld', docid="ggg")
+#'
+#' # You can pass in lists that autoconvert to json internally
+#' doc1 <- list(name = "drink", beer = "IPA")
+#' doc_create(dbname="sofadb", doc=doc1, docid="goodbeer")
 #' }
 
 doc_create <- function(cushion="localhost", dbname, doc, docid=NULL, apicall=FALSE, baseurl,
@@ -71,12 +77,10 @@ doc_create <- function(cushion="localhost", dbname, doc, docid=NULL, apicall=FAL
       sofa_POST(call_, as, body=doc2, ...)
     }
   } else {
-    doc2 <- doc
-    if(grepl("<[A-Za-z]+>", doc)) doc2 <- paste('{"xml":', '"', doc, '"', '}', sep="")
     if(!is.null(docid)){
-      sofa_PUT(paste0(call_, "/", docid), as, body=doc2, ...)
+      sofa_PUT(paste0(call_, "/", docid), as, body=check_inputs(doc), ...)
     } else {
-      sofa_POST(call_, as, body=doc2, ...)
+      sofa_POST(call_, as, body=check_inputs(doc), ...)
     }
   }
 }

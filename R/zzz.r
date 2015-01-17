@@ -101,3 +101,28 @@ pick_url <- function(x){
          iriscouch = iris_url(x)
   )
 }
+
+check_inputs <- function(x){
+  if(length(x) == 0) {
+    NULL
+  } else {
+    if(is.character(x)){
+      # replace newlines
+      x <- gsub("\n|\r", "", x)
+      # check if text is likely XML
+      if(grepl("<[A-Za-z]+>", x)) {
+        paste('{"xml":', '"', doc, '"', '}', sep="")
+      } else {
+        # validate
+        tmp <- jsonlite::validate(x)
+        if(!tmp) stop(attr(tmp, "err"))
+        x
+      }
+    } else if(is.list(x)) {
+      jsonlite::toJSON(x, auto_unbox = TRUE)
+    } else {
+      stop("Only character and list types supported currently")
+    }
+  }
+}
+
