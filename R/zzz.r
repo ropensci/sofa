@@ -111,7 +111,7 @@ check_inputs <- function(x){
       x <- gsub("\n|\r", "", x)
       # check if text is likely XML
       if(grepl("<[A-Za-z]+>", x)) {
-        paste('{"xml":', '"', doc, '"', '}', sep="")
+        paste('{"xml":', '"', x, '"', '}', sep="")
       } else {
         # validate
         tmp <- jsonlite::validate(x)
