@@ -27,8 +27,6 @@ doc_update <- function(cushion="localhost", dbname, doc, docid, rev, as='list', 
   } else if(cushion$type %in% c("cloudant",'iriscouch')){
     call_ <- remote_url(cushion, dbname)
   }
-  doc2 <- doc
-  if(grepl("<[A-Za-z]+>", doc)) doc2 <- paste('{"xml":', '"', doc, '"', '}', sep="")
-  doc2 <- sub("^\\{", sprintf('{"_id":"%s", "_rev":"%s",', docid, rev), doc2)
+  doc2 <- sub("^\\{", sprintf('{"_id":"%s", "_rev":"%s",', docid, rev), check_inputs(doc))
   sofa_PUT(paste0(call_, "/", docid), as, body=doc2, encode="json", ...)
 }
