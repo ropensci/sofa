@@ -27,6 +27,9 @@ db_info(dbname="sofadb", as='json')
 # a database on cloudant or iriscouch
 db_info("cloudant", "gaugesdb_ro")
 db_info("iriscouch", "helloworld")
+
+## arbitrary remote couchdb
+db_info("oceancouch", "beard")
 }
 }
 

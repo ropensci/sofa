@@ -26,6 +26,7 @@ Get an attachment.
 \examples{
 \donttest{
 getattach(dbname="sofadb", docid="abeer")
+getattach("oceancouch", dbname="mapuris", docid="goodbeer")
 }
 }
 

@@ -78,6 +78,10 @@ doc_delete("iriscouch", dbname='helloworld', docid="ggg")
 # You can pass in lists that autoconvert to json internally
 doc1 <- list(name = "drink", beer = "IPA")
 doc_create(dbname="sofadb", doc=doc1, docid="goodbeer")
+
+# On arbitrary remote server
+doc1 <- list(name = "drink", beer = "IPA")
+doc_create("oceancouch", dbname="beard", doc=doc1, docid="goodbeer")
 }
 }
 

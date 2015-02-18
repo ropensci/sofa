@@ -22,10 +22,14 @@
 doc_update <- function(cushion="localhost", dbname, doc, docid, rev, as='list', ...)
 {
   cushion <- get_cushion(cushion)
-  if(cushion$type=="localhost"){
-    call_ <- sprintf("http://127.0.0.1:%s/%s", cushion$port, dbname)
-  } else if(cushion$type %in% c("cloudant",'iriscouch')){
-    call_ <- remote_url(cushion, dbname)
+  if(is.null(cushion$type)){
+    call_ <- paste0(pick_url(cushion), dbname)
+  } else {
+    if(cushion$type=="localhost"){
+      call_ <- sprintf("http://127.0.0.1:%s/%s", cushion$port, dbname)
+    } else if(cushion$type %in% c("cloudant",'iriscouch')){
+      call_ <- remote_url(cushion, dbname)
+    }
   }
   doc2 <- sub("^\\{", sprintf('{"_id":"%s", "_rev":"%s",', docid, rev), check_inputs(doc))
   sofa_PUT(paste0(call_, "/", docid), as, body=doc2, encode="json", ...)

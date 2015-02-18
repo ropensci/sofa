@@ -32,6 +32,9 @@ db_create("cloudant", "mustache")
 
 ## iriscouch
 db_create("iriscouch", "beard")
+
+## arbitrary remote couchdb
+db_create("oceancouch", "beard")
 }
 }
 

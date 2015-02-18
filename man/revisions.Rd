@@ -30,6 +30,8 @@ revisions(dbname="sofadb", docid="a_beer")
 revisions(dbname="sofadb", docid="a_beer", simplify=FALSE)
 revisions(dbname="sofadb", docid="a_beer", as='json')
 revisions(dbname="sofadb", docid="a_beer", simplify=FALSE, as='json')
+
+revisions("oceancouch", dbname="mapuris", docid="10.12688\%2Ff1000research.3817.1", as='json')
 }
 }
 

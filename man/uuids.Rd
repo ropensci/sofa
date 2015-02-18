@@ -24,6 +24,7 @@ uuids()
 uuids(as = 'json')
 uuids("cloudant")
 uuids("iriscouch")
+uuids("oceancouch")
 }
 }
 

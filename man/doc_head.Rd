@@ -26,6 +26,7 @@ doc_head(dbname="sofadb", docid="a_beer")
 doc_head(dbname="sofadb", docid="a_beer", as='json')
 doc_head("cloudant", dbname="animaldb", docid="badger")
 doc_head("iriscouch", dbname="helloworld", docid="ggg")
+doc_head("oceancouch", dbname="beard", docid="goodbeers")
 }
 }
 

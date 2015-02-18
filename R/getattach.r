@@ -7,6 +7,7 @@
 #' @param attname Attachment name.
 #' @examples \donttest{
 #' getattach(dbname="sofadb", docid="abeer")
+#' getattach("oceancouch", dbname="mapuris", docid="goodbeer")
 #' }
 
 getattach <- function(cushion="localhost", dbname, docid, attname=NULL, as='list', ...)
@@ -19,5 +20,5 @@ getattach <- function(cushion="localhost", dbname, docid, attname=NULL, as='list
   {
     call_ <- paste(url, "/", dbname, "/", docid, "/", attname, sep="")
   }
-  sofa_GET(call_, NULL, as, content_type_json(), ...)
+  sofa_GET(call_, as, content_type_json(), ...)
 }

@@ -25,6 +25,7 @@ db_list()
 db_list(as='json')
 db_list("cloudant")
 db_list("iriscouch")
+db_list("oceancouch")
 }
 }
 

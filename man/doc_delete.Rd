@@ -36,6 +36,11 @@ doc3 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
 doc_create("cloudant", dbname="mustache", doc=doc3, docid="bbbb")
 doc_get("cloudant", dbname='mustache', docid='bbbb')
 doc_delete("cloudant", dbname='mustache', docid='bbbb')
+
+# On arbitrary remote server
+doc <- list(name = "drink", beer = "IPA")
+doc_create("oceancouch", dbname="beard", doc=doc, docid="beer")
+doc_delete("oceancouch", dbname="beard", docid="beer")
 }
 }
 

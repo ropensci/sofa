@@ -55,16 +55,24 @@
 #' # You can pass in lists that autoconvert to json internally
 #' doc1 <- list(name = "drink", beer = "IPA")
 #' doc_create(dbname="sofadb", doc=doc1, docid="goodbeer")
+#'
+#' # On arbitrary remote server
+#' doc1 <- list(name = "drink", beer = "IPA")
+#' doc_create("oceancouch", dbname="beard", doc=doc1, docid="goodbeer")
 #' }
 
 doc_create <- function(cushion="localhost", dbname, doc, docid=NULL, apicall=FALSE, baseurl,
   queryargs, as='list', ...)
 {
   cushion <- get_cushion(cushion)
-  if(cushion$type=="localhost"){
-    call_ <- sprintf("http://127.0.0.1:%s/%s", cushion$port, dbname)
-  } else if(cushion$type %in% c("cloudant",'iriscouch')){
-    call_ <- remote_url(cushion, dbname)
+  if(is.null(cushion$type)){
+    call_ <- paste0(pick_url(cushion), dbname)
+  } else {
+    if(cushion$type=="localhost"){
+      call_ <- sprintf("http://127.0.0.1:%s/%s", cushion$port, dbname)
+    } else if(cushion$type %in% c("cloudant",'iriscouch')){
+      call_ <- remote_url(cushion, dbname)
+    }
   }
 
   if(apicall){

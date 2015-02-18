@@ -56,6 +56,10 @@ changes("cloudant", dbname='gaugesdb_ro', include_docs='true')
 # irishcouch
 changes(cushion="iriscouch", dbname='helloworld')
 changes(cushion="iriscouch", dbname='helloworld', include_docs='true')
+
+# arbitrary couch on remote server
+changes("oceancouch", dbname="mapuris", as='json')
+changes("oceancouch", dbname="mapuris", include_docs='true', limit=10)
 }
 }
 

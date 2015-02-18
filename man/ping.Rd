@@ -21,6 +21,7 @@ Ping a couchdb server.
 ping()
 ping("cloudant")
 ping("iriscouch")
+ping("oceancouch")
 }
 }
 

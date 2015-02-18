@@ -30,6 +30,9 @@
 #'
 #' # irishcouch
 #' alldocs(cushion="iriscouch", dbname='helloworld')
+#'
+#' # any remote couch, this is just a couchc on a DigitalOcean droplet
+#' alldocs(cushion="oceancouch", dbname='mapuris')
 #' }
 
 alldocs <- function(cushion="localhost", dbname, asdf = TRUE,
@@ -39,12 +42,17 @@ alldocs <- function(cushion="localhost", dbname, asdf = TRUE,
   args <- sc(list(descending=descending, startkey=startkey,endkey=endkey,
                        limit=limit,include_docs=include_docs))
 
-  if(cushion$type=="localhost"){
-    call_ <- sprintf("http://127.0.0.1:%s/%s/_all_docs", cushion$port, dbname)
+  if(is.null(cushion$type)){
+    call_ <- sprintf("%s:%s/%s/_all_docs", cushion$base, cushion$port, dbname)
     temp <- sofa_GET(call_, as, query=args, ...)
-  } else if(cushion$type %in% c("cloudant",'iriscouch')){
-    temp <- sofa_GET(remote_url(cushion, dbname, "_all_docs"), as, query=args, content_type_json(), ...)
-  } else stop(paste0(cushion$type, " is not supported yet"))
+  } else {
+    if(cushion$type=="localhost"){
+      call_ <- sprintf("http://127.0.0.1:%s/%s/_all_docs", cushion$port, dbname)
+      temp <- sofa_GET(call_, as, query=args, ...)
+    } else if(cushion$type %in% c("cloudant",'iriscouch')){
+      temp <- sofa_GET(remote_url(cushion, dbname, "_all_docs"), as, query=args, content_type_json(), ...)
+    } else stop(paste0(cushion$type, " is not supported yet"))
+  }
 
   if(as=='json'){ temp } else {
     if(asdf & is.null(include_docs)) ldply(temp$rows, function(x) as.data.frame(x)) else temp

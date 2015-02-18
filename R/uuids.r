@@ -11,6 +11,7 @@
 #' uuids(as = 'json')
 #' uuids("cloudant")
 #' uuids("iriscouch")
+#' uuids("oceancouch")
 #' }
 
 uuids <- function(cushion="localhost", count=1, as='list', ...)

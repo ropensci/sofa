@@ -50,6 +50,9 @@ alldocs(cushion="cloudant", dbname='gaugesdb_ro')
 
 # irishcouch
 alldocs(cushion="iriscouch", dbname='helloworld')
+
+# any remote couch, this is just a couchc on a DigitalOcean droplet
+alldocs(cushion="oceancouch", dbname='mapuris')
 }
 }
 

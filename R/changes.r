@@ -30,6 +30,10 @@
 #' # irishcouch
 #' changes(cushion="iriscouch", dbname='helloworld')
 #' changes(cushion="iriscouch", dbname='helloworld', include_docs='true')
+#'
+#' # arbitrary couch on remote server
+#' changes("oceancouch", dbname="mapuris", as='json')
+#' changes("oceancouch", dbname="mapuris", include_docs='true', limit=10)
 #' }
 
 changes <- function(cushion='localhost', dbname, descending=NULL, startkey=NULL, endkey=NULL,
@@ -40,11 +44,16 @@ changes <- function(cushion='localhost', dbname, descending=NULL, startkey=NULL,
   args <- sc(list(descending=descending,startkey=startkey,endkey=endkey,
                   since=since,limit=limit,include_docs=include_docs,feed=feed,
                   heartbeat=heartbeat,filter=filter))
-
-  if(cushion$type == "localhost"){
-    call_ <- sprintf("http://127.0.0.1:%s/%s/_changes", cushion$port, dbname)
+  if(is.null(cushion$type)){
+    url <- pick_url(cushion)
+    call_ <- sprintf("%s%s/_changes", url, dbname)
     sofa_GET(call_, as, query=args, ...)
-  } else if(cushion$type %in% c("cloudant",'iriscouch')){
-    sofa_GET(remote_url(cushion, dbname, "_changes"), as, query=args, content_type_json(), ...)
+  } else {
+    if(cushion$type == "localhost"){
+      call_ <- sprintf("http://127.0.0.1:%s/%s/_changes", cushion$port, dbname)
+      sofa_GET(call_, as, query=args, ...)
+    } else if(cushion$type %in% c("cloudant",'iriscouch')){
+      sofa_GET(remote_url(cushion, dbname, "_changes"), as, query=args, content_type_json(), ...)
+    }
   }
 }

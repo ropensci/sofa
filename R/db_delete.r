@@ -20,14 +20,22 @@
 #' library('httr')
 #' db_create('newdb')
 #' db_delete('newdb', config=verbose())
+#'
+#' ## arbitrary remote couchdb
+#' db_delete("oceancouch", "beard")
 #' }
 
 db_delete <- function(cushion="localhost", dbname, as='list', ...)
 {
   cushion <- get_cushion(cushion)
-  if(cushion$type=="localhost"){
-    sofa_DELETE(sprintf("http://127.0.0.1:%s/%s", cushion$port, dbname), as, ...)
-  } else if(cushion$type %in% c("cloudant",'iriscouch')){
-    sofa_DELETE(remote_url(cushion, dbname), as, content_type_json(), ...)
+  if(is.null(cushion$type)){
+    url <- pick_url(cushion)
+    sofa_DELETE(sprintf("%s%s", url, dbname), as, ...)
+  } else {
+    if(cushion$type=="localhost"){
+      sofa_DELETE(sprintf("http://127.0.0.1:%s/%s", cushion$port, dbname), as, ...)
+    } else if(cushion$type %in% c("cloudant",'iriscouch')){
+      sofa_DELETE(remote_url(cushion, dbname), as, content_type_json(), ...)
+    }
   }
 }

@@ -9,6 +9,7 @@
 #' ping()
 #' ping("cloudant")
 #' ping("iriscouch")
+#' ping("oceancouch")
 #' }
 
 ping <- function(cushion="localhost", as='list', ...)

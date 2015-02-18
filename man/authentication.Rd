@@ -6,7 +6,8 @@
 \alias{cushions}
 \title{Put a cushion on the sofa, and get cushion info}
 \usage{
-cushion(name, user = NULL, pwd = NULL, type, port = 5984)
+cushion(name, user = NULL, pwd = NULL, base = NULL, type = NULL,
+  port = 5984)
 
 cushions(authfile = "~/.sofa-auth")
 }
@@ -18,8 +19,12 @@ details.}
 
 \item{pwd}{A password}
 
-\item{type}{One of localhost, cloudant, or iriscouch. This is what's used to determine
-how to structure the URL to make the request.}
+\item{base}{A base URL, not needed if \code{type=localhost|cloudant|iriscouch}. Though
+you can pass a base URL in here to override anything done internally.}
+
+\item{type}{One of localhost, cloudant, iriscouch, or \code{NULL}. This is what's
+used to determine how to structure the URL to make the request. If left to the
+default of \code{NULL}, you must pass in a base URL.}
 
 \item{port}{Port. Only applies when type is localhost. Default: 5984}
 
@@ -58,6 +63,8 @@ cushion('iriscouch', user='name', pwd='pwd', type="iriscouch")
 cushion('julies_iris', user='name', pwd='pwd', type="iriscouch")
 cushion('adfafafafadf', user='name', pwd='pwd', type="localhost", port=2300)
 cushions()
+
+cushion("oceancouch", base="http://104.236.176.205", port=5984)
 }
 }
 

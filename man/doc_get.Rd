@@ -50,6 +50,7 @@ doc_get(dbname="sofadb", docid="a_beer", revs=TRUE)
 doc_get(dbname="sofadb", docid="a_beer", revs=TRUE, local_seq=TRUE)
 doc_get("cloudant", dbname='gaugesdb_ro', docid='017ba8075b92656bbca20b8ab6fdb21d')
 doc_get("iriscouch", dbname='helloworld', docid="0c0858b75a81c464a74119ca24000543")
+doc_get("oceancouch", dbname="beard", docid="beer")
 }
 }
 

@@ -34,6 +34,9 @@ db_delete("cloudant", "stuffthings")
 library('httr')
 db_create('newdb')
 db_delete('newdb', config=verbose())
+
+## arbitrary remote couchdb
+db_delete("oceancouch", "beard")
 }
 }
 
