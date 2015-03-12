@@ -6,7 +6,7 @@
 #' @param docid Document ID (character)
 #' @param attachment The attachment object name
 #' @param attname Attachment name.
-#' @examples \donttest{
+#' @examples \dontrun{
 #' # put on to an existing document
 #' doc <- '{"name":"guy","beer":"anybeerisfine"}'
 #' doc_create(dbname="sofadb", doc=doc, docid="guysbeer")

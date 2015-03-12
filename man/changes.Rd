@@ -43,7 +43,7 @@ Of course it doesn't make much sense to use certain options in
    within R itself.
 }
 \examples{
-\donttest{
+\dontrun{
 changes(dbname="sofadb")
 changes(dbname="sofadb", as='json')
 changes(dbname="sofadb", limit=2)

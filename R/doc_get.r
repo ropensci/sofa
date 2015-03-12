@@ -13,7 +13,7 @@
 #' @param conflicts (logical) Whether to include _conflicts field.
 #' @param deleted_conflicts (logical) Whether to include _deleted_conflicts field.
 #' @param local_seq (logical) Whether to include _local_seq field.
-#' @examples \donttest{
+#' @examples \dontrun{
 #' doc_get(dbname="sofadb", docid="a_beer")
 #' revs <- revisions(dbname="sofadb", docid="a_beer")
 #' doc_get(dbname="sofadb", docid="a_beer", rev=revs[1])

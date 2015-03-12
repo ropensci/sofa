@@ -4,7 +4,7 @@
 #' @inheritParams ping
 #' @param dbname Database name. (charcter)
 #' @param docid Document ID (character)
-#' @examples \donttest{
+#' @examples \dontrun{
 #' doc3 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
 #' doc_create(dbname="sofadb", doc=doc3, docid="newnewxml")
 #' doc_delete(dbname="sofadb", docid="newnewxml")

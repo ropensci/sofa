@@ -13,7 +13,7 @@
 #' @param limit Number document IDs to return. (numeric)
 #' @param include_docs If TRUE, returns docs themselves, in addition to IDs (logical)
 #' @param ... Curl args passed on to \code{\link[httr]{GET}}
-#' @examples \donttest{
+#' @examples \dontrun{
 #' alldocs(dbname="sofadb")
 #' alldocs(dbname="sofadb", as='json')
 #' alldocs(dbname="mydb", limit=2)

@@ -17,7 +17,7 @@ ping(cushion = "localhost", as = "list", ...)
 Ping a couchdb server.
 }
 \examples{
-\donttest{
+\dontrun{
 ping()
 ping("cloudant")
 ping("iriscouch")

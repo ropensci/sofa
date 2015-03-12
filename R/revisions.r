@@ -7,7 +7,7 @@
 #' @param docid Document ID
 #' @param simplify (logical) Simplify to character vector of revision ids. If FALSE, gives back
 #' availabilit info too.
-#' @examples \donttest{
+#' @examples \dontrun{
 #' revisions(dbname="sofadb", docid="a_beer")
 #' revisions(dbname="sofadb", docid="a_beer", simplify=FALSE)
 #' revisions(dbname="sofadb", docid="a_beer", as='json')

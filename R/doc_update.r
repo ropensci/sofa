@@ -9,7 +9,7 @@
 #' @param rev Revision id.
 #' @details Internally, this function adds in the docid and revision id, required to do a
 #' document update.
-#' @examples \donttest{
+#' @examples \dontrun{
 #' doc1 <- '{"name":"drink","beer":"IPA"}'
 #' doc_create(dbname="sofadb", doc=doc1, docid="b_beer")
 #' doc_get(dbname = "sofadb", docid = "b_beer")

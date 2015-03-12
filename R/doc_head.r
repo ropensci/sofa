@@ -4,7 +4,7 @@
 #' @inheritParams ping
 #' @param dbname Database name. (charcter)
 #' @param docid Document ID (character)
-#' @examples \donttest{
+#' @examples \dontrun{
 #' doc_head(dbname="sofadb", docid="a_beer")
 #' doc_head(dbname="sofadb", docid="a_beer", as='json')
 #' doc_head("cloudant", dbname="animaldb", docid="badger")

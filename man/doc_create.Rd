@@ -36,7 +36,7 @@ inline within your document, you can do so with this fxn. See
 json appropriately.
 }
 \examples{
-\donttest{
+\dontrun{
 # write a document WITH a name (uses PUT)
 doc1 <- '{"name":"drink","beer":"IPA"}'
 doc_create(doc1, dbname="sofadb", docid="abeer")

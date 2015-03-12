@@ -33,7 +33,7 @@ alldocs(cushion = "localhost", dbname, asdf = TRUE, descending = NULL,
 List all docs in a given database.
 }
 \examples{
-\donttest{
+\dontrun{
 alldocs(dbname="sofadb")
 alldocs(dbname="sofadb", as='json')
 alldocs(dbname="mydb", limit=2)

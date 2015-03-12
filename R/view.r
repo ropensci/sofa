@@ -10,7 +10,7 @@
 #' @param query Query terms
 #' @details If you are writing a complicated javascript function, better to do
 #' that in the Futon CouchDB interface or otherwise.
-#' @examples \donttest{
+#' @examples \dontrun{
 #' # Create a view
 #' view_put(dbname='alm_couchdb', design_name='almview1')
 #' view_put(dbname='alm_couchdb', design_name='almview2', value="doc.baseurl")

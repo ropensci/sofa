@@ -40,7 +40,7 @@ doc_get(cushion = "localhost", dbname, docid, rev = NULL,
 Get a document from a database.
 }
 \examples{
-\donttest{
+\dontrun{
 doc_get(dbname="sofadb", docid="a_beer")
 revs <- revisions(dbname="sofadb", docid="a_beer")
 doc_get(dbname="sofadb", docid="a_beer", rev=revs[1])

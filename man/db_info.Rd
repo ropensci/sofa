@@ -19,7 +19,7 @@ db_info(cushion = "localhost", dbname, as = "list", ...)
 List database info.
 }
 \examples{
-\donttest{
+\dontrun{
 # local databasees
 db_info(dbname="sofadb")
 db_info(dbname="sofadb", as='json')

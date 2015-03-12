@@ -24,7 +24,7 @@ attach_get(cushion = "localhost", dbname, docid, attname = NULL,
 Get an attachment.
 }
 \examples{
-\donttest{
+\dontrun{
 attach_get(dbname="sofadb", docid="guysbeer")
 attach_get("oceancouch", dbname="mapuris", docid="goodbeer")
 }

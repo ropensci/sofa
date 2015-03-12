@@ -19,7 +19,7 @@ uuids(cushion = "localhost", count = 1, as = "list", ...)
 Get uuids.
 }
 \examples{
-\donttest{
+\dontrun{
 uuids()
 uuids(as = 'json')
 uuids("cloudant")

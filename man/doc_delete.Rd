@@ -21,7 +21,7 @@ doc_delete(cushion = "localhost", dbname, docid, as = "list", ...)
 Delete a document in a database.
 }
 \examples{
-\donttest{
+\dontrun{
 doc3 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
 doc_create(dbname="sofadb", doc=doc3, docid="newnewxml")
 doc_delete(dbname="sofadb", docid="newnewxml")

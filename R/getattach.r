@@ -5,7 +5,7 @@
 #' @param dbname Database name. (charcter)
 #' @param docid Document ID (character)
 #' @param attname Attachment name.
-#' @examples \donttest{
+#' @examples \dontrun{
 #' attach_get(dbname="sofadb", docid="guysbeer")
 #' attach_get("oceancouch", dbname="mapuris", docid="goodbeer")
 #' }

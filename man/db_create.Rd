@@ -23,7 +23,7 @@ This is useful for testing. Default is FALSE.}
 Create a database.
 }
 \examples{
-\donttest{
+\dontrun{
 db_create(dbname='leothelion')
 db_list() # see if its there now
 

@@ -19,7 +19,7 @@ db_delete(cushion = "localhost", dbname, as = "list", ...)
 Delete a database.
 }
 \examples{
-\donttest{
+\dontrun{
 # local databasees
 ## create database first, then delete
 db_create(dbname='newdb')

@@ -7,7 +7,7 @@
 #'    This is useful for testing. Default is FALSE.
 #' @param as (character) One of list (default) or json
 #' @param ... Curl args passed on to \code{\link[httr]{GET}}
-#' @examples \donttest{
+#' @examples \dontrun{
 #' db_create(dbname='leothelion')
 #' db_list() # see if its there now
 #'

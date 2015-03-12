@@ -25,7 +25,7 @@ availabilit info too.}
 Get document revisions.
 }
 \examples{
-\donttest{
+\dontrun{
 revisions(dbname="sofadb", docid="a_beer")
 revisions(dbname="sofadb", docid="a_beer", simplify=FALSE)
 revisions(dbname="sofadb", docid="a_beer", as='json')

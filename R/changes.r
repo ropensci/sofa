@@ -17,7 +17,7 @@
 #' @description Of course it doesn't make much sense to use certain options in
 #'    _changes. For example, using feed=longpoll or continuous doesn't make much sense
 #'    within R itself.
-#' @examples \donttest{
+#' @examples \dontrun{
 #' changes(dbname="sofadb")
 #' changes(dbname="sofadb", as='json')
 #' changes(dbname="sofadb", limit=2)

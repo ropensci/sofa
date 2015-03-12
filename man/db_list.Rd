@@ -19,7 +19,7 @@ db_list(cushion = "localhost", simplify = TRUE, as = "list", ...)
 List all databases.
 }
 \examples{
-\donttest{
+\dontrun{
 # local databasees
 db_list()
 db_list(as='json')

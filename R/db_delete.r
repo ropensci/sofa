@@ -5,7 +5,7 @@
 #' @param dbname Database name
 #' @param as (character) One of list (default) or json
 #' @param ... Curl args passed on to \code{\link[httr]{GET}}
-#' @examples \donttest{
+#' @examples \dontrun{
 #' # local databasees
 #' ## create database first, then delete
 #' db_create(dbname='newdb')

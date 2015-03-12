@@ -26,7 +26,7 @@ or this fxn can do it for you. Default = FALSE}
 Upload (replicate) a local database to a remote database server, e.g., Cloudant, Iriscouch
 }
 \examples{
-\donttest{
+\dontrun{
 # Create a database locally
 db_list()
 db_create('hello_earth')

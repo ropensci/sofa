@@ -8,7 +8,7 @@
 #' @param createdb If TRUE, the function creates the db on the remote server before
 #'    uploading. The db has to exist before uploading, so either you do it separately
 #'    or this fxn can do it for you. Default = FALSE
-#' @examples \donttest{
+#' @examples \dontrun{
 #' # Create a database locally
 #' db_list()
 #' db_create('hello_earth')

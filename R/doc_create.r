@@ -16,7 +16,7 @@
 #' inline within your document, you can do so with this fxn. See
 #' \url{http://wiki.apache.org/couchdb/HTTP_Document_API#Attachments} for help on formatting
 #' json appropriately.
-#' @examples \donttest{
+#' @examples \dontrun{
 #' # write a document WITH a name (uses PUT)
 #' doc1 <- '{"name":"drink","beer":"IPA"}'
 #' doc_create(doc1, dbname="sofadb", docid="abeer")

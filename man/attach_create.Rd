@@ -23,7 +23,7 @@ attach_create(cushion = "localhost", dbname, docid, attachment, attname, ...)
 Include an attachment either on an existing or new document.
 }
 \examples{
-\donttest{
+\dontrun{
 # put on to an existing document
 doc <- '{"name":"guy","beer":"anybeerisfine"}'
 doc_create(dbname="sofadb", doc=doc, docid="guysbeer")
