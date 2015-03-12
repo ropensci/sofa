@@ -16,6 +16,12 @@
 #' inline within your document, you can do so with this fxn. See
 #' \url{http://wiki.apache.org/couchdb/HTTP_Document_API#Attachments} for help on formatting
 #' json appropriately.
+#'
+#' Note that you can create documents from a data.frame with this function, where each row or
+#' column is a seprate document. However, this function does not use the bulk API
+#' \url{https://couchdb.readthedocs.org/en/latest/api/database/bulk-api.html#db-bulk-docs} - see
+#' \code{\link{bulk_create}} and \code{\link{bulk_update}} to create or update documents with
+#' the bulk API - which should be much faster for a large number of documents.
 #' @examples \dontrun{
 #' # write a document WITH a name (uses PUT)
 #' doc1 <- '{"name":"drink","beer":"IPA"}'
@@ -107,14 +113,6 @@ cush <- function(cushion, dbname) {
   }
 }
 
-# parse each row, column, or all to json to become documents
-#
-# row.names(mtcars) <- NULL
-# parse_df(mtcars, "rows")
-# parse_df(mtcars, "columns")
-# parse_df(mtcars, "one")
-# doc_create("localhost", dbname="test", doc = dat)
-# doc_create("localhost", dbname="test", doc = parse_df(mtcars, "rows")[1])
 parse_df <- function(dat, how = "rows", tojson = TRUE, ...) {
   how <- match.arg(how, c('rows','columns'))
   switch(how,
@@ -140,8 +138,3 @@ parse_df <- function(dat, how = "rows", tojson = TRUE, ...) {
          }
   )
 }
-
-# tojsonnamed <- function(x) {
-#
-#   jsonlite::toJSON(x, auto_unbox = TRUE)
-# }

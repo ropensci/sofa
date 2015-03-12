@@ -34,6 +34,12 @@ the first one is via a separate REST call (see \code{\link{attach_create}}); the
 inline within your document, you can do so with this fxn. See
 \url{http://wiki.apache.org/couchdb/HTTP_Document_API#Attachments} for help on formatting
 json appropriately.
+
+Note that you can create documents from a data.frame with this function, where each row or
+column is a seprate document. However, this function does not use the bulk API
+\url{https://couchdb.readthedocs.org/en/latest/api/database/bulk-api.html#db-bulk-docs} - see
+\code{\link{bulk_create}} and \code{\link{bulk_update}} to create or update documents with
+the bulk API - which should be much faster for a large number of documents.
 }
 \examples{
 \dontrun{
