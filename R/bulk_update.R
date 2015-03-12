@@ -13,34 +13,31 @@
 #' separate document; if columns, each column becomes a separate document.
 #'
 #' @examples \dontrun{
+#' row.names(mtcars) <- NULL
 #' db_delete(dbname="bulktest")
 #' db_create(dbname="bulktest")
 #' bulk_create(mtcars, dbname="bulktest")
 #'
-#' db_create(dbname="bulktest2")
-#' bulk_create(iris, dbname="bulktest2")
+#' # modify mtcars
+#' mtcars$letter <- sample(letters, NROW(mtcars), replace = TRUE)
+#' bulk_update(mtcars, dbname="bulktest")
+#'
+#' # change again
+#' mtcars$num <- 89
+#' bulk_update(mtcars, dbname="bulktest")
 #' }
-bulk_create <- function(doc, cushion = "localhost", dbname, docid = NULL,
-                       how = 'rows', as = 'list', ...) {
-  UseMethod("bulk_create")
+bulk_update <- function(doc, cushion = "localhost", dbname, docid = NULL,
+                        how = 'rows', as = 'list', ...) {
+  UseMethod("bulk_update")
 }
 
 #' @export
-bulk_create.data.frame <- function(doc, cushion = "localhost", dbname, docid = NULL,
+bulk_update.data.frame <- function(doc, cushion = "localhost", dbname, docid = NULL,
                                    how = 'rows', as = 'list', ...) {
   url <- cush(cushion, dbname)
   each <- parse_df(doc, how = how, tojson = FALSE)
+  info <- apply(alldocs(dbname = dbname), 1, as.list)
+  each <- Map(function(x, y) modifyList(x, list(`_id` = y$id, `_rev` = y$rev)), each, info)
   body <- jsonlite::toJSON(list(docs = each), auto_unbox = TRUE)
-  sofa_bulk(file.path(url, "_bulk_docs"), as, body = body, ...)
-}
-
-sofa_bulk <- function(url, as, body, ...) {
-  res <- POST(url, content_type_json(), body = body, ...)
-  bulk_handle(res, as)
-}
-
-bulk_handle <- function(x, as) {
-  stop_status(x)
-  tt <- content(x, "text")
-  if(as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
+  sofa_bulk(file.path(url, "_bulk_docs"), as, body = body)
 }
