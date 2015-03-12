@@ -8,6 +8,8 @@
 #' XML as well, which is embedded in json. When the document is retrieved via
 #' \code{\link{doc_get}}, the XML is given back and you can parse it as normal.
 #' @param docid Document ID
+#' @param how (character) One of rows (default) or columns. If rows, each row becomes a
+#' separate document; if columns, each column becomes a separate document.
 #'
 #' @details Documents can have attachments just like email. There are two ways to use attachments:
 #' the first one is via a separate REST call (see \code{\link{attach_create}}); the second is

@@ -18,6 +18,9 @@ XML as well, which is embedded in json. When the document is retrieved via
 
 \item{docid}{Document ID}
 
+\item{how}{(character) One of rows (default) or columns. If rows, each row becomes a
+separate document; if columns, each column becomes a separate document.}
+
 \item{as}{(character) One of list (default) or json}
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}

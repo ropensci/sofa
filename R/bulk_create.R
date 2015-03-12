@@ -9,22 +9,25 @@
 #' @param docid Document IDs, ignored for now, eventually, you can pass in a list, or
 #' vector to be the ids for each document created. Has to be the same length as the
 #' number of documents.
+#' @param how (character) One of rows (default) or columns. If rows, each row becomes a
+#' separate document; if columns, each column becomes a separate document.
 #'
 #' @examples \dontrun{
 #' db_delete(dbname="bulktest")
 #' db_create(dbname="bulktest")
-#' doc_bulk(mtcars, dbname="bulktest")
+#' bulk_create(mtcars, dbname="bulktest")
 #'
 #' db_create(dbname="bulktest2")
-#' doc_bulk(iris, dbname="bulktest2")
+#' bulk_create(iris, dbname="bulktest2")
 #' }
-doc_bulk <- function(doc, cushion = "localhost", dbname, docid = NULL,
+bulk_create <- function(doc, cushion = "localhost", dbname, docid = NULL,
                        how = 'rows', as = 'list', ...) {
-  UseMethod("doc_bulk")
+  UseMethod("bulk_create")
 }
 
 #' @export
-doc_bulk.data.frame <- function(doc, cushion = "localhost", dbname, how = 'rows', as = 'list', ...) {
+bulk_create.data.frame <- function(doc, cushion = "localhost", dbname, docid = NULL,
+                                   how = 'rows', as = 'list', ...) {
   url <- cush(cushion, dbname)
   each <- parse_df(doc, how = how, tojson = FALSE)
   body <- jsonlite::toJSON(list(docs = each), auto_unbox = TRUE)
