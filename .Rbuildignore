@@ -3,3 +3,4 @@
 .scott_auth.r
 Makefile
 README.Rmd
+^\.travis\.yml$

@@ -11,6 +11,8 @@ sofa
  \ ___________________ /
 </pre>
 
+[![Build Status](https://travis-ci.org/sckott/sofa.png?branch=master)](https://travis-ci.org/sckott/sofa)
+
 #### *An easy interface to CouchDB from R*
 
 Note: Check out [*R4couchdb*](https://github.com/wactbprot/R4CouchDB), another R package to interact with CouchDB. 
@@ -81,11 +83,11 @@ ping()
 #> [1] "2c10f0c6d9bd17205b692ae93cd4cf1d"
 #> 
 #> $version
-#> [1] "1.6.0"
+#> [1] "1.6.1"
 #> 
 #> $vendor
 #> $vendor$version
-#> [1] "1.6.0-1"
+#> [1] "1.6.1-1"
 #> 
 #> $vendor$name
 #> [1] "Homebrew"
@@ -96,9 +98,6 @@ Nice, it's working.
 ### Create a new database, and list available databases
 
 
-```
-#> Error in sofa_DELETE(sprintf("http://127.0.0.1:%s/%s", cushion$port, dbname), : client error: (404) Not Found
-```
 
 
 ```r
@@ -112,8 +111,10 @@ see if its there now
 
 ```r
 db_list()
-#>  [1] "_replicator" "_users"      "alm_couchdb" "cachecall"   "hello_earth"
-#>  [6] "leothelion"  "mran"        "mydb"        "newdbs"      "sofadb"
+#>  [1] "_replicator" "_users"      "alm_couchdb" "bulktest"    "bulktest2"  
+#>  [6] "cachecall"   "diamonds"    "hello_earth" "iris"        "leothelion" 
+#> [11] "leothelion2" "mapuris"     "mran"        "mydb"        "newdbs"     
+#> [16] "newnew"      "sofadb"      "stuff"       "test"
 ```
 
 ### Create documents
@@ -123,7 +124,7 @@ db_list()
 
 ```r
 doc1 <- '{"name":"sofa","beer":"IPA"}'
-doc_create(dbname="sofadb", doc=doc1, docid="a_beer")
+doc_create(doc1, dbname="sofadb", docid="a_beer")
 #> $ok
 #> [1] TRUE
 #> 
@@ -139,12 +140,12 @@ doc_create(dbname="sofadb", doc=doc1, docid="a_beer")
 
 ```r
 doc2 <- '{"name":"sofa","icecream":"rocky road"}'
-doc_create(dbname="sofadb", doc=doc2)
+doc_create(doc2, dbname="sofadb")
 #> $ok
 #> [1] TRUE
 #> 
 #> $id
-#> [1] "c5c5c332c25cf62cc584647a81006adc"
+#> [1] "d90d316881c01300801272b4b406e66e"
 #> 
 #> $rev
 #> [1] "1-fd0da7fcb8d3afbfc5757d065c92362c"
@@ -159,7 +160,7 @@ write the xml
 
 ```r
 doc3 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
-doc_create(dbname="sofadb", doc=doc3, docid="somexml")
+doc_create(doc3, dbname="sofadb", docid="somexml")
 #> $ok
 #> [1] TRUE
 #> 
@@ -195,13 +196,14 @@ doc_get(dbname="sofadb", docid="somexml")[["xml"]]
 
 ### Views
 
-Still working on these functions, check back later...
+__Still working on these functions, check back later...__
 
-<!-- 
 First, create a database
 
 
 ```
+#> $ok
+#> [1] TRUE
 #> $ok
 #> [1] TRUE
 ```
@@ -209,7 +211,6 @@ First, create a database
 
 ```r
 db_create(dbname='alm_couchdb')
-#> Error in sofa_PUT(sprintf("http://127.0.0.1:%s/%s", cushion$port, dbname), : client error: (412) Precondition Failed
 ```
 
 Write a view - here letting key be the default of null
@@ -217,7 +218,6 @@ Write a view - here letting key be the default of null
 
 ```r
 view_put(dbname='alm_couchdb', design_name='almview2', value="doc.baseurl")
-#> Error in sofa_PUT(call_, as, body = doc2, ...): client error: (409) Conflict
 ```
 
 get info on your new view
@@ -225,7 +225,6 @@ get info on your new view
 
 ```r
 view_get(dbname='alm_couchdb', design_name='almview2')
-#> [1] "{\"_id\":\"_design/almview2\",\"_rev\":\"1-e7c17cff1b96e4595c3781da53e16ad8\",\"views\":{\"foo\":{\"map\":\"function(doc){emit(null,doc.baseurl)}\"}}}\n"
 ```
 
 get data using a view
@@ -233,7 +232,6 @@ get data using a view
 
 ```r
 view_search(dbname='alm_couchdb', design_name='almview2')
-#> [1] "{\"total_rows\":0,\"offset\":0,\"rows\":[\r\n\r\n]}\n"
 ```
 
 delete the view
@@ -241,9 +239,7 @@ delete the view
 
 ```r
 view_del(dbname='alm_couchdb', design_name='almview2')
-#> Error in view_get(cushion, dbname, design_name)$`_rev`: $ operator is invalid for atomic vectors
 ```
--->
 
 ### Full text search? por sepuesto
 

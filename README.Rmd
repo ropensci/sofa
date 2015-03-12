@@ -18,6 +18,8 @@ knitr::opts_chunk$set(
  \ ___________________ /
 </pre>
 
+[![Build Status](https://travis-ci.org/sckott/sofa.png?branch=master)](https://travis-ci.org/sckott/sofa)
+
 #### *An easy interface to CouchDB from R*
 
 Note: Check out [*R4couchdb*](https://github.com/wactbprot/R4CouchDB), another R package to interact with CouchDB. 
@@ -57,7 +59,7 @@ Cushions? What? Since it's couch we gotta use `cushions` somehow. `cushions` are
 
 As an example, here's how I set up details for connecting to my Cloudant couch:
 
-```{r}
+```{r eval=FALSE}
 cushion(name = 'cloudant', user = '<user name>', pwd = '<password>', type = "cloudant")
 ```
 
@@ -84,7 +86,7 @@ Nice, it's working.
 ### Create a new database, and list available databases
 
 ```{r echo=FALSE}
-db_delete(dbname='sofadb')
+if(is.null(db_info(dbname = "sofadb")$error)) db_delete(dbname='sofadb')
 ```
 
 ```{r}
@@ -103,14 +105,14 @@ db_list()
 
 ```{r}
 doc1 <- '{"name":"sofa","beer":"IPA"}'
-doc_create(dbname="sofadb", doc=doc1, docid="a_beer")
+doc_create(doc1, dbname="sofadb", docid="a_beer")
 ```
 
 #### Write a json document WITHOUT a name (uses POST)
 
 ```{r}
 doc2 <- '{"name":"sofa","icecream":"rocky road"}'
-doc_create(dbname="sofadb", doc=doc2)
+doc_create(doc2, dbname="sofadb")
 ```
 
 #### XML? 
@@ -121,7 +123,7 @@ write the xml
 
 ```{r}
 doc3 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
-doc_create(dbname="sofadb", doc=doc3, docid="somexml")
+doc_create(doc3, dbname="sofadb", docid="somexml")
 ```
 
 get the doc back out
@@ -138,43 +140,42 @@ doc_get(dbname="sofadb", docid="somexml")[["xml"]]
 
 ### Views
 
-Still working on these functions, check back later...
+__Still working on these functions, check back later...__
 
-<!-- 
 First, create a database
 
 ```{r echo=FALSE}
 if(is.null(db_info(dbname = "sofadb")$error)) db_delete(dbname='sofadb')
+if(is.null(db_info(dbname = "alm_couchdb")$error)) db_delete(dbname='alm_couchdb')
 ```
 
-```{r}
+```{r eval=FALSE}
 db_create(dbname='alm_couchdb')
 ```
 
 Write a view - here letting key be the default of null
 
-```{r}
+```{r eval=FALSE}
 view_put(dbname='alm_couchdb', design_name='almview2', value="doc.baseurl")
 ```
 
 get info on your new view
 
-```{r}
+```{r eval=FALSE}
 view_get(dbname='alm_couchdb', design_name='almview2')
 ```
 
 get data using a view
 
-```{r}
+```{r eval=FALSE}
 view_search(dbname='alm_couchdb', design_name='almview2')
 ```
 
 delete the view
 
-```{r}
+```{r eval=FALSE}
 view_del(dbname='alm_couchdb', design_name='almview2')
 ```
--->
 
 ### Full text search? por sepuesto
 
