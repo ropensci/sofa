@@ -8,16 +8,9 @@
 #' XML as well, which is embedded in json. When the document is retrieved via
 #' \code{\link{doc_get}}, the XML is given back and you can parse it as normal.
 #' @param docid Document ID
-#' @param apicall If TRUE, write with json format e.g.:
-#'    {
-#'      "baseurl" : "http://alm.plos.org/api/v3/articles",
-#'      "yourqueryargs" : "doi=10.1371/journal.pone.0060590",
-#'      "response": "response_from_the_api"
-#'    }
-#' @param baseurl Base url for the web API call
-#' @param queryargs Web API query arguments to pass in to json with document
+#'
 #' @details Documents can have attachments just like email. There are two ways to use attachments:
-#' the first one is via a separate REST call (see \code{doc_attach}); the second is inline within
+#' the first one is via a separate REST call (see \code{\link{doc_attach}}); the second is inline within
 #' your document, you can do so with this fxn. See
 #' \url{http://wiki.apache.org/couchdb/HTTP_Document_API#Attachments} for help on formatting
 #' json appropriately.
@@ -41,12 +34,6 @@
 #' doc_create(dbname="sofadb", doc=doc4, docid="somexml")
 #' doc_get(dbname = "sofadb", docid = "somexml")
 #'
-#' # write a document using web api storage format
-#' doc <- '{"downloads":10,"pageviews":5000,"tweets":300}'
-#' doc_create(dbname="sofadb", doc=doc, docid="asdfg", apicall=TRUE, baseurl="http://things...",
-#'    queryargs="some args")
-#' doc_get(dbname = "sofadb", docid = "asdfg")
-#'
 #' # in iriscouch
 #' doc_create("iriscouch", dbname='helloworld', doc='{"things":"stuff"}', docid="ggg")
 #' doc_get("iriscouch", dbname='helloworld', docid="ggg")
@@ -61,9 +48,8 @@
 #' doc_create("oceancouch", dbname="beard", doc=doc1, docid="goodbeer")
 #' }
 
-doc_create <- function(cushion="localhost", dbname, doc, docid=NULL, apicall=FALSE, baseurl,
-  queryargs, as='list', ...)
-{
+doc_create <- function(cushion = "localhost", dbname, doc, docid = NULL, as = 'list', ...) {
+
   cushion <- get_cushion(cushion)
   if(is.null(cushion$type)){
     call_ <- paste0(pick_url(cushion), dbname)
@@ -75,20 +61,9 @@ doc_create <- function(cushion="localhost", dbname, doc, docid=NULL, apicall=FAL
     }
   }
 
-  if(apicall){
-    doc2 <- paste('{"baseurl":', '"', baseurl, '",', '"queryargs":',
-                  toJSON(queryargs, collapse=""), ',', '"response":', doc, "}", sep="")
-    if(!is.null(docid)){
-      call_ <- paste0(call_, "/", docid)
-      sofa_PUT(call_, as, body=doc2, ...)
-    } else {
-      sofa_POST(call_, as, body=doc2, ...)
-    }
+  if(!is.null(docid)){
+    sofa_PUT(paste0(call_, "/", docid), as, body=check_inputs(doc), ...)
   } else {
-    if(!is.null(docid)){
-      sofa_PUT(paste0(call_, "/", docid), as, body=check_inputs(doc), ...)
-    } else {
-      sofa_POST(call_, as, body=check_inputs(doc), ...)
-    }
+    sofa_POST(call_, as, body=check_inputs(doc), ...)
   }
 }

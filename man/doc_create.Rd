@@ -4,8 +4,8 @@
 \alias{doc_create}
 \title{Create documents to a database.}
 \usage{
-doc_create(cushion = "localhost", dbname, doc, docid = NULL,
-  apicall = FALSE, baseurl, queryargs, as = "list", ...)
+doc_create(cushion = "localhost", dbname, doc, docid = NULL, as = "list",
+  ...)
 }
 \arguments{
 \item{cushion}{A cushion name}
@@ -18,17 +18,6 @@ XML as well, which is embedded in json. When the document is retrieved via
 
 \item{docid}{Document ID}
 
-\item{apicall}{If TRUE, write with json format e.g.:
-{
-  "baseurl" : "http://alm.plos.org/api/v3/articles",
-  "yourqueryargs" : "doi=10.1371/journal.pone.0060590",
-  "response": "response_from_the_api"
-}}
-
-\item{baseurl}{Base url for the web API call}
-
-\item{queryargs}{Web API query arguments to pass in to json with document}
-
 \item{as}{(character) One of list (default) or json}
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
@@ -38,7 +27,7 @@ Create documents to a database.
 }
 \details{
 Documents can have attachments just like email. There are two ways to use attachments:
-the first one is via a separate REST call (see \code{doc_attach}); the second is inline within
+the first one is via a separate REST call (see \code{\link{doc_attach}}); the second is inline within
 your document, you can do so with this fxn. See
 \url{http://wiki.apache.org/couchdb/HTTP_Document_API#Attachments} for help on formatting
 json appropriately.
@@ -63,12 +52,6 @@ doc_create(dbname="sofadb", doc=doc3)
 doc4 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
 doc_create(dbname="sofadb", doc=doc4, docid="somexml")
 doc_get(dbname = "sofadb", docid = "somexml")
-
-# write a document using web api storage format
-doc <- '{"downloads":10,"pageviews":5000,"tweets":300}'
-doc_create(dbname="sofadb", doc=doc, docid="asdfg", apicall=TRUE, baseurl="http://things...",
-   queryargs="some args")
-doc_get(dbname = "sofadb", docid = "asdfg")
 
 # in iriscouch
 doc_create("iriscouch", dbname='helloworld', doc='{"things":"stuff"}', docid="ggg")
