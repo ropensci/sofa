@@ -1,8 +1,8 @@
 Package: sofa
-Title: Easy R connector to CouchDB
+Title: Easy R Connector to CouchDB
 Description: Easy R connector to CouchDB.
-Version: 0.1.6.99
-Date: 2015-01-16
+Version: 0.1.7.99
+Date: 2015-03-12
 Authors@R: "Scott Chamberlain <myrmecocystus@gmail.com> [aut, cre]"
 License: MIT + file LICENSE
 URL: https://github.com/sckott/sofa
