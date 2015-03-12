@@ -31,12 +31,35 @@ Create documents via the bulk API
 }
 \examples{
 \dontrun{
+# From a data.frame
 db_delete(dbname="bulktest")
 db_create(dbname="bulktest")
 bulk_create(mtcars, dbname="bulktest")
 
 db_create(dbname="bulktest2")
 bulk_create(iris, dbname="bulktest2")
+
+# From a json character string, or more likely, many json character strings
+library("jsonlite")
+strs <- as.character(parse_df(mtcars, "columns"))
+db_delete(dbname="bulkfromchr")
+db_create(dbname="bulkfromchr")
+bulk_create(strs, dbname="bulkfromchr")
+
+# From a list of lists
+library("jsonlite")
+lst <- parse_df(mtcars, tojson=FALSE)
+db_delete(dbname="bulkfromchr")
+db_create(dbname="bulkfromchr")
+bulk_create(lst, dbname="bulkfromchr")
+
+# iris dataset - by rows
+db_create(dbname="irisrows")
+bulk_create(apply(iris, 1, as.list), dbname="irisrows")
+
+# iris dataset - by columns - doesn't quite work yet
+# db_create(dbname="iriscolumns")
+# bulk_create(parse_df(iris, "columns", tojson=FALSE), dbname="iriscolumns")
 }
 }
 

@@ -135,4 +135,3 @@ check_inputs <- function(x){
     }
   }
 }
-

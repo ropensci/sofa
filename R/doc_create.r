@@ -112,29 +112,3 @@ cush <- function(cushion, dbname) {
     }
   }
 }
-
-parse_df <- function(dat, how = "rows", tojson = TRUE, ...) {
-  how <- match.arg(how, c('rows','columns'))
-  switch(how,
-         rows = {
-           apply(dat, 1, function(x){
-             if(tojson){
-               toJSON(as.list(setNames(x, names(dat))), auto_unbox = TRUE, ...)
-             } else {
-               as.list(setNames(x, names(dat)))
-             }
-           })
-         },
-         columns = {
-           out <- list()
-           for(i in seq_along(dat)){
-             out[[ names(dat)[i] ]] <- setNames(list(dat[,i]), names(dat)[i])
-           }
-           if(tojson){
-             lapply(out, toJSON, auto_unbox = TRUE, ...)
-           } else {
-             out
-           }
-         }
-  )
-}

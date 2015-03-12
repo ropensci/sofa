@@ -13,16 +13,55 @@
 #' separate document; if columns, each column becomes a separate document.
 #'
 #' @examples \dontrun{
+#' # From a data.frame
 #' db_delete(dbname="bulktest")
 #' db_create(dbname="bulktest")
 #' bulk_create(mtcars, dbname="bulktest")
 #'
 #' db_create(dbname="bulktest2")
 #' bulk_create(iris, dbname="bulktest2")
+#'
+#' # From a json character string, or more likely, many json character strings
+#' library("jsonlite")
+#' strs <- as.character(parse_df(mtcars, "columns"))
+#' db_delete(dbname="bulkfromchr")
+#' db_create(dbname="bulkfromchr")
+#' bulk_create(strs, dbname="bulkfromchr")
+#'
+#' # From a list of lists
+#' library("jsonlite")
+#' lst <- parse_df(mtcars, tojson=FALSE)
+#' db_delete(dbname="bulkfromchr")
+#' db_create(dbname="bulkfromchr")
+#' bulk_create(lst, dbname="bulkfromchr")
+#'
+#' # iris dataset - by rows
+#' db_create(dbname="irisrows")
+#' bulk_create(apply(iris, 1, as.list), dbname="irisrows")
+#'
+#' # iris dataset - by columns - doesn't quite work yet
+#' # db_create(dbname="iriscolumns")
+#' # bulk_create(parse_df(iris, "columns", tojson=FALSE), dbname="iriscolumns")
 #' }
 bulk_create <- function(doc, cushion = "localhost", dbname, docid = NULL,
                        how = 'rows', as = 'list', ...) {
   UseMethod("bulk_create")
+}
+
+#' @export
+bulk_create.character <- function(doc, cushion = "localhost", dbname, docid = NULL,
+                                   how = 'rows', as = 'list', ...) {
+  url <- cush(cushion, dbname)
+  body <- sprintf('{"docs": [%s]}', paste0(doc, collapse = ", "))
+  sofa_bulk(file.path(url, "_bulk_docs"), as, body = body, ...)
+}
+
+#' @export
+bulk_create.list <- function(doc, cushion = "localhost", dbname, docid = NULL,
+                                  how = 'rows', as = 'list', ...) {
+  url <- cush(cushion, dbname)
+  body <- jsonlite::toJSON(list(docs = doc), auto_unbox = TRUE)
+  sofa_bulk(file.path(url, "_bulk_docs"), as, body = body, ...)
 }
 
 #' @export
@@ -35,7 +74,7 @@ bulk_create.data.frame <- function(doc, cushion = "localhost", dbname, docid = N
 }
 
 sofa_bulk <- function(url, as, body, ...) {
-  res <- POST(url, content_type_json(), body = body, ...)
+  res <- POST(url, content_type_json(), body = body)
   bulk_handle(res, as)
 }
 
