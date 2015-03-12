@@ -55,6 +55,6 @@ alldocs <- function(cushion="localhost", dbname, asdf = TRUE,
   }
 
   if(as=='json'){ temp } else {
-    if(asdf & is.null(include_docs)) ldply(temp$rows, function(x) as.data.frame(x)) else temp
+    if(asdf & is.null(include_docs)) ldply(temp$rows, data.frame, stringsAsFactors = FALSE) else temp
   }
 }
