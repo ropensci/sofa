@@ -29,6 +29,9 @@ separate document; if columns, each column becomes a separate document.}
 \description{
 Create documents via the bulk API
 }
+\details{
+Note that row.names are dropped from data.frame inputs.
+}
 \examples{
 \dontrun{
 # From a data.frame
@@ -36,8 +39,16 @@ db_delete(dbname="bulktest")
 db_create(dbname="bulktest")
 bulk_create(mtcars, dbname="bulktest")
 
+db_delete(dbname="bulktest2")
 db_create(dbname="bulktest2")
 bulk_create(iris, dbname="bulktest2")
+
+# data.frame with 1 or more columns as neseted lists
+mtcars$stuff <- list("hello_world")
+mtcars$stuff2 <- list("hello_world","things")
+db_delete(dbname="bulktest3")
+db_create(dbname="bulktest3")
+bulk_create(mtcars, dbname="bulktest3")
 
 # From a json character string, or more likely, many json character strings
 library("jsonlite")
