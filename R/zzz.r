@@ -67,7 +67,7 @@ sofa_PUT <- function(url, as = 'list', ...){
 
 sofa_POST <- function(url, as = 'list', ...){
   res <- POST(url, content_type_json(), ...)
-  stop_for_status(res)
+  stop_status(res)
   tt <- content(res, "text")
   if(as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
 }
@@ -78,6 +78,12 @@ sofa_COPY <- function(url, as = 'list',...){
   stop_for_status(res)
   tt <- content(res, "text")
   if(as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
+}
+
+stop_status <- function(x) {
+  if(x$status_code > 202) {
+    stop(sprintf("(%s) - %s", x$status_code, content(x)$reason), call. = FALSE)
+  }
 }
 
 # sofa_GET <- function(url, as = 'list', ...) sofa_verb("GET", url, as, ...)

@@ -6,12 +6,12 @@
 #' @param docid Document ID (character)
 #' @param attname Attachment name.
 #' @examples \donttest{
-#' getattach(dbname="sofadb", docid="abeer")
-#' getattach("oceancouch", dbname="mapuris", docid="goodbeer")
+#' attach_get(dbname="sofadb", docid="guysbeer")
+#' attach_get("oceancouch", dbname="mapuris", docid="goodbeer")
 #' }
 
-getattach <- function(cushion="localhost", dbname, docid, attname=NULL, as='list', ...)
-{
+attach_get <- function(cushion="localhost", dbname, docid, attname=NULL, as='list', ...) {
+
   cushion <- get_cushion(cushion)
   url <- pick_url(cushion)
   if(is.null(attname)){

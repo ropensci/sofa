@@ -4,17 +4,17 @@
 \alias{doc_create}
 \title{Create documents to a database.}
 \usage{
-doc_create(cushion = "localhost", dbname, doc, docid = NULL, as = "list",
-  ...)
+doc_create(doc, cushion = "localhost", dbname, docid = NULL, how = "rows",
+  as = "list", ...)
 }
 \arguments{
-\item{cushion}{A cushion name}
-
-\item{dbname}{Database name3}
-
 \item{doc}{Document content, can be character string, a list. The character type can be
 XML as well, which is embedded in json. When the document is retrieved via
 \code{\link{doc_get}}, the XML is given back and you can parse it as normal.}
+
+\item{cushion}{A cushion name}
+
+\item{dbname}{Database name3}
 
 \item{docid}{Document ID}
 
@@ -27,8 +27,8 @@ Create documents to a database.
 }
 \details{
 Documents can have attachments just like email. There are two ways to use attachments:
-the first one is via a separate REST call (see \code{\link{doc_attach}}); the second is inline within
-your document, you can do so with this fxn. See
+the first one is via a separate REST call (see \code{\link{attach_create}}); the second is
+inline within your document, you can do so with this fxn. See
 \url{http://wiki.apache.org/couchdb/HTTP_Document_API#Attachments} for help on formatting
 json appropriately.
 }
@@ -36,35 +36,45 @@ json appropriately.
 \donttest{
 # write a document WITH a name (uses PUT)
 doc1 <- '{"name":"drink","beer":"IPA"}'
-doc_create(dbname="sofadb", doc=doc1, docid="abeer")
-doc_create(dbname="sofadb", doc=doc1, docid="morebeer", as='json')
+doc_create(doc1, dbname="sofadb", docid="abeer")
+doc_create(doc1, dbname="sofadb", docid="morebeer", as='json')
 doc_get(dbname = "sofadb", docid = "abeer")
 
 # write a json document WITHOUT a name (uses POST)
 doc2 <- '{"name":"food","icecream":"rocky road"}'
-doc_create(dbname="sofadb", doc=doc2)
+doc_create(doc2, dbname="sofadb")
 
 doc3 <- '{"planet":"mars","size":"smallish"}'
-doc_create(dbname="sofadb", doc=doc3)
+doc_create(doc3, dbname="sofadb")
 
 # write an xml document WITH a name (uses PUT). xml is written as xml in
 # couchdb, just wrapped in json, when you get it out it will be as xml
 doc4 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
-doc_create(dbname="sofadb", doc=doc4, docid="somexml")
+doc_create(doc4, dbname="sofadb", docid="somexml")
 doc_get(dbname = "sofadb", docid = "somexml")
 
 # in iriscouch
-doc_create("iriscouch", dbname='helloworld', doc='{"things":"stuff"}', docid="ggg")
+doc_create('{"things":"stuff"}', cushion="iriscouch", dbname='helloworld', docid="ggg")
 doc_get("iriscouch", dbname='helloworld', docid="ggg")
 doc_delete("iriscouch", dbname='helloworld', docid="ggg")
 
 # You can pass in lists that autoconvert to json internally
 doc1 <- list(name = "drink", beer = "IPA")
-doc_create(dbname="sofadb", doc=doc1, docid="goodbeer")
+doc_create(doc1, dbname="sofadb", docid="goodbeer")
 
 # On arbitrary remote server
 doc1 <- list(name = "drink", beer = "IPA")
-doc_create("oceancouch", dbname="beard", doc=doc1, docid="goodbeer")
+doc_create(doc1, cushion="oceancouch", dbname="beard", docid="goodbeer")
+
+# Write directly from a data.frame
+## Each row or column becomes a separate document
+### by rows
+doc_create(dat, dbname="test", how="rows")
+doc_create(dat, dbname="test", how="columns")
+
+head(iris)
+db_create(dbname = "iris")
+doc_create(iris, dbname = "iris")
 }
 }
 

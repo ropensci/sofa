@@ -10,60 +10,136 @@
 #' @param docid Document ID
 #'
 #' @details Documents can have attachments just like email. There are two ways to use attachments:
-#' the first one is via a separate REST call (see \code{\link{doc_attach}}); the second is inline within
-#' your document, you can do so with this fxn. See
+#' the first one is via a separate REST call (see \code{\link{attach_create}}); the second is
+#' inline within your document, you can do so with this fxn. See
 #' \url{http://wiki.apache.org/couchdb/HTTP_Document_API#Attachments} for help on formatting
 #' json appropriately.
 #' @examples \donttest{
 #' # write a document WITH a name (uses PUT)
 #' doc1 <- '{"name":"drink","beer":"IPA"}'
-#' doc_create(dbname="sofadb", doc=doc1, docid="abeer")
-#' doc_create(dbname="sofadb", doc=doc1, docid="morebeer", as='json')
+#' doc_create(doc1, dbname="sofadb", docid="abeer")
+#' doc_create(doc1, dbname="sofadb", docid="morebeer", as='json')
 #' doc_get(dbname = "sofadb", docid = "abeer")
 #'
 #' # write a json document WITHOUT a name (uses POST)
 #' doc2 <- '{"name":"food","icecream":"rocky road"}'
-#' doc_create(dbname="sofadb", doc=doc2)
+#' doc_create(doc2, dbname="sofadb")
 #'
 #' doc3 <- '{"planet":"mars","size":"smallish"}'
-#' doc_create(dbname="sofadb", doc=doc3)
+#' doc_create(doc3, dbname="sofadb")
 #'
 #' # write an xml document WITH a name (uses PUT). xml is written as xml in
 #' # couchdb, just wrapped in json, when you get it out it will be as xml
 #' doc4 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
-#' doc_create(dbname="sofadb", doc=doc4, docid="somexml")
+#' doc_create(doc4, dbname="sofadb", docid="somexml")
 #' doc_get(dbname = "sofadb", docid = "somexml")
 #'
 #' # in iriscouch
-#' doc_create("iriscouch", dbname='helloworld', doc='{"things":"stuff"}', docid="ggg")
+#' doc_create('{"things":"stuff"}', cushion="iriscouch", dbname='helloworld', docid="ggg")
 #' doc_get("iriscouch", dbname='helloworld', docid="ggg")
 #' doc_delete("iriscouch", dbname='helloworld', docid="ggg")
 #'
 #' # You can pass in lists that autoconvert to json internally
 #' doc1 <- list(name = "drink", beer = "IPA")
-#' doc_create(dbname="sofadb", doc=doc1, docid="goodbeer")
+#' doc_create(doc1, dbname="sofadb", docid="goodbeer")
 #'
 #' # On arbitrary remote server
 #' doc1 <- list(name = "drink", beer = "IPA")
-#' doc_create("oceancouch", dbname="beard", doc=doc1, docid="goodbeer")
+#' doc_create(doc1, cushion="oceancouch", dbname="beard", docid="goodbeer")
+#'
+#' # Write directly from a data.frame
+#' ## Each row or column becomes a separate document
+#' ### by rows
+#' doc_create(dat, dbname="test", how="rows")
+#' doc_create(dat, dbname="test", how="columns")
+#'
+#' head(iris)
+#' db_create(dbname = "iris")
+#' doc_create(iris, dbname = "iris")
 #' }
+doc_create <- function(doc, cushion = "localhost", dbname, docid = NULL,
+                       how = 'rows', as = 'list', ...) {
+  UseMethod("doc_create")
+}
 
-doc_create <- function(cushion = "localhost", dbname, doc, docid = NULL, as = 'list', ...) {
-
-  cushion <- get_cushion(cushion)
-  if(is.null(cushion$type)){
-    call_ <- paste0(pick_url(cushion), dbname)
-  } else {
-    if(cushion$type=="localhost"){
-      call_ <- sprintf("http://127.0.0.1:%s/%s", cushion$port, dbname)
-    } else if(cushion$type %in% c("cloudant",'iriscouch')){
-      call_ <- remote_url(cushion, dbname)
-    }
-  }
-
+#' @export
+doc_create.character <- function(doc, cushion = "localhost", dbname, docid = NULL,
+                                 how = 'rows', as = 'list', ...) {
+  url <- cush(cushion, dbname)
   if(!is.null(docid)){
-    sofa_PUT(paste0(call_, "/", docid), as, body=check_inputs(doc), ...)
+    sofa_PUT(paste0(url, "/", docid), as, body=check_inputs(doc), ...)
   } else {
-    sofa_POST(call_, as, body=check_inputs(doc), ...)
+    sofa_POST(url, as, body=check_inputs(doc), ...)
   }
 }
+
+#' @export
+doc_create.list <- function(doc, cushion = "localhost", dbname, docid = NULL,
+                                 how = 'rows', as = 'list', ...) {
+  url <- cush(cushion, dbname)
+  if(!is.null(docid)){
+    sofa_PUT(paste0(url, "/", docid), as, body=check_inputs(doc), ...)
+  } else {
+    sofa_POST(url, as, body=check_inputs(doc), ...)
+  }
+}
+
+#' @export
+doc_create.data.frame <- function(doc, cushion = "localhost", dbname, docid = NULL,
+                            how = 'rows', as = 'list', ...) {
+  url <- cush(cushion, dbname)
+  each <- parse_df(doc, how = how)
+  lapply(each, function(x) sofa_POST(url, as, body = x, ...))
+}
+
+cush <- function(cushion, dbname) {
+  cushion <- get_cushion(cushion)
+  if(is.null(cushion$type)){
+    paste0(pick_url(cushion), dbname)
+  } else {
+    if(cushion$type=="localhost"){
+      sprintf("http://127.0.0.1:%s/%s", cushion$port, dbname)
+    } else if(cushion$type %in% c("cloudant",'iriscouch')){
+      remote_url(cushion, dbname)
+    }
+  }
+}
+
+# parse each row, column, or all to json to become documents
+#
+# row.names(mtcars) <- NULL
+# parse_df(mtcars, "rows")
+# parse_df(mtcars, "columns")
+# parse_df(mtcars, "one")
+# doc_create("localhost", dbname="test", doc = dat)
+# doc_create("localhost", dbname="test", doc = parse_df(mtcars, "rows")[1])
+parse_df <- function(dat, how = "rows", tojson = TRUE, ...) {
+  how <- match.arg(how, c('rows','columns'))
+  switch(how,
+         rows = {
+           apply(dat, 1, function(x){
+             if(tojson){
+               toJSON(as.list(setNames(x, names(dat))), auto_unbox = TRUE, ...)
+             } else {
+               as.list(setNames(x, names(dat)))
+             }
+           })
+         },
+         columns = {
+           out <- list()
+           for(i in seq_along(dat)){
+             out[[ names(dat)[i] ]] <- setNames(list(dat[,i]), names(dat)[i])
+           }
+           if(tojson){
+             lapply(out, toJSON, auto_unbox = TRUE, ...)
+           } else {
+             out
+           }
+         }
+  )
+}
+
+# tojsonnamed <- function(x) {
+#
+#   jsonlite::toJSON(x, auto_unbox = TRUE)
+# }
