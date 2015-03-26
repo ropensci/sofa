@@ -1,5 +1,5 @@
 sofa
-=======
+====
 
 
 
@@ -11,7 +11,7 @@ sofa
  \ ___________________ /
 </pre>
 
-[![Build Status](https://travis-ci.org/sckott/sofa.png?branch=master)](https://travis-ci.org/sckott/sofa)
+[![Build Status](https://travis-ci.org/ropensci/sofa.png?branch=master)](https://travis-ci.org/ropensci/sofa)
 
 #### *An easy interface to CouchDB from R*
 
@@ -35,12 +35,9 @@ You can interact with your CouchDB databases as well in your browser. Navigate t
 
 ### Install sofa
 
-From GitHub
-
 
 ```r
-install.packages("devtools")
-devtools::install_github("sckott/sofa")
+devtools::install_github("ropensci/sofa")
 ```
 
 
@@ -98,6 +95,10 @@ Nice, it's working.
 ### Create a new database, and list available databases
 
 
+```
+#> $ok
+#> [1] TRUE
+```
 
 
 ```r
@@ -111,10 +112,13 @@ see if its there now
 
 ```r
 db_list()
-#>  [1] "_replicator" "_users"      "alm_couchdb" "bulktest"    "bulktest2"  
-#>  [6] "cachecall"   "diamonds"    "hello_earth" "iris"        "leothelion" 
-#> [11] "leothelion2" "mapuris"     "mran"        "mydb"        "newdbs"     
-#> [16] "newnew"      "sofadb"      "stuff"       "test"
+#>  [1] "_replicator"  "_users"       "adsfa"        "bulkfromchr" 
+#>  [5] "bulkfromlist" "bulktest"     "bulktest2"    "bulktest3"   
+#>  [9] "bulktest4"    "bulktest5"    "cachecall"    "diamonds"    
+#> [13] "hello_earth"  "iris"         "iriscolumns"  "irisrows"    
+#> [17] "leothelion"   "leothelion2"  "mapuris"      "mran"        
+#> [21] "mtcarsdb"     "mydb"         "newdbs"       "newnew"      
+#> [25] "sofadb"       "stuff"        "stuff2"       "test"
 ```
 
 ### Create documents
@@ -145,7 +149,7 @@ doc_create(doc2, dbname="sofadb")
 #> [1] TRUE
 #> 
 #> $id
-#> [1] "d90d316881c01300801272b4b406e66e"
+#> [1] "5ec47bcb445304091a7fde125f0003d1"
 #> 
 #> $rev
 #> [1] "1-fd0da7fcb8d3afbfc5757d065c92362c"
@@ -198,51 +202,10 @@ doc_get(dbname="sofadb", docid="somexml")[["xml"]]
 
 __Still working on these functions, check back later...__
 
-First, create a database
+## Meta
 
+* Please [report any issues or bugs](https://github.com/ropensci/sofa/issues).
+* License: MIT
+* Get citation information for `sofa` in R doing `citation(package = 'sofa')`
 
-```
-#> $ok
-#> [1] TRUE
-#> $ok
-#> [1] TRUE
-```
-
-
-```r
-db_create(dbname='alm_couchdb')
-```
-
-Write a view - here letting key be the default of null
-
-
-```r
-view_put(dbname='alm_couchdb', design_name='almview2', value="doc.baseurl")
-```
-
-get info on your new view
-
-
-```r
-view_get(dbname='alm_couchdb', design_name='almview2')
-```
-
-get data using a view
-
-
-```r
-view_search(dbname='alm_couchdb', design_name='almview2')
-```
-
-delete the view
-
-
-```r
-view_del(dbname='alm_couchdb', design_name='almview2')
-```
-
-### Full text search? por sepuesto
-
-I'm working on an R client for Elaticsearch called `elastic` - find it at [https://github.com/ropensci/elastic](https://github.com/ropensci/elastic)
-
-Thinking about where to include functions to allow `elastic` and `sofa` to work together...if you have any thoughts hit up the issues. 
+[![ropensci_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
