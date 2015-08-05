@@ -12,6 +12,7 @@ sofa
 </pre>
 
 [![Build Status](https://travis-ci.org/ropensci/sofa.png?branch=master)](https://travis-ci.org/ropensci/sofa)
+[![codecov.io](https://codecov.io/github/ropensci/sofa/coverage.svg?branch=master)](https://codecov.io/github/ropensci/sofa?branch=master)
 
 #### *An easy interface to CouchDB from R*
 

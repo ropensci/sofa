@@ -1,10 +1,18 @@
 language: r
+sudo: required
 
 before_script:
   - curl -X PUT localhost:5984/myapp_test
 
 services:
   - couchdb
+
+r_github_packages:
+  - jimhester/robustr
+  - jimhester/covr
+
+after_success:
+  - Rscript -e 'covr::codecov()'
 
 notifications:
   email:

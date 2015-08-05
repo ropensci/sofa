@@ -5,13 +5,13 @@ sofa
 knitr::opts_chunk$set(
   collapse=TRUE,
   comment="#>",
-  warning=FALSE, 
+  warning=FALSE,
   message=FALSE
 )
 ```
 
 <pre>
-  _ _ _ _ _ _ _ _ _ _ _ 
+  _ _ _ _ _ _ _ _ _ _ _
  /|                   |\
 / |_ _ _ _ _ _ _ _ _ _| \
 \ /                    \/
@@ -19,10 +19,11 @@ knitr::opts_chunk$set(
 </pre>
 
 [![Build Status](https://travis-ci.org/ropensci/sofa.png?branch=master)](https://travis-ci.org/ropensci/sofa)
+[![codecov.io](https://codecov.io/github/ropensci/sofa/coverage.svg?branch=master)](https://codecov.io/github/ropensci/sofa?branch=master)
 
 #### *An easy interface to CouchDB from R*
 
-Note: Check out [*R4couchdb*](https://github.com/wactbprot/R4CouchDB), another R package to interact with CouchDB. 
+Note: Check out [*R4couchdb*](https://github.com/wactbprot/R4CouchDB), another R package to interact with CouchDB.
 
 ## Quickstart
 
@@ -32,7 +33,7 @@ Instructions [here](http://wiki.apache.org/couchdb/Installation)
 
 ### Connect to CouchDB
 
-In your terminal 
+In your terminal
 
 ```sh
 couchdb
@@ -52,7 +53,7 @@ library('sofa')
 
 ### Cushions
 
-Cushions? What? Since it's couch we gotta use `cushions` somehow. `cushions` are basically just a simple named list holding details of connections for different couches you work with. See `?cushions` or `?authentication` for help. 
+Cushions? What? Since it's couch we gotta use `cushions` somehow. `cushions` are basically just a simple named list holding details of connections for different couches you work with. See `?cushions` or `?authentication` for help.
 
 As an example, here's how I set up details for connecting to my Cloudant couch:
 
@@ -60,12 +61,12 @@ As an example, here's how I set up details for connecting to my Cloudant couch:
 cushion(name = 'cloudant', user = '<user name>', pwd = '<password>', type = "cloudant")
 ```
 
-Break down of parameters: 
+Break down of parameters:
 
-* `name`: Name of the cushion. This is how you'll refer to each connection. `cushion` is the first parameter of each function. 
+* `name`: Name of the cushion. This is how you'll refer to each connection. `cushion` is the first parameter of each function.
 * `user`: User name for the service.
 * `pwd`: Password for the service, if any.
-* `type`: Type of cushion. This is important. Only `localhost`, `cloudant`, and `iriscouch` are supported right now. Internally in `sofa` functions this variable determines how urls are constructed for http requests. 
+* `type`: Type of cushion. This is important. Only `localhost`, `cloudant`, and `iriscouch` are supported right now. Internally in `sofa` functions this variable determines how urls are constructed for http requests.
 * `port`: The port to connect to. Default: 5984
 
 Of course by default there is a built in `cushion` for localhost so you don't have to do that, unless you want to change those details, e.g., the port number.
@@ -112,7 +113,7 @@ doc2 <- '{"name":"sofa","icecream":"rocky road"}'
 doc_create(doc2, dbname="sofadb")
 ```
 
-#### XML? 
+#### XML?
 
 Write an xml document WITH a name (uses PUT). The xml is written as xml in couchdb, just wrapped in json, when you get it out it will be as xml.
 
