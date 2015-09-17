@@ -14,27 +14,45 @@
 #' parse_df(mtcars, how="columns", tojson=FALSE)
 #' }
 parse_df <- function(dat, how = "rows", tojson = TRUE, ...) {
-  how <- match.arg(how, c('rows','columns'))
+  if (!is(dat, "data.frame")) stop("dat must be a data.frame", call. = FALSE)
+  how <- match.arg(how, c('rows', 'columns'))
+
+  # convert all factor to character
+  dat[vapply(dat, is.factor, logical(1))] <-
+    lapply(dat[vapply(dat, is.factor, logical(1))], as.character)
+
   switch(how,
-         rows = {
-           apply(dat, 1, function(x){
-             if(tojson){
-               jsonlite::toJSON(as.list(setNames(x, names(dat))), auto_unbox = TRUE, ...)
-             } else {
-               as.list(setNames(x, names(dat)))
-             }
-           })
-         },
-         columns = {
-           out <- list()
-           for(i in seq_along(dat)){
-             out[[ names(dat)[i] ]] <- setNames(list(dat[,i]), names(dat)[i])
-           }
-           if(tojson){
-             lapply(out, jsonlite::toJSON, auto_unbox = TRUE, ...)
-           } else {
-             out
-           }
-         }
+   rows = {
+     # apply(dat, 1, function(x){
+     #   if (tojson) {
+     #     jsonlite::toJSON(as.list(setNames(x, names(dat))), auto_unbox = TRUE, ...)
+     #   } else {
+     #     as.list(setNames(x, names(dat)))
+     #   }
+     # })
+
+     if (tojson) {
+       apply(dat, 1, function(x) {
+         jsonlite::toJSON(as.list(setNames(x, names(dat))), auto_unbox = TRUE, ...)
+       })
+     } else {
+       out <- list()
+       for (i in seq_len(NROW(dat))) {
+         out[[i]] <- as.list(setNames(dat[i, ], names(dat)))
+       }
+       out
+     }
+   },
+   columns = {
+     out <- list()
+     for (i in seq_along(dat)) {
+       out[[ names(dat)[i] ]] <- setNames(list(dat[,i]), names(dat)[i])
+     }
+     if (tojson) {
+       lapply(out, jsonlite::toJSON, auto_unbox = TRUE, ...)
+     } else {
+       out
+     }
+   }
   )
 }
