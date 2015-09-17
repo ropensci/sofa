@@ -58,8 +58,8 @@
 #' # Write directly from a data.frame
 #' ## Each row or column becomes a separate document
 #' ### by rows
-#' doc_create(dat, dbname="test", how="rows")
-#' doc_create(dat, dbname="test", how="columns")
+#' doc_create(mtcars, dbname="test", how="rows")
+#' doc_create(mtcars, dbname="test", how="columns")
 #'
 #' head(iris)
 #' db_create(dbname = "iris")
@@ -74,10 +74,10 @@ doc_create <- function(doc, cushion = "localhost", dbname, docid = NULL,
 doc_create.character <- function(doc, cushion = "localhost", dbname, docid = NULL,
                                  how = 'rows', as = 'list', ...) {
   url <- cush(cushion, dbname)
-  if(!is.null(docid)){
-    sofa_PUT(paste0(url, "/", docid), as, body=check_inputs(doc), ...)
+  if (!is.null(docid)) {
+    sofa_PUT(paste0(url, "/", docid), as, body = check_inputs(doc), ...)
   } else {
-    sofa_POST(url, as, body=check_inputs(doc), ...)
+    sofa_POST(url, as, body = check_inputs(doc), ...)
   }
 }
 
@@ -85,10 +85,10 @@ doc_create.character <- function(doc, cushion = "localhost", dbname, docid = NUL
 doc_create.list <- function(doc, cushion = "localhost", dbname, docid = NULL,
                                  how = 'rows', as = 'list', ...) {
   url <- cush(cushion, dbname)
-  if(!is.null(docid)){
-    sofa_PUT(paste0(url, "/", docid), as, body=check_inputs(doc), ...)
+  if (!is.null(docid)) {
+    sofa_PUT(paste0(url, "/", docid), as, body = check_inputs(doc), ...)
   } else {
-    sofa_POST(url, as, body=check_inputs(doc), ...)
+    sofa_POST(url, as, body = check_inputs(doc), ...)
   }
 }
 
@@ -102,12 +102,12 @@ doc_create.data.frame <- function(doc, cushion = "localhost", dbname, docid = NU
 
 cush <- function(cushion, dbname) {
   cushion <- get_cushion(cushion)
-  if(is.null(cushion$type)){
+  if (is.null(cushion$type)) {
     paste0(pick_url(cushion), dbname)
   } else {
-    if(cushion$type=="localhost"){
+    if (cushion$type == "localhost") {
       sprintf("http://127.0.0.1:%s/%s", cushion$port, dbname)
-    } else if(cushion$type %in% c("cloudant",'iriscouch')){
+    } else if (cushion$type %in% c("cloudant", 'iriscouch')) {
       remote_url(cushion, dbname)
     }
   }
