@@ -23,18 +23,21 @@
 #' \code{\link{bulk_create}} and \code{\link{bulk_update}} to create or update documents with
 #' the bulk API - which should be much faster for a large number of documents.
 #' @examples \dontrun{
+#' db_create(dbname = "sofadb")
+#'
 #' # write a document WITH a name (uses PUT)
-#' doc1 <- '{"name":"drink","beer":"IPA"}'
+#' doc1 <- '{"name": "drink", "beer": "IPA", "score": 5}'
 #' doc_create(doc1, dbname="sofadb", docid="abeer")
 #' doc_create(doc1, dbname="sofadb", docid="morebeer", as='json')
 #' doc_get(dbname = "sofadb", docid = "abeer")
 #'
 #' # write a json document WITHOUT a name (uses POST)
-#' doc2 <- '{"name":"food","icecream":"rocky road"}'
+#' doc2 <- '{"name": "food", "icecream": "rocky road"}'
 #' doc_create(doc2, dbname="sofadb")
-#'
-#' doc3 <- '{"planet":"mars","size":"smallish"}'
+#' doc3 <- '{"planet": "mars", "size": "smallish"}'
 #' doc_create(doc3, dbname="sofadb")
+#' ## assigns a UUID instead of a user given name
+#' alldocs(dbname = "sofadb")
 #'
 #' # write an xml document WITH a name (uses PUT). xml is written as xml in
 #' # couchdb, just wrapped in json, when you get it out it will be as xml
@@ -48,7 +51,7 @@
 #' doc_delete("iriscouch", dbname='helloworld', docid="ggg")
 #'
 #' # You can pass in lists that autoconvert to json internally
-#' doc1 <- list(name = "drink", beer = "IPA")
+#' doc1 <- list(name = "drink", beer = "IPA", score = 9)
 #' doc_create(doc1, dbname="sofadb", docid="goodbeer")
 #'
 #' # On arbitrary remote server
@@ -58,12 +61,13 @@
 #' # Write directly from a data.frame
 #' ## Each row or column becomes a separate document
 #' ### by rows
+#' db_create(dbname = "test")
 #' doc_create(mtcars, dbname="test", how="rows")
 #' doc_create(mtcars, dbname="test", how="columns")
 #'
 #' head(iris)
-#' db_create(dbname = "iris")
-#' doc_create(iris, dbname = "iris")
+#' db_create(dbname = "testiris")
+#' doc_create(iris, dbname = "testiris")
 #' }
 doc_create <- function(doc, cushion = "localhost", dbname, docid = NULL,
                        how = 'rows', as = 'list', ...) {
