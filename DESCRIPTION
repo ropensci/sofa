@@ -1,6 +1,12 @@
 Package: sofa
 Title: Easy R Connector to CouchDB
-Description: Easy R connector to CouchDB.
+Description: Provides an interface to the NoSQL database CouchDB
+    (http://couchdb.apache.org/).  Methods are provided for managing
+    databases within CouchDB, including creating/deleting/updating/transferring,
+    and managing documents within databases. In addition, we facilitate
+    connecting with remote CouchDB databases including Iriscouch
+    (http://www.iriscouch.com/). Documents can be inserted directly
+    from vectors, lists, data.frames, and JSON.
 Version: 0.1.8.9300
 Date: 2015-09-18
 Authors@R: "Scott Chamberlain <myrmecocystus@gmail.com> [aut, cre]"

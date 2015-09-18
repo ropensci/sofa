@@ -23,18 +23,7 @@ parse_df <- function(dat, how = "rows", tojson = TRUE, ...) {
 
   switch(how,
    rows = {
-     # apply(dat, 1, function(x){
-     #   if (tojson) {
-     #     jsonlite::toJSON(as.list(setNames(x, names(dat))), auto_unbox = TRUE, ...)
-     #   } else {
-     #     as.list(setNames(x, names(dat)))
-     #   }
-     # })
-
      if (tojson) {
-       # apply(dat, 1, function(x) {
-       #   jsonlite::toJSON(as.list(setNames(x, names(dat))), auto_unbox = TRUE, ...)
-       # })
        out <- list()
        for (i in seq_len(NROW(dat))) {
          out[[i]] <- jsonlite::toJSON(as.list(setNames(dat[i, ], names(dat))), auto_unbox = TRUE, ...)
