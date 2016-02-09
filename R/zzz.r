@@ -45,7 +45,7 @@ asl <- function(x){
 sofa_GET <- function(url, as = 'list', ...){
   as <- match.arg(as, c('list','json'))
   res <- GET(url, content_type_json(), ...)
-  tt <- content(res, "text")
+  tt <- content(res, "text", encoding = "UTF-8")
   if(as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
 }
 
@@ -53,7 +53,7 @@ sofa_DELETE <- function(url, as = 'list',...){
   as <- match.arg(as, c('list','json'))
   res <- DELETE(url, content_type_json(), ...)
   stop_for_status(res)
-  tt <- content(res, "text")
+  tt <- content(res, "text", encoding = "UTF-8")
   if(as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
 }
 
@@ -61,14 +61,14 @@ sofa_PUT <- function(url, as = 'list', ...){
   as <- match.arg(as, c('list','json'))
   res <- PUT(url, content_type_json(), ...)
   stop_for_status(res)
-  tt <- content(res, "text")
+  tt <- content(res, "text", encoding = "UTF-8")
   if(as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
 }
 
 sofa_POST <- function(url, as = 'list', ...){
   res <- POST(url, content_type_json(), ...)
   stop_status(res)
-  tt <- content(res, "text")
+  tt <- content(res, "text", encoding = "UTF-8")
   if(as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
 }
 
@@ -76,13 +76,16 @@ sofa_COPY <- function(url, as = 'list',...){
   as <- match.arg(as, c('list','json'))
   res <- VERB("COPY", url, content_type_json(), ...)
   stop_for_status(res)
-  tt <- content(res, "text")
+  tt <- content(res, "text", encoding = "UTF-8")
   if(as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
 }
 
 stop_status <- function(x) {
-  if(x$status_code > 202) {
-    stop(sprintf("(%s) - %s", x$status_code, content(x)$reason), call. = FALSE)
+  if (x$status_code > 202) {
+    stop(sprintf("(%s) - %s",
+                 x$status_code,
+                 jsonlite::fromJSON(content(x, "text", encoding = "UTF-8"), FALSE)$reason),
+         call. = FALSE)
   }
 }
 

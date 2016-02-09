@@ -91,6 +91,6 @@ sofa_bulk <- function(url, as, body, ...) {
 
 bulk_handle <- function(x, as) {
   stop_status(x)
-  tt <- content(x, "text")
+  tt <- content(x, "text", encoding = "UTF-8")
   if(as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
 }

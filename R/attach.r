@@ -22,7 +22,7 @@ attach_create <- function(cushion="localhost", dbname, docid, attachment, attnam
   call_ <- sprintf("http://127.0.0.1:%s/%s/%s/%s", cushion$port, dbname, docid, attname)
   out <- PUT(call_, query=list(rev=revget), body=attachment, content_type("text/csv"))
   stop_for_status(out)
-  fromJSON(content(out, "text"))
+  fromJSON(content(out, "text", encoding = "UTF-8"))
 }
 
 # PUT('http://localhost:5984/sofadb/guysbeer/mtcars.csv',
