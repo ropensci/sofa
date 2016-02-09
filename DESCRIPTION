@@ -7,8 +7,8 @@ Description: Provides an interface to the NoSQL database CouchDB
     connecting with remote CouchDB databases including Iriscouch
     (http://www.iriscouch.com/). Documents can be inserted directly
     from vectors, lists, data.frames, and JSON.
-Version: 0.1.8.9300
-Date: 2015-09-18
+Version: 0.1.8.9400
+Date: 2016-02-08
 Authors@R: "Scott Chamberlain <myrmecocystus@gmail.com> [aut, cre]"
 License: MIT + file LICENSE
 URL: https://github.com/ropensci/sofa
@@ -18,5 +18,4 @@ Imports:
     plyr,
     jsonlite
 Suggests:
-    testthat,
-    roxygen2
+    testthat

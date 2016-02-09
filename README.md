@@ -208,5 +208,6 @@ __Still working on these functions, check back later...__
 * Please [report any issues or bugs](https://github.com/ropensci/sofa/issues).
 * License: MIT
 * Get citation information for `sofa` in R doing `citation(package = 'sofa')`
+* Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
 
 [![ropensci_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
