@@ -19,3 +19,4 @@ Imports:
     jsonlite
 Suggests:
     testthat
+RoxygenNote: 5.0.1
