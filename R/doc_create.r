@@ -23,6 +23,7 @@
 #' \code{\link{bulk_create}} and \code{\link{bulk_update}} to create or update documents with
 #' the bulk API - which should be much faster for a large number of documents.
 #' @examples \dontrun{
+#' db_delete(dbname = "sofadb")
 #' db_create(dbname = "sofadb")
 #'
 #' # write a document WITH a name (uses PUT)
@@ -30,6 +31,10 @@
 #' doc_create(doc1, dbname="sofadb", docid="abeer")
 #' doc_create(doc1, dbname="sofadb", docid="morebeer", as='json')
 #' doc_get(dbname = "sofadb", docid = "abeer")
+#' ## with factor class values
+#' doc2 <- list(name = as.factor("drink"), beer = "stout", score = 4)
+#' doc_create(doc2, dbname="sofadb", docid="nextbeer", as='json')
+#' doc_get(dbname = "sofadb", docid = "nextbeer")
 #'
 #' # write a json document WITHOUT a name (uses POST)
 #' doc2 <- '{"name": "food", "icecream": "rocky road"}'

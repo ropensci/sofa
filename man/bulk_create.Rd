@@ -65,10 +65,12 @@ db_create(dbname="bulkfromchr")
 bulk_create(lst, dbname="bulkfromchr")
 
 # iris dataset - by rows
+db_delete(dbname="irisrows")
 db_create(dbname="irisrows")
 bulk_create(apply(iris, 1, as.list), dbname="irisrows")
 
 # iris dataset - by columns - doesn't quite work yet
+# db_delete(dbname="iriscolumns")
 # db_create(dbname="iriscolumns")
 # bulk_create(parse_df(iris, "columns", tojson=FALSE), dbname="iriscolumns")
 }

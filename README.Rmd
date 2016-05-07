@@ -21,17 +21,15 @@ knitr::opts_chunk$set(
 [![Build Status](https://travis-ci.org/ropensci/sofa.png?branch=master)](https://travis-ci.org/ropensci/sofa)
 [![codecov.io](https://codecov.io/github/ropensci/sofa/coverage.svg?branch=master)](https://codecov.io/github/ropensci/sofa?branch=master)
 
-#### *An easy interface to CouchDB from R*
+__An easy interface to CouchDB from R__
 
 Note: Check out [*R4couchdb*](https://github.com/wactbprot/R4CouchDB), another R package to interact with CouchDB.
 
-## Quickstart
-
-### Install CouchDB
+## Install CouchDB
 
 Instructions [here](http://wiki.apache.org/couchdb/Installation)
 
-### Connect to CouchDB
+## Connect to CouchDB
 
 In your terminal
 
@@ -41,7 +39,7 @@ couchdb
 
 You can interact with your CouchDB databases as well in your browser. Navigate to [http://localhost:5984/_utils](http://localhost:5984/_utils)
 
-### Install sofa
+## Install sofa
 
 ```{r eval=FALSE}
 devtools::install_github("ropensci/sofa")
@@ -51,7 +49,7 @@ devtools::install_github("ropensci/sofa")
 library('sofa')
 ```
 
-### Cushions
+## Cushions
 
 Cushions? What? Since it's couch we gotta use `cushions` somehow. `cushions` are basically just a simple named list holding details of connections for different couches you work with. See `?cushions` or `?authentication` for help.
 
@@ -73,7 +71,7 @@ Of course by default there is a built in `cushion` for localhost so you don't ha
 
 You can preserve cushions across sessions by storing them in a hidden file. See `?authentication` for details.
 
-### Ping the server
+## Ping the server
 
 ```{r}
 ping()
@@ -81,14 +79,14 @@ ping()
 
 Nice, it's working.
 
-### Create a new database, and list available databases
+## Create a new database, and list available databases
 
 ```{r echo=FALSE}
-if(is.null(db_info(dbname = "sofadb")$error)) db_delete(dbname='sofadb')
+if (is.null(db_info(dbname = "sofadb")$error)) db_delete(dbname = 'sofadb')
 ```
 
 ```{r}
-db_create(dbname='sofadb')
+db_create(dbname = 'sofadb')
 ```
 
 see if its there now
@@ -97,23 +95,23 @@ see if its there now
 db_list()
 ```
 
-### Create documents
+## Create documents
 
-#### Write a document WITH a name (uses PUT)
+### Write a document WITH a name (uses PUT)
 
 ```{r}
 doc1 <- '{"name":"sofa","beer":"IPA"}'
-doc_create(doc1, dbname="sofadb", docid="a_beer")
+doc_create(doc1, dbname = "sofadb", docid = "a_beer")
 ```
 
-#### Write a json document WITHOUT a name (uses POST)
+### Write a json document WITHOUT a name (uses POST)
 
 ```{r}
 doc2 <- '{"name":"sofa","icecream":"rocky road"}'
-doc_create(doc2, dbname="sofadb")
+doc_create(doc2, dbname = "sofadb")
 ```
 
-#### XML?
+### XML?
 
 Write an xml document WITH a name (uses PUT). The xml is written as xml in couchdb, just wrapped in json, when you get it out it will be as xml.
 
@@ -121,24 +119,24 @@ write the xml
 
 ```{r}
 doc3 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
-doc_create(doc3, dbname="sofadb", docid="somexml")
+doc_create(doc3, dbname = "sofadb", docid = "somexml")
 ```
 
 get the doc back out
 
 ```{r}
-doc_get(dbname="sofadb", docid="somexml")
+doc_get(dbname = "sofadb", docid = "somexml")
 ```
 
 get just the xml out
 
 ```{r}
-doc_get(dbname="sofadb", docid="somexml")[["xml"]]
+doc_get(dbname = "sofadb", docid = "somexml")[["xml"]]
 ```
 
-### Views
+## ToDo
 
-__Still working on these functions, check back later...__
+* Views
 
 ## Meta
 

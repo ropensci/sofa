@@ -1,5 +1,8 @@
 #' R client for CouchDB.
 #'
+#' @importFrom methods is
+#' @importFrom stats setNames
+#' @importFrom utils modifyList
 #' @name sofa-package
 #' @aliases sofa
 #' @docType package

@@ -47,6 +47,8 @@ that in the Futon CouchDB interface or otherwise.
 \examples{
 \dontrun{
 # Create a view
+db_create(dbname = "alm_couchdb")
+
 view_put(dbname='alm_couchdb', design_name='almview1')
 view_put(dbname='alm_couchdb', design_name='almview2', value="doc.baseurl")
 view_put(dbname='alm_couchdb', design_name='almview5', value="[doc.baseurl,doc.queryargs]")
@@ -55,10 +57,10 @@ view_put(dbname='alm_couchdb', design_name='almview5', value="[doc.baseurl,doc.q
 view_del(dbname='alm_couchdb', design_name='almview1')
 
 # Get info on a design document (i.e., a view)
-view_get(dbname='alm_couchdb', design_name='almview1')
+# view_get(dbname='alm_couchdb', design_name='almview1')
 
 # Search using a view
-view_search(dbname='alm_couchdb', design_name='almview1', query="XXX")
+# view_search(dbname='alm_couchdb', design_name='almview1', query="XXX")
 }
 }
 
