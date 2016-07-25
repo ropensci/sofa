@@ -4,7 +4,7 @@
 \alias{db_info}
 \title{List database info.}
 \usage{
-db_info(cushion = "localhost", dbname, as = "list", ...)
+db_info(cushion, dbname, as = "list", ...)
 }
 \arguments{
 \item{cushion}{A cushion name}

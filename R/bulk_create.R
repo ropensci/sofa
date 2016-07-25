@@ -55,32 +55,37 @@
 #' # db_create(dbname="iriscolumns")
 #' # bulk_create(parse_df(iris, "columns", tojson=FALSE), dbname="iriscolumns")
 #' }
-bulk_create <- function(doc, cushion = "localhost", dbname, docid = NULL,
+bulk_create <- function(cushion, dbname, docid = NULL, doc,
+                         how = 'rows', as = 'list', ...) {
+  bulk_create_(doc, cushion, dbname, docid, how, as, ...)
+}
+
+bulk_create_ <- function(doc, cushion, dbname, docid = NULL,
                        how = 'rows', as = 'list', ...) {
-  UseMethod("bulk_create")
+  UseMethod("bulk_create_")
 }
 
 #' @export
-bulk_create.character <- function(doc, cushion = "localhost", dbname, docid = NULL,
+bulk_create_.character <- function(doc, cushion, dbname, docid = NULL,
                                    how = 'rows', as = 'list', ...) {
-  url <- cush(cushion, dbname)
+  url <- sprintf("%s/%s", cushion$make_url(), dbname)
   body <- sprintf('{"docs": [%s]}', paste0(doc, collapse = ", "))
   sofa_bulk(file.path(url, "_bulk_docs"), as, body = body, ...)
 }
 
 #' @export
-bulk_create.list <- function(doc, cushion = "localhost", dbname, docid = NULL,
+bulk_create_.list <- function(doc, cushion, dbname, docid = NULL,
                                   how = 'rows', as = 'list', ...) {
-  url <- cush(cushion, dbname)
+  url <- sprintf("%s/%s", cushion$make_url(), dbname)
   body <- jsonlite::toJSON(list(docs = doc), auto_unbox = TRUE)
   sofa_bulk(file.path(url, "_bulk_docs"), as, body = body, ...)
 }
 
 #' @export
-bulk_create.data.frame <- function(doc, cushion = "localhost", dbname, docid = NULL,
+bulk_create_.data.frame <- function(doc, cushion, dbname, docid = NULL,
                                    how = 'rows', as = 'list', ...) {
   row.names(doc) <- NULL
-  url <- cush(cushion, dbname)
+  url <- sprintf("%s/%s", cushion$make_url(), dbname)
   each <- unname(parse_df(doc, how = how, tojson = FALSE))
   body <- jsonlite::toJSON(list(docs = each), auto_unbox = TRUE)
   sofa_bulk(file.path(url, "_bulk_docs"), as, body = body, ...)
@@ -94,5 +99,5 @@ sofa_bulk <- function(url, as, body, ...) {
 bulk_handle <- function(x, as) {
   stop_status(x)
   tt <- content(x, "text", encoding = "UTF-8")
-  if(as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
+  if (as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
 }

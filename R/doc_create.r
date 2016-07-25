@@ -74,15 +74,19 @@
 #' db_create(dbname = "testiris")
 #' doc_create(iris, dbname = "testiris")
 #' }
-doc_create <- function(doc, cushion = "localhost", dbname, docid = NULL,
+doc_create <- function(cushion, dbname, docid = NULL, doc,
                        how = 'rows', as = 'list', ...) {
-  UseMethod("doc_create")
+  doc_create_(doc, cushion, dbname, docid, how, as, ...)
 }
 
-#' @export
-doc_create.character <- function(doc, cushion = "localhost", dbname, docid = NULL,
+doc_create_ <- function(doc, cushion = "localhost", dbname, docid = NULL,
+                       how = 'rows', as = 'list', ...) {
+  UseMethod("doc_create_")
+}
+
+doc_create_.character <- function(doc, cushion = "localhost", dbname, docid = NULL,
                                  how = 'rows', as = 'list', ...) {
-  url <- cush(cushion, dbname)
+  url <- sprintf("%s/%s", cushion$make_url(), dbname)
   if (!is.null(docid)) {
     sofa_PUT(paste0(url, "/", docid), as, body = check_inputs(doc), ...)
   } else {
@@ -90,10 +94,9 @@ doc_create.character <- function(doc, cushion = "localhost", dbname, docid = NUL
   }
 }
 
-#' @export
-doc_create.list <- function(doc, cushion = "localhost", dbname, docid = NULL,
+doc_create_.list <- function(doc, cushion = "localhost", dbname, docid = NULL,
                                  how = 'rows', as = 'list', ...) {
-  url <- cush(cushion, dbname)
+  url <- sprintf("%s/%s", cushion$make_url(), dbname)
   if (!is.null(docid)) {
     sofa_PUT(paste0(url, "/", docid), as, body = check_inputs(doc), ...)
   } else {
@@ -101,23 +104,22 @@ doc_create.list <- function(doc, cushion = "localhost", dbname, docid = NULL,
   }
 }
 
-#' @export
-doc_create.data.frame <- function(doc, cushion = "localhost", dbname, docid = NULL,
+doc_create_.data.frame <- function(doc, cushion = "localhost", dbname, docid = NULL,
                             how = 'rows', as = 'list', ...) {
-  url <- cush(cushion, dbname)
+  url <- sprintf("%s/%s", cushion$make_url(), dbname)
   each <- parse_df(doc, how = how)
   lapply(each, function(x) sofa_POST(url, as, body = x, ...))
 }
 
-cush <- function(cushion, dbname) {
-  cushion <- get_cushion(cushion)
-  if (is.null(cushion$type)) {
-    paste0(pick_url(cushion), dbname)
-  } else {
-    if (cushion$type == "localhost") {
-      sprintf("http://127.0.0.1:%s/%s", cushion$port, dbname)
-    } else if (cushion$type %in% c("cloudant", 'iriscouch')) {
-      remote_url(cushion, dbname)
-    }
-  }
-}
+# cush <- function(cushion, dbname) {
+#   cushion <- get_cushion(cushion)
+#   if (is.null(cushion$type)) {
+#     paste0(pick_url(cushion), dbname)
+#   } else {
+#     if (cushion$type == "localhost") {
+#       sprintf("http://127.0.0.1:%s/%s", cushion$port, dbname)
+#     } else if (cushion$type %in% c("cloudant", 'iriscouch')) {
+#       remote_url(cushion, dbname)
+#     }
+#   }
+# }

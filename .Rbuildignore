@@ -5,3 +5,4 @@ Makefile
 README.Rmd
 ^\.travis\.yml$
 ^CONDUCT\.md$
+^notes\.md$

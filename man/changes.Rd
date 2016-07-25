@@ -4,7 +4,7 @@
 \alias{changes}
 \title{List changes to a database.}
 \usage{
-changes(cushion = "localhost", dbname, descending = NULL, startkey = NULL,
+changes(cushion, dbname, descending = NULL, startkey = NULL,
   endkey = NULL, since = NULL, limit = NULL, include_docs = NULL,
   feed = "normal", heartbeat = NULL, filter = NULL, as = "list", ...)
 }

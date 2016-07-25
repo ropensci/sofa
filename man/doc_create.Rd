@@ -4,19 +4,19 @@
 \alias{doc_create}
 \title{Create documents to a database.}
 \usage{
-doc_create(doc, cushion = "localhost", dbname, docid = NULL, how = "rows",
-  as = "list", ...)
+doc_create(cushion, dbname, docid = NULL, doc, how = "rows", as = "list",
+  ...)
 }
 \arguments{
-\item{doc}{Document content, can be character string, a list. The character type can be
-XML as well, which is embedded in json. When the document is retrieved via
-\code{\link{doc_get}}, the XML is given back and you can parse it as normal.}
-
 \item{cushion}{A cushion name}
 
 \item{dbname}{Database name3}
 
 \item{docid}{Document ID}
+
+\item{doc}{Document content, can be character string, a list. The character type can be
+XML as well, which is embedded in json. When the document is retrieved via
+\code{\link{doc_get}}, the XML is given back and you can parse it as normal.}
 
 \item{how}{(character) One of rows (default) or columns. If rows, each row becomes a
 separate document; if columns, each column becomes a separate document.}

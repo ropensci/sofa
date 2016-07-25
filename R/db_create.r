@@ -18,21 +18,11 @@
 #' db_create("iriscouch", "beard")
 #'
 #' ## arbitrary remote couchdb
-#' db_create("oceancouch", "beard")
+#' db_create("oceancouch", dbname = "beard")
 #' }
 
-db_create <- function(cushion="localhost", dbname, delifexists=FALSE, as='list', ...)
-{
-  if(delifexists) db_delete(cushion, dbname, ...)
-  cushion <- get_cushion(cushion)
-  if(is.null(cushion$type)){
-    url <- pick_url(cushion)
-    sofa_PUT(sprintf("%s%s", url, dbname), as, ...)
-  } else {
-    if(cushion$type=="localhost"){
-      sofa_PUT(sprintf("http://127.0.0.1:%s/%s", cushion$port, dbname), as, ...)
-    } else if(cushion$type %in% c("cloudant",'iriscouch')){
-      sofa_PUT(remote_url(cushion, dbname), as, ...)
-    }
-  }
+db_create <- function(cushion, dbname, delifexists=FALSE, as='list', ...) {
+  if (delifexists) db_delete(cushion, dbname, ...)
+  check_cushion(cushion)
+  sofa_PUT(file.path(cushion$make_url(), dbname), as, ...)
 }

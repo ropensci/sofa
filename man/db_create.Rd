@@ -4,8 +4,7 @@
 \alias{db_create}
 \title{Create a database.}
 \usage{
-db_create(cushion = "localhost", dbname, delifexists = FALSE, as = "list",
-  ...)
+db_create(cushion, dbname, delifexists = FALSE, as = "list", ...)
 }
 \arguments{
 \item{cushion}{A cushion name}
@@ -34,7 +33,7 @@ db_create("cloudant", "mustache")
 db_create("iriscouch", "beard")
 
 ## arbitrary remote couchdb
-db_create("oceancouch", "beard")
+db_create("oceancouch", dbname = "beard")
 }
 }
 

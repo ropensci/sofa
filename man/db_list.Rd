@@ -4,7 +4,7 @@
 \alias{db_list}
 \title{List all databases.}
 \usage{
-db_list(cushion = "localhost", simplify = TRUE, as = "list", ...)
+db_list(cushion, simplify = TRUE, as = "list", ...)
 }
 \arguments{
 \item{cushion}{A cushion name}

@@ -3,6 +3,7 @@
 #' @importFrom methods is
 #' @importFrom stats setNames
 #' @importFrom utils modifyList
+#' @import R6
 #' @name sofa-package
 #' @aliases sofa
 #' @docType package

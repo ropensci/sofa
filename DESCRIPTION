@@ -8,9 +8,10 @@ Description: Provides an interface to the NoSQL database CouchDB
     (<http://www.iriscouch.com>) and Cloudant (<https://cloudant.com>).
     Documents can be inserted directly from vectors, lists,
     data.frames, and JSON.
-Version: 0.1.8.9400
-Date: 2016-05-06
-Authors@R: "Scott Chamberlain <myrmecocystus@gmail.com> [aut, cre]"
+Version: 0.1.8.9900
+Date: 2016-07-25
+Authors@R: person("Scott", "Chamberlain", role = c("aut", "cre"),
+    email = "myrmecocystus@gmail.com")
 License: MIT + file LICENSE
 URL: https://github.com/ropensci/sofa
 BugReports: https://github.com/ropensci/sofa/issues
@@ -20,7 +21,8 @@ Imports:
     utils,
     httr,
     plyr,
-    jsonlite
+    jsonlite,
+    R6
 Suggests:
     testthat,
     covr

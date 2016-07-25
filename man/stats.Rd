@@ -4,8 +4,7 @@
 \alias{stats}
 \title{Get stats on your Couchdb instance}
 \usage{
-stats(cushion = "localhost", section = NULL, stat = NULL, as = "list",
-  ...)
+stats(cushion, section = NULL, stat = NULL, as = "list", ...)
 }
 \arguments{
 \item{cushion}{A cushion name}

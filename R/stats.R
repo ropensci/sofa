@@ -26,11 +26,12 @@
 #' stats(section="httpd_status_codes", stat=200)
 #' stats(section="httpd_status_codes", stat=400)
 #' }
-stats <- function(cushion = "localhost", section = NULL, stat = NULL, as = 'list', ...) {
-  cushion <- get_cushion(cushion)
-  url <- paste0(pick_url(cushion), "_stats")
-  if(!is.null(section) && !is.null(stat)) {
+stats <- function(cushion, section = NULL, stat = NULL, as = 'list', ...) {
+  #cushion <- get_cushion(cushion)
+  check_cushion(cushion)
+  url <- file.path(cushion$make_url(), "_stats")
+  if (!is.null(section) && !is.null(stat)) {
     url <- file.path(url, section, stat)
   }
-  sofa_GET(url, as=as, args=NULL, ...)
+  sofa_GET(url, as = as, args = NULL, ...)
 }

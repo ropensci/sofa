@@ -4,9 +4,8 @@
 \alias{alldocs}
 \title{List all docs in a given database.}
 \usage{
-alldocs(cushion = "localhost", dbname, asdf = TRUE, descending = NULL,
-  startkey = NULL, endkey = NULL, limit = NULL, include_docs = NULL,
-  as = "list", ...)
+alldocs(cushion, dbname, asdf = TRUE, descending = NULL, startkey = NULL,
+  endkey = NULL, limit = NULL, include_docs = NULL, as = "list", ...)
 }
 \arguments{
 \item{cushion}{A cushion name}

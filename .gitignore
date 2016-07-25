@@ -2,3 +2,4 @@
 .scott_auth.r
 .Rproj.user
 .Rhistory
+^notes\.md$

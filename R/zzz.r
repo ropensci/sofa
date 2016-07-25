@@ -104,15 +104,19 @@ stop_status <- function(x) {
 # }
 
 pick_url <- function(x){
-  if(is.null(x$type)){
-    if(is.null(x$port)) paste0(x$base, "/") else sprintf("%s:%s/", x$base, x$port)
+  if (is.null(x$type)) {
+    tmp <- if (is.null(x$port)) paste0(x$base, "/") else sprintf("%s:%s/", x$base, x$port)
   } else {
-    switch(x$type,
-           localhost = sprintf("http://127.0.0.1:%s/", x$port),
+    tmp <- switch(x$type,
+           localhost = sprintf("%s://127.0.0.1:%s/", x$transport, x$port),
            cloudant = cloudant_url(x),
            iriscouch = iris_url(x)
     )
   }
+  if (!is.null(x$path)) {
+    tmp <- sprintf("%s/%s", tmp, x$path)
+  }
+  tmp
 }
 
 check_inputs <- function(x){

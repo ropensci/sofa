@@ -4,12 +4,10 @@
 \alias{bulk_create}
 \title{Create documents via the bulk API}
 \usage{
-bulk_create(doc, cushion = "localhost", dbname, docid = NULL,
-  how = "rows", as = "list", ...)
+bulk_create(cushion, dbname, docid = NULL, doc, how = "rows", as = "list",
+  ...)
 }
 \arguments{
-\item{doc}{For now, a data.frame only}
-
 \item{cushion}{A cushion name}
 
 \item{dbname}{Database name3
@@ -18,6 +16,8 @@ bulk_create(doc, cushion = "localhost", dbname, docid = NULL,
 \item{docid}{Document IDs, ignored for now, eventually, you can pass in a list, or
 vector to be the ids for each document created. Has to be the same length as the
 number of documents.}
+
+\item{doc}{For now, a data.frame only}
 
 \item{how}{(character) One of rows (default) or columns. If rows, each row becomes a
 separate document; if columns, each column becomes a separate document.}
