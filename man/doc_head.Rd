@@ -7,7 +7,7 @@
 doc_head(cushion = "localhost", dbname, docid, as = "list", ...)
 }
 \arguments{
-\item{cushion}{A cushion name}
+\item{cushion}{A \code{Cushion} object. Required.}
 
 \item{dbname}{Database name. (charcter)}
 

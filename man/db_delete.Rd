@@ -4,7 +4,7 @@
 \alias{db_delete}
 \title{Delete a database.}
 \usage{
-db_delete(cushion = "localhost", dbname, as = "list", ...)
+db_delete(cushion, dbname, as = "list", ...)
 }
 \arguments{
 \item{cushion}{A cushion name}
@@ -20,23 +20,17 @@ Delete a database.
 }
 \examples{
 \dontrun{
+(x <- Cushion$new())
+
 # local databasees
 ## create database first, then delete
-db_create(dbname='newdb')
-db_delete(dbname='newdb')
-
-# cloudant
-db_create("cloudant", "stuffthings")
-listdbs("cloudant")
-db_delete("cloudant", "stuffthings")
+db_create(x, dbname='newdb')
+db_delete(x, dbname='newdb')
 
 ## with curl info while doing request
 library('httr')
-db_create('newdb')
-db_delete('newdb', config=verbose())
-
-## arbitrary remote couchdb
-db_delete("oceancouch", "beard")
+db_create(x, 'newdb')
+db_delete(x, 'newdb', config = httr::verbose())
 }
 }
 

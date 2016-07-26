@@ -8,7 +8,7 @@ alldocs(cushion, dbname, asdf = TRUE, descending = NULL, startkey = NULL,
   endkey = NULL, limit = NULL, include_docs = NULL, as = "list", ...)
 }
 \arguments{
-\item{cushion}{A cushion name}
+\item{cushion}{A \code{Cushion} object. Required.}
 
 \item{dbname}{Database name. (charcter)}
 
@@ -33,25 +33,14 @@ List all docs in a given database.
 }
 \examples{
 \dontrun{
-alldocs(dbname="sofadb")
-alldocs(dbname="sofadb", as='json')
-alldocs(dbname="mydb", limit=2)
-alldocs(dbname="mydb", limit=2, include_docs="true")
+(x <- Cushion$new())
+
+alldocs(x, dbname="sofadb")
+alldocs(x, dbname="sofadb", as='json')
+alldocs(x, dbname="mydb", limit=2)
+alldocs(x, dbname="mydb", limit=2, include_docs="true")
 library('httr')
-alldocs(dbname="sofadb", config=verbose())
-
-# different login credentials than normal, just pass in to function call
-## you obviously need to fill in some details here, this won't work as is
-alldocs("cloudant", dbname='dbname')
-
-# this works for the package author, but not for you
-alldocs(cushion="cloudant", dbname='gaugesdb_ro')
-
-# irishcouch
-alldocs(cushion="iriscouch", dbname='helloworld')
-
-# any remote couch, this is just a couchc on a DigitalOcean droplet
-alldocs(cushion="oceancouch", dbname='mapuris')
+alldocs(x, dbname="sofadb", config=verbose())
 }
 }
 

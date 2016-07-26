@@ -26,18 +26,22 @@
 #' }
 
 db_replicate <- function(from='localhost', to="cloudant", dbname, createdb=FALSE, as='list', ...){
-  cushion <- get_cushion(to)
-  if(createdb) db_create(cushion, dbname)
-  fromcushion <- get_cushion(from)
-  if(fromcushion$type=="localhost")
+  check_cushion(to)
+  cushion <- to
+  if (createdb) db_create(cushion, dbname)
+  fromcushion <- check_cushion(from)
+  if (fromcushion$type == "localhost") {
     url <- sprintf('http://localhost:%s/_replicate', fromcushion$port)
-  else
+  } else {
     url <- remote_url(fromcushion, endpt = '_replicate')
+  }
 
-  if(cushion$type %in% c("cloudant",'iriscouch')){
+  if (cushion$type %in% c("cloudant",'iriscouch')) {
     message(sprintf("Uploading to %s...", to))
     args <- list(source = unbox(dbname),
                  target = unbox(cloudant_url(cushion, dbname)))
     sofa_POST(url, as, content_type_json(), body=args, encode="json", ...)
-  } else stop(paste0(cushion$type, " is not supported yet"))
+  } else {
+    stop(paste0(cushion$type, " is not supported yet"))
+  }
 }

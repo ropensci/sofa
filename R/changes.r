@@ -18,24 +18,12 @@
 #'    _changes. For example, using feed=longpoll or continuous doesn't make much sense
 #'    within R itself.
 #' @examples \dontrun{
-#' changes(dbname="sofadb")
-#' changes(dbname="sofadb", as='json')
-#' changes(dbname="sofadb", limit=2)
+#' (x <- Cushion$new())
 #'
-#' # different login credentials than normal, just pass in to function call
-#' changes("cloudant", dbname='gaugesdb_ro')
-#' changes("cloudant", dbname='gaugesdb_ro', as='json')
-#' changes("cloudant", dbname='gaugesdb_ro', include_docs='true')
-#'
-#' # irishcouch
-#' changes(cushion="iriscouch", dbname='helloworld')
-#' changes(cushion="iriscouch", dbname='helloworld', include_docs='true')
-#'
-#' # arbitrary couch on remote server
-#' changes("oceancouch", dbname="mapuris", as='json')
-#' changes("oceancouch", dbname="mapuris", include_docs='true', limit=10)
+#' changes(x, dbname="sofadb")
+#' changes(x, dbname="sofadb", as='json')
+#' changes(x, dbname="sofadb", limit=2)
 #' }
-
 changes <- function(cushion, dbname, descending=NULL, startkey=NULL, endkey=NULL,
   since=NULL, limit=NULL, include_docs=NULL, feed="normal", heartbeat=NULL,
   filter=NULL, as='list', ...) {
@@ -46,5 +34,5 @@ changes <- function(cushion, dbname, descending=NULL, startkey=NULL, endkey=NULL
                   heartbeat=heartbeat,filter=filter))
 
   call_ <- sprintf("%s/%s/_changes", cushion$make_url(), dbname)
-  sofa_GET(call_, as, query = args, ...)
+  sofa_GET(call_, as, query = args, cushion$get_headers(), ...)
 }

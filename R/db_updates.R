@@ -19,13 +19,14 @@
 #' }
 #'
 #' @examples \dontrun{
-#' db_updates()
+#' (x <- Cushion$new())
+#' db_updates(x)
 #' db_updates(feed="continuous")
 #' db_updates(feed="eventsource")
 #' }
-db_updates <- function(cushion = "localhost", feed = 'longpoll', timeout = 60, heartbeat = TRUE,
+db_updates <- function(cushion, feed = 'longpoll', timeout = 60, heartbeat = TRUE,
                        as = 'list', ...) {
-  cushion <- get_cushion(cushion)
+  check_cushion(cushion)
   args <- sc(list(feed = feed, timeout = timeout, heartbeat = tolower(heartbeat)))
-  sofa_GET(paste0(pick_url(cushion), "_db_updates"), as=as, args=args)
+  sofa_GET(paste0(cushion$make_url(), "_db_updates"), as=as, args=args, cushion$get_headers(), ...)
 }

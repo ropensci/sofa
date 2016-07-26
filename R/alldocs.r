@@ -4,7 +4,7 @@
 #' @import plyr
 #' @importFrom jsonlite fromJSON toJSON unbox
 #' @inheritParams ping
-#' @param cushion A cushion name
+#' @param cushion A \code{Cushion} object. Required.
 #' @param dbname Database name. (charcter)
 #' @param asdf Return as data.frame? defaults to TRUE (logical)
 #' @param descending Return in descending order? (logical)
@@ -14,25 +14,14 @@
 #' @param include_docs If TRUE, returns docs themselves, in addition to IDs (logical)
 #' @param ... Curl args passed on to \code{\link[httr]{GET}}
 #' @examples \dontrun{
-#' alldocs(dbname="sofadb")
-#' alldocs(dbname="sofadb", as='json')
-#' alldocs(dbname="mydb", limit=2)
-#' alldocs(dbname="mydb", limit=2, include_docs="true")
+#' (x <- Cushion$new())
+#'
+#' alldocs(x, dbname="sofadb")
+#' alldocs(x, dbname="sofadb", as='json')
+#' alldocs(x, dbname="mydb", limit=2)
+#' alldocs(x, dbname="mydb", limit=2, include_docs="true")
 #' library('httr')
-#' alldocs(dbname="sofadb", config=verbose())
-#'
-#' # different login credentials than normal, just pass in to function call
-#' ## you obviously need to fill in some details here, this won't work as is
-#' alldocs("cloudant", dbname='dbname')
-#'
-#' # this works for the package author, but not for you
-#' alldocs(cushion="cloudant", dbname='gaugesdb_ro')
-#'
-#' # irishcouch
-#' alldocs(cushion="iriscouch", dbname='helloworld')
-#'
-#' # any remote couch, this is just a couchc on a DigitalOcean droplet
-#' alldocs(cushion="oceancouch", dbname='mapuris')
+#' alldocs(x, dbname="sofadb", config=verbose())
 #' }
 
 alldocs <- function(cushion, dbname, asdf = TRUE,
@@ -43,7 +32,7 @@ alldocs <- function(cushion, dbname, asdf = TRUE,
                        limit=limit,include_docs=include_docs))
 
   call_ <- sprintf("%s/%s/_all_docs", cushion$make_url(), dbname)
-  temp <- sofa_GET(call_, as, query = args, ...)
+  temp <- sofa_GET(call_, as, query = args, cushion$get_headers(), ...)
 
   if (as == 'json') {
     temp

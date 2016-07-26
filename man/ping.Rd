@@ -7,7 +7,7 @@
 ping(cushion = "localhost", as = "list", ...)
 }
 \arguments{
-\item{cushion}{A cushion name}
+\item{cushion}{A \code{Cushion} object. Required.}
 
 \item{as}{(character) One of list (default) or json}
 

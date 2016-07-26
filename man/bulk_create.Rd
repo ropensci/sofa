@@ -8,7 +8,7 @@ bulk_create(cushion, dbname, docid = NULL, doc, how = "rows", as = "list",
   ...)
 }
 \arguments{
-\item{cushion}{A cushion name}
+\item{cushion}{A \code{Cushion} object. Required.}
 
 \item{dbname}{Database name3
 \code{\link{doc_get}}, the XML is given back and you can parse it as normal.}
@@ -34,45 +34,47 @@ Note that row.names are dropped from data.frame inputs.
 }
 \examples{
 \dontrun{
-# From a data.frame
-db_delete(dbname="bulktest")
-db_create(dbname="bulktest")
-bulk_create(mtcars, dbname="bulktest")
+(x <- Cushion$new())
 
-db_delete(dbname="bulktest2")
-db_create(dbname="bulktest2")
-bulk_create(iris, dbname="bulktest2")
+# From a data.frame
+db_delete(x, dbname="bulktest")
+db_create(x, dbname="bulktest")
+bulk_create(x, mtcars, dbname="bulktest")
+
+db_delete(x, dbname="bulktest2")
+db_create(x, dbname="bulktest2")
+bulk_create(x, iris, dbname="bulktest2")
 
 # data.frame with 1 or more columns as neseted lists
 mtcars$stuff <- list("hello_world")
 mtcars$stuff2 <- list("hello_world","things")
-db_delete(dbname="bulktest3")
-db_create(dbname="bulktest3")
-bulk_create(mtcars, dbname="bulktest3")
+db_delete(x, dbname="bulktest3")
+db_create(x, dbname="bulktest3")
+bulk_create(x, mtcars, dbname="bulktest3")
 
 # From a json character string, or more likely, many json character strings
 library("jsonlite")
 strs <- as.character(parse_df(mtcars, "columns"))
-db_delete(dbname="bulkfromchr")
-db_create(dbname="bulkfromchr")
-bulk_create(strs, dbname="bulkfromchr")
+db_delete(x, dbname="bulkfromchr")
+db_create(x, dbname="bulkfromchr")
+bulk_create(x, strs, dbname="bulkfromchr")
 
 # From a list of lists
 library("jsonlite")
 lst <- parse_df(mtcars, tojson=FALSE)
-db_delete(dbname="bulkfromchr")
-db_create(dbname="bulkfromchr")
-bulk_create(lst, dbname="bulkfromchr")
+db_delete(x, dbname="bulkfromchr")
+db_create(x, dbname="bulkfromchr")
+bulk_create(x, lst, dbname="bulkfromchr")
 
 # iris dataset - by rows
-db_delete(dbname="irisrows")
-db_create(dbname="irisrows")
-bulk_create(apply(iris, 1, as.list), dbname="irisrows")
+db_delete(x, dbname="irisrows")
+db_create(x, dbname="irisrows")
+bulk_create(x, apply(iris, 1, as.list), dbname="irisrows")
 
 # iris dataset - by columns - doesn't quite work yet
-# db_delete(dbname="iriscolumns")
-# db_create(dbname="iriscolumns")
-# bulk_create(parse_df(iris, "columns", tojson=FALSE), dbname="iriscolumns")
+# db_delete(x, dbname="iriscolumns")
+# db_create(x, dbname="iriscolumns")
+# bulk_create(x, parse_df(iris, "columns", tojson=FALSE), dbname="iriscolumns")
 }
 }
 

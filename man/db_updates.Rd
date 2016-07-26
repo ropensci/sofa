@@ -4,11 +4,11 @@
 \alias{db_updates}
 \title{Get information on database updates}
 \usage{
-db_updates(cushion = "localhost", feed = "longpoll", timeout = 60,
-  heartbeat = TRUE, as = "list", ...)
+db_updates(cushion, feed = "longpoll", timeout = 60, heartbeat = TRUE,
+  as = "list", ...)
 }
 \arguments{
-\item{cushion}{A cushion name}
+\item{cushion}{A \code{Cushion} object. Required.}
 
 \item{feed}{(character) One of longpoll (default), continuous, or eventsource. See Details.}
 
@@ -38,7 +38,8 @@ Options for the \code{feed} parmeter:
 }
 \examples{
 \dontrun{
-db_updates()
+(x <- Cushion$new())
+db_updates(x)
 db_updates(feed="continuous")
 db_updates(feed="eventsource")
 }

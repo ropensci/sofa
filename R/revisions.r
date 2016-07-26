@@ -2,34 +2,31 @@
 #'
 #' @export
 #' @inheritParams ping
-#' @param cushion A cushion name
+#' @param cushion A \code{Cushion} object. Required.
 #' @param dbname Database name
 #' @param docid Document ID
 #' @param simplify (logical) Simplify to character vector of revision ids. If FALSE, gives back
 #' availabilit info too.
 #' @examples \dontrun{
-#' revisions(dbname="sofadb", docid="a_beer")
-#' revisions(dbname="sofadb", docid="a_beer", simplify=FALSE)
-#' revisions(dbname="sofadb", docid="a_beer", as='json')
-#' revisions(dbname="sofadb", docid="a_beer", simplify=FALSE, as='json')
+#' (x <- Cushion$new())
 #'
-#' revisions("oceancouch", dbname="mapuris", docid="10.12688%2Ff1000research.3817.1", as='json')
+#' if ("error" %in% names(db_info(x, "sofadb"))) {
+#'  db_create(x, dbname = "sofadb")
 #' }
-
-revisions <- function(cushion="localhost", dbname, docid, simplify=TRUE, as='list', ...)
-{
-  cushion <- get_cushion(cushion)
-  if(is.null(cushion$type)){
-    url <- pick_url(cushion)
-    call_ <- sprintf("%s%s/%s", url, dbname, docid)
-    tmp <- sofa_GET(call_, as="list", query=list(revs_info='true'), ...)
-  } else {
-    if(cushion$type=="localhost"){
-      tmp <- sofa_GET(sprintf("http://127.0.0.1:%s/%s/%s", cushion$port, dbname, docid), as='list', query=list(revs_info='true'), ...)
-    } else if(cushion$type %in% c("cloudant",'iriscouch')){
-      tmp <- sofa_GET(file.path(remote_url(cushion, dbname), docid), as='list', query=list(revs_info='true'), content_type_json(), ...)
-    }
-  }
-  revs <- if(simplify) vapply(tmp$`_revs_info`, "[[", "", "rev") else tmp$`_revs_info`
-  if(as=='json') jsonlite::toJSON(revs) else revs
+#'
+#' doc1 <- '{"name": "drink", "beer": "IPA", "score": 5}'
+#' doc_create(x, dbname="sofadb", doc1, docid="abeer")
+#' doc_create(x, dbname="sofadb", doc1, docid="morebeer", as='json')
+#'
+#' revisions(x, dbname="sofadb", docid="abeer")
+#' revisions(x, dbname="sofadb", docid="abeer", simplify=FALSE)
+#' revisions(x, dbname="sofadb", docid="abeer", as='json')
+#' revisions(x, dbname="sofadb", docid="abeer", simplify=FALSE, as='json')
+#' }
+revisions <- function(cushion, dbname, docid, simplify=TRUE, as='list', ...) {
+  check_cushion(cushion)
+  call_ <- sprintf("%s/%s/%s", cushion$make_url(), dbname, docid)
+  tmp <- sofa_GET(call_, as = "list", query = list(revs_info = 'true'), cushion$get_headers(), ...)
+  revs <- if (simplify) vapply(tmp$`_revs_info`, "[[", "", "rev") else tmp$`_revs_info`
+  if (as == 'json') jsonlite::toJSON(revs) else revs
 }

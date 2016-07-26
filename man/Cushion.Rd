@@ -5,24 +5,30 @@
 \alias{Cushion}
 \title{sofa connection client}
 \arguments{
-\item{name}{(character) Name for the cushion. This is what you'll call in sofa functions to get these
-details.}
+\item{host}{(character) A base URL (without the transport), e.g., \code{localhost},
+\code{127.0.0.1}, or \code{foobar.cloudant.com}}
 
-\item{host}{(character) A base URL, not needed if \code{type=localhost|cloudant|iriscouch}. Though
-you can pass a base URL in here to override anything done internally.}
+\item{port}{(numeric) Port. Remember that if you don't want a port set, set this
+parameter to \code{NULL}. Default: \code{5984}}
 
-\item{port}{(numeric) Port. Only applies when type is localhost. Default: 5984}
+\item{path}{(character) context path that is appended to the end of the url. e.g.,
+\code{bar} in \code{http://foo.com/bar}. Default: NULL, ignored}
 
-\item{path}{(character) context path that is appended to the end of the url.
-Default: NULL, ignored}
+\item{transport}{(character) http or https. Default: http}
 
 \item{user}{(character) A user name}
 
 \item{pwd}{(character) A password}
 
-\item{type}{(character) One of localhost, cloudant, iriscouch, or \code{NULL}. This is what's
-used to determine how to structure the URL to make the request. If left to the
-default of \code{NULL}, you must pass in a base URL.}
+\item{headers}{Either an object of class \code{request} or a list that can be coerced
+to an object of class \code{request} via \code{\link[httr]{add_headers}}. These headers
+are used in all requests. To use headers in individual requests and not others, pass
+in headers using \code{\link[httr]{add_headers}} via \code{...} in a function call.}
+}
+\value{
+An object of class \code{Cushion}, with variables accessible for
+host, port, path, transport, user, pwd, and headers. Functions are callable
+to get headers, and to make the base url sent with all requests.
 }
 \description{
 sofa connection client
@@ -36,17 +42,19 @@ sofa connection client
     \item{\code{make_url()}}{
       Construct full base URL from the pieces in the connection object
     }
+    \item{\code{get_headers()}}{
+      Get headers that will be sent with each request
+    }
   }
 }
 \examples{
 \dontrun{
 # Create a CouchDB connection client
-(x <- Cushion$new(name = "foobar"))
+(x <- Cushion$new())
 
 ## metadata
 x$host
 x$path
-x$name
 x$port
 x$type
 
@@ -54,19 +62,7 @@ x$type
 x$ping()
 
 ## CouchDB server statistics
-stats(x)
-
-## database info
-db_info(x, "bulktest")
-
-## list dbs
-db_list(x)
-
-## all docs
-alldocs(x, "bulktest", limit = 3)
-
-## changes
-changes(x, "bulktest")
+# stats(x)
 
 # create database
 db_create(x, "stuff")
@@ -81,16 +77,27 @@ db_create(x, "mymtcars")
 bulk_create(x, dbname="mymtcars", doc = mtcars)
 db_list(x)
 
-# Using Cloudant
-# (z <- Cushion$new('foobar', type="cloudant",
-#   user = 'ropensci', pwd = 'agXX9ypzYDD3FqcLKvWGQiFZx'))
-# z$db_info()
-# z$alldocs(limit = 2)
+## database info
+db_info(x, "bulktest")
 
-## create a cloudant db
-# (z <- Cushion$new('stuff', type="cloudant",
-#     user = 'ropensci', pwd = 'agXX9ypzYDD3FqcLKvWGQiFZx'))
-# z$db_create()
+## list dbs
+db_list(x)
+
+## all docs
+alldocs(x, "bulktest", limit = 3)
+
+## changes
+changes(x, "bulktest")
+
+
+# Using Cloudant
+z <- Cushion$new(host = "ropensci.cloudant.com", transport = 'https', port = NULL,
+   user = 'ropensci', pwd = Sys.getenv('CLOUDANT_PWD'))
+z
+db_list(z)
+db_create(z, "stuff2")
+db_info(z, "stuff2")
+alldocs(z, "foobar")
 }
 }
 \keyword{datasets}

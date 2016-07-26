@@ -1,18 +1,20 @@
 #' sofa connection client
 #'
 #' @export
-#' @param name (character) Name for the cushion. This is what you'll call in sofa functions to get these
-#' details.
-#' @param host (character) A base URL, not needed if \code{type=localhost|cloudant|iriscouch}. Though
-#' you can pass a base URL in here to override anything done internally.
-#' @param port (numeric) Port. Only applies when type is localhost. Default: 5984
-#' @param path (character) context path that is appended to the end of the url.
-#' Default: NULL, ignored
+#' @param host (character) A base URL (without the transport), e.g., \code{localhost},
+#' \code{127.0.0.1}, or \code{foobar.cloudant.com}
+#' @param port (numeric) Port. Remember that if you don't want a port set, set this
+#' parameter to \code{NULL}. Default: \code{5984}
+#' @param path (character) context path that is appended to the end of the url. e.g.,
+#' \code{bar} in \code{http://foo.com/bar}. Default: NULL, ignored
+#' @param transport (character) http or https. Default: http
 #' @param user (character) A user name
 #' @param pwd (character) A password
-#' @param type (character) One of localhost, cloudant, iriscouch, or \code{NULL}. This is what's
-#' used to determine how to structure the URL to make the request. If left to the
-#' default of \code{NULL}, you must pass in a base URL.
+#' @param headers Either an object of class \code{request} or a list that can be coerced
+#' to an object of class \code{request} via \code{\link[httr]{add_headers}}. These headers
+#' are used in all requests. To use headers in individual requests and not others, pass
+#' in headers using \code{\link[httr]{add_headers}} via \code{...} in a function call.
+#'
 #' @details
 #' \strong{Methods}
 #'   \describe{
@@ -22,17 +24,25 @@
 #'     \item{\code{make_url()}}{
 #'       Construct full base URL from the pieces in the connection object
 #'     }
+#'     \item{\code{get_headers()}}{
+#'       Get headers that will be sent with each request
+#'     }
 #'   }
+#'
 #' @format NULL
 #' @usage NULL
+#'
+#' @return An object of class \code{Cushion}, with variables accessible for
+#' host, port, path, transport, user, pwd, and headers. Functions are callable
+#' to get headers, and to make the base url sent with all requests.
+#'
 #' @examples \dontrun{
 #' # Create a CouchDB connection client
-#' (x <- Cushion$new(name = "foobar"))
+#' (x <- Cushion$new())
 #'
 #' ## metadata
 #' x$host
 #' x$path
-#' x$name
 #' x$port
 #' x$type
 #'
@@ -40,19 +50,7 @@
 #' x$ping()
 #'
 #' ## CouchDB server statistics
-#' stats(x)
-#'
-#' ## database info
-#' db_info(x, "bulktest")
-#'
-#' ## list dbs
-#' db_list(x)
-#'
-#' ## all docs
-#' alldocs(x, "bulktest", limit = 3)
-#'
-#' ## changes
-#' changes(x, "bulktest")
+#' # stats(x)
 #'
 #' # create database
 #' db_create(x, "stuff")
@@ -67,51 +65,54 @@
 #' bulk_create(x, dbname="mymtcars", doc = mtcars)
 #' db_list(x)
 #'
-#' # Using Cloudant
-#' # (z <- Cushion$new('foobar', type="cloudant",
-#' #   user = 'ropensci', pwd = 'agXX9ypzYDD3FqcLKvWGQiFZx'))
-#' # z$db_info()
-#' # z$alldocs(limit = 2)
+#' ## database info
+#' db_info(x, "bulktest")
 #'
-#' ## create a cloudant db
-#' # (z <- Cushion$new('stuff', type="cloudant",
-#' #     user = 'ropensci', pwd = 'agXX9ypzYDD3FqcLKvWGQiFZx'))
-#' # z$db_create()
+#' ## list dbs
+#' db_list(x)
+#'
+#' ## all docs
+#' alldocs(x, "bulktest", limit = 3)
+#'
+#' ## changes
+#' changes(x, "bulktest")
+#'
+#'
+#' # Using Cloudant
+#' z <- Cushion$new(host = "ropensci.cloudant.com", transport = 'https', port = NULL,
+#'    user = 'ropensci', pwd = Sys.getenv('CLOUDANT_PWD'))
+#' z
+#' db_list(z)
+#' db_create(z, "stuff2")
+#' db_info(z, "stuff2")
+#' alldocs(z, "foobar")
 #' }
 Cushion <- R6::R6Class(
   "Cushion",
   public = list(
-    name = NULL,
-    host = NULL,
+    host = '127.0.0.1',
     port = 5984,
     path = NULL,
     transport = 'http',
     user = NULL,
     pwd = NULL,
-    type = 'localhost',
+    headers = NULL,
 
-    initialize = function(name, host = '127.0.0.1', port = 5984, path, transport = 'http',
-                          user, pwd, type = 'localhost') {
-
-      if (!missing(name)) self$name <- name
-      if (!missing(host)) {
-        self$host <- host
-      } else {
-        self$host <-
-          switch(type,
-                 localhost = '127.0.0.1',
-                 cloudant = 'cloudant.com',
-                 iriscouch = 'iriscouch.com')
-      }
+    initialize = function(host, port, path, transport, user, pwd, headers) {
+      if (!missing(host)) self$host <- host
       if (!missing(port)) self$port <- port
       if (!missing(path)) self$path <- path
+      if (!missing(transport)) self$transport <- transport
       if (!missing(user)) self$user <- user
       if (!missing(pwd)) self$pwd <- pwd
-      if (!missing(type)) self$type <- type
+      if (!missing(user) && !missing(pwd)) {
+        private$auth_headers <- httr::authenticate(user = user, password = pwd)
+      }
+      if (!missing(headers)) self$headers <- headers
     },
 
     print = function() {
-      cat(paste0("<sofa - cushion> ", self$name), sep = "\n")
+      cat("<sofa - cushion> ", sep = "\n")
       cat(paste0("  transport: ", self$transport), sep = "\n")
       cat(paste0("  host: ", self$host), sep = "\n")
       cat(paste0("  port: ", self$port), sep = "\n")
@@ -123,7 +124,7 @@ Cushion <- R6::R6Class(
     },
 
     ping = function(...) {
-      sofa_GET(private$make_url(), ...)
+      sofa_GET(self$make_url(), ...)
     },
 
     make_url = function() {
@@ -135,7 +136,15 @@ Cushion <- R6::R6Class(
         tmp <- sprintf("%s/%s", tmp, self$path)
       }
       tmp
+    },
+
+    get_headers = function() {
+      c(private$auth_headers, self$headers)
     }
+  ),
+
+  private = list(
+    auth_headers = NULL
   )
 )
 

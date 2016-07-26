@@ -4,11 +4,10 @@
 \alias{revisions}
 \title{Get document revisions.}
 \usage{
-revisions(cushion = "localhost", dbname, docid, simplify = TRUE,
-  as = "list", ...)
+revisions(cushion, dbname, docid, simplify = TRUE, as = "list", ...)
 }
 \arguments{
-\item{cushion}{A cushion name}
+\item{cushion}{A \code{Cushion} object. Required.}
 
 \item{dbname}{Database name}
 
@@ -26,12 +25,20 @@ Get document revisions.
 }
 \examples{
 \dontrun{
-revisions(dbname="sofadb", docid="a_beer")
-revisions(dbname="sofadb", docid="a_beer", simplify=FALSE)
-revisions(dbname="sofadb", docid="a_beer", as='json')
-revisions(dbname="sofadb", docid="a_beer", simplify=FALSE, as='json')
+(x <- Cushion$new())
 
-revisions("oceancouch", dbname="mapuris", docid="10.12688\%2Ff1000research.3817.1", as='json')
+if ("error" \%in\% names(db_info(x, "sofadb"))) {
+ db_create(x, dbname = "sofadb")
+}
+
+doc1 <- '{"name": "drink", "beer": "IPA", "score": 5}'
+doc_create(x, dbname="sofadb", doc1, docid="abeer")
+doc_create(x, dbname="sofadb", doc1, docid="morebeer", as='json')
+
+revisions(x, dbname="sofadb", docid="abeer")
+revisions(x, dbname="sofadb", docid="abeer", simplify=FALSE)
+revisions(x, dbname="sofadb", docid="abeer", as='json')
+revisions(x, dbname="sofadb", docid="abeer", simplify=FALSE, as='json')
 }
 }
 

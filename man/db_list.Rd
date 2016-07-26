@@ -7,7 +7,7 @@
 db_list(cushion, simplify = TRUE, as = "list", ...)
 }
 \arguments{
-\item{cushion}{A cushion name}
+\item{cushion}{A \code{Cushion} object. Required.}
 
 \item{simplify}{(logical) Simplify to character vector, ignored if \code{as="json"}}
 
@@ -21,11 +21,12 @@ List all databases.
 \examples{
 \dontrun{
 # local databasees
-db_list()
-db_list(as='json')
-db_list("cloudant")
-db_list("iriscouch")
-db_list("oceancouch")
+(x <- Cushion$new())
+db_list(x)
+db_list(x, as = 'json')
+db_list(x, "cloudant")
+db_list(x, "iriscouch")
+db_list(x, "oceancouch")
 }
 }
 

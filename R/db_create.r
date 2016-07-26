@@ -8,21 +8,15 @@
 #' @param as (character) One of list (default) or json
 #' @param ... Curl args passed on to \code{\link[httr]{GET}}
 #' @examples \dontrun{
-#' db_create(dbname='leothelion')
-#' db_list() # see if its there now
+#' (x <- Cushion$new())
 #'
-#' ## or setting username and password in cushion() call
-#' db_create("cloudant", "mustache")
+#' db_create(x, dbname='leothelion')
 #'
-#' ## iriscouch
-#' db_create("iriscouch", "beard")
-#'
-#' ## arbitrary remote couchdb
-#' db_create("oceancouch", dbname = "beard")
+#' ## see if its there now
+#' db_list(x)
 #' }
-
 db_create <- function(cushion, dbname, delifexists=FALSE, as='list', ...) {
   if (delifexists) db_delete(cushion, dbname, ...)
   check_cushion(cushion)
-  sofa_PUT(file.path(cushion$make_url(), dbname), as, ...)
+  sofa_PUT(file.path(cushion$make_url(), dbname), as, cushion$get_headers(), ...)
 }

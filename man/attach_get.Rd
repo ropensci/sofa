@@ -8,7 +8,7 @@ attach_get(cushion = "localhost", dbname, docid, attname = NULL,
   as = "list", ...)
 }
 \arguments{
-\item{cushion}{A cushion name}
+\item{cushion}{A \code{Cushion} object. Required.}
 
 \item{dbname}{Database name. (charcter)}
 

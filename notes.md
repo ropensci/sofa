@@ -29,3 +29,6 @@ curl -v -XPOST -H 'Content-Type: application/json' 'http://localhost:5984/farts/
   ]
 }'
 ```
+
+
+curl -v -XGET -H 'Content-Type: application/json' 'http://localhost:5984/_stats'

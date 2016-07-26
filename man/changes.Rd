@@ -9,7 +9,7 @@ changes(cushion, dbname, descending = NULL, startkey = NULL,
   feed = "normal", heartbeat = NULL, filter = NULL, as = "list", ...)
 }
 \arguments{
-\item{cushion}{A cushion name}
+\item{cushion}{A \code{Cushion} object. Required.}
 
 \item{dbname}{Database name. (charcter)}
 
@@ -44,22 +44,11 @@ Of course it doesn't make much sense to use certain options in
 }
 \examples{
 \dontrun{
-changes(dbname="sofadb")
-changes(dbname="sofadb", as='json')
-changes(dbname="sofadb", limit=2)
+(x <- Cushion$new())
 
-# different login credentials than normal, just pass in to function call
-changes("cloudant", dbname='gaugesdb_ro')
-changes("cloudant", dbname='gaugesdb_ro', as='json')
-changes("cloudant", dbname='gaugesdb_ro', include_docs='true')
-
-# irishcouch
-changes(cushion="iriscouch", dbname='helloworld')
-changes(cushion="iriscouch", dbname='helloworld', include_docs='true')
-
-# arbitrary couch on remote server
-changes("oceancouch", dbname="mapuris", as='json')
-changes("oceancouch", dbname="mapuris", include_docs='true', limit=10)
+changes(x, dbname="sofadb")
+changes(x, dbname="sofadb", as='json')
+changes(x, dbname="sofadb", limit=2)
 }
 }
 

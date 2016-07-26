@@ -26,13 +26,19 @@
 #' mtcars$num <- 89
 #' bulk_update(mtcars, dbname="bulktest")
 #' }
-bulk_update <- function(doc, cushion = "localhost", dbname, docid = NULL,
+#' @export
+bulk_update <- function(cushion, dbname, doc, docid = NULL,
                         how = 'rows', as = 'list', ...) {
-  UseMethod("bulk_update")
+  bulk_update_(doc, cushion, dbname, docid, how, as, ...)
+}
+
+bulk_update_ <- function(doc, cushion, dbname, docid = NULL,
+                        how = 'rows', as = 'list', ...) {
+  UseMethod("bulk_update_")
 }
 
 #' @export
-bulk_update.data.frame <- function(doc, cushion = "localhost", dbname, docid = NULL,
+bulk_update_.data.frame <- function(doc, cushion, dbname, docid = NULL,
                                    how = 'rows', as = 'list', ...) {
   url <- cush(cushion, dbname)
   each <- parse_df(doc, how = how, tojson = FALSE)

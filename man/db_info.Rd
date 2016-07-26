@@ -7,7 +7,7 @@
 db_info(cushion, dbname, as = "list", ...)
 }
 \arguments{
-\item{cushion}{A cushion name}
+\item{cushion}{A \code{Cushion} object. Required.}
 
 \item{dbname}{Database name}
 
@@ -20,16 +20,10 @@ List database info.
 }
 \examples{
 \dontrun{
-# local databasees
-db_info(dbname="sofadb")
-db_info(dbname="sofadb", as='json')
+(x <- Cushion$new())
 
-# a database on cloudant or iriscouch
-db_info("cloudant", "gaugesdb_ro")
-db_info("iriscouch", "helloworld")
-
-## arbitrary remote couchdb
-db_info("oceancouch", "beard")
+db_info(x, dbname="sofadb")
+db_info(x, dbname="sofadb", as='json')
 }
 }
 

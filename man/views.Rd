@@ -19,7 +19,7 @@ view_search(cushion = "localhost", dbname, design_name, query = NULL,
   as = "json", ...)
 }
 \arguments{
-\item{cushion}{A cushion name}
+\item{cushion}{A \code{Cushion} object. Required.}
 
 \item{dbname}{Database name}
 

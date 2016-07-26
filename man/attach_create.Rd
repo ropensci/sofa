@@ -7,7 +7,7 @@
 attach_create(cushion = "localhost", dbname, docid, attachment, attname, ...)
 }
 \arguments{
-\item{cushion}{A cushion name}
+\item{cushion}{A \code{Cushion} object. Required.}
 
 \item{dbname}{Database name. (charcter)}
 

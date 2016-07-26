@@ -22,9 +22,10 @@
 #' running processes to determine whether compaction is currently running.
 #' See "/_active_tasks"
 #' @examples \dontrun{
-#' db_compact(dbname = "iris")
+#' (x <- Cushion$new())
+#' db_compact(x, dbname = "iris")
 #' }
-db_compact <- function(cushion = "localhost", dbname, as = 'list', ...) {
-  cushion <- get_cushion(cushion)
-  sofa_POST(paste0(pick_url(cushion), dbname, "/", "_compact"), as=as, ...)
+db_compact <- function(cushion, dbname, as = 'list', ...) {
+  check_cushion(cushion)
+  sofa_POST(paste0(cushion$make_url(), dbname, "/", "_compact"), as = as, cushion$get_headers(), ...)
 }
