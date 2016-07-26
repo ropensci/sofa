@@ -1,6 +1,7 @@
 language: r
 sudo: false
 cache: packages
+warnings_are_errors: false
 
 before_script:
   - curl -X PUT localhost:5984/myapp_test
