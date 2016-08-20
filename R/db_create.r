@@ -23,7 +23,9 @@
 
 db_create <- function(cushion="localhost", dbname, delifexists=FALSE, as='list', ...)
 {
-  if(delifexists) db_delete(cushion, dbname, ...)
+  if(delifexists & !is.na(match(dbname, db_list()))) {
+    db_delete(cushion, dbname, ...)
+  }
   cushion <- get_cushion(cushion)
   if(is.null(cushion$type)){
     url <- pick_url(cushion)
