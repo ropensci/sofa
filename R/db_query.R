@@ -5,21 +5,21 @@
 #' @param dbname Database name
 #' @param query (character) instead of using the other parameters, you can
 #' compose one R list or json blob here
-#' @param selector (json) – JSON object describing criteria used to select
+#' @param selector (json) - JSON object describing criteria used to select
 #' documents. More information provided in the section on selector syntax.
 #' See
 #' \url{http://docs.couchdb.org/en/2.0.0/api/database/find.html#find-selectors}
-#' @param limit (number) – Maximum number of results returned. Default is 25.
+#' @param limit (number) - Maximum number of results returned. Default is 25.
 #' Optional
-#' @param skip (number) – Skip the first ‘n’ results, where ‘n’ is the value
+#' @param skip (number) - Skip the first 'n' results, where 'n' is the value
 #' specified. Optional
-#' @param sort (json) – JSON array following sort syntax. Optional.
+#' @param sort (json) - JSON array following sort syntax. Optional.
 #' See \url{http://docs.couchdb.org/en/2.0.0/api/database/find.html#find-sort}
-#' @param fields (json) – JSON array specifying which fields of each object
+#' @param fields (json) - JSON array specifying which fields of each object
 #' should be returned. If it is omitted, the entire object is returned. More
 #' information provided in the section on filtering fields. Optional
 #' See \url{http://docs.couchdb.org/en/2.0.0/api/database/find.html#find-filter}
-#' @param use_index (json) – Instruct a query to use a specific index.
+#' @param use_index (json) - Instruct a query to use a specific index.
 #' Specified either as "<design_document>" or ["<design_document>",
 #' "<index_name>"]. Optional
 #' @param as (character) One of list (default) or json

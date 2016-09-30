@@ -16,26 +16,26 @@ db_query(cushion, dbname, query = NULL, selector = NULL, limit = NULL,
 \item{query}{(character) instead of using the other parameters, you can
 compose one R list or json blob here}
 
-\item{selector}{(json) – JSON object describing criteria used to select
+\item{selector}{(json) - JSON object describing criteria used to select
 documents. More information provided in the section on selector syntax.
 See
 \url{http://docs.couchdb.org/en/2.0.0/api/database/find.html#find-selectors}}
 
-\item{limit}{(number) – Maximum number of results returned. Default is 25.
+\item{limit}{(number) - Maximum number of results returned. Default is 25.
 Optional}
 
-\item{skip}{(number) – Skip the first ‘n’ results, where ‘n’ is the value
+\item{skip}{(number) - Skip the first 'n' results, where 'n' is the value
 specified. Optional}
 
-\item{sort}{(json) – JSON array following sort syntax. Optional.
+\item{sort}{(json) - JSON array following sort syntax. Optional.
 See \url{http://docs.couchdb.org/en/2.0.0/api/database/find.html#find-sort}}
 
-\item{fields}{(json) – JSON array specifying which fields of each object
+\item{fields}{(json) - JSON array specifying which fields of each object
 should be returned. If it is omitted, the entire object is returned. More
 information provided in the section on filtering fields. Optional
 See \url{http://docs.couchdb.org/en/2.0.0/api/database/find.html#find-filter}}
 
-\item{use_index}{(json) – Instruct a query to use a specific index.
+\item{use_index}{(json) - Instruct a query to use a specific index.
 Specified either as "<design_document>" or ["<design_document>",
 "<index_name>"]. Optional}
 
