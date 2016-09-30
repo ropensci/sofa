@@ -1,7 +1,5 @@
 library("httr")
 
-skip_on_travis()
-
 invisible(sofa_conn <- sofa::Cushion$new())
 
 db <- "testing123"
