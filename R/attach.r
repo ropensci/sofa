@@ -1,28 +1,30 @@
-#' Include an attachment either on an existing or new document.
+#' Include an attachment either on an existing or new document
 #'
 #' @export
 #' @inheritParams ping
-#' @param dbname Database name. (charcter)
-#' @param docid Document ID (character)
-#' @param attachment The attachment object name
-#' @param attname Attachment name.
+#' @param dbname (charcter) Database name. Required.
+#' @param docid (charcter) Document ID. Required.
+#' @param attachment (charcter) The attachment object name. Required.
+#' @param attname (charcter) Attachment name. Required.
 #' @examples \dontrun{
+#' (x <- Cushion$new(user = 'jane', pwd = 'foobar'))
+#'
 #' # put on to an existing document
 #' doc <- '{"name":"guy","beer":"anybeerisfine"}'
-#' doc_create(dbname="sofadb", doc=doc, docid="guysbeer")
+#' doc_create(x, dbname="sofadb", doc=doc, docid="guysbeer")
 #' myattachment <- "just a simple text string"
 #' myattachment <- mtcars
-#' attach_create(dbname="sofadb", docid="guysbeer", attachment=myattachment, attname="mtcarstable.csv")
+#' attach_create(x, dbname="sofadb", docid="guysbeer",
+#'   attachment=myattachment, attname="mtcarstable.csv")
 #' }
-
-attach_create <- function(cushion="localhost", dbname, docid, attachment, attname, ...) {
-  # message("needs work still")
-  cushion <- get_cushion(cushion)
-  revget <- revisions(dbname=dbname, docid=docid)[1]
-  call_ <- sprintf("http://127.0.0.1:%s/%s/%s/%s", cushion$port, dbname, docid, attname)
-  out <- PUT(call_, query=list(rev=revget), body=attachment, content_type("text/csv"))
-  stop_for_status(out)
-  fromJSON(content(out, "text", encoding = "UTF-8"))
+attach_create <- function(cushion, dbname, docid, attachment, attname, ...) {
+  check_cushion(cushion)
+  revget <- revisions(cushion, dbname = dbname, docid = docid)[1]
+  url <- file.path(cushion$make_url(), dbname, docid, attname)
+  out <- PUT(url, query = list(rev = revget),
+             body = attachment, content_type("text/csv"), cushion$get_headers(), ...)
+  stop_status(out)
+  jsonlite::fromJSON(content(out, "text", encoding = "UTF-8"))
 }
 
 # PUT('http://localhost:5984/sofadb/guysbeer/mtcars.csv',

@@ -4,17 +4,16 @@
 \alias{attach_get}
 \title{Get an attachment.}
 \usage{
-attach_get(cushion = "localhost", dbname, docid, attname = NULL,
-  as = "list", ...)
+attach_get(cushion, dbname, docid, attname = NULL, as = "list", ...)
 }
 \arguments{
-\item{cushion}{A cushion name}
+\item{cushion}{A \code{Cushion} object. Required.}
 
-\item{dbname}{Database name. (charcter)}
+\item{dbname}{(charcter) Database name. Required.}
 
-\item{docid}{Document ID (character)}
+\item{docid}{(charcter) Document ID. Required.}
 
-\item{attname}{Attachment name.}
+\item{attname}{(charcter) Attachment name. Optional.}
 
 \item{as}{(character) One of list (default) or json}
 
@@ -25,8 +24,9 @@ Get an attachment.
 }
 \examples{
 \dontrun{
-attach_get(dbname="sofadb", docid="guysbeer")
-attach_get("oceancouch", dbname="mapuris", docid="goodbeer")
+(x <- Cushion$new(user = 'jane', pwd = 'foobar'))
+
+attach_get(x, dbname="sofadb", docid="guysbeer")
 }
 }
 

@@ -4,18 +4,18 @@
 \alias{doc_update}
 \title{Update a document.}
 \usage{
-doc_update(cushion = "localhost", dbname, doc, docid, rev, as = "list", ...)
+doc_update(cushion, dbname, doc, docid, rev, as = "list", ...)
 }
 \arguments{
-\item{cushion}{A cushion name}
+\item{cushion}{A \code{Cushion} object. Required.}
 
-\item{dbname}{Database name3}
+\item{dbname}{(character) Database name. Required.}
 
-\item{doc}{Document content}
+\item{doc}{(character) Document content. Required.}
 
-\item{docid}{Document ID}
+\item{docid}{(character) Document ID. Required.}
 
-\item{rev}{Revision id.}
+\item{rev}{(character) Revision id. Required.}
 
 \item{as}{(character) One of list (default) or json}
 
@@ -25,18 +25,25 @@ doc_update(cushion = "localhost", dbname, doc, docid, rev, as = "list", ...)
 Update a document.
 }
 \details{
-Internally, this function adds in the docid and revision id, required to do a
-document update.
+Internally, this function adds in the docid and revision id,
+required to do a document update
 }
 \examples{
 \dontrun{
+(x <- Cushion$new(user = 'jane', pwd = 'foobar'))
+
+if ("sofadb" \%in\% db_list(x)) {
+  invisible(db_delete(x, dbname="sofadb"))
+}
+db_create(x, dbname='sofadb')
+
 doc1 <- '{"name":"drink","beer":"IPA"}'
-doc_create(dbname="sofadb", doc=doc1, docid="b_beer")
-doc_get(dbname = "sofadb", docid = "b_beer")
-revs <- revisions(dbname = "sofadb", docid = "b_beer")
+doc_create(x, dbname="sofadb", doc=doc1, docid="b_beer")
+doc_get(x, dbname = "sofadb", docid = "b_beer")
+revs <- revisions(x, dbname = "sofadb", docid = "b_beer")
 doc2 <- '{"name":"drink","beer":"IPA","note":"yummy","note2":"yay"}'
-doc_update(dbname="sofadb", doc=doc2, docid="b_beer", rev=revs[1])
-revisions(dbname = "sofadb", docid = "b_beer")
+doc_update(x, dbname="sofadb", doc=doc2, docid="b_beer", rev=revs[1])
+revisions(x, dbname = "sofadb", docid = "b_beer")
 }
 }
 

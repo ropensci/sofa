@@ -2,97 +2,127 @@
 #'
 #' @export
 #' @inheritParams ping
-#' @param doc For now, a data.frame only
-#' @param cushion A cushion name
-#' @param dbname Database name3
-#' \code{\link{doc_get}}, the XML is given back and you can parse it as normal.
-#' @param docid Document IDs, ignored for now, eventually, you can pass in a list, or
-#' vector to be the ids for each document created. Has to be the same length as the
-#' number of documents.
-#' @param how (character) One of rows (default) or columns. If rows, each row becomes a
-#' separate document; if columns, each column becomes a separate document.
+#' @param dbname (character) Database name. Required.
+#' @param doc A data.frame, list, or JSON as a character string. Required.
+#' @param docid Document IDs, ignored for now, eventually, you can pass in a
+#' list, or vector to be the ids for each document created. Has to be the same
+#' length as the number of documents.
+#' @param how (character) One of rows (default) or columns. If rows, each row
+#' becomes a separate document; if columns, each column becomes a separate
+#' document.
 #'
 #' @details Note that row.names are dropped from data.frame inputs.
 #'
-#' @examples \dontrun{
-#' # From a data.frame
-#' db_delete(dbname="bulktest")
-#' db_create(dbname="bulktest")
-#' bulk_create(mtcars, dbname="bulktest")
+#' @return Either a list or json (depending on \code{as} parameter), with
+#' each element an array of key:value pairs:
+#' \itemize{
+#'  \item ok - whether creation was successful
+#'  \item id - the document id
+#'  \item rev - the revision id
+#' }
 #'
-#' db_delete(dbname="bulktest2")
-#' db_create(dbname="bulktest2")
-#' bulk_create(iris, dbname="bulktest2")
+#' @examples \dontrun{
+#' # initialize a couchdb connection
+#' (x <- Cushion$new())
+#'
+#' # From a data.frame
+#' if ("bulktest" %in% db_list(x)) {
+#'   invisible(db_delete(x, dbname="bulktest"))
+#' }
+#' db_create(x, dbname="bulktest")
+#' bulk_create(x, "bulktest", mtcars)
+#'
+#' if ("bulktest2" %in% db_list(x)) {
+#'   invisible(db_delete(x, dbname="bulktest2"))
+#' }
+#' db_create(x, dbname="bulktest2")
+#' bulk_create(x, "bulktest2", iris)
 #'
 #' # data.frame with 1 or more columns as neseted lists
 #' mtcars$stuff <- list("hello_world")
 #' mtcars$stuff2 <- list("hello_world","things")
-#' db_delete(dbname="bulktest3")
-#' db_create(dbname="bulktest3")
-#' bulk_create(mtcars, dbname="bulktest3")
+#' if ("bulktest3" %in% db_list(x)) {
+#'   invisible(db_delete(x, dbname="bulktest3"))
+#' }
+#' db_create(x, dbname="bulktest3")
+#' bulk_create(x, "bulktest3", mtcars)
 #'
 #' # From a json character string, or more likely, many json character strings
 #' library("jsonlite")
 #' strs <- as.character(parse_df(mtcars, "columns"))
-#' db_delete(dbname="bulkfromchr")
-#' db_create(dbname="bulkfromchr")
-#' bulk_create(strs, dbname="bulkfromchr")
+#' if ("bulkfromchr" %in% db_list(x)) {
+#'   invisible(db_delete(x, dbname="bulkfromchr"))
+#' }
+#' db_create(x, dbname="bulkfromchr")
+#' bulk_create(x, "bulkfromchr", strs)
 #'
 #' # From a list of lists
 #' library("jsonlite")
 #' lst <- parse_df(mtcars, tojson=FALSE)
-#' db_delete(dbname="bulkfromchr")
-#' db_create(dbname="bulkfromchr")
-#' bulk_create(lst, dbname="bulkfromchr")
+#' if ("bulkfromchr" %in% db_list(x)) {
+#'   invisible(db_delete(x, dbname="bulkfromchr"))
+#' }
+#' db_create(x, dbname="bulkfromchr")
+#' bulk_create(x, "bulkfromchr", lst)
 #'
 #' # iris dataset - by rows
-#' db_delete(dbname="irisrows")
-#' db_create(dbname="irisrows")
-#' bulk_create(apply(iris, 1, as.list), dbname="irisrows")
+#' if ("irisrows" %in% db_list(x)) {
+#'   invisible(db_delete(x, dbname="irisrows"))
+#' }
+#' db_create(x, dbname="irisrows")
+#' bulk_create(x, "irisrows", apply(iris, 1, as.list))
 #'
 #' # iris dataset - by columns - doesn't quite work yet
-#' # db_delete(dbname="iriscolumns")
-#' # db_create(dbname="iriscolumns")
-#' # bulk_create(parse_df(iris, "columns", tojson=FALSE), dbname="iriscolumns")
+#' # if ("iriscolumns" %in% db_list(x)) {
+#' #   invisible(db_delete(x, dbname="iriscolumns"))
+#' # }
+#' # db_create(x, dbname="iriscolumns")
+#' # bulk_create(x, "iriscolumns", parse_df(iris, "columns", tojson=FALSE), how="columns")
 #' }
-bulk_create <- function(doc, cushion = "localhost", dbname, docid = NULL,
+bulk_create <- function(cushion, dbname, doc, docid = NULL,
+                         how = 'rows', as = 'list', ...) {
+  check_cushion(cushion)
+  bulk_create_(doc, cushion, dbname, docid, how, as, ...)
+}
+
+bulk_create_ <- function(doc, cushion, dbname, docid = NULL,
                        how = 'rows', as = 'list', ...) {
-  UseMethod("bulk_create")
+  UseMethod("bulk_create_")
 }
 
 #' @export
-bulk_create.character <- function(doc, cushion = "localhost", dbname, docid = NULL,
+bulk_create_.character <- function(doc, cushion, dbname, docid = NULL,
                                    how = 'rows', as = 'list', ...) {
-  url <- cush(cushion, dbname)
+  url <- sprintf("%s/%s", cushion$make_url(), dbname)
   body <- sprintf('{"docs": [%s]}', paste0(doc, collapse = ", "))
-  sofa_bulk(file.path(url, "_bulk_docs"), as, body = body, ...)
+  sofa_bulk(file.path(url, "_bulk_docs"), as, body = body, cushion$get_headers(), ...)
 }
 
 #' @export
-bulk_create.list <- function(doc, cushion = "localhost", dbname, docid = NULL,
+bulk_create_.list <- function(doc, cushion, dbname, docid = NULL,
                                   how = 'rows', as = 'list', ...) {
-  url <- cush(cushion, dbname)
+  url <- sprintf("%s/%s", cushion$make_url(), dbname)
   body <- jsonlite::toJSON(list(docs = doc), auto_unbox = TRUE)
-  sofa_bulk(file.path(url, "_bulk_docs"), as, body = body, ...)
+  sofa_bulk(file.path(url, "_bulk_docs"), as, body = body, cushion$get_headers(), ...)
 }
 
 #' @export
-bulk_create.data.frame <- function(doc, cushion = "localhost", dbname, docid = NULL,
+bulk_create_.data.frame <- function(doc, cushion, dbname, docid = NULL,
                                    how = 'rows', as = 'list', ...) {
   row.names(doc) <- NULL
-  url <- cush(cushion, dbname)
+  url <- sprintf("%s/%s", cushion$make_url(), dbname)
   each <- unname(parse_df(doc, how = how, tojson = FALSE))
   body <- jsonlite::toJSON(list(docs = each), auto_unbox = TRUE)
-  sofa_bulk(file.path(url, "_bulk_docs"), as, body = body, ...)
+  sofa_bulk(file.path(url, "_bulk_docs"), as, body = body, cushion$get_headers(), ...)
 }
 
 sofa_bulk <- function(url, as, body, ...) {
-  res <- POST(url, content_type_json(), body = body)
+  res <- POST(url, content_type_json(), body = body, ...)
   bulk_handle(res, as)
 }
 
 bulk_handle <- function(x, as) {
   stop_status(x)
   tt <- content(x, "text", encoding = "UTF-8")
-  if(as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
+  if (as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
 }

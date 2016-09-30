@@ -4,12 +4,12 @@
 \alias{changes}
 \title{List changes to a database.}
 \usage{
-changes(cushion = "localhost", dbname, descending = NULL, startkey = NULL,
+changes(cushion, dbname, descending = NULL, startkey = NULL,
   endkey = NULL, since = NULL, limit = NULL, include_docs = NULL,
   feed = "normal", heartbeat = NULL, filter = NULL, as = "list", ...)
 }
 \arguments{
-\item{cushion}{A cushion name}
+\item{cushion}{A \code{Cushion} object. Required.}
 
 \item{dbname}{Database name. (charcter)}
 
@@ -19,47 +19,71 @@ changes(cushion = "localhost", dbname, descending = NULL, startkey = NULL,
 
 \item{endkey}{Document ID to end at. (character)}
 
-\item{since}{Start the results from the change immediately after the given sequence number.}
+\item{since}{Start the results from the change immediately after the given
+sequence number.}
 
 \item{limit}{Number document IDs to return. (numeric)}
 
-\item{include_docs}{If "true", returns docs themselves, in addition to IDs (character)}
+\item{include_docs}{(character) If "true", returns docs themselves, in
+addition to IDs}
 
-\item{feed}{Select the type of feed. One of normal, longpoll, or continuous. See description. (character)}
+\item{feed}{Select the type of feed. One of normal, longpoll, or continuous.
+See description. (character)}
 
-\item{heartbeat}{Period in milliseconds after which an empty line is sent in the results.
-Only applicable for longpoll or continuous feeds. Overrides any timeout to keep the
-feed alive indefinitely. (numeric (milliseconds))}
+\item{heartbeat}{Period in milliseconds after which an empty line is sent in
+the results. Only applicable for longpoll or continuous feeds. Overrides any
+timeout to keep the feed alive indefinitely. (numeric (milliseconds))}
 
-\item{filter}{Reference a filter function from a design document to selectively get updates.}
+\item{filter}{Reference a filter function from a design document to
+selectively get updates.}
 
 \item{as}{(character) One of list (default) or json}
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }
+\value{
+Either a list of json (depending on \code{as} parameter), with
+keys:
+\itemize{
+ \item results - Changes made to a database, length 0 if no changes.
+ Each of these has:
+ \itemize{
+  \item changes - List of document`s leafs with single field rev
+  \item id - Document ID
+  \item seq - Update sequence
+ }
+ \item last_seq - Last change update sequence
+ \item pending - Count of remaining items in the feed
+}
+}
 \description{
 Of course it doesn't make much sense to use certain options in
-   _changes. For example, using feed=longpoll or continuous doesn't make much sense
-   within R itself.
+_changes. For example, using feed=longpoll or continuous doesn't make much
+sense within R itself.
 }
 \examples{
 \dontrun{
-changes(dbname="sofadb")
-changes(dbname="sofadb", as='json')
-changes(dbname="sofadb", limit=2)
+(x <- Cushion$new())
 
-# different login credentials than normal, just pass in to function call
-changes("cloudant", dbname='gaugesdb_ro')
-changes("cloudant", dbname='gaugesdb_ro', as='json')
-changes("cloudant", dbname='gaugesdb_ro', include_docs='true')
+if ("leothelion" \%in\% db_list(x)) {
+  invisible(db_delete(x, dbname="leothelion"))
+}
+db_create(x, dbname='leothelion')
 
-# irishcouch
-changes(cushion="iriscouch", dbname='helloworld')
-changes(cushion="iriscouch", dbname='helloworld', include_docs='true')
+# no changes
+res <- changes(x, dbname="leothelion")
+res$results
 
-# arbitrary couch on remote server
-changes("oceancouch", dbname="mapuris", as='json')
-changes("oceancouch", dbname="mapuris", include_docs='true', limit=10)
+# create a document
+doc1 <- '{"name": "drink", "beer": "IPA", "score": 5}'
+doc_create(x, dbname="leothelion", doc1, docid="abeer")
+
+# now there's changes
+res <- changes(x, dbname="leothelion")
+res$results
+
+# as JSON
+changes(x, dbname="leothelion", as='json')
 }
 }
 

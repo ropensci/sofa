@@ -4,14 +4,14 @@
 \alias{doc_head}
 \title{Get header info for a document.}
 \usage{
-doc_head(cushion = "localhost", dbname, docid, as = "list", ...)
+doc_head(cushion, dbname, docid, as = "list", ...)
 }
 \arguments{
-\item{cushion}{A cushion name}
+\item{cushion}{A \code{Cushion} object. Required.}
 
-\item{dbname}{Database name. (charcter)}
+\item{dbname}{(character) Database name. Required.}
 
-\item{docid}{Document ID (character)}
+\item{docid}{(character) Document ID. Required.}
 
 \item{as}{(character) One of list (default) or json}
 
@@ -22,11 +22,21 @@ Get header info for a document.
 }
 \examples{
 \dontrun{
-doc_head(dbname="sofadb", docid="a_beer")
-doc_head(dbname="sofadb", docid="a_beer", as='json')
-doc_head("cloudant", dbname="animaldb", docid="badger")
-doc_head("iriscouch", dbname="helloworld", docid="ggg")
-doc_head("oceancouch", dbname="beard", docid="goodbeers")
+(x <- Cushion$new(user = 'jane', pwd = 'foobar'))
+
+# create a database
+if ("sofadb" \%in\% db_list(x)) {
+  invisible(db_delete(x, dbname="sofadb"))
+}
+db_create(x, dbname='sofadb')
+
+# create a document
+doc1 <- '{"name": "drink", "beer": "IPA", "score": 5}'
+doc_create(x, dbname="sofadb", doc1, docid="abeer")
+
+# run doc_head
+doc_head(x, dbname="sofadb", docid="abeer")
+doc_head(x, dbname="sofadb", docid="abeer", as='json')
 }
 }
 

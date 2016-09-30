@@ -4,18 +4,20 @@
 \alias{db_updates}
 \title{Get information on database updates}
 \usage{
-db_updates(cushion = "localhost", feed = "longpoll", timeout = 60,
-  heartbeat = TRUE, as = "list", ...)
+db_updates(cushion, feed = "longpoll", timeout = 60, heartbeat = TRUE,
+  as = "list", ...)
 }
 \arguments{
-\item{cushion}{A cushion name}
+\item{cushion}{A \code{Cushion} object. Required.}
 
-\item{feed}{(character) One of longpoll (default), continuous, or eventsource. See Details.}
+\item{feed}{(character) One of longpoll (default), continuous, or
+eventsource. See Details.}
 
-\item{timeout}{(integer) Number of seconds until CouchDB closes the connection. Default: 60.}
+\item{timeout}{(integer) Number of seconds until CouchDB closes the
+connection. Default: 60.}
 
-\item{heartbeat}{(logical) Whether CouchDB will send a newline character on timeout.
-Default: true}
+\item{heartbeat}{(logical) Whether CouchDB will send a newline character
+on timeout. Default: \code{TRUE}}
 
 \item{as}{(character) One of list (default) or json}
 
@@ -25,22 +27,28 @@ Default: true}
 Get information on database updates
 }
 \details{
-This may not be very appropriate for use in R, but who knows, so here it is.
+This may not be very appropriate for use in R, but who knows,
+so here it is.
 
-Also, continuous and eventsource don't seem to work in R, unless I'm missing something.
+Also, continuous and eventsource don't seem to work in R, unless I'm
+missing something.
 
 Options for the \code{feed} parmeter:
 \itemize{
  \item longpoll: Closes the connection after the first event.
- \item continuous: Send a line of JSON per event. Keeps the socket open until timeout.
- \item eventsource: Like, continuous, but sends the events in EventSource format.
+ \item continuous: Send a line of JSON per event. Keeps the socket open
+ until timeout.
+ \item eventsource: Like, continuous, but sends the events in EventSource
+ format.
 }
 }
 \examples{
 \dontrun{
-db_updates()
-db_updates(feed="continuous")
-db_updates(feed="eventsource")
+(x <- Cushion$new())
+
+db_updates(x)
+db_updates(x, feed="continuous")
+db_updates(x, feed="eventsource")
 }
 }
 

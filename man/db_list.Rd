@@ -4,12 +4,13 @@
 \alias{db_list}
 \title{List all databases.}
 \usage{
-db_list(cushion = "localhost", simplify = TRUE, as = "list", ...)
+db_list(cushion, simplify = TRUE, as = "list", ...)
 }
 \arguments{
-\item{cushion}{A cushion name}
+\item{cushion}{A \code{Cushion} object. Required.}
 
-\item{simplify}{(logical) Simplify to character vector, ignored if \code{as="json"}}
+\item{simplify}{(logical) Simplify to character vector, ignored
+if \code{as="json"}}
 
 \item{as}{(character) One of list (default) or json}
 
@@ -20,12 +21,10 @@ List all databases.
 }
 \examples{
 \dontrun{
-# local databasees
-db_list()
-db_list(as='json')
-db_list("cloudant")
-db_list("iriscouch")
-db_list("oceancouch")
+(x <- Cushion$new())
+
+db_list(x)
+db_list(x, as = 'json')
 }
 }
 

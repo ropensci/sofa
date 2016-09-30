@@ -4,18 +4,17 @@
 \alias{revisions}
 \title{Get document revisions.}
 \usage{
-revisions(cushion = "localhost", dbname, docid, simplify = TRUE,
-  as = "list", ...)
+revisions(cushion, dbname, docid, simplify = TRUE, as = "list", ...)
 }
 \arguments{
-\item{cushion}{A cushion name}
+\item{cushion}{A \code{Cushion} object. Required.}
 
 \item{dbname}{Database name}
 
 \item{docid}{Document ID}
 
-\item{simplify}{(logical) Simplify to character vector of revision ids. If FALSE, gives back
-availabilit info too.}
+\item{simplify}{(logical) Simplify to character vector of revision ids.
+If \code{FALSE}, gives back availabilit info too. Default: \code{TRUE}}
 
 \item{as}{(character) One of list (default) or json}
 
@@ -26,12 +25,21 @@ Get document revisions.
 }
 \examples{
 \dontrun{
-revisions(dbname="sofadb", docid="a_beer")
-revisions(dbname="sofadb", docid="a_beer", simplify=FALSE)
-revisions(dbname="sofadb", docid="a_beer", as='json')
-revisions(dbname="sofadb", docid="a_beer", simplify=FALSE, as='json')
+(x <- Cushion$new())
 
-revisions("oceancouch", dbname="mapuris", docid="10.12688\%2Ff1000research.3817.1", as='json')
+if ("sofa" \%in\% db_list(x)) {
+ db_delete(x, dbname = "sofadb")
+}
+db_create(x, dbname = "sofadb")
+
+doc1 <- '{"name": "drink", "beer": "IPA", "score": 5}'
+doc_create(x, dbname="sofadb", doc1, docid="abeer")
+doc_create(x, dbname="sofadb", doc1, docid="morebeer", as='json')
+
+revisions(x, dbname="sofadb", docid="abeer")
+revisions(x, dbname="sofadb", docid="abeer", simplify=FALSE)
+revisions(x, dbname="sofadb", docid="abeer", as='json')
+revisions(x, dbname="sofadb", docid="abeer", simplify=FALSE, as='json')
 }
 }
 

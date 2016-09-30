@@ -7,7 +7,7 @@
 restart(cushion = "localhost", as = "list", ...)
 }
 \arguments{
-\item{cushion}{A cushion name}
+\item{cushion}{A \code{Cushion} object. Required.}
 
 \item{as}{(character) One of list (default) or json}
 
@@ -18,7 +18,9 @@ Restart your Couchdb instance
 }
 \examples{
 \dontrun{
-restart()
+(x <- Cushion$new())
+
+# restart(x)
 }
 }
 

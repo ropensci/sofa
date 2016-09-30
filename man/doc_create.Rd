@@ -4,17 +4,17 @@
 \alias{doc_create}
 \title{Create documents to a database.}
 \usage{
-doc_create(doc, cushion = "localhost", dbname, docid = NULL, how = "rows",
-  as = "list", ...)
+doc_create(cushion, dbname, doc, docid = NULL, how = "rows", as = "list",
+  ...)
 }
 \arguments{
+\item{cushion}{A \code{Cushion} object. Required.}
+
+\item{dbname}{Database name3}
+
 \item{doc}{Document content, can be character string, a list. The character type can be
 XML as well, which is embedded in json. When the document is retrieved via
 \code{\link{doc_get}}, the XML is given back and you can parse it as normal.}
-
-\item{cushion}{A cushion name}
-
-\item{dbname}{Database name3}
 
 \item{docid}{Document ID}
 
@@ -43,56 +43,51 @@ the bulk API - which should be much faster for a large number of documents.
 }
 \examples{
 \dontrun{
-db_delete(dbname = "sofadb")
-db_create(dbname = "sofadb")
+(x <- Cushion$new(user = 'jane', pwd = 'foobar'))
+
+if ("sofadb" \%in\% db_list(x)) {
+  invisible(db_delete(x, dbname="sofadb"))
+}
+db_create(x, dbname='sofadb')
 
 # write a document WITH a name (uses PUT)
 doc1 <- '{"name": "drink", "beer": "IPA", "score": 5}'
-doc_create(doc1, dbname="sofadb", docid="abeer")
-doc_create(doc1, dbname="sofadb", docid="morebeer", as='json')
-doc_get(dbname = "sofadb", docid = "abeer")
+doc_create(x, dbname="sofadb", doc1, docid="abeer")
+doc_create(x, dbname="sofadb", doc1, docid="morebeer", as='json')
+doc_get(x, dbname = "sofadb", docid = "abeer")
 ## with factor class values
 doc2 <- list(name = as.factor("drink"), beer = "stout", score = 4)
-doc_create(doc2, dbname="sofadb", docid="nextbeer", as='json')
-doc_get(dbname = "sofadb", docid = "nextbeer")
+doc_create(x, doc2, dbname="sofadb", docid="nextbeer", as='json')
+doc_get(x, dbname = "sofadb", docid = "nextbeer")
 
 # write a json document WITHOUT a name (uses POST)
 doc2 <- '{"name": "food", "icecream": "rocky road"}'
-doc_create(doc2, dbname="sofadb")
+doc_create(x, doc2, dbname="sofadb")
 doc3 <- '{"planet": "mars", "size": "smallish"}'
-doc_create(doc3, dbname="sofadb")
+doc_create(x, doc3, dbname="sofadb")
 ## assigns a UUID instead of a user given name
-alldocs(dbname = "sofadb")
+alldocs(x, dbname = "sofadb")
 
 # write an xml document WITH a name (uses PUT). xml is written as xml in
 # couchdb, just wrapped in json, when you get it out it will be as xml
 doc4 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
-doc_create(doc4, dbname="sofadb", docid="somexml")
-doc_get(dbname = "sofadb", docid = "somexml")
-
-# in iriscouch
-doc_create('{"things":"stuff"}', cushion="iriscouch", dbname='helloworld', docid="ggg")
-doc_get("iriscouch", dbname='helloworld', docid="ggg")
-doc_delete("iriscouch", dbname='helloworld', docid="ggg")
+doc_create(x, doc4, dbname="sofadb", docid="somexml")
+doc_get(x, dbname = "sofadb", docid = "somexml")
 
 # You can pass in lists that autoconvert to json internally
 doc1 <- list(name = "drink", beer = "IPA", score = 9)
 doc_create(doc1, dbname="sofadb", docid="goodbeer")
 
-# On arbitrary remote server
-doc1 <- list(name = "drink", beer = "IPA")
-doc_create(doc1, cushion="oceancouch", dbname="beard", docid="goodbeer")
-
 # Write directly from a data.frame
 ## Each row or column becomes a separate document
 ### by rows
-db_create(dbname = "test")
-doc_create(mtcars, dbname="test", how="rows")
-doc_create(mtcars, dbname="test", how="columns")
+db_create(x, dbname = "test")
+doc_create(x, mtcars, dbname="test", how="rows")
+doc_create(x, mtcars, dbname="test", how="columns")
 
 head(iris)
-db_create(dbname = "testiris")
-doc_create(iris, dbname = "testiris")
+db_create(x, dbname = "testiris")
+doc_create(x, iris, dbname = "testiris")
 }
 }
 

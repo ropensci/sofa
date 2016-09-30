@@ -4,10 +4,10 @@
 \alias{db_compact}
 \title{Request compaction of the specified database}
 \usage{
-db_compact(cushion = "localhost", dbname, as = "list", ...)
+db_compact(cushion, dbname, as = "list", ...)
 }
 \arguments{
-\item{cushion}{A cushion name}
+\item{cushion}{A \code{Cushion} object. Required.}
 
 \item{dbname}{Database name. Required.}
 
@@ -40,7 +40,8 @@ See "/_active_tasks"
 }
 \examples{
 \dontrun{
-db_compact(dbname = "iris")
+(x <- Cushion$new())
+db_compact(x, dbname = "iris")
 }
 }
 

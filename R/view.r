@@ -2,12 +2,12 @@
 #'
 #' @name views
 #' @inheritParams ping
-#' @param dbname Database name
-#' @param design_name Design document name
-#' @param fxnname A function name
-#' @param key Key
-#' @param value Value
-#' @param query Query terms
+#' @param dbname (character) Database name
+#' @param design_name (character) Design document name
+#' @param fxnname (character) A function name
+#' @param key (character) Key
+#' @param value (character) Value
+#' @param query (character) Query terms
 #' @details If you are writing a complicated javascript function, better to do
 #' that in the Futon CouchDB interface or otherwise.
 #' @examples \dontrun{
@@ -30,44 +30,41 @@
 
 #' @export
 #' @rdname views
-view_put <- function(cushion="localhost", dbname, design_name, fxnname='foo',
-  key="null", value="doc", as='json', ...)
-{
-  cushion <- get_cushion(cushion)
-  url <- pick_url(cushion)
-  call_ <- paste0(url, "/", dbname, "/_design/", design_name)
+view_put <- function(cushion, dbname, design_name, fxnname='foo',
+  key="null", value="doc", as='json', ...) {
+
+  check_cushion(cushion)
+  url <- cushion$make_url()
+  call_ <- file.path(url, dbname, "_design", design_name)
   doc2 <- paste0('{"_id":',
            '"_design/', design_name, '",',
            '"views": {', '"', fxnname, '": {', '"map": "function(doc){emit(', key, ",", value, ')}"}}}')
-  sofa_PUT(call_, as, body=doc2, ...)
+  sofa_PUT(call_, as, body = doc2, cushion$get_headers(), ...)
 }
 
 #' @export
 #' @rdname views
-view_del <- function(cushion="localhost", dbname, design_name, as='json', ...)
-{
-  cushion <- get_cushion(cushion)
-  url <- pick_url(cushion)
+view_del <- function(cushion, dbname, design_name, as='json', ...) {
+  check_cushion(cushion)
+  url <- cushion$make_url()
   rev <- view_get(cushion, dbname, design_name)$`_rev`
-  call_ <- paste0(url, "/", dbname, "/_design/", design_name)
-  sofa_DELETE(call_, as, query=list(rev=rev), ...)
+  call_ <- file.path(url, dbname, "_design", design_name)
+  sofa_DELETE(call_, as, query = list(rev = rev), cushion$get_headers(), ...)
 }
 
 #' @export
 #' @rdname views
-view_get <- function(cushion="localhost", dbname, design_name, as='json', ...)
-{
-  cushion <- get_cushion(cushion)
-  url <- pick_url(cushion)
-  sofa_GET(paste0(url, "/", dbname, "/_design/", design_name), NULL, as, ...)
+view_get <- function(cushion, dbname, design_name, as='json', ...) {
+  check_cushion(cushion)
+  url <- cushion$make_url()
+  sofa_GET(file.path(url, dbname, "_design", design_name), NULL, as, cushion$get_headers(), ...)
 }
 
 #' @export
 #' @rdname views
-view_search <- function(cushion="localhost", dbname, design_name, query = NULL, as='json', ...)
-{
-  cushion <- get_cushion(cushion)
-  url <- pick_url(cushion)
-  call_ <- paste0(url, "/", dbname, "/_design/", design_name, "/_view", "/foo")
-  sofa_GET(call_, NULL, as, ...)
+view_search <- function(cushion, dbname, design_name, query = NULL, as='json', ...) {
+  check_cushion(cushion)
+  url <- cushion$make_url()
+  call_ <- file.path(url, dbname, "_design", design_name, "_view", "foo")
+  sofa_GET(call_, NULL, as, cushion$get_headers(), ...)
 }

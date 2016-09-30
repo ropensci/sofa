@@ -8,34 +8,33 @@
 \alias{views}
 \title{Work with design documents (i.e., views) in your CouchDB's.}
 \usage{
-view_put(cushion = "localhost", dbname, design_name, fxnname = "foo",
-  key = "null", value = "doc", as = "json", ...)
+view_put(cushion, dbname, design_name, fxnname = "foo", key = "null",
+  value = "doc", as = "json", ...)
 
-view_del(cushion = "localhost", dbname, design_name, as = "json", ...)
+view_del(cushion, dbname, design_name, as = "json", ...)
 
-view_get(cushion = "localhost", dbname, design_name, as = "json", ...)
+view_get(cushion, dbname, design_name, as = "json", ...)
 
-view_search(cushion = "localhost", dbname, design_name, query = NULL,
-  as = "json", ...)
+view_search(cushion, dbname, design_name, query = NULL, as = "json", ...)
 }
 \arguments{
-\item{cushion}{A cushion name}
+\item{cushion}{A \code{Cushion} object. Required.}
 
-\item{dbname}{Database name}
+\item{dbname}{(character) Database name}
 
-\item{design_name}{Design document name}
+\item{design_name}{(character) Design document name}
 
-\item{fxnname}{A function name}
+\item{fxnname}{(character) A function name}
 
-\item{key}{Key}
+\item{key}{(character) Key}
 
-\item{value}{Value}
+\item{value}{(character) Value}
 
 \item{as}{(character) One of list (default) or json}
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 
-\item{query}{Query terms}
+\item{query}{(character) Query terms}
 }
 \description{
 Work with design documents (i.e., views) in your CouchDB's.

@@ -4,8 +4,7 @@
 \alias{db_create}
 \title{Create a database.}
 \usage{
-db_create(cushion = "localhost", dbname, delifexists = FALSE, as = "list",
-  ...)
+db_create(cushion, dbname, delifexists = FALSE, as = "list", ...)
 }
 \arguments{
 \item{cushion}{A cushion name}
@@ -24,17 +23,15 @@ Create a database.
 }
 \examples{
 \dontrun{
-db_create(dbname='leothelion')
-db_list() # see if its there now
+(x <- Cushion$new(user = 'jane', pwd = 'foobar'))
 
-## or setting username and password in cushion() call
-db_create("cloudant", "mustache")
+if ("leothelion" \%in\% db_list(x)) {
+  invisible(db_delete(x, dbname="leothelion"))
+}
+db_create(x, dbname='leothelion')
 
-## iriscouch
-db_create("iriscouch", "beard")
-
-## arbitrary remote couchdb
-db_create("oceancouch", "beard")
+## see if its there now
+db_list(x)
 }
 }
 

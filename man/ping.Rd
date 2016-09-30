@@ -2,26 +2,27 @@
 % Please edit documentation in R/ping.r
 \name{ping}
 \alias{ping}
-\title{Ping a couchdb server.}
+\title{Ping a couchdb server}
 \usage{
-ping(cushion = "localhost", as = "list", ...)
+ping(cushion, as = "list", ...)
 }
 \arguments{
-\item{cushion}{A cushion name}
+\item{cushion}{A \code{Cushion} object. Required.}
 
 \item{as}{(character) One of list (default) or json}
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }
 \description{
-Ping a couchdb server.
+Ping a couchdb server
 }
 \examples{
 \dontrun{
-ping()
-ping("cloudant")
-ping("iriscouch")
-ping("oceancouch")
+# initialize a couchdb connection
+(x <- Cushion$new())
+
+ping(x)
+ping(x, as = "json")
 }
 }
 
