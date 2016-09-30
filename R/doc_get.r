@@ -13,7 +13,7 @@
 #' @param deleted_conflicts (logical) Whether to include _deleted_conflicts field.
 #' @param local_seq (logical) Whether to include _local_seq field.
 #' @examples \dontrun{
-#' (x <- Cushion$new(user = 'jane', pwd = 'foobar'))
+#' (x <- Cushion$new())
 #'
 #' if ("sofadb" %in% db_list(x)) {
 #'   invisible(db_delete(x, dbname="sofadb"))

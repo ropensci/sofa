@@ -7,7 +7,7 @@
 #' @param attachment (charcter) The attachment object name. Required.
 #' @param attname (charcter) Attachment name. Required.
 #' @examples \dontrun{
-#' (x <- Cushion$new(user = 'jane', pwd = 'foobar'))
+#' (x <- Cushion$new())
 #'
 #' # put on to an existing document
 #' doc <- '{"name":"guy","beer":"anybeerisfine"}'

@@ -6,7 +6,7 @@
 #' @param as (character) One of list (default) or json
 #' @param ... Curl args passed on to \code{\link[httr]{GET}}
 #' @examples \dontrun{
-#' (x <- Cushion$new(user = 'jane', pwd = 'foobar'))
+#' (x <- Cushion$new())
 #'
 #' # local databasees
 #' ## create database first, then delete

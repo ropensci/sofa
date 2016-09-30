@@ -20,7 +20,7 @@ Delete a database.
 }
 \examples{
 \dontrun{
-(x <- Cushion$new(user = 'jane', pwd = 'foobar'))
+(x <- Cushion$new())
 
 # local databasees
 ## create database first, then delete

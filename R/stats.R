@@ -14,6 +14,8 @@
 #' Note that this isn't working with CouchDB v2, not sure why
 #'
 #' @examples \dontrun{
+#' (x <- Cushion$new())
+#'
 #' stats(x)
 #' stats(x, as = "json")
 #'

@@ -13,7 +13,7 @@
 #' you do it separately or this fxn can do it for you. Default: \code{FALSE}
 #' @examples \dontrun{
 #' ## create a connection
-#' (x <- Cushion$new(user = 'jane', pwd = 'foobar'))
+#' (x <- Cushion$new())
 #'
 #' # Create a database locally
 #' db_list(x)

@@ -22,7 +22,7 @@ Delete a document in a database.
 }
 \examples{
 \dontrun{
-(x <- Cushion$new(user = 'jane', pwd = 'foobar'))
+(x <- Cushion$new())
 
 # create a database
 if ("sofadb" \%in\% db_list(x)) {

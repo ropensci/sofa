@@ -49,7 +49,7 @@ Query a database.
 \examples{
 \dontrun{
 ## create a connection
-(x <- Cushion$new(user = 'jane', pwd = 'foobar'))
+(x <- Cushion$new())
 
 file <- system.file("examples/omdb.json", package = "sofa")
 strs <- readLines(file)

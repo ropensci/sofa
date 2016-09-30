@@ -31,7 +31,7 @@ e.g., Cloudant, Iriscouch
 \examples{
 \dontrun{
 ## create a connection
-(x <- Cushion$new(user = 'jane', pwd = 'foobar'))
+(x <- Cushion$new())
 
 # Create a database locally
 db_list(x)

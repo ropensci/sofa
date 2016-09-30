@@ -24,7 +24,7 @@ Get an attachment.
 }
 \examples{
 \dontrun{
-(x <- Cushion$new(user = 'jane', pwd = 'foobar'))
+(x <- Cushion$new())
 
 attach_get(x, dbname="sofadb", docid="guysbeer")
 }

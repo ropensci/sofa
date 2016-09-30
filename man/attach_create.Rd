@@ -24,7 +24,7 @@ Include an attachment either on an existing or new document
 }
 \examples{
 \dontrun{
-(x <- Cushion$new(user = 'jane', pwd = 'foobar'))
+(x <- Cushion$new())
 
 # put on to an existing document
 doc <- '{"name":"guy","beer":"anybeerisfine"}'

@@ -30,7 +30,7 @@ required to do a document update
 }
 \examples{
 \dontrun{
-(x <- Cushion$new(user = 'jane', pwd = 'foobar'))
+(x <- Cushion$new())
 
 if ("sofadb" \%in\% db_list(x)) {
   invisible(db_delete(x, dbname="sofadb"))

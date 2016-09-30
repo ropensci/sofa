@@ -6,7 +6,7 @@
 #' @param as (character) One of list (default) or json
 #' @examples \dontrun{
 #' # Create a CouchDB connection client
-#' (x <- Cushion$new(user = 'jane', pwd = 'foobar'))
+#' (x <- Cushion$new())
 #'
 #' uuids(x)
 #' uuids(x, as = 'json')

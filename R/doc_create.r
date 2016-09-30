@@ -22,7 +22,7 @@
 #' \code{\link{bulk_create}} and \code{\link{bulk_update}} to create or update documents with
 #' the bulk API - which should be much faster for a large number of documents.
 #' @examples \dontrun{
-#' (x <- Cushion$new(user = 'jane', pwd = 'foobar'))
+#' (x <- Cushion$new())
 #'
 #' if ("sofadb" %in% db_list(x)) {
 #'   invisible(db_delete(x, dbname="sofadb"))

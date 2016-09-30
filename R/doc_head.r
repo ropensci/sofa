@@ -5,7 +5,7 @@
 #' @param dbname (character) Database name. Required.
 #' @param docid (character) Document ID. Required.
 #' @examples \dontrun{
-#' (x <- Cushion$new(user = 'jane', pwd = 'foobar'))
+#' (x <- Cushion$new())
 #'
 #' # create a database
 #' if ("sofadb" %in% db_list(x)) {

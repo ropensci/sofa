@@ -11,21 +11,23 @@
 #' @details If you are writing a complicated javascript function, better to do
 #' that in the Futon CouchDB interface or otherwise.
 #' @examples \dontrun{
-#' # Create a view
-#' db_create(dbname = "alm_couchdb")
+#' (x <- Cushion$new())
 #'
-#' view_put(dbname='alm_couchdb', design_name='almview1')
-#' view_put(dbname='alm_couchdb', design_name='almview2', value="doc.baseurl")
-#' view_put(dbname='alm_couchdb', design_name='almview5', value="[doc.baseurl,doc.queryargs]")
+#' # Create a view
+#' db_create(x, dbname = "alm_couchdb")
+#'
+#' view_put(x, dbname='alm_couchdb', design_name='almview1')
+#' view_put(x, dbname='alm_couchdb', design_name='almview2', value="doc.baseurl")
+#' view_put(x, dbname='alm_couchdb', design_name='almview5', value="[doc.baseurl,doc.queryargs]")
 #'
 #' # Delete a view
-#' view_del(dbname='alm_couchdb', design_name='almview1')
+#' view_del(x, dbname='alm_couchdb', design_name='almview1')
 #'
 #' # Get info on a design document (i.e., a view)
-#' # view_get(dbname='alm_couchdb', design_name='almview1')
+#' # view_get(x, dbname='alm_couchdb', design_name='almview1')
 #'
 #' # Search using a view
-#' # view_search(dbname='alm_couchdb', design_name='almview1', query="XXX")
+#' # view_search(x, dbname='alm_couchdb', design_name='almview1', query="XXX")
 #' }
 
 #' @export

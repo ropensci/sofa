@@ -22,7 +22,7 @@ Get header info for a document.
 }
 \examples{
 \dontrun{
-(x <- Cushion$new(user = 'jane', pwd = 'foobar'))
+(x <- Cushion$new())
 
 # create a database
 if ("sofadb" \%in\% db_list(x)) {
