@@ -6,3 +6,5 @@ README.Rmd
 ^\.travis\.yml$
 ^CONDUCT\.md$
 ^notes\.md$
+man-roxygen
+

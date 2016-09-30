@@ -28,7 +28,8 @@ Optional}
 specified. Optional}
 
 \item{sort}{(json) - JSON array following sort syntax. Optional.
-See \url{http://docs.couchdb.org/en/2.0.0/api/database/find.html#find-sort}}
+See \url{http://docs.couchdb.org/en/2.0.0/api/database/find.html#find-sort}
+For some reason, sort doesn't work often, not sure why.}
 
 \item{fields}{(json) - JSON array specifying which fields of each object
 should be returned. If it is omitted, the entire object is returned. More
@@ -55,16 +56,16 @@ file <- system.file("examples/omdb.json", package = "sofa")
 strs <- readLines(file)
 
 ## create a database
-if ("leothelion" \%in\% db_list(x)) {
-  invisible(db_delete(x, dbname="leothelion"))
+if ("omdb" \%in\% db_list(x)) {
+  invisible(db_delete(x, dbname="omdb"))
 }
-db_create(x, dbname='leothelion')
+db_create(x, dbname='omdb')
 
 ## add some documents
-invisible(bulk_create(x, "leothelion", strs))
+invisible(bulk_create(x, "omdb", strs))
 
 ## query all in one json blob
-db_query(x, dbname = "leothelion", query = '{
+db_query(x, dbname = "omdb", query = '{
   "selector": {
     "_id": {
       "$gt": null
@@ -73,25 +74,47 @@ db_query(x, dbname = "leothelion", query = '{
 }')
 
 ## query with each parameter
-db_query(x, dbname = "leothelion",
+db_query(x, dbname = "omdb",
   selector = list(`_id` = list(`$gt` = NULL)))
 
-db_query(x, dbname = "leothelion",
+db_query(x, dbname = "omdb",
   selector = list(`_id` = list(`$gt` = NULL)), limit = 3)
 
-db_query(x, dbname = "leothelion",
+db_query(x, dbname = "omdb",
   selector = list(`_id` = list(`$gt` = NULL)), limit = 3,
   fields = c('_id', 'Actors', 'imdbRating'))
 
-db_query(x, dbname = "leothelion",
-  selector = list(`_id` = list(`$gt` = NULL)), limit = 3,
-  fields = c('_id', 'Actors', 'imdbRating'),
-  sort = list(imdbRating = "desc"))
+db_query(x, dbname = "omdb",
+  selector = list(Year = list(`$gt` = "2013")))
 
-db_query(x, dbname = "leothelion",
-  selector = list(`_id` = list(`$gt` = NULL)), limit = 3,
-  fields = c('_id', 'Actors', 'imdbRating'),
-  sort = "imdbRating")
+db_query(x, dbname = "omdb", selector = list(Rated = "R"))
+
+db_query(x, dbname = "omdb",
+  selector = list(Rated = "PG", Language = "English"))
+
+db_query(x, dbname = "omdb", selector = list(
+  `$or` = list(
+    list(Director = "Jon Favreau"),
+    list(Director = "Spike Lee")
+  )
+), fields = c("_id", "Director"))
+
+## when selector vars are of same name, use a JSON string
+## b/c R doesn't let you have a list with same name slots
+db_query(x, dbname = "omdb", query = '{
+  "selector": {
+    "Year": {"$gte": "1990"},
+    "Year": {"$lte": "2000"},
+    "$not": {"Year": "1998"}
+  },
+  "fields": ["_id", "Year"]
+}')
+
+## regex
+db_query(x, dbname = "omdb", selector = list(
+  Director = list(`$regex` = "^R")
+), fields = c("_id", "Director"))
+
 }
 }
 

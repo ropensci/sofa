@@ -8,7 +8,7 @@ Description: Provides an interface to the NoSQL database CouchDB
     (<http://www.iriscouch.com>) and Cloudant (<https://cloudant.com>).
     Documents can be inserted directly from vectors, lists,
     data.frames, and JSON.
-Version: 0.1.8.9940
+Version: 0.1.8.9960
 Authors@R: person("Scott", "Chamberlain", role = c("aut", "cre"),
     email = "myrmecocystus@gmail.com")
 License: MIT + file LICENSE
@@ -24,5 +24,8 @@ Imports:
     R6
 Suggests:
     testthat,
+    knitr,
+    rmarkdown,
     covr
+VignetteBuilder: knitr
 RoxygenNote: 5.0.1
