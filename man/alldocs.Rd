@@ -35,12 +35,17 @@ List all docs in a given database.
 \dontrun{
 (x <- Cushion$new())
 
-alldocs(x, dbname="sofadb")
-alldocs(x, dbname="sofadb", as='json')
-alldocs(x, dbname="mydb", limit=2)
-alldocs(x, dbname="mydb", limit=2, include_docs="true")
+db_create(x, dbname='leothelion')
+bulk_create(x, mtcars, dbname="leothelion")
+
+alldocs(x, dbname="leothelion")
+alldocs(x, dbname="leothelion", as='json')
+alldocs(x, dbname="leothelion", limit=2)
+alldocs(x, dbname="leothelion", limit=2, include_docs="true")
+
+# curl options
 library('httr')
-alldocs(x, dbname="sofadb", config=verbose())
+res <- alldocs(x, dbname="leothelion", config=verbose())
 }
 }
 

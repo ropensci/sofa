@@ -3,35 +3,37 @@
 #' @export
 #' @inheritParams ping
 #' @param cushion A cushion name
-#' @param section (character) One of couchdb, httpd_request_methods, or httpd_status_codes.
-#' Default is none of them, which returns all sections.
+#' @param section (character) One of couchdb, httpd_request_methods, or
+#' httpd_status_codes. Default is none of them, which returns all sections.
 #' @param stat (character) Statistic to return. There are many options.
 #'
-#' @details Note that if you provide \code{section} you have to provide \code{stat}, or
-#' the function drops those variables, and defaults to all statistics.
+#' @details Note that if you provide \code{section} you have to provide
+#' \code{stat}, or the function drops those variables, and defaults to
+#' all statistics.
+#'
+#' Note that this isn't working with CouchDB v2, not sure why
 #'
 #' @examples \dontrun{
-#' stats()
-#' stats(as = "json")
+#' stats(x)
+#' stats(x, as = "json")
 #'
 #' # couchdb stats
-#' stats(section="couchdb", stat="database_writes")
-#' stats(section="couchdb", stat = "open_os_files")
+#' stats(x, section="couchdb", stat="database_writes")
+#' stats(x, section="couchdb", stat = "open_os_files")
 #'
 #' # request methods
-#' stats(section="httpd_request_methods", stat="GET")
-#' stats(section="httpd_request_methods", stat="POST")
+#' stats(x, section="httpd_request_methods", stat="GET")
+#' stats(x, section="httpd_request_methods", stat="POST")
 #'
 #' # request status codes
-#' stats(section="httpd_status_codes", stat=200)
-#' stats(section="httpd_status_codes", stat=400)
+#' stats(x, section="httpd_status_codes", stat=200)
+#' stats(x, section="httpd_status_codes", stat=400)
 #' }
 stats <- function(cushion, section = NULL, stat = NULL, as = 'list', ...) {
-  #cushion <- get_cushion(cushion)
   check_cushion(cushion)
   url <- file.path(cushion$make_url(), "_stats")
   if (!is.null(section) && !is.null(stat)) {
     url <- file.path(url, section, stat)
   }
-  sofa_GET(url, as = as, args = NULL, ...)
+  sofa_GET(url, as = as, args = NULL, cushion$get_headers(), ...)
 }

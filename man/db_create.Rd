@@ -25,6 +25,9 @@ Create a database.
 \dontrun{
 (x <- Cushion$new())
 
+if ("leothelion" \%in\% db_list(x)) {
+  invisible(db_delete(x, dbname="leothelion"))
+}
 db_create(x, dbname='leothelion')
 
 ## see if its there now

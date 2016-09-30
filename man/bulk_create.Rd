@@ -4,27 +4,36 @@
 \alias{bulk_create}
 \title{Create documents via the bulk API}
 \usage{
-bulk_create(cushion, dbname, docid = NULL, doc, how = "rows", as = "list",
+bulk_create(cushion, dbname, doc, docid = NULL, how = "rows", as = "list",
   ...)
 }
 \arguments{
 \item{cushion}{A \code{Cushion} object. Required.}
 
-\item{dbname}{Database name3
-\code{\link{doc_get}}, the XML is given back and you can parse it as normal.}
+\item{dbname}{(character) Database name. Required.}
 
-\item{docid}{Document IDs, ignored for now, eventually, you can pass in a list, or
-vector to be the ids for each document created. Has to be the same length as the
-number of documents.}
+\item{doc}{A data.frame, list, or JSON as a character string. Required.}
 
-\item{doc}{For now, a data.frame only}
+\item{docid}{Document IDs, ignored for now, eventually, you can pass in a
+list, or vector to be the ids for each document created. Has to be the same
+length as the number of documents.}
 
-\item{how}{(character) One of rows (default) or columns. If rows, each row becomes a
-separate document; if columns, each column becomes a separate document.}
+\item{how}{(character) One of rows (default) or columns. If rows, each row
+becomes a separate document; if columns, each column becomes a separate
+document.}
 
 \item{as}{(character) One of list (default) or json}
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
+}
+\value{
+Either a list or json (depending on \code{as} parameter), with
+each element an array of key:value pairs:
+\itemize{
+ \item ok - whether creation was successful
+ \item id - the document id
+ \item rev - the revision id
+}
 }
 \description{
 Create documents via the bulk API
@@ -34,47 +43,62 @@ Note that row.names are dropped from data.frame inputs.
 }
 \examples{
 \dontrun{
+# initialize a couchdb connection
 (x <- Cushion$new())
 
 # From a data.frame
-db_delete(x, dbname="bulktest")
+if ("bulktest" \%in\% db_list(x)) {
+  invisible(db_delete(x, dbname="bulktest"))
+}
 db_create(x, dbname="bulktest")
-bulk_create(x, mtcars, dbname="bulktest")
+bulk_create(x, "bulktest", mtcars)
 
-db_delete(x, dbname="bulktest2")
+if ("bulktest2" \%in\% db_list(x)) {
+  invisible(db_delete(x, dbname="bulktest2"))
+}
 db_create(x, dbname="bulktest2")
-bulk_create(x, iris, dbname="bulktest2")
+bulk_create(x, "bulktest2", iris)
 
 # data.frame with 1 or more columns as neseted lists
 mtcars$stuff <- list("hello_world")
 mtcars$stuff2 <- list("hello_world","things")
-db_delete(x, dbname="bulktest3")
+if ("bulktest3" \%in\% db_list(x)) {
+  invisible(db_delete(x, dbname="bulktest3"))
+}
 db_create(x, dbname="bulktest3")
-bulk_create(x, mtcars, dbname="bulktest3")
+bulk_create(x, "bulktest3", mtcars)
 
 # From a json character string, or more likely, many json character strings
 library("jsonlite")
 strs <- as.character(parse_df(mtcars, "columns"))
-db_delete(x, dbname="bulkfromchr")
+if ("bulkfromchr" \%in\% db_list(x)) {
+  invisible(db_delete(x, dbname="bulkfromchr"))
+}
 db_create(x, dbname="bulkfromchr")
-bulk_create(x, strs, dbname="bulkfromchr")
+bulk_create(x, "bulkfromchr", strs)
 
 # From a list of lists
 library("jsonlite")
 lst <- parse_df(mtcars, tojson=FALSE)
-db_delete(x, dbname="bulkfromchr")
+if ("bulkfromchr" \%in\% db_list(x)) {
+  invisible(db_delete(x, dbname="bulkfromchr"))
+}
 db_create(x, dbname="bulkfromchr")
-bulk_create(x, lst, dbname="bulkfromchr")
+bulk_create(x, "bulkfromchr", lst)
 
 # iris dataset - by rows
-db_delete(x, dbname="irisrows")
+if ("irisrows" \%in\% db_list(x)) {
+  invisible(db_delete(x, dbname="irisrows"))
+}
 db_create(x, dbname="irisrows")
-bulk_create(x, apply(iris, 1, as.list), dbname="irisrows")
+bulk_create(x, "irisrows", apply(iris, 1, as.list))
 
 # iris dataset - by columns - doesn't quite work yet
-# db_delete(x, dbname="iriscolumns")
+# if ("iriscolumns" \%in\% db_list(x)) {
+#   invisible(db_delete(x, dbname="iriscolumns"))
+# }
 # db_create(x, dbname="iriscolumns")
-# bulk_create(x, parse_df(iris, "columns", tojson=FALSE), dbname="iriscolumns")
+# bulk_create(x, "iriscolumns", parse_df(iris, "columns", tojson=FALSE), how="columns")
 }
 }
 

@@ -1,19 +1,17 @@
-#' Ping a couchdb server.
+#' Ping a couchdb server
 #'
-#' @import httr
 #' @export
 #' @param cushion A \code{Cushion} object. Required.
 #' @param as (character) One of list (default) or json
 #' @param ... Curl args passed on to \code{\link[httr]{GET}}
 #' @examples \dontrun{
-#' ping()
-#' ping("cloudant")
-#' ping("iriscouch")
-#' ping("oceancouch")
+#' # initialize a couchdb connection
+#' (x <- Cushion$new())
+#'
+#' ping(x)
+#' ping(x, as = "json")
 #' }
-
-ping <- function(cushion="localhost", as='list', ...)
-{
-  cushion <- get_cushion(cushion)
-  sofa_GET(pick_url(cushion), as=as, args=NULL, ...)
+ping <- function(cushion, as = 'list', ...) {
+  check_cushion(cushion)
+  sofa_GET(cushion$make_url(), as = as, args = NULL, cushion$get_headers(), ...)
 }

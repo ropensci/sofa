@@ -3,9 +3,12 @@
 #' @export
 #' @inheritParams ping
 #' @examples \dontrun{
-#' restart()
+#' (x <- Cushion$new())
+#'
+#' # restart(x)
 #' }
 restart <- function(cushion = "localhost", as = 'list', ...) {
-  cushion <- get_cushion(cushion)
-  sofa_POST(paste0(pick_url(cushion), "_restart"), as=as)
+  check_cushion(cushion)
+  sofa_POST(file.path(cushion$make_url(), "_restart"),
+            as = as, cushion$get_headers(), ...)
 }

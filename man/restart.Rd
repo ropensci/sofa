@@ -18,7 +18,9 @@ Restart your Couchdb instance
 }
 \examples{
 \dontrun{
-restart()
+(x <- Cushion$new())
+
+# restart(x)
 }
 }
 

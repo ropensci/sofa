@@ -13,8 +13,8 @@ revisions(cushion, dbname, docid, simplify = TRUE, as = "list", ...)
 
 \item{docid}{Document ID}
 
-\item{simplify}{(logical) Simplify to character vector of revision ids. If FALSE, gives back
-availabilit info too.}
+\item{simplify}{(logical) Simplify to character vector of revision ids.
+If \code{FALSE}, gives back availabilit info too. Default: \code{TRUE}}
 
 \item{as}{(character) One of list (default) or json}
 
@@ -27,9 +27,10 @@ Get document revisions.
 \dontrun{
 (x <- Cushion$new())
 
-if ("error" \%in\% names(db_info(x, "sofadb"))) {
- db_create(x, dbname = "sofadb")
+if ("sofa" \%in\% db_list(x)) {
+ db_delete(x, dbname = "sofadb")
 }
+db_create(x, dbname = "sofadb")
 
 doc1 <- '{"name": "drink", "beer": "IPA", "score": 5}'
 doc_create(x, dbname="sofadb", doc1, docid="abeer")

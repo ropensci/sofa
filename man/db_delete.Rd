@@ -7,7 +7,7 @@
 db_delete(cushion, dbname, as = "list", ...)
 }
 \arguments{
-\item{cushion}{A cushion name}
+\item{cushion}{A \code{Cushion} object. Required.}
 
 \item{dbname}{Database name}
 
@@ -20,7 +20,7 @@ Delete a database.
 }
 \examples{
 \dontrun{
-(x <- Cushion$new())
+(x <- Cushion$new(user = 'jane', pwd = 'foobar'))
 
 # local databasees
 ## create database first, then delete

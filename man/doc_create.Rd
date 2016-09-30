@@ -43,10 +43,12 @@ the bulk API - which should be much faster for a large number of documents.
 }
 \examples{
 \dontrun{
-(x <- Cushion$new())
+(x <- Cushion$new(user = 'jane', pwd = 'foobar'))
 
-db_delete(x, dbname = "sofadb")
-db_create(x, dbname = "sofadb")
+if ("sofadb" \%in\% db_list(x)) {
+  invisible(db_delete(x, dbname="sofadb"))
+}
+db_create(x, dbname='sofadb')
 
 # write a document WITH a name (uses PUT)
 doc1 <- '{"name": "drink", "beer": "IPA", "score": 5}'

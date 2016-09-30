@@ -1,12 +1,12 @@
 #' Delete a database.
 #'
 #' @export
-#' @param cushion A cushion name
+#' @inheritParams ping
 #' @param dbname Database name
 #' @param as (character) One of list (default) or json
 #' @param ... Curl args passed on to \code{\link[httr]{GET}}
 #' @examples \dontrun{
-#' (x <- Cushion$new())
+#' (x <- Cushion$new(user = 'jane', pwd = 'foobar'))
 #'
 #' # local databasees
 #' ## create database first, then delete

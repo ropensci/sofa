@@ -1,13 +1,14 @@
-#' Upload (replicate) a local database to a remote database server, e.g., Cloudant, Iriscouch
+#' Upload (replicate) a local database to a remote database server,
+#' e.g., Cloudant, Iriscouch
 #'
 #' @export
 #' @inheritParams ping
 #' @param from Couch to replicate from, Default: localhost
 #' @param to Remote service name to upload to. One of cloudant, iriscouch.
 #' @param dbname Database name.
-#' @param createdb If TRUE, the function creates the db on the remote server before
-#'    uploading. The db has to exist before uploading, so either you do it separately
-#'    or this fxn can do it for you. Default = FALSE
+#' @param createdb If TRUE, the function creates the db on the remote server
+#' before uploading. The db has to exist before uploading, so either you do
+#' it separately or this fxn can do it for you. Default: \code{FALSE}
 #' @examples \dontrun{
 #' # Create a database locally
 #' db_list()
@@ -16,16 +17,18 @@
 #' # replicate to a remote server
 #' db_replicate(to="cloudant", dbname="hello_earth", createdb=TRUE)
 #' changes("cloudant", dbname = "hello_earth")
-#' doc_create("cloudant", dbname = "hello_earth", doc = '{"language":"python","library":"requests"}')
+#' doc_create("cloudant", dbname = "hello_earth",
+#'   doc = '{"language":"python","library":"requests"}')
 #' changes("cloudant", dbname = "hello_earth")
 #'
-#' doc_create("cloudant", dbname = "hello_earth", doc = '{"language":"R"}', docid="R_rules")
+#' doc_create("cloudant", dbname = "hello_earth", doc = '{"language":"R"}',
+#'   docid="R_rules")
 #' doc_get("cloudant", dbname = "hello_earth", docid='R_rules')
 #'
 #' db_delete('cloudant', 'hello_earth')
 #' }
-
-db_replicate <- function(from='localhost', to="cloudant", dbname, createdb=FALSE, as='list', ...){
+db_replicate <- function(from='localhost', to="cloudant", dbname,
+                         createdb=FALSE, as='list', ...){
   check_cushion(to)
   cushion <- to
   if (createdb) db_create(cushion, dbname)
@@ -40,7 +43,7 @@ db_replicate <- function(from='localhost', to="cloudant", dbname, createdb=FALSE
     message(sprintf("Uploading to %s...", to))
     args <- list(source = unbox(dbname),
                  target = unbox(cloudant_url(cushion, dbname)))
-    sofa_POST(url, as, content_type_json(), body=args, encode="json", ...)
+    sofa_POST(url, as, content_type_json(), body = args, encode = "json", ...)
   } else {
     stop(paste0(cushion$type, " is not supported yet"))
   }

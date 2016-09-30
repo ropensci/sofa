@@ -77,6 +77,8 @@
 #' ## changes
 #' changes(x, "bulktest")
 #'
+#' # With auth
+#' x <- Cushion$new(user = 'sckott', pwd = 'sckott')
 #'
 #' # Using Cloudant
 #' z <- Cushion$new(host = "ropensci.cloudant.com", transport = 'https', port = NULL,

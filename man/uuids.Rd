@@ -4,10 +4,10 @@
 \alias{uuids}
 \title{Get uuids.}
 \usage{
-uuids(cushion = "localhost", count = 1, as = "list", ...)
+uuids(cushion, count = 1, as = "list", ...)
 }
 \arguments{
-\item{cushion}{A cushion name}
+\item{cushion}{A \code{Cushion} object. Required.}
 
 \item{count}{(numeric) Number of uuids to return. Default: 1}
 
@@ -20,11 +20,11 @@ Get uuids.
 }
 \examples{
 \dontrun{
-uuids()
-uuids(as = 'json')
-uuids("cloudant")
-uuids("iriscouch")
-uuids("oceancouch")
+# Create a CouchDB connection client
+(x <- Cushion$new(user = 'jane', pwd = 'foobar'))
+
+uuids(x)
+uuids(x, as = 'json')
 }
 }
 

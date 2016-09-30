@@ -1,21 +1,18 @@
 #' Get uuids.
 #'
-#' @import httr
 #' @export
-#' @param cushion A cushion name
+#' @inheritParams ping
 #' @param count (numeric) Number of uuids to return. Default: 1
 #' @param as (character) One of list (default) or json
-#' @param ... Curl args passed on to \code{\link[httr]{GET}}
 #' @examples \dontrun{
-#' uuids()
-#' uuids(as = 'json')
-#' uuids("cloudant")
-#' uuids("iriscouch")
-#' uuids("oceancouch")
+#' # Create a CouchDB connection client
+#' (x <- Cushion$new(user = 'jane', pwd = 'foobar'))
+#'
+#' uuids(x)
+#' uuids(x, as = 'json')
 #' }
-
-uuids <- function(cushion="localhost", count=1, as='list', ...)
-{
-  cushion <- get_cushion(cushion)
-  sofa_GET(paste0(pick_url(cushion), '_uuids'), as=as, query=list(count=count), ...)
+uuids <- function(cushion, count = 1, as = 'list', ...) {
+  check_cushion(cushion)
+  sofa_GET(file.path(cushion$make_url(), '_uuids'),
+           as = as, query = list(count = count), ...)
 }

@@ -4,13 +4,12 @@
 \alias{doc_get}
 \title{Get a document from a database.}
 \usage{
-doc_get(cushion = "localhost", dbname, docid, rev = NULL,
-  attachments = FALSE, deleted = FALSE, revs = FALSE, revs_info = FALSE,
-  conflicts = FALSE, deleted_conflicts = FALSE, local_seq = FALSE,
-  as = "list", ...)
+doc_get(cushion, dbname, docid, rev = NULL, attachments = FALSE,
+  deleted = FALSE, revs = FALSE, revs_info = FALSE, conflicts = FALSE,
+  deleted_conflicts = FALSE, local_seq = FALSE, as = "list", ...)
 }
 \arguments{
-\item{cushion}{A cushion name}
+\item{cushion}{A \code{Cushion} object. Required.}
 
 \item{dbname}{Database name}
 
@@ -41,16 +40,24 @@ Get a document from a database.
 }
 \examples{
 \dontrun{
-doc_get(dbname="sofadb", docid="a_beer")
-revs <- revisions(dbname="sofadb", docid="a_beer")
-doc_get(dbname="sofadb", docid="a_beer", rev=revs[1])
-doc_get(dbname="sofadb", docid="a_beer", rev=revs[2])
-doc_get(dbname="sofadb", docid="a_beer", as='json')
-doc_get(dbname="sofadb", docid="a_beer", revs=TRUE)
-doc_get(dbname="sofadb", docid="a_beer", revs=TRUE, local_seq=TRUE)
-doc_get("cloudant", dbname='gaugesdb_ro', docid='017ba8075b92656bbca20b8ab6fdb21d')
-doc_get("iriscouch", dbname='helloworld', docid="0c0858b75a81c464a74119ca24000543")
-doc_get("oceancouch", dbname="beard", docid="beer")
+(x <- Cushion$new(user = 'jane', pwd = 'foobar'))
+
+if ("sofadb" \%in\% db_list(x)) {
+  invisible(db_delete(x, dbname="sofadb"))
+}
+db_create(x, dbname="sofadb")
+
+# create a document
+doc1 <- '{"name": "drink", "beer": "IPA", "score": 5}'
+doc_create(x, dbname="sofadb", doc1, docid="abeer")
+
+doc_get(x, dbname="sofadb", docid="abeer")
+revs <- revisions(x, dbname="sofadb", docid="abeer")
+doc_get(x, dbname="sofadb", docid="abeer", rev=revs[1])
+doc_get(x, dbname="sofadb", docid="abeer", rev=revs[2])
+doc_get(x, dbname="sofadb", docid="abeer", as='json')
+doc_get(x, dbname="sofadb", docid="abeer", revs=TRUE)
+doc_get(x, dbname="sofadb", docid="abeer", revs=TRUE, local_seq=TRUE)
 }
 }
 

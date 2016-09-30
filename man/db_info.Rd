@@ -22,6 +22,11 @@ List database info.
 \dontrun{
 (x <- Cushion$new())
 
+if ("sofadb" \%in\% db_list(x)) {
+  invisible(db_delete(x, dbname="sofadb"))
+}
+db_create(x, dbname='sofadb')
+
 db_info(x, dbname="sofadb")
 db_info(x, dbname="sofadb", as='json')
 }

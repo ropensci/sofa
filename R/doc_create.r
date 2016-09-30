@@ -2,7 +2,6 @@
 #'
 #' @export
 #' @inheritParams ping
-#' @param cushion A \code{Cushion} object. Required.
 #' @param dbname Database name3
 #' @param doc Document content, can be character string, a list. The character type can be
 #' XML as well, which is embedded in json. When the document is retrieved via
@@ -23,10 +22,12 @@
 #' \code{\link{bulk_create}} and \code{\link{bulk_update}} to create or update documents with
 #' the bulk API - which should be much faster for a large number of documents.
 #' @examples \dontrun{
-#' (x <- Cushion$new())
+#' (x <- Cushion$new(user = 'jane', pwd = 'foobar'))
 #'
-#' db_delete(x, dbname = "sofadb")
-#' db_create(x, dbname = "sofadb")
+#' if ("sofadb" %in% db_list(x)) {
+#'   invisible(db_delete(x, dbname="sofadb"))
+#' }
+#' db_create(x, dbname='sofadb')
 #'
 #' # write a document WITH a name (uses PUT)
 #' doc1 <- '{"name": "drink", "beer": "IPA", "score": 5}'

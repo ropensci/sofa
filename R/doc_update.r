@@ -2,35 +2,31 @@
 #'
 #' @export
 #' @inheritParams ping
-#' @param cushion A cushion name
-#' @param dbname Database name3
-#' @param doc Document content
-#' @param docid Document ID
-#' @param rev Revision id.
-#' @details Internally, this function adds in the docid and revision id, required to do a
-#' document update.
+#' @param dbname (character) Database name. Required.
+#' @param doc (character) Document content. Required.
+#' @param docid (character) Document ID. Required.
+#' @param rev (character) Revision id. Required.
+#' @details Internally, this function adds in the docid and revision id,
+#' required to do a document update
 #' @examples \dontrun{
-#' doc1 <- '{"name":"drink","beer":"IPA"}'
-#' doc_create(dbname="sofadb", doc=doc1, docid="b_beer")
-#' doc_get(dbname = "sofadb", docid = "b_beer")
-#' revs <- revisions(dbname = "sofadb", docid = "b_beer")
-#' doc2 <- '{"name":"drink","beer":"IPA","note":"yummy","note2":"yay"}'
-#' doc_update(dbname="sofadb", doc=doc2, docid="b_beer", rev=revs[1])
-#' revisions(dbname = "sofadb", docid = "b_beer")
+#' (x <- Cushion$new(user = 'jane', pwd = 'foobar'))
+#'
+#' if ("sofadb" %in% db_list(x)) {
+#'   invisible(db_delete(x, dbname="sofadb"))
 #' }
-
-doc_update <- function(cushion="localhost", dbname, doc, docid, rev, as='list', ...)
-{
-  cushion <- get_cushion(cushion)
-  if(is.null(cushion$type)){
-    call_ <- paste0(pick_url(cushion), dbname)
-  } else {
-    if(cushion$type=="localhost"){
-      call_ <- sprintf("http://127.0.0.1:%s/%s", cushion$port, dbname)
-    } else if(cushion$type %in% c("cloudant",'iriscouch')){
-      call_ <- remote_url(cushion, dbname)
-    }
-  }
+#' db_create(x, dbname='sofadb')
+#'
+#' doc1 <- '{"name":"drink","beer":"IPA"}'
+#' doc_create(x, dbname="sofadb", doc=doc1, docid="b_beer")
+#' doc_get(x, dbname = "sofadb", docid = "b_beer")
+#' revs <- revisions(x, dbname = "sofadb", docid = "b_beer")
+#' doc2 <- '{"name":"drink","beer":"IPA","note":"yummy","note2":"yay"}'
+#' doc_update(x, dbname="sofadb", doc=doc2, docid="b_beer", rev=revs[1])
+#' revisions(x, dbname = "sofadb", docid = "b_beer")
+#' }
+doc_update <- function(cushion, dbname, doc, docid, rev, as = 'list', ...) {
+  check_cushion(cushion)
+  url <- file.path(cushion$make_url(), dbname, docid)
   doc2 <- sub("^\\{", sprintf('{"_id":"%s", "_rev":"%s",', docid, rev), check_inputs(doc))
-  sofa_PUT(paste0(call_, "/", docid), as, body=doc2, encode="json", ...)
+  sofa_PUT(url, as, body = doc2, encode = "json", ...)
 }
