@@ -39,7 +39,7 @@ view_put <- function(cushion, dbname, design_name, fxnname='foo',
   doc2 <- paste0('{"_id":',
            '"_design/', design_name, '",',
            '"views": {', '"', fxnname, '": {', '"map": "function(doc){emit(', key, ",", value, ')}"}}}')
-  sofa_PUT(call_, as, body = doc2, ...)
+  sofa_PUT(call_, as, body = doc2, cushion$get_headers(), ...)
 }
 
 #' @export
@@ -49,7 +49,7 @@ view_del <- function(cushion, dbname, design_name, as='json', ...) {
   url <- cushion$make_url()
   rev <- view_get(cushion, dbname, design_name)$`_rev`
   call_ <- file.path(url, dbname, "_design", design_name)
-  sofa_DELETE(call_, as, query = list(rev = rev), ...)
+  sofa_DELETE(call_, as, query = list(rev = rev), cushion$get_headers(), ...)
 }
 
 #' @export
@@ -57,7 +57,7 @@ view_del <- function(cushion, dbname, design_name, as='json', ...) {
 view_get <- function(cushion, dbname, design_name, as='json', ...) {
   check_cushion(cushion)
   url <- cushion$make_url()
-  sofa_GET(file.path(url, dbname, "_design", design_name), NULL, as, ...)
+  sofa_GET(file.path(url, dbname, "_design", design_name), NULL, as, cushion$get_headers(), ...)
 }
 
 #' @export
@@ -66,5 +66,5 @@ view_search <- function(cushion, dbname, design_name, query = NULL, as='json', .
   check_cushion(cushion)
   url <- cushion$make_url()
   call_ <- file.path(url, dbname, "_design", design_name, "_view", "foo")
-  sofa_GET(call_, NULL, as, ...)
+  sofa_GET(call_, NULL, as, cushion$get_headers(), ...)
 }

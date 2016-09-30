@@ -28,5 +28,5 @@ doc_update <- function(cushion, dbname, doc, docid, rev, as = 'list', ...) {
   check_cushion(cushion)
   url <- file.path(cushion$make_url(), dbname, docid)
   doc2 <- sub("^\\{", sprintf('{"_id":"%s", "_rev":"%s",', docid, rev), check_inputs(doc))
-  sofa_PUT(url, as, body = doc2, encode = "json", ...)
+  sofa_PUT(url, as, body = doc2, encode = "json", cushion$get_headers(), ...)
 }

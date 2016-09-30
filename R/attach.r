@@ -22,7 +22,7 @@ attach_create <- function(cushion, dbname, docid, attachment, attname, ...) {
   revget <- revisions(cushion, dbname = dbname, docid = docid)[1]
   url <- file.path(cushion$make_url(), dbname, docid, attname)
   out <- PUT(url, query = list(rev = revget),
-             body = attachment, content_type("text/csv"))
+             body = attachment, content_type("text/csv"), cushion$get_headers(), ...)
   stop_status(out)
   jsonlite::fromJSON(content(out, "text", encoding = "UTF-8"))
 }

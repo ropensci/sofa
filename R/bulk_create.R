@@ -117,7 +117,7 @@ bulk_create_.data.frame <- function(doc, cushion, dbname, docid = NULL,
 }
 
 sofa_bulk <- function(url, as, body, ...) {
-  res <- POST(url, content_type_json(), body = body)
+  res <- POST(url, content_type_json(), body = body, ...)
   bulk_handle(res, as)
 }
 

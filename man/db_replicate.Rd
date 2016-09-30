@@ -5,19 +5,20 @@
 \title{Upload (replicate) a local database to a remote database server,
 e.g., Cloudant, Iriscouch}
 \usage{
-db_replicate(from = "localhost", to = "cloudant", dbname,
-  createdb = FALSE, as = "list", ...)
+db_replicate(from, to, dbname, createdb = FALSE, as = "list", ...)
 }
 \arguments{
-\item{from}{Couch to replicate from, Default: localhost}
+\item{from}{Couch to replicate from. An object of class \code{Cushion}.
+Required.}
 
-\item{to}{Remote service name to upload to. One of cloudant, iriscouch.}
+\item{to}{Remote couch to replicate to. An object of class \code{Cushion}.
+Required.}
 
-\item{dbname}{Database name.}
+\item{dbname}{(character) Database name. Required.}
 
-\item{createdb}{If TRUE, the function creates the db on the remote server
-before uploading. The db has to exist before uploading, so either you do
-it separately or this fxn can do it for you. Default: \code{FALSE}}
+\item{createdb}{If \code{TRUE}, the function creates the db on the remote
+server before uploading. The db has to exist before uploading, so either
+you do it separately or this fxn can do it for you. Default: \code{FALSE}}
 
 \item{as}{(character) One of list (default) or json}
 
@@ -29,22 +30,39 @@ e.g., Cloudant, Iriscouch
 }
 \examples{
 \dontrun{
+## create a connection
+(x <- Cushion$new(user = 'jane', pwd = 'foobar'))
+
 # Create a database locally
-db_list()
-db_create('hello_earth')
+db_list(x)
+if ("hello_earth" \%in\% db_list(x)) {
+  invisible(db_delete(x, dbname="hello_earth"))
+}
+db_create(x, 'hello_earth')
 
-# replicate to a remote server
-db_replicate(to="cloudant", dbname="hello_earth", createdb=TRUE)
-changes("cloudant", dbname = "hello_earth")
-doc_create("cloudant", dbname = "hello_earth",
-  doc = '{"language":"python","library":"requests"}')
-changes("cloudant", dbname = "hello_earth")
+## replicate to a remote server
+z <- Cushion$new(host = "ropensci.cloudant.com", transport = 'https',
+  port = NULL, user = 'ropensci', pwd = Sys.getenv('CLOUDANT_PWD'))
 
-doc_create("cloudant", dbname = "hello_earth", doc = '{"language":"R"}',
+## do the replication
+db_replicate(x, z, dbname = "hello_earth", createdb = TRUE)
+
+## check changes on the remote
+db_list(z)
+changes(z, dbname = "hello_earth")
+
+## make some changes on the remote
+doc_create(z, dbname = "hello_earth",
+  '{"language":"python","library":"requests"}', 'stuff')
+changes(z, dbname = "hello_earth")
+
+## create another document, and try to get it
+doc_create(z, dbname = "hello_earth", doc = '{"language":"R"}',
   docid="R_rules")
-doc_get("cloudant", dbname = "hello_earth", docid='R_rules')
+doc_get(z, dbname = "hello_earth", docid='R_rules')
 
-db_delete('cloudant', 'hello_earth')
+## cleanup - delete the database
+db_delete(z, 'hello_earth')
 }
 }
 

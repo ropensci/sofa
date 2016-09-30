@@ -17,5 +17,6 @@ attach_get <- function(cushion, dbname, docid, attname = NULL, as = 'list', ...)
   } else {
     url <- file.path(cushion$make_url(), dbname, docid, attname)
   }
-  sofa_GET(url, as, content_type_json(), query = list(`_attachments` = "true"), ...)
+  sofa_GET(url, as, content_type_json(), query = list(`_attachments` = "true"),
+           cushion$get_headers(), ...)
 }
