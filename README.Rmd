@@ -18,28 +18,40 @@ knitr::opts_chunk$set(
  \ ___________________ /
 </pre>
 
-[![Build Status](https://travis-ci.org/ropensci/sofa.png?branch=master)](https://travis-ci.org/ropensci/sofa)
+[![Build Status](https://travis-ci.org/ropensci/sofa.svg?branch=master)](https://travis-ci.org/ropensci/sofa)
 [![codecov.io](https://codecov.io/github/ropensci/sofa/coverage.svg?branch=master)](https://codecov.io/github/ropensci/sofa?branch=master)
 
 __An easy interface to CouchDB from R__
 
-Note: Check out [*R4couchdb*](https://github.com/wactbprot/R4CouchDB), another R package to interact with CouchDB.
+Note: Check out [*R4couchdb*](https://github.com/wactbprot/R4CouchDB), another R 
+package to interact with CouchDB.
 
 ## Install CouchDB
 
-Instructions [here](http://wiki.apache.org/couchdb/Installation)
+Go to <http://docs.couchdb.org/en/2.0.0/install/index.html> for instructions.
 
 ## Connect to CouchDB
 
-In your terminal
+This may be starting it on your terminal/shell
 
 ```sh
 couchdb
 ```
 
+Or opening the CouchDB app on your machine, or running it in docker. Whatever it
+is, start it up.
+
 You can interact with your CouchDB databases as well in your browser. Navigate to [http://localhost:5984/_utils](http://localhost:5984/_utils)
 
 ## Install sofa
+
+From CRAN
+
+```{r eval=FALSE}
+install.packages("sofa")
+```
+
+Development version from GitHub
 
 ```{r eval=FALSE}
 devtools::install_github("ropensci/sofa")
@@ -51,30 +63,45 @@ library('sofa')
 
 ## Cushions
 
-Cushions? What? Since it's couch we gotta use `cushions` somehow. `cushions` are basically just a simple named list holding details of connections for different couches you work with. See `?cushions` or `?authentication` for help.
+Cushions? What? Since it's couch we gotta use `cushions` somehow. `cushions` are a 
+connection class containing all connection info to a CouchDB instance. 
+See `?Cushion` for help.
 
-As an example, here's how I set up details for connecting to my Cloudant couch:
+As an example, connecting to a Cloudant couch:
 
 ```{r eval=FALSE}
-cushion(name = 'cloudant', user = '<user name>', pwd = '<password>', type = "cloudant")
+z <- Cushion$new(
+  host = "stuff.cloudant.com", 
+  transport = 'https', 
+  port = NULL, 
+  user = 'foobar', 
+  pwd = 'things'
+)
 ```
 
 Break down of parameters:
 
-* `name`: Name of the cushion. This is how you'll refer to each connection. `cushion` is the first parameter of each function.
+* `host`: the base url, without the transport (`http`/`https`)
+* `transport`: `http` or `https`
+* `port`: The port to connect to. Default: 5984. For Cloudant, have to set to `NULL`
 * `user`: User name for the service.
 * `pwd`: Password for the service, if any.
-* `type`: Type of cushion. This is important. Only `localhost`, `cloudant`, and `iriscouch` are supported right now. Internally in `sofa` functions this variable determines how urls are constructed for http requests.
-* `port`: The port to connect to. Default: 5984
 
-Of course by default there is a built in `cushion` for localhost so you don't have to do that, unless you want to change those details, e.g., the port number.
+If you call `Cushion$new()` with no arguments you get a cushion set up for local 
+use on your machine, with all defaults used. 
 
-You can preserve cushions across sessions by storing them in a hidden file. See `?authentication` for details.
+```{r}
+x <- Cushion$new()
+```
+
+```{r echo=FALSE}
+x <- Cushion$new(user = 'jane', pwd = 'foobar')
+```
 
 ## Ping the server
 
 ```{r}
-ping()
+ping(x)
 ```
 
 Nice, it's working.
@@ -82,17 +109,17 @@ Nice, it's working.
 ## Create a new database, and list available databases
 
 ```{r echo=FALSE}
-if (is.null(db_info(dbname = "sofadb")$error)) db_delete(dbname = 'sofadb')
+if (is.null(db_info(x, dbname = "sofadb")$error)) db_delete(x, dbname = 'sofadb')
 ```
 
 ```{r}
-db_create(dbname = 'sofadb')
+db_create(x, dbname = 'sofadb')
 ```
 
 see if its there now
 
 ```{r}
-db_list()
+db_list(x)
 ```
 
 ## Create documents
@@ -101,14 +128,14 @@ db_list()
 
 ```{r}
 doc1 <- '{"name":"sofa","beer":"IPA"}'
-doc_create(doc1, dbname = "sofadb", docid = "a_beer")
+doc_create(x, doc1, dbname = "sofadb", docid = "a_beer")
 ```
 
 ### Write a json document WITHOUT a name (uses POST)
 
 ```{r}
 doc2 <- '{"name":"sofa","icecream":"rocky road"}'
-doc_create(doc2, dbname = "sofadb")
+doc_create(x, doc2, dbname = "sofadb")
 ```
 
 ### XML?
@@ -119,24 +146,20 @@ write the xml
 
 ```{r}
 doc3 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
-doc_create(doc3, dbname = "sofadb", docid = "somexml")
+doc_create(x, doc3, dbname = "sofadb", docid = "somexml")
 ```
 
 get the doc back out
 
 ```{r}
-doc_get(dbname = "sofadb", docid = "somexml")
+doc_get(x, dbname = "sofadb", docid = "somexml")
 ```
 
 get just the xml out
 
 ```{r}
-doc_get(dbname = "sofadb", docid = "somexml")[["xml"]]
+doc_get(x, dbname = "sofadb", docid = "somexml")[["xml"]]
 ```
-
-## ToDo
-
-* Views
 
 ## Meta
 

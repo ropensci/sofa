@@ -4,37 +4,48 @@ sofa
 
 
 <pre>
-  _ _ _ _ _ _ _ _ _ _ _ 
+  _ _ _ _ _ _ _ _ _ _ _
  /|                   |\
 / |_ _ _ _ _ _ _ _ _ _| \
 \ /                    \/
  \ ___________________ /
 </pre>
 
-[![Build Status](https://travis-ci.org/ropensci/sofa.png?branch=master)](https://travis-ci.org/ropensci/sofa)
+[![Build Status](https://travis-ci.org/ropensci/sofa.svg?branch=master)](https://travis-ci.org/ropensci/sofa)
 [![codecov.io](https://codecov.io/github/ropensci/sofa/coverage.svg?branch=master)](https://codecov.io/github/ropensci/sofa?branch=master)
 
-#### *An easy interface to CouchDB from R*
+__An easy interface to CouchDB from R__
 
-Note: Check out [*R4couchdb*](https://github.com/wactbprot/R4CouchDB), another R package to interact with CouchDB. 
+Note: Check out [*R4couchdb*](https://github.com/wactbprot/R4CouchDB), another R 
+package to interact with CouchDB.
 
-## Quickstart
+## Install CouchDB
 
-### Install CouchDB
+Go to <http://docs.couchdb.org/en/2.0.0/install/index.html> for instructions.
 
-Instructions [here](http://wiki.apache.org/couchdb/Installation)
+## Connect to CouchDB
 
-### Connect to CouchDB
-
-In your terminal 
+This may be starting it on your terminal/shell
 
 ```sh
 couchdb
 ```
 
+Or opening the CouchDB app on your machine, or running it in docker. Whatever it
+is, start it up.
+
 You can interact with your CouchDB databases as well in your browser. Navigate to [http://localhost:5984/_utils](http://localhost:5984/_utils)
 
-### Install sofa
+## Install sofa
+
+From CRAN
+
+
+```r
+install.packages("sofa")
+```
+
+Development version from GitHub
 
 
 ```r
@@ -46,64 +57,71 @@ devtools::install_github("ropensci/sofa")
 library('sofa')
 ```
 
-### Cushions
+## Cushions
 
-Cushions? What? Since it's couch we gotta use `cushions` somehow. `cushions` are basically just a simple named list holding details of connections for different couches you work with. See `?cushions` or `?authentication` for help. 
+Cushions? What? Since it's couch we gotta use `cushions` somehow. `cushions` are a 
+connection class containing all connection info to a CouchDB instance. 
+See `?Cushion` for help.
 
-As an example, here's how I set up details for connecting to my Cloudant couch:
+As an example, connecting to a Cloudant couch:
 
 
 ```r
-cushion(name = 'cloudant', user = '<user name>', pwd = '<password>', type = "cloudant")
+z <- Cushion$new(
+  host = "stuff.cloudant.com", 
+  transport = 'https', 
+  port = NULL, 
+  user = 'foobar', 
+  pwd = 'things'
+)
 ```
 
-Break down of parameters: 
+Break down of parameters:
 
-* `name`: Name of the cushion. This is how you'll refer to each connection. `cushion` is the first parameter of each function. 
+* `host`: the base url, without the transport (`http`/`https`)
+* `transport`: `http` or `https`
+* `port`: The port to connect to. Default: 5984. For Cloudant, have to set to `NULL`
 * `user`: User name for the service.
 * `pwd`: Password for the service, if any.
-* `type`: Type of cushion. This is important. Only `localhost`, `cloudant`, and `iriscouch` are supported right now. Internally in `sofa` functions this variable determines how urls are constructed for http requests. 
-* `port`: The port to connect to. Default: 5984
 
-Of course by default there is a built in `cushion` for localhost so you don't have to do that, unless you want to change those details, e.g., the port number.
-
-You can preserve cushions across sessions by storing them in a hidden file. See `?authentication` for details.
-
-### Ping the server
+If you call `Cushion$new()` with no arguments you get a cushion set up for local 
+use on your machine, with all defaults used. 
 
 
 ```r
-ping()
+x <- Cushion$new()
+```
+
+
+
+## Ping the server
+
+
+```r
+ping(x)
 #> $couchdb
 #> [1] "Welcome"
 #> 
-#> $uuid
-#> [1] "2c10f0c6d9bd17205b692ae93cd4cf1d"
-#> 
 #> $version
-#> [1] "1.6.1"
+#> [1] "2.0.0"
 #> 
 #> $vendor
-#> $vendor$version
-#> [1] "1.6.1-1"
-#> 
 #> $vendor$name
-#> [1] "Homebrew"
+#> [1] "The Apache Software Foundation"
 ```
 
 Nice, it's working.
 
-### Create a new database, and list available databases
+## Create a new database, and list available databases
 
 
 ```
-#> $ok
-#> [1] TRUE
+#> Error: (404) - Database does not exist.
 ```
 
 
 ```r
-db_create(dbname='sofadb')
+db_create(x, dbname = 'sofadb')
 #> $ok
 #> [1] TRUE
 ```
@@ -112,24 +130,18 @@ see if its there now
 
 
 ```r
-db_list()
-#>  [1] "_replicator"  "_users"       "adsfa"        "bulkfromchr" 
-#>  [5] "bulkfromlist" "bulktest"     "bulktest2"    "bulktest3"   
-#>  [9] "bulktest4"    "bulktest5"    "cachecall"    "diamonds"    
-#> [13] "hello_earth"  "iris"         "iriscolumns"  "irisrows"    
-#> [17] "leothelion"   "leothelion2"  "mapuris"      "mran"        
-#> [21] "mtcarsdb"     "mydb"         "newdbs"       "newnew"      
-#> [25] "sofadb"       "stuff"        "stuff2"       "test"
+db_list(x)
+#> [1] "sofadb"
 ```
 
-### Create documents
+## Create documents
 
-#### Write a document WITH a name (uses PUT)
+### Write a document WITH a name (uses PUT)
 
 
 ```r
 doc1 <- '{"name":"sofa","beer":"IPA"}'
-doc_create(doc1, dbname="sofadb", docid="a_beer")
+doc_create(x, doc1, dbname = "sofadb", docid = "a_beer")
 #> $ok
 #> [1] TRUE
 #> 
@@ -140,23 +152,23 @@ doc_create(doc1, dbname="sofadb", docid="a_beer")
 #> [1] "1-a48c98c945bcc05d482bc6f938c89882"
 ```
 
-#### Write a json document WITHOUT a name (uses POST)
+### Write a json document WITHOUT a name (uses POST)
 
 
 ```r
 doc2 <- '{"name":"sofa","icecream":"rocky road"}'
-doc_create(doc2, dbname="sofadb")
+doc_create(x, doc2, dbname = "sofadb")
 #> $ok
 #> [1] TRUE
 #> 
 #> $id
-#> [1] "5ec47bcb445304091a7fde125f0003d1"
+#> [1] "9f8a9c9617997cc5babbf5302245f647"
 #> 
 #> $rev
 #> [1] "1-fd0da7fcb8d3afbfc5757d065c92362c"
 ```
 
-#### XML? 
+### XML?
 
 Write an xml document WITH a name (uses PUT). The xml is written as xml in couchdb, just wrapped in json, when you get it out it will be as xml.
 
@@ -165,7 +177,7 @@ write the xml
 
 ```r
 doc3 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
-doc_create(doc3, dbname="sofadb", docid="somexml")
+doc_create(x, doc3, dbname = "sofadb", docid = "somexml")
 #> $ok
 #> [1] TRUE
 #> 
@@ -180,7 +192,7 @@ get the doc back out
 
 
 ```r
-doc_get(dbname="sofadb", docid="somexml")
+doc_get(x, dbname = "sofadb", docid = "somexml")
 #> $`_id`
 #> [1] "somexml"
 #> 
@@ -195,13 +207,9 @@ get just the xml out
 
 
 ```r
-doc_get(dbname="sofadb", docid="somexml")[["xml"]]
+doc_get(x, dbname = "sofadb", docid = "somexml")[["xml"]]
 #> [1] "<top><a/><b/><c><d/><e>bob</e></c></top>"
 ```
-
-### Views
-
-__Still working on these functions, check back later...__
 
 ## Meta
 
