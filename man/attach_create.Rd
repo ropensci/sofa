@@ -2,34 +2,37 @@
 % Please edit documentation in R/attach.r
 \name{attach_create}
 \alias{attach_create}
-\title{Include an attachment either on an existing or new document.}
+\title{Include an attachment either on an existing or new document}
 \usage{
-attach_create(cushion = "localhost", dbname, docid, attachment, attname, ...)
+attach_create(cushion, dbname, docid, attachment, attname, ...)
 }
 \arguments{
 \item{cushion}{A \code{Cushion} object. Required.}
 
-\item{dbname}{Database name. (charcter)}
+\item{dbname}{(charcter) Database name. Required.}
 
-\item{docid}{Document ID (character)}
+\item{docid}{(charcter) Document ID. Required.}
 
-\item{attachment}{The attachment object name}
+\item{attachment}{(charcter) The attachment object name. Required.}
 
-\item{attname}{Attachment name.}
+\item{attname}{(charcter) Attachment name. Required.}
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }
 \description{
-Include an attachment either on an existing or new document.
+Include an attachment either on an existing or new document
 }
 \examples{
 \dontrun{
+(x <- Cushion$new(user = 'jane', pwd = 'foobar'))
+
 # put on to an existing document
 doc <- '{"name":"guy","beer":"anybeerisfine"}'
-doc_create(dbname="sofadb", doc=doc, docid="guysbeer")
+doc_create(x, dbname="sofadb", doc=doc, docid="guysbeer")
 myattachment <- "just a simple text string"
 myattachment <- mtcars
-attach_create(dbname="sofadb", docid="guysbeer", attachment=myattachment, attname="mtcarstable.csv")
+attach_create(x, dbname="sofadb", docid="guysbeer",
+  attachment=myattachment, attname="mtcarstable.csv")
 }
 }
 

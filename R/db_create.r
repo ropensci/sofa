@@ -8,7 +8,7 @@
 #' @param as (character) One of list (default) or json
 #' @param ... Curl args passed on to \code{\link[httr]{GET}}
 #' @examples \dontrun{
-#' (x <- Cushion$new())
+#' (x <- Cushion$new(user = 'jane', pwd = 'foobar'))
 #'
 #' if ("leothelion" %in% db_list(x)) {
 #'   invisible(db_delete(x, dbname="leothelion"))

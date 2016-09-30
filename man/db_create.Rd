@@ -23,7 +23,7 @@ Create a database.
 }
 \examples{
 \dontrun{
-(x <- Cushion$new())
+(x <- Cushion$new(user = 'jane', pwd = 'foobar'))
 
 if ("leothelion" \%in\% db_list(x)) {
   invisible(db_delete(x, dbname="leothelion"))

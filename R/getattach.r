@@ -2,23 +2,20 @@
 #'
 #' @export
 #' @inheritParams ping
-#' @param dbname Database name. (charcter)
-#' @param docid Document ID (character)
-#' @param attname Attachment name.
+#' @param dbname (charcter) Database name. Required.
+#' @param docid (charcter) Document ID. Required.
+#' @param attname (charcter) Attachment name. Optional.
 #' @examples \dontrun{
-#' attach_get(dbname="sofadb", docid="guysbeer")
-#' attach_get("oceancouch", dbname="mapuris", docid="goodbeer")
+#' (x <- Cushion$new(user = 'jane', pwd = 'foobar'))
+#'
+#' attach_get(x, dbname="sofadb", docid="guysbeer")
 #' }
-
-attach_get <- function(cushion="localhost", dbname, docid, attname=NULL, as='list', ...) {
-
-  cushion <- get_cushion(cushion)
-  url <- pick_url(cushion)
-  if(is.null(attname)){
-    call_ <- paste(url, "/", dbname, "/", docid, "?_attachments=true", sep="")
-  } else
-  {
-    call_ <- paste(url, "/", dbname, "/", docid, "/", attname, sep="")
+attach_get <- function(cushion, dbname, docid, attname = NULL, as = 'list', ...) {
+  check_cushion(cushion)
+  if (is.null(attname)) {
+    url <- file.path(cushion$make_url(), dbname, docid)
+  } else {
+    url <- file.path(cushion$make_url(), dbname, docid, attname)
   }
-  sofa_GET(call_, as, content_type_json(), ...)
+  sofa_GET(url, as, content_type_json(), query = list(`_attachments` = "true"), ...)
 }

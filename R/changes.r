@@ -27,9 +27,9 @@
 #'  \item results - Changes made to a database, length 0 if no changes.
 #'  Each of these has:
 #'  \itemize{
-#'   \item changes – List of document`s leafs with single field rev
-#'   \item id – Document ID
-#'   \item seq – Update sequence
+#'   \item changes - List of document`s leafs with single field rev
+#'   \item id - Document ID
+#'   \item seq - Update sequence
 #'  }
 #'  \item last_seq - Last change update sequence
 #'  \item pending - Count of remaining items in the feed
