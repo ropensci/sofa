@@ -18,8 +18,8 @@ There are the following functions for working with documents:
  \item \code{\link{doc_delete}} - Delete a document
  \item \code{\link{doc_head}} - Get headers for a document
  \item \code{\link{attach_create}} - Attach something to a document
- \item \code{\link{alldocs}} - Get all documents
- \item \code{\link{revisions}} - Get revisions for a document
+ \item \code{\link{db_alldocs}} - Get all documents
+ \item \code{\link{db_revisions}} - Get revisions for a document
 }
 }
 

@@ -13,21 +13,24 @@
 #' @examples \dontrun{
 #' (x <- Cushion$new())
 #'
-#' # Create a view
-#' db_create(x, dbname = "alm_couchdb")
+#' if ("acouch" %in% db_list(x)) {
+#'  db_delete(x, dbname = "acouch")
+#' }
+#' db_create(x, 'acouch')
 #'
-#' view_put(x, dbname='alm_couchdb', design_name='almview1')
-#' view_put(x, dbname='alm_couchdb', design_name='almview2', value="doc.baseurl")
-#' view_put(x, dbname='alm_couchdb', design_name='almview5', value="[doc.baseurl,doc.queryargs]")
+#' # Create a view
+#' view_put(x, dbname='acouch', design_name='view1')
+#' view_put(x, dbname='acouch', design_name='view2', value="doc.baseurl")
+#' view_put(x, dbname='acouch', design_name='view5', value="[doc.baseurl,doc.queryargs]")
 #'
 #' # Delete a view
-#' view_del(x, dbname='alm_couchdb', design_name='almview1')
+#' view_delete(x, dbname='acouch', design_name='view1')
 #'
 #' # Get info on a design document (i.e., a view)
-#' # view_get(x, dbname='alm_couchdb', design_name='almview1')
+#' view_get(x, dbname='acouch', design_name='view2')
 #'
 #' # Search using a view
-#' # view_search(x, dbname='alm_couchdb', design_name='almview1', query="XXX")
+#' view_search(x, dbname='acouch', design_name='view2', query="XXX")
 #' }
 
 #' @export
@@ -46,7 +49,7 @@ view_put <- function(cushion, dbname, design_name, fxnname='foo',
 
 #' @export
 #' @rdname views
-view_del <- function(cushion, dbname, design_name, as='json', ...) {
+view_delete <- function(cushion, dbname, design_name, as='json', ...) {
   check_cushion(cushion)
   url <- cushion$make_url()
   rev <- view_get(cushion, dbname, design_name)$`_rev`
@@ -56,10 +59,10 @@ view_del <- function(cushion, dbname, design_name, as='json', ...) {
 
 #' @export
 #' @rdname views
-view_get <- function(cushion, dbname, design_name, as='json', ...) {
+view_get <- function(cushion, dbname, design_name, as='list', ...) {
   check_cushion(cushion)
   url <- cushion$make_url()
-  sofa_GET(file.path(url, dbname, "_design", design_name), NULL, as, cushion$get_headers(), ...)
+  sofa_GET(file.path(url, dbname, "_design", design_name), as, cushion$get_headers(), ...)
 }
 
 #' @export
@@ -68,5 +71,5 @@ view_search <- function(cushion, dbname, design_name, query = NULL, as='json', .
   check_cushion(cushion)
   url <- cushion$make_url()
   call_ <- file.path(url, dbname, "_design", design_name, "_view", "foo")
-  sofa_GET(call_, NULL, as, cushion$get_headers(), ...)
+  sofa_GET(call_, as, cushion$get_headers(), ...)
 }

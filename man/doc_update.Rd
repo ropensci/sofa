@@ -40,10 +40,10 @@ db_create(x, dbname='sofadb')
 doc1 <- '{"name":"drink","beer":"IPA"}'
 doc_create(x, dbname="sofadb", doc=doc1, docid="b_beer")
 doc_get(x, dbname = "sofadb", docid = "b_beer")
-revs <- revisions(x, dbname = "sofadb", docid = "b_beer")
+revs <- db_revisions(x, dbname = "sofadb", docid = "b_beer")
 doc2 <- '{"name":"drink","beer":"IPA","note":"yummy","note2":"yay"}'
 doc_update(x, dbname="sofadb", doc=doc2, docid="b_beer", rev=revs[1])
-revisions(x, dbname = "sofadb", docid = "b_beer")
+db_revisions(x, dbname = "sofadb", docid = "b_beer")
 }
 }
 

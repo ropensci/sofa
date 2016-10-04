@@ -19,12 +19,12 @@
 #' doc_create(x, dbname="sofadb", doc1, docid="abeer")
 #' doc_create(x, dbname="sofadb", doc1, docid="morebeer", as='json')
 #'
-#' revisions(x, dbname="sofadb", docid="abeer")
-#' revisions(x, dbname="sofadb", docid="abeer", simplify=FALSE)
-#' revisions(x, dbname="sofadb", docid="abeer", as='json')
-#' revisions(x, dbname="sofadb", docid="abeer", simplify=FALSE, as='json')
+#' db_revisions(x, dbname="sofadb", docid="abeer")
+#' db_revisions(x, dbname="sofadb", docid="abeer", simplify=FALSE)
+#' db_revisions(x, dbname="sofadb", docid="abeer", as='json')
+#' db_revisions(x, dbname="sofadb", docid="abeer", simplify=FALSE, as='json')
 #' }
-revisions <- function(cushion, dbname, docid, simplify=TRUE, as='list', ...) {
+db_revisions <- function(cushion, dbname, docid, simplify=TRUE, as='list', ...) {
   check_cushion(cushion)
   call_ <- sprintf("%s/%s/%s", cushion$make_url(), dbname, docid)
   tmp <- sofa_GET(call_, as = "list", query = list(revs_info = 'true'),

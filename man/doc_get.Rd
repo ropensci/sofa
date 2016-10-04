@@ -52,7 +52,7 @@ doc1 <- '{"name": "drink", "beer": "IPA", "score": 5}'
 doc_create(x, dbname="sofadb", doc1, docid="abeer")
 
 doc_get(x, dbname="sofadb", docid="abeer")
-revs <- revisions(x, dbname="sofadb", docid="abeer")
+revs <- db_revisions(x, dbname="sofadb", docid="abeer")
 doc_get(x, dbname="sofadb", docid="abeer", rev=revs[1])
 doc_get(x, dbname="sofadb", docid="abeer", rev=revs[2])
 doc_get(x, dbname="sofadb", docid="abeer", as='json')

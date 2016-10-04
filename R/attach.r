@@ -19,7 +19,7 @@
 #' }
 attach_create <- function(cushion, dbname, docid, attachment, attname, ...) {
   check_cushion(cushion)
-  revget <- revisions(cushion, dbname = dbname, docid = docid)[1]
+  revget <- db_revisions(cushion, dbname = dbname, docid = docid)[1]
   url <- file.path(cushion$make_url(), dbname, docid, attname)
   out <- PUT(url, query = list(rev = revget),
              body = attachment, content_type("text/csv"), cushion$get_headers(), ...)
