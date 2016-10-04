@@ -2,10 +2,12 @@
 #'
 #' @name views
 #' @inheritParams ping
-#' @param dbname (character) Database name
-#' @param design_name (character) Design document name
-#' @param fxnname (character) A function name
+#' @param dbname (character) Database name. required.
+#' @param design_name (character) Design document name. required.
+#' @param fxnname (character) A function name. required for \code{view_put}
+#' and \code{view_put_}
 #' @param key,value (character) a key and value, see Examples and Details
+#' @param fxn (character) a javascript function. required for \code{view_put_}
 #' @details \code{view_create} is a slightly easier interface to creating
 #' design documents; it just asks for a function name, the key and a
 #' value, then we create the function for you internally. TO have more

@@ -23,17 +23,20 @@ view_search(cushion, dbname, design_name, as = "list", ...)
 \arguments{
 \item{cushion}{A \code{Cushion} object. Required.}
 
-\item{dbname}{(character) Database name}
+\item{dbname}{(character) Database name. required.}
 
-\item{design_name}{(character) Design document name}
+\item{design_name}{(character) Design document name. required.}
 
-\item{fxnname}{(character) A function name}
+\item{fxnname}{(character) A function name. required for \code{view_put}
+and \code{view_put_}}
 
 \item{key, value}{(character) a key and value, see Examples and Details}
 
 \item{as}{(character) One of list (default) or json}
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
+
+\item{fxn}{(character) a javascript function. required for \code{view_put_}}
 }
 \description{
 Work with design documents (i.e., views) in your CouchDB's.
