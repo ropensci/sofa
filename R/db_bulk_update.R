@@ -29,29 +29,29 @@
 #'   invisible(db_delete(x, dbname="bulktest"))
 #' }
 #' db_create(x, dbname="bulktest")
-#' bulk_create(x, mtcars, dbname="bulktest")
+#' db_bulk_create(x, mtcars, dbname="bulktest")
 #'
 #' # modify mtcars
 #' mtcars$letter <- sample(letters, NROW(mtcars), replace = TRUE)
-#' bulk_update(x, "bulktest", mtcars)
+#' db_bulk_update(x, "bulktest", mtcars)
 #'
 #' # change again
 #' mtcars$num <- 89
-#' bulk_update(x, "bulktest", mtcars)
+#' db_bulk_update(x, "bulktest", mtcars)
 #' }
-bulk_update <- function(cushion, dbname, doc, docid = NULL,
+db_bulk_update <- function(cushion, dbname, doc, docid = NULL,
                         how = 'rows', as = 'list', ...) {
   check_cushion(cushion)
-  bulk_update_(doc, cushion, dbname, docid, how, as, ...)
+  db_bulk_update_(doc, cushion, dbname, docid, how, as, ...)
 }
 
-bulk_update_ <- function(doc, cushion, dbname, docid = NULL,
+db_bulk_update_ <- function(doc, cushion, dbname, docid = NULL,
                         how = 'rows', as = 'list', ...) {
-  UseMethod("bulk_update_")
+  UseMethod("db_bulk_update_")
 }
 
 #' @export
-bulk_update_.data.frame <- function(doc, cushion, dbname, docid = NULL,
+db_bulk_update_.data.frame <- function(doc, cushion, dbname, docid = NULL,
                                    how = 'rows', as = 'list', ...) {
   row.names(doc) <- NULL
   url <- sprintf("%s/%s", cushion$make_url(), dbname)

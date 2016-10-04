@@ -44,7 +44,7 @@
 #' db_create(x, dbname='leothelion')
 #'
 #' # no changes
-#' res <- changes(x, dbname="leothelion")
+#' res <- db_changes(x, dbname="leothelion")
 #' res$results
 #'
 #' # create a document
@@ -52,13 +52,13 @@
 #' doc_create(x, dbname="leothelion", doc1, docid="abeer")
 #'
 #' # now there's changes
-#' res <- changes(x, dbname="leothelion")
+#' res <- db_changes(x, dbname="leothelion")
 #' res$results
 #'
 #' # as JSON
-#' changes(x, dbname="leothelion", as='json')
+#' db_changes(x, dbname="leothelion", as='json')
 #' }
-changes <- function(cushion, dbname, descending=NULL, startkey=NULL, endkey=NULL,
+db_changes <- function(cushion, dbname, descending=NULL, startkey=NULL, endkey=NULL,
   since=NULL, limit=NULL, include_docs=NULL, feed="normal", heartbeat=NULL,
   filter=NULL, as='list', ...) {
 

@@ -30,13 +30,13 @@
 #'   invisible(db_delete(x, dbname="bulktest"))
 #' }
 #' db_create(x, dbname="bulktest")
-#' bulk_create(x, "bulktest", mtcars)
+#' db_bulk_create(x, "bulktest", mtcars)
 #'
 #' if ("bulktest2" %in% db_list(x)) {
 #'   invisible(db_delete(x, dbname="bulktest2"))
 #' }
 #' db_create(x, dbname="bulktest2")
-#' bulk_create(x, "bulktest2", iris)
+#' db_bulk_create(x, "bulktest2", iris)
 #'
 #' # data.frame with 1 or more columns as neseted lists
 #' mtcars$stuff <- list("hello_world")
@@ -45,7 +45,7 @@
 #'   invisible(db_delete(x, dbname="bulktest3"))
 #' }
 #' db_create(x, dbname="bulktest3")
-#' bulk_create(x, "bulktest3", mtcars)
+#' db_bulk_create(x, "bulktest3", mtcars)
 #'
 #' # From a json character string, or more likely, many json character strings
 #' library("jsonlite")
@@ -54,7 +54,7 @@
 #'   invisible(db_delete(x, dbname="bulkfromchr"))
 #' }
 #' db_create(x, dbname="bulkfromchr")
-#' bulk_create(x, "bulkfromchr", strs)
+#' db_bulk_create(x, "bulkfromchr", strs)
 #'
 #' # From a list of lists
 #' library("jsonlite")
@@ -63,35 +63,35 @@
 #'   invisible(db_delete(x, dbname="bulkfromchr"))
 #' }
 #' db_create(x, dbname="bulkfromchr")
-#' bulk_create(x, "bulkfromchr", lst)
+#' db_bulk_create(x, "bulkfromchr", lst)
 #'
 #' # iris dataset - by rows
 #' if ("irisrows" %in% db_list(x)) {
 #'   invisible(db_delete(x, dbname="irisrows"))
 #' }
 #' db_create(x, dbname="irisrows")
-#' bulk_create(x, "irisrows", apply(iris, 1, as.list))
+#' db_bulk_create(x, "irisrows", apply(iris, 1, as.list))
 #'
 #' # iris dataset - by columns - doesn't quite work yet
 #' # if ("iriscolumns" %in% db_list(x)) {
 #' #   invisible(db_delete(x, dbname="iriscolumns"))
 #' # }
 #' # db_create(x, dbname="iriscolumns")
-#' # bulk_create(x, "iriscolumns", parse_df(iris, "columns", tojson=FALSE), how="columns")
+#' # db_bulk_create(x, "iriscolumns", parse_df(iris, "columns", tojson=FALSE), how="columns")
 #' }
-bulk_create <- function(cushion, dbname, doc, docid = NULL,
+db_bulk_create <- function(cushion, dbname, doc, docid = NULL,
                          how = 'rows', as = 'list', ...) {
   check_cushion(cushion)
-  bulk_create_(doc, cushion, dbname, docid, how, as, ...)
+  db_bulk_create_(doc, cushion, dbname, docid, how, as, ...)
 }
 
-bulk_create_ <- function(doc, cushion, dbname, docid = NULL,
+db_bulk_create_ <- function(doc, cushion, dbname, docid = NULL,
                        how = 'rows', as = 'list', ...) {
-  UseMethod("bulk_create_")
+  UseMethod("db_bulk_create_")
 }
 
 #' @export
-bulk_create_.character <- function(doc, cushion, dbname, docid = NULL,
+db_bulk_create_.character <- function(doc, cushion, dbname, docid = NULL,
                                    how = 'rows', as = 'list', ...) {
   url <- sprintf("%s/%s", cushion$make_url(), dbname)
   body <- sprintf('{"docs": [%s]}', paste0(doc, collapse = ", "))
@@ -99,7 +99,7 @@ bulk_create_.character <- function(doc, cushion, dbname, docid = NULL,
 }
 
 #' @export
-bulk_create_.list <- function(doc, cushion, dbname, docid = NULL,
+db_bulk_create_.list <- function(doc, cushion, dbname, docid = NULL,
                                   how = 'rows', as = 'list', ...) {
   url <- sprintf("%s/%s", cushion$make_url(), dbname)
   body <- jsonlite::toJSON(list(docs = doc), auto_unbox = TRUE)
@@ -107,7 +107,7 @@ bulk_create_.list <- function(doc, cushion, dbname, docid = NULL,
 }
 
 #' @export
-bulk_create_.data.frame <- function(doc, cushion, dbname, docid = NULL,
+db_bulk_create_.data.frame <- function(doc, cushion, dbname, docid = NULL,
                                    how = 'rows', as = 'list', ...) {
   row.names(doc) <- NULL
   url <- sprintf("%s/%s", cushion$make_url(), dbname)

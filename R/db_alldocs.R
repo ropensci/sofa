@@ -19,17 +19,17 @@
 #' db_create(x, dbname='leothelion')
 #' bulk_create(x, mtcars, dbname="leothelion")
 #'
-#' alldocs(x, dbname="leothelion")
-#' alldocs(x, dbname="leothelion", as='json')
-#' alldocs(x, dbname="leothelion", limit=2)
-#' alldocs(x, dbname="leothelion", limit=2, include_docs="true")
+#' db_alldocs(x, dbname="leothelion")
+#' db_alldocs(x, dbname="leothelion", as='json')
+#' db_alldocs(x, dbname="leothelion", limit=2)
+#' db_alldocs(x, dbname="leothelion", limit=2, include_docs="true")
 #'
 #' # curl options
 #' library('httr')
-#' res <- alldocs(x, dbname="leothelion", config=verbose())
+#' res <- db_alldocs(x, dbname="leothelion", config=verbose())
 #' }
 
-alldocs <- function(cushion, dbname, asdf = TRUE,
+db_alldocs <- function(cushion, dbname, asdf = TRUE,
   descending=NULL, startkey=NULL, endkey=NULL, limit=NULL, include_docs=NULL, as='list', ...) {
 
   check_cushion(cushion)
