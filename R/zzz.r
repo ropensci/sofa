@@ -42,6 +42,12 @@ sofa_GET <- function(url, as = 'list', ...) {
   if (as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
 }
 
+sofa_HEAD <- function(url, ...) {
+  res <- HEAD(url, content_type_json(), ...)
+  stop_status(res)
+  res$headers
+}
+
 sofa_DELETE <- function(url, as = 'list', ...) {
   as <- match.arg(as, c('list','json'))
   res <- DELETE(url, content_type_json(), ...)
