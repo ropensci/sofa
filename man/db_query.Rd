@@ -18,7 +18,7 @@ compose one R list or json blob here}
 
 \item{selector}{(json) - JSON object describing criteria used to select
 documents. More information provided in the section on selector syntax.
-See
+See the \code{query_tutorial} in this package, and the selectors docs
 \url{http://docs.couchdb.org/en/2.0.0/api/database/find.html#find-selectors}}
 
 \item{limit}{(number) - Maximum number of results returned. Default is 25.
