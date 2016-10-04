@@ -56,7 +56,7 @@ db_bulk_update_.data.frame <- function(doc, cushion, dbname, docid = NULL,
   row.names(doc) <- NULL
   url <- sprintf("%s/%s", cushion$make_url(), dbname)
   each <- unname(parse_df(doc, how = how, tojson = FALSE))
-  info <- apply(alldocs(cushion, dbname = dbname), 1, as.list)
+  info <- apply(db_alldocs(cushion, dbname = dbname), 1, as.list)
   each <- Map(function(x, y) modifyList(x, list(`_id` = y$id, `_rev` = y$rev)), each, info)
   body <- jsonlite::toJSON(list(docs = each), auto_unbox = TRUE)
   sofa_bulk(file.path(url, "_bulk_docs"), as, body = body, cushion$get_headers(), ...)
