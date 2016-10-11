@@ -119,7 +119,7 @@ check_inputs <- function(x){
       } else {
         # validate
         tmp <- jsonlite::validate(x)
-        if (!tmp) stop(attr(tmp, "err"))
+        if (!tmp) stop(attr(tmp, "err"), call. = FALSE)
         x
       }
     } else if (is.list(x)) {

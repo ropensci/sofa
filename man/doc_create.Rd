@@ -12,8 +12,8 @@ doc_create(cushion, dbname, doc, docid = NULL, how = "rows", as = "list",
 
 \item{dbname}{Database name3}
 
-\item{doc}{Document content, can be character string, a list. The character
-type can be XML as well, which is embedded in json. When the document is
+\item{doc}{Document content, can be character string or a list. The character
+type can be XML as well, if embedded in JSON. When the document is
 retrieved via \code{\link{doc_get}}, the XML is given back and you can parse
 it as normal.}
 

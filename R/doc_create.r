@@ -4,8 +4,8 @@
 #' @template all
 #' @template return
 #' @param dbname Database name3
-#' @param doc Document content, can be character string, a list. The character
-#' type can be XML as well, which is embedded in json. When the document is
+#' @param doc Document content, can be character string or a list. The character
+#' type can be XML as well, if embedded in JSON. When the document is
 #' retrieved via \code{\link{doc_get}}, the XML is given back and you can parse
 #' it as normal.
 #' @param docid Document ID
