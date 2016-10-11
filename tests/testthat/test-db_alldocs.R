@@ -33,6 +33,7 @@ test_that("db_alldocs - include_docs works", {
 })
 
 test_that("db_alldocs fails well", {
-	#expect_error(db_alldocs(5), "input must be a sofa Cushion object")
+	expect_error(db_alldocs(), "argument \"cushion\" is missing")
+  expect_error(db_alldocs(sofa_conn), "argument \"dbname\" is missing")
 })
 
