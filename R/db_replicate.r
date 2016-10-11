@@ -2,7 +2,6 @@
 #' e.g., Cloudant, Iriscouch
 #'
 #' @export
-#' @template all
 #' @template return
 #' @param from Couch to replicate from. An object of class \code{Cushion}.
 #' Required.
@@ -12,6 +11,8 @@
 #' @param createdb If \code{TRUE}, the function creates the db on the remote
 #' server before uploading. The db has to exist before uploading, so either
 #' you do it separately or this fxn can do it for you. Default: \code{FALSE}
+#' @param as (character) One of list (default) or json
+#' @param ... Curl args passed on to \code{\link[httr]{GET}}
 #' @examples \dontrun{
 #' ## create a connection
 #' (x <- Cushion$new())

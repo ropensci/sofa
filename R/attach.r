@@ -1,20 +1,27 @@
 #' Include an attachment either on an existing or new document
 #'
 #' @export
-#' @template all
+#' @param cushion A \code{Cushion} object. Required.
 #' @param dbname (charcter) Database name. Required.
 #' @param docid (charcter) Document ID. Required.
 #' @param attachment (charcter) The attachment object name. Required.
 #' @param attname (charcter) Attachment name. Required.
+#' @param ... Curl args passed on to \code{\link[httr]{POST}}
+#' @return a list
 #' @examples \dontrun{
 #' (x <- Cushion$new())
 #'
+#' if ("drinksdb" %in% db_list(x)) {
+#'   invisible(db_delete(x, dbname="drinksdb"))
+#' }
+#' db_create(x, dbname='drinksdb')
+#'
 #' # put on to an existing document
-#' doc <- '{"name":"guy","beer":"anybeerisfine"}'
-#' doc_create(x, dbname="sofadb", doc=doc, docid="guysbeer")
+#' doc <- '{"name":"stuff", "drink":"soda"}'
+#' doc_create(x, dbname="drinksdb", doc=doc, docid="asoda")
 #' myattachment <- "just a simple text string"
 #' myattachment <- mtcars
-#' attach_create(x, dbname="sofadb", docid="guysbeer",
+#' attach_create(x, dbname="drinksdb", docid="asoda",
 #'   attachment=myattachment, attname="mtcarstable.csv")
 #' }
 attach_create <- function(cushion, dbname, docid, attachment, attname, ...) {
@@ -26,35 +33,3 @@ attach_create <- function(cushion, dbname, docid, attachment, attname, ...) {
   stop_status(out)
   jsonlite::fromJSON(content(out, "text", encoding = "UTF-8"))
 }
-
-# PUT('http://localhost:5984/sofadb/guysbeer/mtcars.csv',
-#     body=list(file=upload_file("mtcars.csv")),
-#     query=list(rev = revget)
-#     # encode="multipart",
-#     # content_type("text/csv")
-#     # content_type("text/plain")
-# )
-
-#     body=list(
-#       `_rev` = revget,
-#       `_attachments` = list(
-#         `/Users/sacmac/mtcars.csv` = list(
-#           "content_type" = "text/csv"
-#         )
-#     )),
-#     content_type_json()
-# )
-
-# curl -XPUT 'http://localhost:5984/sofadb/guysbeer' -d '{
-# 	"_attachments": {
-# 		"/Users/sacmac/mtcars.csv": {
-# 			"content_type": "text/csv"
-# 		}
-# 	}
-# }' -H "Content-Type:application/json"
-#
-#
-# curl -XPUT \
-#   -H 'Content-Type: text/csv' \
-#   --data-binary @mtcars.csv \
-#   'http://localhost:5984/sofadb/guysbeer/mtcars.csv?rev=23-8f8951e0afa79a1c500697cdb83e442f'

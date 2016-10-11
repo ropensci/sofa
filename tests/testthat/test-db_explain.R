@@ -22,7 +22,7 @@ test_that("db_explain basic usage works", {
              "$gt": null
              }
              }
-  }')
+  }', limit = 25)
 
 	expect_is(aa, "list")
 	expect_named(aa, c('dbname','index','selector','opts','limit','skip','fields','range'))

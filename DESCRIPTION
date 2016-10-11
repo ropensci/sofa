@@ -4,10 +4,9 @@ Description: Provides an interface to the NoSQL database CouchDB
     (<http://couchdb.apache.org>).  Methods are provided for managing
     databases within CouchDB, including creating/deleting/updating/transferring,
     and managing documents within databases. One can connect with a local
-    CouchDB instance, or a remote CouchDB databases such as Iriscouch
-    (<http://www.iriscouch.com>) or Cloudant (<https://cloudant.com>).
-    Documents can be inserted directly from vectors, lists,
-    data.frames, and JSON.
+    CouchDB instance, or a remote CouchDB databases such as Cloudant
+    (<https://cloudant.com>). Documents can be inserted directly from
+    vectors, lists, data.frames, and JSON.
 Version: 0.1.9.9550
 Authors@R: person("Scott", "Chamberlain", role = c("aut", "cre"),
     email = "myrmecocystus@gmail.com")

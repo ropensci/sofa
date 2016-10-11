@@ -17,9 +17,10 @@ attach_create(cushion, dbname, docid, attachment, attname, ...)
 
 \item{attname}{(charcter) Attachment name. Required.}
 
-\item{...}{Curl args passed on to \code{\link[httr]{GET}}}
-
-\item{as}{(character) One of list (default) or json}
+\item{...}{Curl args passed on to \code{\link[httr]{POST}}}
+}
+\value{
+a list
 }
 \description{
 Include an attachment either on an existing or new document
@@ -28,12 +29,17 @@ Include an attachment either on an existing or new document
 \dontrun{
 (x <- Cushion$new())
 
+if ("drinksdb" \%in\% db_list(x)) {
+  invisible(db_delete(x, dbname="drinksdb"))
+}
+db_create(x, dbname='drinksdb')
+
 # put on to an existing document
-doc <- '{"name":"guy","beer":"anybeerisfine"}'
-doc_create(x, dbname="sofadb", doc=doc, docid="guysbeer")
+doc <- '{"name":"stuff", "drink":"soda"}'
+doc_create(x, dbname="drinksdb", doc=doc, docid="asoda")
 myattachment <- "just a simple text string"
 myattachment <- mtcars
-attach_create(x, dbname="sofadb", docid="guysbeer",
+attach_create(x, dbname="drinksdb", docid="asoda",
   attachment=myattachment, attname="mtcarstable.csv")
 }
 }

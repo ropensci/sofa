@@ -23,8 +23,6 @@ you do it separately or this fxn can do it for you. Default: \code{FALSE}}
 \item{as}{(character) One of list (default) or json}
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
-
-\item{cushion}{A \code{Cushion} object. Required.}
 }
 \value{
 JSON as a character string or a list (determined by the
