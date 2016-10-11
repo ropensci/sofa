@@ -1,13 +1,16 @@
 language: r
-sudo: false
+sudo: required
 cache: packages
 warnings_are_errors: false
+
+before_install:
+  - docker run -p 5984:5984 klaemo/couchdb:2.0-rc2
 
 before_script:
   - curl -X PUT localhost:5984/testing123
 
 services:
-  - couchdb
+  - docker
 
 after_success:
   - Rscript -e 'covr::codecov()'
@@ -16,3 +19,4 @@ notifications:
   email:
     on_success: never
     on_failure: never
+
