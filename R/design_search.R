@@ -51,7 +51,7 @@
 #' key. Optional. \code{start_key} is an alias for startkey
 #' @param startkey_docid,start_key_doc_id (character) Return records starting
 #' with the specified document ID. Requires startkey to be specified for this
-#' to have any effect. Optional. \codde{start_key_doc_id} is an alias for
+#' to have any effect. Optional. \code{start_key_doc_id} is an alias for
 #' \code{startkey_docid}
 #' @param update_seq (logical) Response includes an update_seq value
 #' indicating which sequence id of the database the view reflects.

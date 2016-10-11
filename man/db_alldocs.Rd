@@ -4,16 +4,13 @@
 \alias{db_alldocs}
 \title{List all docs in a given database.}
 \usage{
-db_alldocs(cushion, dbname, asdf = TRUE, descending = NULL,
-  startkey = NULL, endkey = NULL, limit = NULL, include_docs = NULL,
-  as = "list", ...)
+db_alldocs(cushion, dbname, descending = NULL, startkey = NULL,
+  endkey = NULL, limit = NULL, include_docs = FALSE, as = "list", ...)
 }
 \arguments{
 \item{cushion}{A \code{Cushion} object. Required.}
 
 \item{dbname}{Database name. (charcter)}
-
-\item{asdf}{Return as data.frame? defaults to TRUE (logical)}
 
 \item{descending}{Return in descending order? (logical)}
 
@@ -23,11 +20,15 @@ db_alldocs(cushion, dbname, asdf = TRUE, descending = NULL,
 
 \item{limit}{Number document IDs to return. (numeric)}
 
-\item{include_docs}{If TRUE, returns docs themselves, in addition to IDs (logical)}
+\item{include_docs}{(logical) If \code{TRUE}, returns docs themselves,
+in addition to IDs. Default: \code{FALSE}}
 
 \item{as}{(character) One of list (default) or json}
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
+}
+\value{
+JSON as a character string or a list
 }
 \description{
 List all docs in a given database.
@@ -42,7 +43,7 @@ bulk_create(x, mtcars, dbname="leothelion")
 db_alldocs(x, dbname="leothelion")
 db_alldocs(x, dbname="leothelion", as='json')
 db_alldocs(x, dbname="leothelion", limit=2)
-db_alldocs(x, dbname="leothelion", limit=2, include_docs="true")
+db_alldocs(x, dbname="leothelion", limit=2, include_docs=TRUE)
 
 # curl options
 library('httr')

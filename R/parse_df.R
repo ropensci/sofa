@@ -14,7 +14,7 @@
 #' parse_df(mtcars, how="columns", tojson=FALSE)
 #' }
 parse_df <- function(dat, how = "rows", tojson = TRUE, ...) {
-  if (!is(dat, "data.frame")) stop("dat must be a data.frame", call. = FALSE)
+  if (!inherits(dat, "data.frame")) stop("dat must be a data.frame", call. = FALSE)
   how <- match.arg(how, c('rows', 'columns'))
 
   # convert all factor to character
@@ -26,13 +26,13 @@ parse_df <- function(dat, how = "rows", tojson = TRUE, ...) {
      if (tojson) {
        out <- list()
        for (i in seq_len(NROW(dat))) {
-         out[[i]] <- jsonlite::toJSON(as.list(setNames(dat[i, ], names(dat))), auto_unbox = TRUE, ...)
+         out[[i]] <- jsonlite::toJSON(as.list(stats::setNames(dat[i, ], names(dat))), auto_unbox = TRUE, ...)
        }
        out
      } else {
        out <- list()
        for (i in seq_len(NROW(dat))) {
-         out[[i]] <- as.list(setNames(dat[i, ], names(dat)))
+         out[[i]] <- as.list(stats::setNames(dat[i, ], names(dat)))
        }
        out
      }
@@ -40,7 +40,7 @@ parse_df <- function(dat, how = "rows", tojson = TRUE, ...) {
    columns = {
      out <- list()
      for (i in seq_along(dat)) {
-       out[[ names(dat)[i] ]] <- setNames(list(dat[,i]), names(dat)[i])
+       out[[ names(dat)[i] ]] <- stats::setNames(list(dat[,i]), names(dat)[i])
      }
      if (tojson) {
        lapply(out, jsonlite::toJSON, auto_unbox = TRUE, ...)

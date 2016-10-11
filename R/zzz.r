@@ -129,3 +129,7 @@ check_inputs <- function(x){
     }
   }
 }
+
+check_if <- function(x, class) {
+  if (!inherits(x, class)) stop("input must be of class ", class, call. = FALSE)
+}
