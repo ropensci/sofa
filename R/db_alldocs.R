@@ -1,8 +1,8 @@
 #' List all docs in a given database.
 #'
 #' @export
-#' @inheritParams ping
-#' @param cushion A \code{Cushion} object. Required.
+#' @template all
+#' @template return
 #' @param dbname Database name. (charcter)
 #' @param descending Return in descending order? (logical)
 #' @param startkey Document ID to start at. (character)
@@ -10,8 +10,6 @@
 #' @param limit Number document IDs to return. (numeric)
 #' @param include_docs (logical) If \code{TRUE}, returns docs themselves,
 #' in addition to IDs. Default: \code{FALSE}
-#' @param ... Curl args passed on to \code{\link[httr]{GET}}
-#' @return JSON as a character string or a list
 #' @examples \dontrun{
 #' (x <- Cushion$new())
 #'

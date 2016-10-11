@@ -1,7 +1,8 @@
 #' Create documents to a database.
 #'
 #' @export
-#' @inheritParams ping
+#' @template all
+#' @template return
 #' @param dbname Database name3
 #' @param doc Document content, can be character string, a list. The character
 #' type can be XML as well, which is embedded in json. When the document is

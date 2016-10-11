@@ -1,7 +1,8 @@
 #' Delete a document in a database.
 #'
 #' @export
-#' @inheritParams ping
+#' @template all
+#' @template return
 #' @param dbname Database name. (charcter)
 #' @param docid Document ID (character)
 #' @examples \dontrun{

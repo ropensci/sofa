@@ -1,7 +1,8 @@
 #' Get an attachment.
 #'
 #' @export
-#' @inheritParams ping
+#' @template all
+#' @template return
 #' @param dbname (charcter) Database name. Required.
 #' @param docid (charcter) Document ID. Required.
 #' @param attname (charcter) Attachment name. Optional.

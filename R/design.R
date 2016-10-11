@@ -1,7 +1,8 @@
 #' Work with design documents
 #'
 #' @name design
-#' @inheritParams ping
+#' @template all
+#' @template return
 #' @param dbname (character) Database name. required.
 #' @param design (character) Design document name. this is the design name
 #' without \strong{_design/}, which is prepended internally. required.

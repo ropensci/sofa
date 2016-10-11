@@ -1,8 +1,8 @@
 #' active tasks
 #'
 #' @export
-#' @inheritParams ping
-#' @param as (character) One of list (default) or json
+#' @template all
+#' @template return
 #' @examples \dontrun{
 #' # Create a CouchDB connection client
 #' (x <- Cushion$new())

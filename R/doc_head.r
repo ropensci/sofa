@@ -1,7 +1,8 @@
 #' Get header info for a document.
 #'
 #' @export
-#' @inheritParams ping
+#' @template all
+#' @template return
 #' @param dbname (character) Database name. Required.
 #' @param docid (character) Document ID. Required.
 #' @examples \dontrun{

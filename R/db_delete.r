@@ -1,10 +1,9 @@
 #' Delete a database.
 #'
 #' @export
-#' @inheritParams ping
+#' @template all
+#' @template return
 #' @param dbname Database name
-#' @param as (character) One of list (default) or json
-#' @param ... Curl args passed on to \code{\link[httr]{GET}}
 #' @examples \dontrun{
 #' (x <- Cushion$new())
 #'

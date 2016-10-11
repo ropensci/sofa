@@ -7,7 +7,7 @@
 db_create(cushion, dbname, delifexists = FALSE, as = "list", ...)
 }
 \arguments{
-\item{cushion}{A cushion name}
+\item{cushion}{A \code{Cushion} object. Required.}
 
 \item{dbname}{Database name}
 
@@ -17,6 +17,10 @@ This is useful for testing. Default is FALSE.}
 \item{as}{(character) One of list (default) or json}
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
+}
+\value{
+JSON as a character string or a list (determined by the
+\code{as} parameter)
 }
 \description{
 Create a database.

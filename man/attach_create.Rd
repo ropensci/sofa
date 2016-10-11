@@ -18,6 +18,8 @@ attach_create(cushion, dbname, docid, attachment, attname, ...)
 \item{attname}{(charcter) Attachment name. Required.}
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
+
+\item{as}{(character) One of list (default) or json}
 }
 \description{
 Include an attachment either on an existing or new document

@@ -1,11 +1,10 @@
 #' List all databases.
 #'
 #' @export
-#' @param cushion A \code{Cushion} object. Required.
+#' @template all
+#' @template return
 #' @param simplify (logical) Simplify to character vector, ignored
 #' if \code{as="json"}
-#' @param as (character) One of list (default) or json
-#' @param ... Curl args passed on to \code{\link[httr]{GET}}
 #' @examples \dontrun{
 #' (x <- Cushion$new())
 #'

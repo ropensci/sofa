@@ -1,9 +1,8 @@
 #' Ping a couchdb server
 #'
 #' @export
-#' @param cushion A \code{Cushion} object. Required.
-#' @param as (character) One of list (default) or json
-#' @param ... Curl args passed on to \code{\link[httr]{GET}}
+#' @template all
+#' @template return
 #' @examples \dontrun{
 #' # initialize a couchdb connection
 #' (x <- Cushion$new())

@@ -1,7 +1,8 @@
 #' Get information on database updates
 #'
 #' @export
-#' @inheritParams ping
+#' @template all
+#' @template return
 #' @param feed (character) One of longpoll (default), continuous, or
 #' eventsource. See Details.
 #' @param timeout (integer) Number of seconds until CouchDB closes the

@@ -1,8 +1,8 @@
 #' Get document revisions.
 #'
 #' @export
-#' @inheritParams ping
-#' @param cushion A \code{Cushion} object. Required.
+#' @template all
+#' @template return
 #' @param dbname Database name
 #' @param docid Document ID
 #' @param simplify (logical) Simplify to character vector of revision ids.

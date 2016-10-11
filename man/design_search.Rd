@@ -97,6 +97,10 @@ Default: \code{FALSE}}
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }
+\value{
+JSON as a character string or a list (determined by the
+\code{as} parameter)
+}
 \description{
 Search design documents
 }

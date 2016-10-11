@@ -1,9 +1,9 @@
 #' Get uuids.
 #'
 #' @export
-#' @inheritParams ping
+#' @template all
+#' @template return
 #' @param count (numeric) Number of uuids to return. Default: 1
-#' @param as (character) One of list (default) or json
 #' @examples \dontrun{
 #' # Create a CouchDB connection client
 #' (x <- Cushion$new())

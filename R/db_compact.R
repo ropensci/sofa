@@ -1,7 +1,8 @@
 #' Request compaction of the specified database
 #'
 #' @export
-#' @inheritParams ping
+#' @template all
+#' @template return
 #' @param dbname Database name. Required.
 #' @details Compaction compresses the disk database file by performing the following
 #' operations:

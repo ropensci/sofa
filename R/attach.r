@@ -1,7 +1,7 @@
 #' Include an attachment either on an existing or new document
 #'
 #' @export
-#' @inheritParams ping
+#' @template all
 #' @param dbname (charcter) Database name. Required.
 #' @param docid (charcter) Document ID. Required.
 #' @param attachment (charcter) The attachment object name. Required.

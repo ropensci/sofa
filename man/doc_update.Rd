@@ -21,6 +21,10 @@ doc_update(cushion, dbname, doc, docid, rev, as = "list", ...)
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}}}
 }
+\value{
+JSON as a character string or a list (determined by the
+\code{as} parameter)
+}
 \description{
 Update a document.
 }

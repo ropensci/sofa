@@ -1,7 +1,8 @@
 #' Get a document from a database.
 #'
 #' @export
-#' @inheritParams ping
+#' @template all
+#' @template return
 #' @param dbname Database name
 #' @param docid Document ID
 #' @param rev Revision id of the document to get. If NULL, gets current revision

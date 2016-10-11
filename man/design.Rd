@@ -49,6 +49,10 @@ and \code{view_put_}}
 without \strong{_design/}, which is prepended internally. required for
 \code{design_copy}}
 }
+\value{
+JSON as a character string or a list (determined by the
+\code{as} parameter)
+}
 \description{
 Work with design documents
 }

@@ -2,7 +2,8 @@
 #' e.g., Cloudant, Iriscouch
 #'
 #' @export
-#' @inheritParams ping
+#' @template all
+#' @template return
 #' @param from Couch to replicate from. An object of class \code{Cushion}.
 #' Required.
 #' @param to Remote couch to replicate to. An object of class \code{Cushion}.

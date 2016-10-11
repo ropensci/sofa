@@ -1,12 +1,11 @@
 #' Create a database.
 #'
 #' @export
-#' @param cushion A cushion name
+#' @template all
+#' @template return
 #' @param dbname Database name
 #' @param delifexists If TRUE, delete any database of the same name before creating it.
 #'    This is useful for testing. Default is FALSE.
-#' @param as (character) One of list (default) or json
-#' @param ... Curl args passed on to \code{\link[httr]{GET}}
 #' @examples \dontrun{
 #' (x <- Cushion$new())
 #'

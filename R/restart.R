@@ -1,7 +1,8 @@
 #' Restart your Couchdb instance
 #'
 #' @export
-#' @inheritParams ping
+#' @template all
+#' @template return
 #' @examples \dontrun{
 #' (x <- Cushion$new())
 #'

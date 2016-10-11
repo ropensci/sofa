@@ -1,7 +1,8 @@
 #' Query a database.
 #'
 #' @export
-#' @inheritParams ping
+#' @template all
+#' @template return
 #' @param dbname Database name
 #' @param query (character) instead of using the other parameters, you can
 #' compose one R list or json blob here
@@ -23,7 +24,6 @@
 #' @param use_index (json) - Instruct a query to use a specific index.
 #' Specified either as "<design_document>" or ["<design_document>",
 #' "<index_name>"]. Optional
-#' @param as (character) One of list (default) or json
 #' @template query-egs
 db_query <- function(cushion, dbname, query = NULL, selector = NULL,
   limit = NULL, skip = NULL, sort = NULL, fields = NULL, use_index = NULL,

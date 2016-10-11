@@ -1,7 +1,8 @@
 #' Explain API
 #'
 #' @export
-#' @inheritParams ping
+#' @template all
+#' @template return
 #' @param dbname Database name
 #' @param query (character) instead of using the other parameters, you can
 #' compose one R list or json blob here
@@ -23,7 +24,6 @@
 #' @param use_index (json) - Instruct a query to use a specific index.
 #' Specified either as "<design_document>" or ["<design_document>",
 #' "<index_name>"]. Optional
-#' @param as (character) One of list (default) or json
 #' @examples \dontrun{
 #' ## create a connection
 #' (x <- Cushion$new())

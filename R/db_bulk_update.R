@@ -1,7 +1,7 @@
 #' Create documents via the bulk API
 #'
 #' @export
-#' @inheritParams ping
+#' @template all
 #' @param dbname (character) Database name. Required.
 #' @param doc For now, a data.frame only. Required.
 #' @param docid Document IDs, ignored for now, eventually, you can pass in a

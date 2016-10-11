@@ -1,7 +1,7 @@
 #' List changes to a database.
 #'
 #' @export
-#' @inheritParams ping
+#' @template all
 #' @param dbname Database name. (charcter)
 #' @param descending Return in descending order? (logical)
 #' @param startkey Document ID to start at. (character)
