@@ -4,6 +4,8 @@ dbname_random <- function() {
   paste0(sample(letters, 10, replace = TRUE), collapse = '')
 }
 
+skip_on_cran()
+
 invisible(sofa_conn <- sofa::Cushion$new())
 
 db_test_name <- "testing123"

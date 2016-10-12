@@ -1,6 +1,7 @@
 context("db_query")
 
 local({
+  skip_on_cran()
   file <- system.file("examples/omdb.json", package = "sofa")
   strs <- readLines(file)
 
@@ -88,5 +89,7 @@ test_that("db_query - fields param works", {
 test_that("db_query fails well", {
   expect_error(db_query(), "argument \"cushion\" is missing")
   expect_error(db_query(sofa_conn), "argument \"dbname\" is missing")
+
+  skip_on_cran()
   expect_error(db_query(sofa_conn, "asdfds"), "Database does not exist")
 })

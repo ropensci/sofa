@@ -3,6 +3,7 @@ context("doc_create")
 db <- dbname_random()
 
 local({
+  skip_on_cran()
   if (db %in% db_list(sofa_conn)) {
     invisible(db_delete(sofa_conn, dbname = db))
   }
@@ -60,6 +61,8 @@ test_that("doc_create fails well", {
   expect_error(doc_create(sofa_conn), "argument \"doc\" is missing")
   expect_error(doc_create(sofa_conn, "asdfds", "asdfadf"),
                "invalid char in json text")
+
+  skip_on_cran()
   expect_error(doc_create(sofa_conn, "asdfds", '{"a": 5}'),
                "Database does not exist")
 })

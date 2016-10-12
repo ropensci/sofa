@@ -30,7 +30,7 @@ You can do this from anywhere in your directory. See <http://couchdb.apache.org>
 couchdb
 ```
 
-You can interact with your CouchDB databases as well in your browser. Navigate to <http://localhost:5984/_utils>
+You can interact with your CouchDB databases as well in your browser. Navigate to http://localhost:5984/_utils
 
 ## Install sofa
 

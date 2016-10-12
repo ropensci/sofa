@@ -30,6 +30,7 @@ test_that("db_delete fails well", {
 	expect_error(db_delete(), "argument \"cushion\" is missing")
   expect_error(db_delete(sofa_conn), "argument \"dbname\" is missing")
 
+  skip_on_cran()
   dbn <- dbname_random()
   invisible(db_create(sofa_conn, dbname = dbn))
   invisible(db_delete(sofa_conn, dbn))
