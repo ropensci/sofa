@@ -8,3 +8,4 @@ README.Rmd
 ^notes\.md$
 man-roxygen
 ^cran-comments\.md$
+tests/test-all.R
