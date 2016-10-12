@@ -94,10 +94,6 @@ use on your machine, with all defaults used.
 x <- Cushion$new()
 ```
 
-```{r echo=FALSE}
-x <- Cushion$new(user = 'jane', pwd = 'foobar')
-```
-
 ## Ping the server
 
 ```{r}

@@ -143,13 +143,17 @@ db_create(x, 'cats')
 ```r
 db_list(x)
 #>  [1] "acouch"          "alm_couchdb"     "aqijhfcntb"     
-#>  [4] "auhgmimrls"      "bhlhhiwwph"      "bulktest"       
-#>  [7] "cats"            "flxsqfkzdf"      "gtogmgbsjx"     
-#> [10] "helloworld"      "jxdktgmdsb"      "leothelion"     
-#> [13] "leothelion-json" "namcicfbjl"      "omdb"           
-#> [16] "sofadb"          "spyrzxffqv"      "sss"            
-#> [19] "testing123"      "vswtlxhcxe"      "xwrcjghvxx"     
-#> [22] "zocaqeleye"
+#>  [4] "auhgmimrls"      "avarpnvaia"      "bhlhhiwwph"     
+#>  [7] "bulktest"        "bvuizcrdoy"      "cats"           
+#> [10] "dpufyoigqf"      "drinksdb"        "flxsqfkzdf"     
+#> [13] "gtogmgbsjx"      "helloworld"      "jebvagbrqz"     
+#> [16] "jxdktgmdsb"      "leothelion"      "leothelion-json"
+#> [19] "lgzzmzugkm"      "lhkfptkfel"      "namcicfbjl"     
+#> [22] "nqidfcpojk"      "omdb"            "sofadb"         
+#> [25] "spyrzxffqv"      "sss"             "testing123"     
+#> [28] "trkhxkopvd"      "uwvtpnehdu"      "vswtlxhcxe"     
+#> [31] "wqefduwgpu"      "xhalvmxmud"      "xwrcjghvxx"     
+#> [34] "zocaqeleye"
 ```
 
 ## Create a document
@@ -178,7 +182,7 @@ doc_create(x, dbname = "cats", doc2)
 #> [1] TRUE
 #> 
 #> $id
-#> [1] "1c529986bebca280ba8cc556ec43015e"
+#> [1] "1c529986bebca280ba8cc556ece6383d"
 #> 
 #> $rev
 #> [1] "1-08aef850a23f5ff95869c9cf5d9604dc"
@@ -194,7 +198,7 @@ doc_create(x, dbname = "cats", doc3)
 #> [1] TRUE
 #> 
 #> $id
-#> [1] "1c529986bebca280ba8cc556ec43112c"
+#> [1] "1c529986bebca280ba8cc556ece63c6b"
 #> 
 #> $rev
 #> [1] "1-73443af61b0149e4c3e138b870e72602"
@@ -211,7 +215,7 @@ db_changes(x, "cats")
 #> $results
 #> $results[[1]]
 #> $results[[1]]$seq
-#> [1] "1-g1AAAACTeJzLYWBgYMpgTmEQTM4vTc5ISXLIyU9OzMnILy7JAUklMiTV____PyuDOZEhFyjAbmqSYmyUmJrCwFmal5KalpmXmoJHex4LkGRoAFL_oaYwgk0xTzJLM0g0wqYvCwDEFi2Q"
+#> [1] "1-g1AAAAB5eJzLYWBgYMpgTmEQTM4vTc5ISXLIyU9OzMnILy7JAUklMiTV____PyuRAY-iPBYgydAApP6D1GYwJzLmAgXYk81STNJMDbHpywIA75Ymnw"
 #> 
 #> $results[[1]]$id
 #> [1] "bluecat"
@@ -226,37 +230,37 @@ db_changes(x, "cats")
 #> 
 #> $results[[2]]
 #> $results[[2]]$seq
-#> [1] "2-g1AAAACTeJzLYWBgYMpgTmEQTM4vTc5ISXLIyU9OzMnILy7JAUklMiTV____PyuDOZEhFyjAbmqSYmyUmJrCwFmal5KalpmXmoJHex4LkGRoAFL_oaYwgU0xTzJLM0g0wqYvCwDEOC2R"
+#> [1] "2-g1AAAACbeJzLYWBgYMpgTmEQTM4vTc5ISXLIyU9OzMnILy7JAUklMiTV____PyuDOZExFyjAnmaZlGZiYoBNAx5j8liAJEMDkPqPYlqyWYpJmqkhNn1ZAHpDMNQ"
 #> 
 #> $results[[2]]$id
-#> [1] "1c529986bebca280ba8cc556ec43015e"
+#> [1] "1c529986bebca280ba8cc556ece63c6b"
 #> 
 #> $results[[2]]$changes
 #> $results[[2]]$changes[[1]]
 #> $results[[2]]$changes[[1]]$rev
-#> [1] "1-08aef850a23f5ff95869c9cf5d9604dc"
+#> [1] "1-73443af61b0149e4c3e138b870e72602"
 #> 
 #> 
 #> 
 #> 
 #> $results[[3]]
 #> $results[[3]]$seq
-#> [1] "3-g1AAAACTeJzLYWBgYMpgTmEQTM4vTc5ISXLIyU9OzMnILy7JAUklMiTV____PyuDOZEhFyjAbmqSYmyUmJrCwFmal5KalpmXmoJHex4LkGRoAFL_oaYwg00xTzJLM0g0wqYvCwDEWi2S"
+#> [1] "3-g1AAAACbeJzLYWBgYMpgTmEQTM4vTc5ISXLIyU9OzMnILy7JAUklMiTV____PyuDOZExFyjAnmaZlGZiYoBNAx5j8liAJEMDkPoPNY0JbFqyWYpJmqkhNn1ZAHplMNU"
 #> 
 #> $results[[3]]$id
-#> [1] "1c529986bebca280ba8cc556ec43112c"
+#> [1] "1c529986bebca280ba8cc556ece6383d"
 #> 
 #> $results[[3]]$changes
 #> $results[[3]]$changes[[1]]
 #> $results[[3]]$changes[[1]]$rev
-#> [1] "1-73443af61b0149e4c3e138b870e72602"
+#> [1] "1-08aef850a23f5ff95869c9cf5d9604dc"
 #> 
 #> 
 #> 
 #> 
 #> 
 #> $last_seq
-#> [1] "3-g1AAAACTeJzLYWBgYMpgTmEQTM4vTc5ISXLIyU9OzMnILy7JAUklMiTV____PyuDOZEhFyjAbmqSYmyUmJrCwFmal5KalpmXmoJHex4LkGRoAFL_oaYwg00xTzJLM0g0wqYvCwDEWi2S"
+#> [1] "3-g1AAAACbeJzLYWBgYMpgTmEQTM4vTc5ISXLIyU9OzMnILy7JAUklMiTV____PyuDOZExFyjAnmaZlGZiYoBNAx5j8liAJEMDkPoPNY0JbFqyWYpJmqkhNn1ZAHplMNU"
 #> 
 #> $pending
 #> [1] 0
@@ -271,7 +275,7 @@ The simplest search just returns the documents.
 db_query(x, dbname = "cats", selector = list(`_id` = list(`$gt` = NULL)))$docs
 #> [[1]]
 #> [[1]]$`_id`
-#> [1] "1c529986bebca280ba8cc556ec43015e"
+#> [1] "1c529986bebca280ba8cc556ece6383d"
 #> 
 #> [[1]]$`_rev`
 #> [1] "1-08aef850a23f5ff95869c9cf5d9604dc"
@@ -291,7 +295,7 @@ db_query(x, dbname = "cats", selector = list(`_id` = list(`$gt` = NULL)))$docs
 #> 
 #> [[2]]
 #> [[2]]$`_id`
-#> [1] "1c529986bebca280ba8cc556ec43112c"
+#> [1] "1c529986bebca280ba8cc556ece63c6b"
 #> 
 #> [[2]]$`_rev`
 #> [1] "1-73443af61b0149e4c3e138b870e72602"
@@ -336,7 +340,7 @@ Search for cats that are red
 db_query(x, dbname = "cats", selector = list(color = "red"))$docs
 #> [[1]]
 #> [[1]]$`_id`
-#> [1] "1c529986bebca280ba8cc556ec43015e"
+#> [1] "1c529986bebca280ba8cc556ece6383d"
 #> 
 #> [[1]]$`_rev`
 #> [1] "1-08aef850a23f5ff95869c9cf5d9604dc"
@@ -361,7 +365,7 @@ Search for cats that are furry
 db_query(x, dbname = "cats", selector = list(size = list(`$gt` = 2)))$docs
 #> [[1]]
 #> [[1]]$`_id`
-#> [1] "1c529986bebca280ba8cc556ec43015e"
+#> [1] "1c529986bebca280ba8cc556ece6383d"
 #> 
 #> [[1]]$`_rev`
 #> [1] "1-08aef850a23f5ff95869c9cf5d9604dc"
@@ -381,7 +385,7 @@ db_query(x, dbname = "cats", selector = list(size = list(`$gt` = 2)))$docs
 #> 
 #> [[2]]
 #> [[2]]$`_id`
-#> [1] "1c529986bebca280ba8cc556ec43112c"
+#> [1] "1c529986bebca280ba8cc556ece63c6b"
 #> 
 #> [[2]]$`_rev`
 #> [1] "1-73443af61b0149e4c3e138b870e72602"

@@ -92,8 +92,6 @@ use on your machine, with all defaults used.
 x <- Cushion$new()
 ```
 
-
-
 ## Ping the server
 
 
@@ -116,7 +114,8 @@ Nice, it's working.
 
 
 ```
-#> Error: (404) - Database does not exist.
+#> $ok
+#> [1] TRUE
 ```
 
 
@@ -131,7 +130,18 @@ see if its there now
 
 ```r
 db_list(x)
-#> [1] "sofadb"
+#>  [1] "acouch"          "alm_couchdb"     "aqijhfcntb"     
+#>  [4] "auhgmimrls"      "avarpnvaia"      "bhlhhiwwph"     
+#>  [7] "bulktest"        "bvuizcrdoy"      "cats"           
+#> [10] "dpufyoigqf"      "drinksdb"        "flxsqfkzdf"     
+#> [13] "gtogmgbsjx"      "helloworld"      "jebvagbrqz"     
+#> [16] "jxdktgmdsb"      "leothelion"      "leothelion-json"
+#> [19] "lgzzmzugkm"      "lhkfptkfel"      "namcicfbjl"     
+#> [22] "nqidfcpojk"      "omdb"            "sofadb"         
+#> [25] "spyrzxffqv"      "sss"             "testing123"     
+#> [28] "trkhxkopvd"      "uwvtpnehdu"      "vswtlxhcxe"     
+#> [31] "wqefduwgpu"      "xhalvmxmud"      "xwrcjghvxx"     
+#> [34] "zocaqeleye"
 ```
 
 ## Create documents
@@ -162,7 +172,7 @@ doc_create(x, doc2, dbname = "sofadb")
 #> [1] TRUE
 #> 
 #> $id
-#> [1] "9f8a9c9617997cc5babbf5302245f647"
+#> [1] "1c529986bebca280ba8cc556ece63297"
 #> 
 #> $rev
 #> [1] "1-fd0da7fcb8d3afbfc5757d065c92362c"

@@ -7,4 +7,4 @@ README.Rmd
 ^CONDUCT\.md$
 ^notes\.md$
 man-roxygen
-
+^cran-comments\.md$
