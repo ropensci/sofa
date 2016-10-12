@@ -29,7 +29,6 @@ test_that("db_explain basic usage works", {
 	expect_equal(aa$dbname, "omdb")
 	expect_named(aa$selector, "_id")
 	expect_named(aa$selector$`_id`, "$gt")
-	expect_equal(aa$limit, 25)
 	expect_equal(aa$fields, "all_fields")
 })
 
