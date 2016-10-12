@@ -38,7 +38,7 @@ couchdb
 Or opening the CouchDB app on your machine, or running it in docker. Whatever it
 is, start it up.
 
-You can interact with your CouchDB databases as well in your browser. Navigate to [http://localhost:5984/_utils](http://localhost:5984/_utils)
+You can interact with your CouchDB databases as well in your browser. Navigate to http://localhost:5984/_utils
 
 ## Install sofa
 
