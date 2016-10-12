@@ -41,7 +41,9 @@ and \code{view_put_}}
 
 \item{as}{(character) One of list (default) or json}
 
-\item{...}{Curl args passed on to \code{\link[httr]{GET}}}
+\item{...}{Curl args passed on to one of the HTTP verbs (e.g,.
+\code{\link[httr]{GET}}, \code{\link[httr]{POST}}, \code{\link[httr]{PUT}},
+etc.)}
 
 \item{fxn}{(character) a javascript function. required for \code{view_put_}}
 

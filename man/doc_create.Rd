@@ -25,7 +25,9 @@ document.}
 
 \item{as}{(character) One of list (default) or json}
 
-\item{...}{Curl args passed on to \code{\link[httr]{GET}}}
+\item{...}{Curl args passed on to one of the HTTP verbs (e.g,.
+\code{\link[httr]{GET}}, \code{\link[httr]{POST}}, \code{\link[httr]{PUT}},
+etc.)}
 }
 \value{
 JSON as a character string or a list (determined by the
@@ -37,7 +39,7 @@ Create documents to a database.
 \details{
 Documents can have attachments just like email. There are two ways
 to use attachments: the first one is via a separate REST call
-(see \code{\link{attach_create}}); the second is inline within your
+(see \code{\link{doc_attach_create}}); the second is inline within your
 document, you can do so with this fxn. See
 \url{http://wiki.apache.org/couchdb/HTTP_Document_API#Attachments} for help
 on formatting json appropriately.

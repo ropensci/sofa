@@ -11,7 +11,10 @@
 #'  \item \code{\link{doc_get}} - Get a document
 #'  \item \code{\link{doc_delete}} - Delete a document
 #'  \item \code{\link{doc_head}} - Get headers for a document
-#'  \item \code{\link{attach_create}} - Attach something to a document
+#'  \item \code{\link{doc_attach_create}} - Attach something to a document
+#'  \item \code{\link{doc_attach_info}} - Get info on an attachment
+#'  \item \code{\link{doc_attach_get}} - Fetch an attachment
+#'  \item \code{\link{doc_attach_delete}} - Delete an attachment
 #'  \item \code{\link{db_alldocs}} - Get all documents
 #'  \item \code{\link{db_revisions}} - Get revisions for a document
 #' }

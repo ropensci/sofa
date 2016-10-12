@@ -7,7 +7,7 @@ Description: Provides an interface to the NoSQL database CouchDB
     CouchDB instance, or a remote CouchDB databases such as Cloudant
     (<https://cloudant.com>). Documents can be inserted directly from
     vectors, lists, data.frames, and JSON.
-Version: 0.1.9.9550
+Version: 0.1.9.9700
 Authors@R: person("Scott", "Chamberlain", role = c("aut", "cre"),
     email = "myrmecocystus@gmail.com")
 License: MIT + file LICENSE
@@ -16,7 +16,8 @@ BugReports: https://github.com/ropensci/sofa/issues
 Imports:
     httr (>= 1.2.0),
     jsonlite (>= 1.1),
-    R6 (>= 2.2.0)
+    R6 (>= 2.2.0),
+    mime
 Suggests:
     roxygen2 (>= 5.0.1),
     testthat,

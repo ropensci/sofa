@@ -24,7 +24,9 @@ document.}
 
 \item{as}{(character) One of list (default) or json}
 
-\item{...}{Curl args passed on to \code{\link[httr]{GET}}}
+\item{...}{Curl args passed on to one of the HTTP verbs (e.g,.
+\code{\link[httr]{GET}}, \code{\link[httr]{POST}}, \code{\link[httr]{PUT}},
+etc.)}
 }
 \value{
 Either a list or json (depending on \code{as} parameter), with
