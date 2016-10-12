@@ -19,6 +19,10 @@ __An easy interface to CouchDB from R__
 Note: Check out [*R4couchdb*](https://github.com/wactbprot/R4CouchDB), another R 
 package to interact with CouchDB.
 
+## CouchDB versions
+
+`sofa` is built targeting CouchDB v2 or greater.
+
 ## Install CouchDB
 
 Go to <http://docs.couchdb.org/en/2.0.0/install/index.html> for instructions.
@@ -133,15 +137,15 @@ db_list(x)
 #>  [1] "acouch"          "alm_couchdb"     "aqijhfcntb"     
 #>  [4] "auhgmimrls"      "avarpnvaia"      "bhlhhiwwph"     
 #>  [7] "bulktest"        "bvuizcrdoy"      "cats"           
-#> [10] "dpufyoigqf"      "drinksdb"        "flxsqfkzdf"     
-#> [13] "gtogmgbsjx"      "helloworld"      "jebvagbrqz"     
-#> [16] "jxdktgmdsb"      "leothelion"      "leothelion-json"
-#> [19] "lgzzmzugkm"      "lhkfptkfel"      "namcicfbjl"     
-#> [22] "nqidfcpojk"      "omdb"            "sofadb"         
-#> [25] "spyrzxffqv"      "sss"             "testing123"     
-#> [28] "trkhxkopvd"      "uwvtpnehdu"      "vswtlxhcxe"     
-#> [31] "wqefduwgpu"      "xhalvmxmud"      "xwrcjghvxx"     
-#> [34] "zocaqeleye"
+#> [10] "dpufyoigqf"      "drinksdb"        "fiadbzwmos"     
+#> [13] "flxsqfkzdf"      "gtogmgbsjx"      "helloworld"     
+#> [16] "jebvagbrqz"      "jxdktgmdsb"      "leothelion"     
+#> [19] "leothelion-json" "lgzzmzugkm"      "lhkfptkfel"     
+#> [22] "lyluootgvi"      "namcicfbjl"      "nqidfcpojk"     
+#> [25] "omdb"            "sofadb"          "spyrzxffqv"     
+#> [28] "sss"             "testing123"      "trkhxkopvd"     
+#> [31] "uwvtpnehdu"      "vswtlxhcxe"      "wqefduwgpu"     
+#> [34] "xhalvmxmud"      "xwrcjghvxx"      "zocaqeleye"
 ```
 
 ## Create documents
@@ -172,7 +176,7 @@ doc_create(x, doc2, dbname = "sofadb")
 #> [1] TRUE
 #> 
 #> $id
-#> [1] "1c529986bebca280ba8cc556ece63297"
+#> [1] "e6bb43092edaf8fd987434b8a30d08bd"
 #> 
 #> $rev
 #> [1] "1-fd0da7fcb8d3afbfc5757d065c92362c"

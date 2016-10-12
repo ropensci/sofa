@@ -26,6 +26,10 @@ __An easy interface to CouchDB from R__
 Note: Check out [*R4couchdb*](https://github.com/wactbprot/R4CouchDB), another R 
 package to interact with CouchDB.
 
+## CouchDB versions
+
+`sofa` is built targeting CouchDB v2 or greater.
+
 ## Install CouchDB
 
 Go to <http://docs.couchdb.org/en/2.0.0/install/index.html> for instructions.
