@@ -16,6 +16,12 @@
 #' or a \strong{cushion}. Create the object with \code{\link{Cushion}}. You
 #' can have multiple connection objects in an R session.
 #'
+#' @section CouchDB versions:
+#' \pkg{sofa} was built assuming CouchDB version 2 or greater. Some
+#' functionality of this package will work with versions < 2, while
+#' some may not (mango queries, see \code{\link{db_query}}). I don't
+#' plan to support older CouchDB versions per se.
+#'
 #' @importFrom R6 R6Class
 #' @importFrom jsonlite fromJSON toJSON unbox
 #' @importFrom httr DELETE GET HEAD POST PUT VERB content content_type

@@ -1,12 +1,13 @@
 Package: sofa
 Title: R Connector to CouchDB
 Description: Provides an interface to the NoSQL database CouchDB
-    (<http://couchdb.apache.org>).  Methods are provided for managing
+    (<http://couchdb.apache.org>). Methods are provided for managing
     databases within CouchDB, including creating/deleting/updating/transferring,
     and managing documents within databases. One can connect with a local
     CouchDB instance, or a remote CouchDB databases such as Cloudant
     (<https://cloudant.com>). Documents can be inserted directly from
-    vectors, lists, data.frames, and JSON.
+    vectors, lists, data.frames, and JSON. Targeted at CouchDB v2 or
+    greater.
 Version: 0.2.0
 Authors@R: person("Scott", "Chamberlain", role = c("aut", "cre"),
     email = "myrmecocystus@gmail.com")
