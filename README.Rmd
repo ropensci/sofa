@@ -20,10 +20,12 @@ knitr::opts_chunk$set(
 
 [![Build Status](https://travis-ci.org/ropensci/sofa.svg?branch=master)](https://travis-ci.org/ropensci/sofa)
 [![codecov.io](https://codecov.io/github/ropensci/sofa/coverage.svg?branch=master)](https://codecov.io/github/ropensci/sofa?branch=master)
+[![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/grand-total/sofa?color=ff69b4)](https://github.com/metacran/cranlogs.app)
+[![cran version](http://www.r-pkg.org/badges/version/sofa)](https://cran.r-project.org/package=sofa)
 
 __An easy interface to CouchDB from R__
 
-Note: Check out [*R4couchdb*](https://github.com/wactbprot/R4CouchDB), another R 
+Note: Check out [*R4couchdb*](https://github.com/wactbprot/R4CouchDB), another R
 package to interact with CouchDB.
 
 ## CouchDB versions
@@ -67,18 +69,18 @@ library('sofa')
 
 ## Cushions
 
-Cushions? What? Since it's couch we gotta use `cushions` somehow. `cushions` are a 
-connection class containing all connection info to a CouchDB instance. 
+Cushions? What? Since it's couch we gotta use `cushions` somehow. `cushions` are a
+connection class containing all connection info to a CouchDB instance.
 See `?Cushion` for help.
 
 As an example, connecting to a Cloudant couch:
 
 ```{r eval=FALSE}
 z <- Cushion$new(
-  host = "stuff.cloudant.com", 
-  transport = 'https', 
-  port = NULL, 
-  user = 'foobar', 
+  host = "stuff.cloudant.com",
+  transport = 'https',
+  port = NULL,
+  user = 'foobar',
   pwd = 'things'
 )
 ```
@@ -91,8 +93,8 @@ Break down of parameters:
 * `user`: User name for the service.
 * `pwd`: Password for the service, if any.
 
-If you call `Cushion$new()` with no arguments you get a cushion set up for local 
-use on your machine, with all defaults used. 
+If you call `Cushion$new()` with no arguments you get a cushion set up for local
+use on your machine, with all defaults used.
 
 ```{r}
 x <- Cushion$new()

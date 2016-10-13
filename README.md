@@ -13,10 +13,12 @@ sofa
 
 [![Build Status](https://travis-ci.org/ropensci/sofa.svg?branch=master)](https://travis-ci.org/ropensci/sofa)
 [![codecov.io](https://codecov.io/github/ropensci/sofa/coverage.svg?branch=master)](https://codecov.io/github/ropensci/sofa?branch=master)
+[![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/grand-total/sofa?color=ff69b4)](https://github.com/metacran/cranlogs.app)
+[![cran version](http://www.r-pkg.org/badges/version/sofa)](https://cran.r-project.org/package=sofa)
 
 __An easy interface to CouchDB from R__
 
-Note: Check out [*R4couchdb*](https://github.com/wactbprot/R4CouchDB), another R 
+Note: Check out [*R4couchdb*](https://github.com/wactbprot/R4CouchDB), another R
 package to interact with CouchDB.
 
 ## CouchDB versions
@@ -63,8 +65,8 @@ library('sofa')
 
 ## Cushions
 
-Cushions? What? Since it's couch we gotta use `cushions` somehow. `cushions` are a 
-connection class containing all connection info to a CouchDB instance. 
+Cushions? What? Since it's couch we gotta use `cushions` somehow. `cushions` are a
+connection class containing all connection info to a CouchDB instance.
 See `?Cushion` for help.
 
 As an example, connecting to a Cloudant couch:
@@ -72,10 +74,10 @@ As an example, connecting to a Cloudant couch:
 
 ```r
 z <- Cushion$new(
-  host = "stuff.cloudant.com", 
-  transport = 'https', 
-  port = NULL, 
-  user = 'foobar', 
+  host = "stuff.cloudant.com",
+  transport = 'https',
+  port = NULL,
+  user = 'foobar',
   pwd = 'things'
 )
 ```
@@ -88,8 +90,8 @@ Break down of parameters:
 * `user`: User name for the service.
 * `pwd`: Password for the service, if any.
 
-If you call `Cushion$new()` with no arguments you get a cushion set up for local 
-use on your machine, with all defaults used. 
+If you call `Cushion$new()` with no arguments you get a cushion set up for local
+use on your machine, with all defaults used.
 
 
 ```r
@@ -103,10 +105,10 @@ x <- Cushion$new()
 ping(x)
 #> $couchdb
 #> [1] "Welcome"
-#> 
+#>
 #> $version
 #> [1] "2.0.0"
-#> 
+#>
 #> $vendor
 #> $vendor$name
 #> [1] "The Apache Software Foundation"
@@ -134,17 +136,17 @@ see if its there now
 
 ```r
 db_list(x)
-#>  [1] "acouch"          "alm_couchdb"     "aqijhfcntb"     
-#>  [4] "auhgmimrls"      "avarpnvaia"      "bhlhhiwwph"     
-#>  [7] "bulktest"        "bvuizcrdoy"      "cats"           
-#> [10] "dpufyoigqf"      "drinksdb"        "fiadbzwmos"     
-#> [13] "flxsqfkzdf"      "gtogmgbsjx"      "helloworld"     
-#> [16] "jebvagbrqz"      "jxdktgmdsb"      "leothelion"     
-#> [19] "leothelion-json" "lgzzmzugkm"      "lhkfptkfel"     
-#> [22] "lyluootgvi"      "namcicfbjl"      "nqidfcpojk"     
-#> [25] "omdb"            "sofadb"          "spyrzxffqv"     
-#> [28] "sss"             "testing123"      "trkhxkopvd"     
-#> [31] "uwvtpnehdu"      "vswtlxhcxe"      "wqefduwgpu"     
+#>  [1] "acouch"          "alm_couchdb"     "aqijhfcntb"
+#>  [4] "auhgmimrls"      "avarpnvaia"      "bhlhhiwwph"
+#>  [7] "bulktest"        "bvuizcrdoy"      "cats"
+#> [10] "dpufyoigqf"      "drinksdb"        "fiadbzwmos"
+#> [13] "flxsqfkzdf"      "gtogmgbsjx"      "helloworld"
+#> [16] "jebvagbrqz"      "jxdktgmdsb"      "leothelion"
+#> [19] "leothelion-json" "lgzzmzugkm"      "lhkfptkfel"
+#> [22] "lyluootgvi"      "namcicfbjl"      "nqidfcpojk"
+#> [25] "omdb"            "sofadb"          "spyrzxffqv"
+#> [28] "sss"             "testing123"      "trkhxkopvd"
+#> [31] "uwvtpnehdu"      "vswtlxhcxe"      "wqefduwgpu"
 #> [34] "xhalvmxmud"      "xwrcjghvxx"      "zocaqeleye"
 ```
 
@@ -158,10 +160,10 @@ doc1 <- '{"name":"sofa","beer":"IPA"}'
 doc_create(x, doc1, dbname = "sofadb", docid = "a_beer")
 #> $ok
 #> [1] TRUE
-#> 
+#>
 #> $id
 #> [1] "a_beer"
-#> 
+#>
 #> $rev
 #> [1] "1-a48c98c945bcc05d482bc6f938c89882"
 ```
@@ -174,10 +176,10 @@ doc2 <- '{"name":"sofa","icecream":"rocky road"}'
 doc_create(x, doc2, dbname = "sofadb")
 #> $ok
 #> [1] TRUE
-#> 
+#>
 #> $id
 #> [1] "e6bb43092edaf8fd987434b8a30d08bd"
-#> 
+#>
 #> $rev
 #> [1] "1-fd0da7fcb8d3afbfc5757d065c92362c"
 ```
@@ -194,10 +196,10 @@ doc3 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
 doc_create(x, doc3, dbname = "sofadb", docid = "somexml")
 #> $ok
 #> [1] TRUE
-#> 
+#>
 #> $id
 #> [1] "somexml"
-#> 
+#>
 #> $rev
 #> [1] "1-5f06e82103a0d5baa9d5f75226c8dcb8"
 ```
@@ -209,10 +211,10 @@ get the doc back out
 doc_get(x, dbname = "sofadb", docid = "somexml")
 #> $`_id`
 #> [1] "somexml"
-#> 
+#>
 #> $`_rev`
 #> [1] "1-5f06e82103a0d5baa9d5f75226c8dcb8"
-#> 
+#>
 #> $xml
 #> [1] "<top><a/><b/><c><d/><e>bob</e></c></top>"
 ```
