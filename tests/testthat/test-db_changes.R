@@ -23,6 +23,8 @@ test_that("db_changes basic usage works", {
 
 	expect_equal(length(aa$results), 0)
 	expect_equal(length(bb$results), 1)
+
+	cleanup_dbs("leothelion")
 })
 
 test_that("db_changes - json return works", {
@@ -39,6 +41,8 @@ test_that("db_changes - json return works", {
   expect_is(aa, "character")
   expect_match(aa, "results")
   expect_match(aa, "pending")
+
+  cleanup_dbs("sss")
 })
 
 test_that("db_changes fails well", {

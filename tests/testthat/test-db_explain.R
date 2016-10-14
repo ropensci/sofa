@@ -30,6 +30,8 @@ test_that("db_explain basic usage works", {
 	expect_named(aa$selector, "_id")
 	expect_named(aa$selector$`_id`, "$gt")
 	expect_equal(aa$fields, "all_fields")
+
+	cleanup_dbs("omdb")
 })
 
 test_that("db_explain fails well", {

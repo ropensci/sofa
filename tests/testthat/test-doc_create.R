@@ -66,3 +66,5 @@ test_that("doc_create fails well", {
   expect_error(doc_create(sofa_conn, "asdfds", '{"a": 5}'),
                "Database does not exist")
 })
+
+cleanup_dbs(db)

@@ -93,3 +93,5 @@ test_that("db_query fails well", {
   skip_on_cran()
   expect_error(db_query(sofa_conn, "asdfds"), "Database does not exist")
 })
+
+cleanup_dbs("omdb")

@@ -8,7 +8,7 @@ Description: Provides an interface to the 'NoSQL' database 'CouchDB'
     (<https://cloudant.com>). Documents can be inserted directly from
     vectors, lists, data.frames, and 'JSON'. Targeted at 'CouchDB' v2 or
     greater.
-Version: 0.2.0.9000
+Version: 0.2.0.9300
 Authors@R: person("Scott", "Chamberlain", role = c("aut", "cre"),
     email = "myrmecocystus@gmail.com")
 License: MIT + file LICENSE

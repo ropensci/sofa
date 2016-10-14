@@ -17,6 +17,8 @@ test_that("db_info basic usage works", {
   expect_equal(aa$doc_count, 0)
   expect_equal(aa$doc_del_count, 0)
   expect_equal(aa$data_size, 0)
+
+  cleanup_dbs(db)
 })
 
 test_that("db_info fails well", {

@@ -46,6 +46,8 @@ test_that("db_bulk_update basic usage works", {
 	expect_false("num" %in% names(bb_data))
 	expect_true("letter" %in% names(cc_data))
 	expect_true("num" %in% names(cc_data))
+
+	cleanup_dbs("bulktest")
 })
 
 test_that("db_bulk_update fails well", {

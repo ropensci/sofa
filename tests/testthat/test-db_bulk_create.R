@@ -16,6 +16,8 @@ test_that("db_bulk_create basic usage works", {
   expect_true(aa[[1]]$ok)
   expect_is(aa[[1]]$id, "character")
   expect_is(aa[[1]]$rev, "character")
+
+  cleanup_dbs("bulktest")
 })
 
 test_that("db_bulk_create fails well", {

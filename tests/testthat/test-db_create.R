@@ -12,6 +12,8 @@ test_that("db_create basic usage works", {
 	expect_is(aa, "list")
 	expect_named(aa, "ok")
 	expect_true(aa$ok)
+
+	cleanup_dbs("leothelion")
 })
 
 test_that("db_create - json return works", {
@@ -26,6 +28,8 @@ test_that("db_create - json return works", {
   expect_is(aa, "character")
   expect_match(aa, "ok")
   expect_match(aa, "true")
+
+  cleanup_dbs("leothelion-json")
 })
 
 test_that("db_create fails well", {
@@ -39,4 +43,6 @@ test_that("db_create fails well", {
   invisible(db_create(sofa_conn, "leothelion"))
   expect_error(db_create(sofa_conn, "leothelion"),
     "\\(412\\) - The database could not be created, the file already exists.")
+
+  cleanup_dbs("leothelion")
 })
