@@ -9,11 +9,11 @@ attach_get(cushion, dbname, docid, attname = NULL, as = "list", ...)
 \arguments{
 \item{cushion}{A \code{Cushion} object. Required.}
 
-\item{dbname}{(charcter) Database name. Required.}
+\item{dbname}{(character) Database name. Required.}
 
-\item{docid}{(charcter) Document ID. Required.}
+\item{docid}{(character) Document ID. Required.}
 
-\item{attname}{(charcter) Attachment name. Optional.}
+\item{attname}{(character) Attachment name. Optional.}
 
 \item{as}{(character) One of list (default) or json}
 
@@ -35,4 +35,3 @@ Get an attachment.
 attach_get(x, dbname="sofadb", docid="guysbeer")
 }
 }
-

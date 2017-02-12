@@ -2,8 +2,8 @@
 % Please edit documentation in R/sofa-package.r
 \docType{package}
 \name{sofa-package}
-\alias{sofa}
 \alias{sofa-package}
+\alias{sofa}
 \title{R client for CouchDB.}
 \description{
 Relax.
@@ -33,8 +33,8 @@ functionality of this package will work with versions < 2, while
 some may not (mango queries, see \code{\link{db_query}}). I don't
 plan to support older CouchDB versions per se.
 }
+
 \author{
 Scott Chamberlain \email{myrmecocystus@gmail.com}
 }
 \keyword{package}
-

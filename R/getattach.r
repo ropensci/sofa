@@ -3,9 +3,9 @@
 #' @export
 #' @template all
 #' @template return
-#' @param dbname (charcter) Database name. Required.
-#' @param docid (charcter) Document ID. Required.
-#' @param attname (charcter) Attachment name. Optional.
+#' @param dbname (character) Database name. Required.
+#' @param docid (character) Document ID. Required.
+#' @param attname (character) Attachment name. Optional.
 #' @examples \dontrun{
 #' (x <- Cushion$new())
 #'

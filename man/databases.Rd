@@ -16,4 +16,3 @@ There are the following functions for working with databases:
  \item \code{\link{db_replicate}} - Replicate a database from one couch to another
 }
 }
-

@@ -39,4 +39,3 @@ db_create(x, 'newdb')
 db_delete(x, 'newdb', config = httr::verbose())
 }
 }
-

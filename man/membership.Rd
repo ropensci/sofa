@@ -31,4 +31,3 @@ membership(x)
 membership(x, as = 'json')
 }
 }
-

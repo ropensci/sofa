@@ -11,7 +11,7 @@ db_changes(cushion, dbname, descending = NULL, startkey = NULL,
 \arguments{
 \item{cushion}{A \code{Cushion} object. Required.}
 
-\item{dbname}{Database name. (charcter)}
+\item{dbname}{Database name. (character)}
 
 \item{descending}{Return in descending order? (logical)}
 
@@ -88,4 +88,3 @@ res$results
 db_changes(x, dbname="leothelion", as='json')
 }
 }
-

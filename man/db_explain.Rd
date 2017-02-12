@@ -80,4 +80,3 @@ db_explain(x, dbname = "omdb", query = '{
 }')
 }
 }
-

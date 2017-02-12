@@ -42,7 +42,7 @@ Create documents via the bulk API
 }
 \examples{
 \dontrun{
-# initialize a couchdb connection
+# initialize a CouchDB connection
 (x <- Cushion$new())
 
 row.names(mtcars) <- NULL
@@ -62,4 +62,3 @@ mtcars$num <- 89
 db_bulk_update(x, "bulktest", mtcars)
 }
 }
-

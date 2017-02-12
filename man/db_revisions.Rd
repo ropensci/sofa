@@ -14,7 +14,7 @@ db_revisions(cushion, dbname, docid, simplify = TRUE, as = "list", ...)
 \item{docid}{Document ID}
 
 \item{simplify}{(logical) Simplify to character vector of revision ids.
-If \code{FALSE}, gives back availabilit info too. Default: \code{TRUE}}
+If \code{FALSE}, gives back availability info too. Default: \code{TRUE}}
 
 \item{as}{(character) One of list (default) or json}
 
@@ -48,4 +48,3 @@ db_revisions(x, dbname="sofadb", docid="abeer", as='json')
 db_revisions(x, dbname="sofadb", docid="abeer", simplify=FALSE, as='json')
 }
 }
-

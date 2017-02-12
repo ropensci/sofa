@@ -9,7 +9,7 @@ doc_delete(cushion, dbname, docid, as = "list", ...)
 \arguments{
 \item{cushion}{A \code{Cushion} object. Required.}
 
-\item{dbname}{Database name. (charcter)}
+\item{dbname}{Database name. (character)}
 
 \item{docid}{Document ID (character)}
 
@@ -46,4 +46,3 @@ doc_create(x, dbname="sofadb", doc=doc3, docid="newxml")
 doc_delete(x, dbname="sofadb", docid="wrongname")
 }
 }
-

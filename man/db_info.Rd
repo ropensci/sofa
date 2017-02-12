@@ -37,4 +37,3 @@ db_info(x, dbname="sofadb")
 db_info(x, dbname="sofadb", as='json')
 }
 }
-

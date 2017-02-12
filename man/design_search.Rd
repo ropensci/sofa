@@ -163,4 +163,3 @@ design_search(x, dbname='omdb', design='view5', view = 'foobar3',
 \references{
 \url{http://docs.couchdb.org/en/latest/api/ddoc/views.html}
 }
-

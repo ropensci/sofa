@@ -2,7 +2,7 @@
 % Please edit documentation in R/ping.r
 \name{ping}
 \alias{ping}
-\title{Ping a couchdb server}
+\title{Ping a CouchDB server}
 \usage{
 ping(cushion, as = "list", ...)
 }
@@ -20,15 +20,14 @@ JSON as a character string or a list (determined by the
 \code{as} parameter)
 }
 \description{
-Ping a couchdb server
+Ping a CouchDB server
 }
 \examples{
 \dontrun{
-# initialize a couchdb connection
+# initialize a CouchDB connection
 (x <- Cushion$new())
 
 ping(x)
 ping(x, as = "json")
 }
 }
-

@@ -45,7 +45,7 @@ Note that row.names are dropped from data.frame inputs.
 }
 \examples{
 \dontrun{
-# initialize a couchdb connection
+# initialize a CouchDB connection
 (x <- Cushion$new())
 
 # From a data.frame
@@ -103,4 +103,3 @@ db_bulk_create(x, "irisrows", apply(iris, 1, as.list))
 # db_bulk_create(x, "iriscolumns", parse_df(iris, "columns", tojson=FALSE), how="columns")
 }
 }
-
