@@ -10,7 +10,7 @@ db_alldocs(cushion, dbname, descending = NULL, startkey = NULL,
 \arguments{
 \item{cushion}{A \code{Cushion} object. Required.}
 
-\item{dbname}{Database name. (charcter)}
+\item{dbname}{Database name. (character)}
 
 \item{descending}{Return in descending order? (logical)}
 

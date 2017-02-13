@@ -6,7 +6,7 @@
 #' @param dbname Database name
 #' @param docid Document ID
 #' @param simplify (logical) Simplify to character vector of revision ids.
-#' If \code{FALSE}, gives back availabilit info too. Default: \code{TRUE}
+#' If \code{FALSE}, gives back availability info too. Default: \code{TRUE}
 #' @examples \dontrun{
 #' (x <- Cushion$new())
 #'

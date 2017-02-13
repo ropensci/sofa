@@ -1,10 +1,10 @@
-#' Ping a couchdb server
+#' Ping a CouchDB server
 #'
 #' @export
 #' @template all
 #' @template return
 #' @examples \dontrun{
-#' # initialize a couchdb connection
+#' # initialize a CouchDB connection
 #' (x <- Cushion$new())
 #'
 #' ping(x)

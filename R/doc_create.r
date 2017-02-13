@@ -21,7 +21,7 @@
 #' on formatting json appropriately.
 #'
 #' Note that you can create documents from a data.frame with this function,
-#' where each row or column is a seprate document. However, this function does
+#' where each row or column is a separate document. However, this function does
 #' not use the bulk API
 #' \url{https://couchdb.readthedocs.org/en/latest/api/database/bulk-api.html#db-bulk-docs}
 #' - see \code{\link{db_bulk_create}} and \code{\link{db_bulk_update}} to

@@ -45,7 +45,7 @@ Note that row.names are dropped from data.frame inputs.
 }
 \examples{
 \dontrun{
-# initialize a couchdb connection
+# initialize a CouchDB connection
 (x <- Cushion$new())
 
 # From a data.frame
