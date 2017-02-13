@@ -3,7 +3,7 @@
 #' @export
 #' @template all
 #' @template return
-#' @param dbname Database name. (charcter)
+#' @param dbname Database name. (character)
 #' @param docid Document ID (character)
 #' @examples \dontrun{
 #' (x <- Cushion$new())

@@ -16,7 +16,7 @@
 #' Also, continuous and eventsource don't seem to work in R, unless I'm
 #' missing something.
 #'
-#' Options for the \code{feed} parmeter:
+#' Options for the \code{feed} parameter:
 #' \itemize{
 #'  \item longpoll: Closes the connection after the first event.
 #'  \item continuous: Send a line of JSON per event. Keeps the socket open

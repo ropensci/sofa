@@ -22,7 +22,7 @@
 #' }
 #'
 #' @examples \dontrun{
-#' # initialize a couchdb connection
+#' # initialize a CouchDB connection
 #' (x <- Cushion$new())
 #'
 #' # From a data.frame

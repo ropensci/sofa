@@ -3,7 +3,7 @@
 #' @export
 #' @template all
 #' @template return
-#' @param dbname Database name. (charcter)
+#' @param dbname Database name. (character)
 #' @param descending Return in descending order? (logical)
 #' @param startkey Document ID to start at. (character)
 #' @param endkey Document ID to end at. (character)

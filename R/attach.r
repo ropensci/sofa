@@ -3,10 +3,10 @@
 #' @name attachments
 #' @template all
 #' @template return
-#' @param dbname (charcter) Database name. Required.
-#' @param docid (charcter) Document ID. Required.
-#' @param attachment (charcter) A file name. Required.
-#' @param attname (charcter) Attachment name. Required.
+#' @param dbname (character) Database name. Required.
+#' @param docid (character) Document ID. Required.
+#' @param attachment (character) A file name. Required.
+#' @param attname (character) Attachment name. Required.
 #' @param type (character) one of raw (default) or text. required.
 #' @details Methods:
 #' \itemize{

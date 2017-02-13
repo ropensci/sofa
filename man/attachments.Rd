@@ -20,13 +20,13 @@ doc_attach_delete(cushion, dbname, docid, attname, as = "list", ...)
 \arguments{
 \item{cushion}{A \code{Cushion} object. Required.}
 
-\item{dbname}{(charcter) Database name. Required.}
+\item{dbname}{(character) Database name. Required.}
 
-\item{docid}{(charcter) Document ID. Required.}
+\item{docid}{(character) Document ID. Required.}
 
-\item{attachment}{(charcter) A file name. Required.}
+\item{attachment}{(character) A file name. Required.}
 
-\item{attname}{(charcter) Attachment name. Required.}
+\item{attname}{(character) Attachment name. Required.}
 
 \item{as}{(character) One of list (default) or json}
 
