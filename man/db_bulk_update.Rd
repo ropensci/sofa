@@ -62,4 +62,3 @@ mtcars$num <- 89
 db_bulk_update(x, "bulktest", mtcars)
 }
 }
-

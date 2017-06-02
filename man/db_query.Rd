@@ -123,4 +123,3 @@ db_query(x, dbname = "omdb", selector = list(
 
 }
 }
-

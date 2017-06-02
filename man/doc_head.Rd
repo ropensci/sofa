@@ -45,4 +45,3 @@ doc_head(x, dbname="sofadb", docid="abeer")
 doc_head(x, dbname="sofadb", docid="abeer", as='json')
 }
 }
-

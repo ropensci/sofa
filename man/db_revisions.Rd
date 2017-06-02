@@ -48,4 +48,3 @@ db_revisions(x, dbname="sofadb", docid="abeer", as='json')
 db_revisions(x, dbname="sofadb", docid="abeer", simplify=FALSE, as='json')
 }
 }
-

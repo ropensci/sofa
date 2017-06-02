@@ -46,4 +46,3 @@ doc_create(x, dbname="sofadb", doc=doc3, docid="newxml")
 doc_delete(x, dbname="sofadb", docid="wrongname")
 }
 }
-

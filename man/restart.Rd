@@ -29,4 +29,3 @@ Restart your Couchdb instance
 # restart(x)
 }
 }
-

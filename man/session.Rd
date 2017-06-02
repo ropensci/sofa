@@ -31,4 +31,3 @@ session(x)
 session(x, as = 'json')
 }
 }
-

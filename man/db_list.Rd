@@ -33,4 +33,3 @@ db_list(x)
 db_list(x, as = 'json')
 }
 }
-

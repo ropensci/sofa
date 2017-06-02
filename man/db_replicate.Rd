@@ -69,4 +69,3 @@ doc_get(z, dbname = "hello_earth", docid='R_rules')
 db_delete(z, 'hello_earth')
 }
 }
-

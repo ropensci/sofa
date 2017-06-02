@@ -31,4 +31,3 @@ ping(x)
 ping(x, as = "json")
 }
 }
-

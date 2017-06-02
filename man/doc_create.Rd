@@ -101,4 +101,3 @@ db_create(x, dbname = "testiris")
 doc_create(x, iris, dbname = "testiris")
 }
 }
-

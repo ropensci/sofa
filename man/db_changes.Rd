@@ -88,4 +88,3 @@ res$results
 db_changes(x, dbname="leothelion", as='json')
 }
 }
-

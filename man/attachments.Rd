@@ -3,9 +3,9 @@
 \name{attachments}
 \alias{attachments}
 \alias{doc_attach_create}
-\alias{doc_attach_delete}
-\alias{doc_attach_get}
 \alias{doc_attach_info}
+\alias{doc_attach_get}
+\alias{doc_attach_delete}
 \title{Work with attachments}
 \usage{
 doc_attach_create(cushion, dbname, docid, attachment, attname, as = "list",
@@ -109,4 +109,3 @@ doc_attach_delete(x, "drinksdb", docid="asoda", attname="img.png")
 doc_attach_delete(x, "drinksdb", docid="asoda", attname="plot.pdf")
 }
 }
-
