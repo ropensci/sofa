@@ -50,7 +50,7 @@ install.packages("sofa")
 Development version
 
 ```{r eval=FALSE}
-devtools::install_github("rbison", "ropensci")
+devtools::install_github("ropensci/sofa")
 ```
 
 Load library
@@ -61,7 +61,7 @@ library(sofa)
 
 ## sofa package API
 
-The folloing is a breakdown of the major groups of functions - note that not all are included.
+The following is a breakdown of the major groups of functions - note that not all are included.
 
 __create a CouchDB client connection__
 
@@ -150,12 +150,14 @@ doc_create(x, dbname = "cats", doc2)
 and one more, cause 3's company
 
 ```{r}
-doc3 <- '{"name": "matilda", "color": "green", "furry": false, "size": 5}'
+doc3 <- '{"name": "matilda", "color": "green", "furry": false, "size": 5, "age": 2}'
 doc_create(x, dbname = "cats", doc3)
 ```
 
 Note how we used a document id in the first document creation, but
-not in the second. Using a document id is optional.
+not in the second and third. Using a document id is optional.
+
+Also note that the third document has an additional field "age".
 
 ## Changes feed
 
@@ -180,7 +182,7 @@ db_query(x, dbname = "cats", selector = list(color = "red"))$docs
 Search for cats that are furry
 
 ```{r}
-db_query(x, dbname = "cats", selector = list(size = list(`$gt` = 2)))$docs
+db_query(x, dbname = "cats", selector = list(furry = TRUE))$docs
 ```
 
 Return only certain fields
@@ -190,3 +192,17 @@ db_query(x, dbname = "cats",
          selector = list(size = list(`$gt` = 2)),
          fields = c("name", "color"))$docs
 ```
+
+Convert the result of a query into a data.frame using `jsonlite`
+
+```{r}
+library('jsonlite')
+res <- db_query(x, dbname = "cats", 
+                 selector = list(`_id` = list(`$gt` = NULL)),
+                 fields = c("name", "color", "furry", "size", "age"),
+                 as = "json")
+
+fromJSON(res)$docs
+```
+
+
