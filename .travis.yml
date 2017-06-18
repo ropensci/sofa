@@ -4,6 +4,9 @@ cache: packages
 
 warnings_are_errors: false
 
+r_github_packages:
+  - jimhester/covr
+
 before_install:
   - docker run -d -p 5984:5984 klaemo/couchdb:2.0-rc2 --with-haproxy
 
