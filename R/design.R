@@ -60,7 +60,7 @@
 #' design_get(x, dbname='omdb', design='view5')
 #'
 #' # Search using a view
-#' res <- view_search(x, dbname='omdb', design='view2')
+#' res <- design_search(x, dbname='omdb', design='view2')
 #' head(
 #'   do.call(
 #'     "rbind.data.frame",
@@ -68,7 +68,7 @@
 #'   )
 #' )
 #'
-#' res <- view_search(x, dbname='omdb', design='view5')
+#' res <- design_search(x, dbname='omdb', design='view5')
 #' head(
 #'   structure(do.call(
 #'     "rbind.data.frame",
