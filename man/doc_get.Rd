@@ -66,4 +66,3 @@ doc_get(x, dbname="sofadb", docid="abeer", revs=TRUE)
 doc_get(x, dbname="sofadb", docid="abeer", revs=TRUE, local_seq=TRUE)
 }
 }
-

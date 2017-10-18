@@ -53,4 +53,3 @@ library('httr')
 res <- db_alldocs(x, dbname="leothelion", config=verbose())
 }
 }
-

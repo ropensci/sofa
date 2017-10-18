@@ -54,6 +54,7 @@ functionality of this package will work with versions < 2, while
 some may not (mango queries, see \code{\link{db_query}}). I don't
 plan to support older CouchDB versions per se.
 }
+
 \examples{
 \dontrun{
 # Create a CouchDB connection client
@@ -110,4 +111,3 @@ alldocs(z, "foobar")
 }
 }
 \keyword{datasets}
-

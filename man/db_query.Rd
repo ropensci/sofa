@@ -68,7 +68,7 @@ if ("omdb" \%in\% db_list(x)) {
 db_create(x, dbname='omdb')
 
 ## add some documents
-invisible(bulk_create(x, "omdb", strs))
+invisible(db_bulk_create(x, "omdb", strs))
 
 ## query all in one json blob
 db_query(x, dbname = "omdb", query = '{
@@ -123,4 +123,3 @@ db_query(x, dbname = "omdb", selector = list(
 
 }
 }
-

@@ -35,4 +35,3 @@ Get an attachment.
 attach_get(x, dbname="sofadb", docid="guysbeer")
 }
 }
-

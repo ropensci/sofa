@@ -25,4 +25,3 @@ There are the following functions for working with documents:
  \item \code{\link{db_revisions}} - Get revisions for a document
 }
 }
-

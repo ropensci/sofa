@@ -103,4 +103,3 @@ db_bulk_create(x, "irisrows", apply(iris, 1, as.list))
 # db_bulk_create(x, "iriscolumns", parse_df(iris, "columns", tojson=FALSE), how="columns")
 }
 }
-

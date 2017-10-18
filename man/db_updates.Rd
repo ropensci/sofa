@@ -57,4 +57,3 @@ db_updates(x, feed="continuous")
 db_updates(x, feed="eventsource")
 }
 }
-

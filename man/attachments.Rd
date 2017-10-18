@@ -3,9 +3,9 @@
 \name{attachments}
 \alias{attachments}
 \alias{doc_attach_create}
-\alias{doc_attach_delete}
-\alias{doc_attach_get}
 \alias{doc_attach_info}
+\alias{doc_attach_get}
+\alias{doc_attach_delete}
 \title{Work with attachments}
 \usage{
 doc_attach_create(cushion, dbname, docid, attachment, attname, as = "list",
@@ -13,7 +13,7 @@ doc_attach_create(cushion, dbname, docid, attachment, attname, as = "list",
 
 doc_attach_info(cushion, dbname, docid, attname, ...)
 
-doc_attach_get(cushion, dbname, docid, attname, type = "raw", ...)
+doc_attach_get(cushion, dbname, docid, attname, as = "raw", ...)
 
 doc_attach_delete(cushion, dbname, docid, attname, as = "list", ...)
 }
@@ -98,7 +98,7 @@ doc_attach_info(x, "drinksdb", docid="asoda", attname="plot.pdf")
 
 # get an attachment (GET request)
 res <- doc_attach_get(x, "drinksdb", docid="asoda",
-  attname="mtcarstable.csv", type = "text")
+  attname="mtcarstable.csv", as = "text")
 read.csv(text = res)
 doc_attach_get(x, "drinksdb", docid="asoda", attname="img.png")
 doc_attach_get(x, "drinksdb", docid="asoda", attname="plot.pdf")
@@ -109,4 +109,3 @@ doc_attach_delete(x, "drinksdb", docid="asoda", attname="img.png")
 doc_attach_delete(x, "drinksdb", docid="asoda", attname="plot.pdf")
 }
 }
-

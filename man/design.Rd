@@ -2,13 +2,13 @@
 % Please edit documentation in R/design.R
 \name{design}
 \alias{design}
-\alias{design_copy}
 \alias{design_create}
 \alias{design_create_}
 \alias{design_delete}
 \alias{design_get}
 \alias{design_head}
 \alias{design_info}
+\alias{design_copy}
 \title{Work with design documents}
 \usage{
 design_create(cushion, dbname, design, fxnname, key = "null", value = "doc",
@@ -128,4 +128,3 @@ head(
 design_copy(x, dbname = "omdb", design = "view2", design_to = "view22")
 }
 }
-

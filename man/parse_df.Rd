@@ -30,4 +30,3 @@ parse_df(mtcars, how="rows", tojson=FALSE)
 parse_df(mtcars, how="columns", tojson=FALSE)
 }
 }
-

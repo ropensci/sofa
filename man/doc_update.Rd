@@ -52,4 +52,3 @@ doc_update(x, dbname="sofadb", doc=doc2, docid="b_beer", rev=revs[1])
 db_revisions(x, dbname = "sofadb", docid = "b_beer")
 }
 }
-
