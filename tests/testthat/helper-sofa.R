@@ -7,9 +7,11 @@ dbname_random <- function() {
 cleanup_dbs <- function(x) invisible(db_delete(sofa_conn, x))
 
 invisible(sofa_conn <- sofa::Cushion$new())
-
-db_test_name <- "testing123"
-if (!db_test_name %in% sofa::db_list(sofa_conn)) {
-  sofa::db_create(sofa_conn, dbname = db_test_name)
+pinged <- tryCatch(sofa_conn$ping(), error = function(e) e)
+if (!inherits(pinged, "error")) {
+	db_test_name <- "testing123"
+	if (!db_test_name %in% sofa::db_list(sofa_conn)) {
+	  sofa::db_create(sofa_conn, dbname = db_test_name)
+	}
+	invisible(sofa::db_bulk_create(sofa_conn, dbname = db_test_name, doc = iris))
 }
-invisible(sofa::db_bulk_create(sofa_conn, dbname = db_test_name, doc = iris))
