@@ -11,8 +11,8 @@ db_create(cushion, dbname, delifexists = FALSE, as = "list", ...)
 
 \item{dbname}{Database name}
 
-\item{delifexists}{If TRUE, delete any database of the same name before creating it.
-This is useful for testing. Default is FALSE.}
+\item{delifexists}{If TRUE, delete any database of the same name before
+creating it. This is useful for testing. Default is FALSE.}
 
 \item{as}{(character) One of list (default) or json}
 

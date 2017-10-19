@@ -24,10 +24,11 @@
 #' }
 doc_head <- function(cushion, dbname, docid, as = 'list', ...) {
   check_cushion(cushion)
-  out <- HEAD(
-    file.path(cushion$make_url(), dbname, docid),
-    cushion$get_headers(),
-    ...)
-  stop_status(out)
-  if (as == 'list') out$all_headers else jsonlite::toJSON(out$all_header)
+  sofa_HEAD(file.path(cushion$make_url(), dbname, docid), cushion$get_headers(), ...)
+  # out <- HEAD(
+  #   file.path(cushion$make_url(), dbname, docid),
+  #   cushion$get_headers(),
+  #   ...)
+  # stop_status(out)
+  # if (as == 'list') out$all_headers else jsonlite::toJSON(out$all_header)
 }

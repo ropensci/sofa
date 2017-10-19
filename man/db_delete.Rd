@@ -34,8 +34,8 @@ db_create(x, dbname='newdb')
 db_delete(x, dbname='newdb')
 
 ## with curl info while doing request
-library('httr')
+library('crul')
 db_create(x, 'newdb')
-db_delete(x, 'newdb', config = httr::verbose())
+db_delete(x, 'newdb', verbose = TRUE)
 }
 }

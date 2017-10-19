@@ -33,7 +33,7 @@
 #' if ("sofadb" %in% db_list(x)) {
 #'   invisible(db_delete(x, dbname="sofadb"))
 #' }
-#' db_create(x, dbname='sofadb')
+#' db_create(x, 'sofadb')
 #'
 #' # write a document WITH a name (uses PUT)
 #' doc1 <- '{"name": "drink", "beer": "IPA", "score": 5}'
@@ -51,7 +51,7 @@
 #' doc3 <- '{"planet": "mars", "size": "smallish"}'
 #' doc_create(x, doc3, dbname="sofadb")
 #' ## assigns a UUID instead of a user given name
-#' alldocs(x, dbname = "sofadb")
+#' db_alldocs(x, dbname = "sofadb")
 #'
 #' # write an xml document WITH a name (uses PUT). xml is written as xml in
 #' # couchdb, just wrapped in json, when you get it out it will be as xml
@@ -61,7 +61,7 @@
 #'
 #' # You can pass in lists that autoconvert to json internally
 #' doc1 <- list(name = "drink", beer = "IPA", score = 9)
-#' doc_create(doc1, dbname="sofadb", docid="goodbeer")
+#' doc_create(x, dbname="sofadb", doc1, docid="goodbeer")
 #'
 #' # Write directly from a data.frame
 #' ## Each row or column becomes a separate document
@@ -88,8 +88,12 @@ doc_create_ <- function(doc, cushion, dbname, docid = NULL,
 doc_create_.character <- function(doc, cushion, dbname, docid = NULL,
                                  how = 'rows', as = 'list', ...) {
   url <- sprintf("%s/%s", cushion$make_url(), dbname)
+  docex <- tryCatch(doc_head(cushion, dbname, docid), error = function(e) e)
+  rev <- if (inherits(docex, "error")) NULL else docex$rev
   if (!is.null(docid)) {
-    sofa_PUT(paste0(url, "/", docid), as, body = check_inputs(doc), cushion$get_headers(), ...)
+    sofa_PUT_doc_create(file.path(url, docid), as, body = check_inputs(doc),
+      encode = "json", headers = list(`Accept` = "application/json"),
+      rev = rev, cushion$get_headers(), ...)
   } else {
     sofa_POST(url, as, body = check_inputs(doc), ...)
   }
@@ -99,7 +103,8 @@ doc_create_.list <- function(doc, cushion, dbname, docid = NULL,
                                  how = 'rows', as = 'list', ...) {
   url <- sprintf("%s/%s", cushion$make_url(), dbname)
   if (!is.null(docid)) {
-    sofa_PUT(paste0(url, "/", docid), as, body = check_inputs(doc), cushion$get_headers(), ...)
+    sofa_PUT(paste0(url, "/", docid), as, body = check_inputs(doc),
+             cushion$get_headers(), ...)
   } else {
     sofa_POST(url, as, body = check_inputs(doc), ...)
   }
@@ -109,5 +114,18 @@ doc_create_.data.frame <- function(doc, cushion, dbname, docid = NULL,
                             how = 'rows', as = 'list', ...) {
   url <- sprintf("%s/%s", cushion$make_url(), dbname)
   each <- parse_df(doc, how = how)
-  lapply(each, function(x) sofa_POST(url, as, body = x, cushion$get_headers(), ...))
+  lapply(each, function(x) sofa_POST(url, as, body = x,
+                                     cushion$get_headers(), ...))
+}
+
+sofa_PUT_doc_create <- function(url, as = 'list', body, encode = "json",
+                                headers = NULL, rev, ...){
+  as <- match.arg(as, c('list','json'))
+  cli <- crul::HttpClient$new(
+    url = url,
+    headers = sc(c(ct_json, headers, list(`If-Match` = rev))),
+    opts = list(...))
+  res <- cli$put(body = body, encode = encode)
+  txt <- res$parse("UTF-8")
+  if (as == 'json') txt else jsonlite::fromJSON(txt, FALSE)
 }

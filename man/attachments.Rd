@@ -13,7 +13,7 @@ doc_attach_create(cushion, dbname, docid, attachment, attname, as = "list",
 
 doc_attach_info(cushion, dbname, docid, attname, ...)
 
-doc_attach_get(cushion, dbname, docid, attname, as = "raw", ...)
+doc_attach_get(cushion, dbname, docid, attname, type = "raw", ...)
 
 doc_attach_delete(cushion, dbname, docid, attname, as = "list", ...)
 }

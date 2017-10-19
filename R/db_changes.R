@@ -58,9 +58,9 @@
 #' # as JSON
 #' db_changes(x, dbname="leothelion", as='json')
 #' }
-db_changes <- function(cushion, dbname, descending=NULL, startkey=NULL, endkey=NULL,
-  since=NULL, limit=NULL, include_docs=NULL, feed="normal", heartbeat=NULL,
-  filter=NULL, as='list', ...) {
+db_changes <- function(cushion, dbname, descending=NULL, startkey=NULL,
+  endkey=NULL, since=NULL, limit=NULL, include_docs=NULL, feed="normal",
+  heartbeat=NULL, filter=NULL, as='list', ...) {
 
   check_cushion(cushion)
   args <- sc(list(descending=descending,startkey=startkey,endkey=endkey,
@@ -68,5 +68,7 @@ db_changes <- function(cushion, dbname, descending=NULL, startkey=NULL, endkey=N
                   heartbeat=heartbeat,filter=filter))
 
   call_ <- sprintf("%s/%s/_changes", cushion$make_url(), dbname)
-  sofa_GET(call_, as, query = args, cushion$get_headers(), ...)
+  sofa_GET(call_, as, query = args,
+           cushion$get_headers(),
+           cushion$get_auth(), ...)
 }

@@ -13,11 +13,12 @@
 #' db_delete(x, dbname='newdb')
 #'
 #' ## with curl info while doing request
-#' library('httr')
+#' library('crul')
 #' db_create(x, 'newdb')
-#' db_delete(x, 'newdb', config = httr::verbose())
+#' db_delete(x, 'newdb', verbose = TRUE)
 #' }
 db_delete <- function(cushion, dbname, as = 'list', ...) {
   check_cushion(cushion)
-  sofa_DELETE(sprintf("%s/%s", cushion$make_url(), dbname), as, cushion$get_headers(), ...)
+  sofa_DELETE(sprintf("%s/%s", cushion$make_url(), dbname), as,
+              cushion$get_headers(), cushion$get_auth(), ...)
 }

@@ -116,13 +116,16 @@ db_bulk_create_.data.frame <- function(doc, cushion, dbname, docid = NULL,
   sofa_bulk(file.path(url, "_bulk_docs"), as, body = body, cushion$get_headers(), ...)
 }
 
-sofa_bulk <- function(url, as, body, ...) {
-  res <- POST(url, content_type_json(), body = body, ...)
+sofa_bulk <- function(url, as, body, headers, ...) {
+  cli <- crul::HttpClient$new(url = url, headers = c(ct_json, headers),
+                              opts = list(...))
+  res <- cli$post(body = body)
+  #res <- POST(url, content_type_json(), body = body, ...)
   bulk_handle(res, as)
 }
 
 bulk_handle <- function(x, as) {
   stop_status(x)
-  tt <- content(x, "text", encoding = "UTF-8")
+  tt <- x$parse("UTF-8")
   if (as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
 }

@@ -16,14 +16,12 @@ parameter to \code{NULL}. Default: \code{5984}}
 
 \item{transport}{(character) http or https. Default: http}
 
-\item{user}{(character) A user name}
+\item{user, pwd}{(character) user name, and password. these are used in all
+requests. if absent, they are not passed to requests}
 
-\item{pwd}{(character) A password}
-
-\item{headers}{Either an object of class \code{request} or a list that can be coerced
-to an object of class \code{request} via \code{\link[httr]{add_headers}}. These headers
-are used in all requests. To use headers in individual requests and not others, pass
-in headers using \code{\link[httr]{add_headers}} via \code{...} in a function call.}
+\item{headers}{A named list of headers. These headers are used in all
+requests. To use headers in individual requests and not others, pass
+in headers via \code{...} in a function call.}
 }
 \value{
 An object of class \code{Cushion}, with variables accessible for
@@ -43,7 +41,10 @@ sofa connection client
       Construct full base URL from the pieces in the connection object
     }
     \item{\code{get_headers()}}{
-      Get headers that will be sent with each request
+      Get list of headers that will be sent with each request
+    }
+    \item{\code{get_auth()}}{
+      Get list of auth values, user and pwd
     }
   }
 }

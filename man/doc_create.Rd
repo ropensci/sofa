@@ -59,7 +59,7 @@ for a large number of documents.
 if ("sofadb" \%in\% db_list(x)) {
   invisible(db_delete(x, dbname="sofadb"))
 }
-db_create(x, dbname='sofadb')
+db_create(x, 'sofadb')
 
 # write a document WITH a name (uses PUT)
 doc1 <- '{"name": "drink", "beer": "IPA", "score": 5}'
@@ -77,7 +77,7 @@ doc_create(x, doc2, dbname="sofadb")
 doc3 <- '{"planet": "mars", "size": "smallish"}'
 doc_create(x, doc3, dbname="sofadb")
 ## assigns a UUID instead of a user given name
-alldocs(x, dbname = "sofadb")
+db_alldocs(x, dbname = "sofadb")
 
 # write an xml document WITH a name (uses PUT). xml is written as xml in
 # couchdb, just wrapped in json, when you get it out it will be as xml
@@ -87,7 +87,7 @@ doc_get(x, dbname = "sofadb", docid = "somexml")
 
 # You can pass in lists that autoconvert to json internally
 doc1 <- list(name = "drink", beer = "IPA", score = 9)
-doc_create(doc1, dbname="sofadb", docid="goodbeer")
+doc_create(x, dbname="sofadb", doc1, docid="goodbeer")
 
 # Write directly from a data.frame
 ## Each row or column becomes a separate document

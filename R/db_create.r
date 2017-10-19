@@ -4,8 +4,8 @@
 #' @template all
 #' @template return
 #' @param dbname Database name
-#' @param delifexists If TRUE, delete any database of the same name before creating it.
-#'    This is useful for testing. Default is FALSE.
+#' @param delifexists If TRUE, delete any database of the same name before
+#' creating it. This is useful for testing. Default is FALSE.
 #' @examples \dontrun{
 #' (x <- Cushion$new())
 #'
@@ -20,5 +20,6 @@
 db_create <- function(cushion, dbname, delifexists=FALSE, as='list', ...) {
   if (delifexists) db_delete(cushion, dbname, ...)
   check_cushion(cushion)
-  sofa_PUT(file.path(cushion$make_url(), dbname), as, cushion$get_headers(), ...)
+  sofa_PUT(file.path(cushion$make_url(), dbname), as,
+           headers = cushion$get_headers(), auth = cushion$get_auth(), ...)
 }

@@ -49,11 +49,11 @@ z <- Cushion$new(host = "ropensci.cloudant.com", transport = 'https',
   port = NULL, user = 'ropensci', pwd = Sys.getenv('CLOUDANT_PWD'))
 
 ## do the replication
-db_replicate(x, z, dbname = "hello_earth", createdb = TRUE)
+db_replicate(x, z, dbname = "hello_earth")
 
 ## check changes on the remote
 db_list(z)
-changes(z, dbname = "hello_earth")
+db_changes(z, dbname = "hello_earth")
 
 ## make some changes on the remote
 doc_create(z, dbname = "hello_earth",

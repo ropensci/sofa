@@ -13,6 +13,8 @@
 #' }
 db_list <- function(cushion, simplify=TRUE, as='list', ...) {
   check_cushion(cushion)
-  tmp <- sofa_GET(sprintf("%s/_all_dbs", cushion$make_url()), as, cushion$get_headers(), ...)
+  tmp <- sofa_GET(sprintf("%s/_all_dbs", cushion$make_url()), as,
+                  headers = cushion$get_headers(),
+                  auth = cushion$get_auth(), ...)
   if (simplify && as == 'list') do.call(c, tmp) else tmp
 }

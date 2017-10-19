@@ -8,12 +8,11 @@
 #' @param path (character) context path that is appended to the end of the url. e.g.,
 #' \code{bar} in \code{http://foo.com/bar}. Default: NULL, ignored
 #' @param transport (character) http or https. Default: http
-#' @param user (character) A user name
-#' @param pwd (character) A password
-#' @param headers Either an object of class \code{request} or a list that can be coerced
-#' to an object of class \code{request} via \code{\link[httr]{add_headers}}. These headers
-#' are used in all requests. To use headers in individual requests and not others, pass
-#' in headers using \code{\link[httr]{add_headers}} via \code{...} in a function call.
+#' @param user,pwd (character) user name, and password. these are used in all
+#' requests. if absent, they are not passed to requests
+#' @param headers A named list of headers. These headers are used in all
+#' requests. To use headers in individual requests and not others, pass
+#' in headers via \code{...} in a function call.
 #'
 #' @details
 #' \strong{Methods}
@@ -25,7 +24,10 @@
 #'       Construct full base URL from the pieces in the connection object
 #'     }
 #'     \item{\code{get_headers()}}{
-#'       Get headers that will be sent with each request
+#'       Get list of headers that will be sent with each request
+#'     }
+#'     \item{\code{get_auth()}}{
+#'       Get list of auth values, user and pwd
 #'     }
 #'   }
 #'
@@ -114,7 +116,7 @@ Cushion <- R6::R6Class(
       if (!missing(user)) self$user <- user
       if (!missing(pwd)) self$pwd <- pwd
       if (!missing(user) && !missing(pwd)) {
-        private$auth_headers <- httr::authenticate(user = user, password = pwd)
+        private$auth_headers <- crul::auth(user, pwd)
       }
       if (!missing(headers)) self$headers <- headers
     },
@@ -127,7 +129,8 @@ Cushion <- R6::R6Class(
       cat(paste0("  path: ", self$path), sep = "\n")
       cat(paste0("  type: ", self$type), sep = "\n")
       cat(paste0("  user: ", self$user), sep = "\n")
-      cat(paste0("  pwd: ", if (!is.null(self$pwd)) '<secret>' else ''), sep = "\n")
+      cat(paste0("  pwd: ", if (!is.null(self$pwd)) '<secret>' else ''),
+          sep = "\n")
       invisible(self)
     },
 
@@ -146,9 +149,8 @@ Cushion <- R6::R6Class(
       tmp
     },
 
-    get_headers = function() {
-      c(private$auth_headers, self$headers)
-    }
+    get_headers = function() self$headers,
+    get_auth = function() private$auth_headers
   ),
 
   private = list(

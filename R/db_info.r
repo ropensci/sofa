@@ -17,5 +17,6 @@
 #' }
 db_info <- function(cushion, dbname, as = 'list', ...) {
   check_cushion(cushion)
-  sofa_GET(sprintf("%s/%s", cushion$make_url(), dbname), as, cushion$get_headers(), ...)
+  sofa_GET(sprintf("%s/%s", cushion$make_url(), dbname), as,
+           cushion$get_headers(), ...)
 }
