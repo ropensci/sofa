@@ -32,10 +32,12 @@
 #' db_updates(x, feed="continuous")
 #' db_updates(x, feed="eventsource")
 #' }
-db_updates <- function(cushion, feed = 'longpoll', timeout = 60, heartbeat = TRUE,
-                       as = 'list', ...) {
+db_updates <- function(cushion, feed = 'longpoll', timeout = 60,
+                       heartbeat = TRUE, as = 'list', ...) {
+
   check_cushion(cushion)
-  args <- sc(list(feed = feed, timeout = timeout, heartbeat = tolower(heartbeat)))
-  sofa_GET(paste0(cushion$make_url(), "_db_updates"), as = as,
+  args <- sc(list(feed = feed, timeout = timeout,
+                  heartbeat = tolower(heartbeat)))
+  sofa_GET(file.path(cushion$make_url(), "_db_updates"), as = as,
            args = args, cushion$get_headers(), ...)
 }
