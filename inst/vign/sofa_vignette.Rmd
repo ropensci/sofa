@@ -18,8 +18,8 @@ sofa introduction
 
 CouchDB links
 
-+ [Apache CouchDB](http://couchdb.apache.org/).
-+ [CouchDB guide - online book and hard copy](http://guide.couchdb.org/).
++ [Apache CouchDB](http://couchdb.apache.org/)
++ [CouchDB docs](http://docs.couchdb.org/en/2.1.0/index.html)
 
 ## CouchDB versions
 
@@ -27,17 +27,11 @@ CouchDB links
 
 ## Install CouchDB
 
-Go to <http://docs.couchdb.org/en/2.0.0/install/index.html> for instructions.
+Go to <http://docs.couchdb.org/en/2.1.0/install/index.html> for instructions.
 
-## Start CouchDB in your terminal
+## Start CouchDB
 
-You can do this from anywhere in your directory. See <http://couchdb.apache.org> for instructions on how to install CouchDB. You can't use `sofa` functions without having couchdb running, either locally or on a remote server. If using a remote sever of course you don't need to have CouchDB running locally.
-
-```bash
-couchdb
-```
-
-You can interact with your CouchDB databases as well in your browser. Navigate to http://localhost:5984/_utils
+Start CouchDB however is appropriate for your setup. You can interact with your CouchDB databases as well in your browser. Navigate to <http://localhost:5984>
 
 ## Install sofa
 
@@ -80,11 +74,12 @@ __work with databases__
 * `db_query`
 * `db_replicate`
 * `db_revisions`
-* `db_updates`
+* `db_index`
+* `db_index_create`
+* `db_index_delete`
 
 __work with views/design documents__
 
-* `design_copy`
 * `design_create`
 * `design_create_`
 * `design_delete`
@@ -92,6 +87,7 @@ __work with views/design documents__
 * `design_head`
 * `design_info`
 * `design_search`
+* `design_search_many`
 
 __work with documents__
 
@@ -102,6 +98,10 @@ __work with documents__
 * `doc_update`
 * `db_bulk_create`
 * `db_bulk_update`
+* `doc_attach_create`
+* `doc_attach_delete`
+* `doc_attach_get`
+* `doc_attach_info`
 
 ## Create a connection client
 
@@ -188,7 +188,7 @@ db_query(x, dbname = "cats", selector = list(furry = TRUE))$docs
 Return only certain fields
 
 ```{r}
-db_query(x, dbname = "cats", 
+db_query(x, dbname = "cats",
          selector = list(size = list(`$gt` = 2)),
          fields = c("name", "color"))$docs
 ```
@@ -197,7 +197,7 @@ Convert the result of a query into a data.frame using `jsonlite`
 
 ```{r}
 library('jsonlite')
-res <- db_query(x, dbname = "cats", 
+res <- db_query(x, dbname = "cats",
                  selector = list(`_id` = list(`$gt` = NULL)),
                  fields = c("name", "color", "furry", "size", "age"),
                  as = "json")
