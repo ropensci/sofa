@@ -27,7 +27,7 @@ package to interact with CouchDB.
 
 ## Install CouchDB
 
-Go to <http://docs.couchdb.org/en/2.0.0/install/index.html> for instructions.
+Go to <http://docs.couchdb.org/en/2.1.0/install/index.html> for instructions.
 
 ## Connect to CouchDB
 
@@ -40,7 +40,7 @@ couchdb
 Or opening the CouchDB app on your machine, or running it in docker. Whatever it
 is, start it up.
 
-You can interact with your CouchDB databases as well in your browser. Navigate to http://localhost:5984/_utils
+You can interact with your CouchDB databases as well in your browser. Navigate to <http://localhost:5984/_utils>
 
 ## Install sofa
 
@@ -85,10 +85,12 @@ z <- Cushion$new(
 Break down of parameters:
 
 * `host`: the base url, without the transport (`http`/`https`)
+* `path`: context path that is appended to the end of the url
 * `transport`: `http` or `https`
 * `port`: The port to connect to. Default: 5984. For Cloudant, have to set to `NULL`
 * `user`: User name for the service.
 * `pwd`: Password for the service, if any.
+* `headers`: headers to pass in all requests
 
 If you call `Cushion$new()` with no arguments you get a cushion set up for local
 use on your machine, with all defaults used.
@@ -102,13 +104,18 @@ x <- Cushion$new()
 
 
 ```r
-ping(x)
+x$ping()
 #> $couchdb
 #> [1] "Welcome"
-#>
+#> 
 #> $version
-#> [1] "2.0.0"
-#>
+#> [1] "2.1.0"
+#> 
+#> $features
+#> $features[[1]]
+#> [1] "scheduler"
+#> 
+#> 
 #> $vendor
 #> $vendor$name
 #> [1] "The Apache Software Foundation"
@@ -136,18 +143,9 @@ see if its there now
 
 ```r
 db_list(x)
-#>  [1] "acouch"          "alm_couchdb"     "aqijhfcntb"
-#>  [4] "auhgmimrls"      "avarpnvaia"      "bhlhhiwwph"
-#>  [7] "bulktest"        "bvuizcrdoy"      "cats"
-#> [10] "dpufyoigqf"      "drinksdb"        "fiadbzwmos"
-#> [13] "flxsqfkzdf"      "gtogmgbsjx"      "helloworld"
-#> [16] "jebvagbrqz"      "jxdktgmdsb"      "leothelion"
-#> [19] "leothelion-json" "lgzzmzugkm"      "lhkfptkfel"
-#> [22] "lyluootgvi"      "namcicfbjl"      "nqidfcpojk"
-#> [25] "omdb"            "sofadb"          "spyrzxffqv"
-#> [28] "sss"             "testing123"      "trkhxkopvd"
-#> [31] "uwvtpnehdu"      "vswtlxhcxe"      "wqefduwgpu"
-#> [34] "xhalvmxmud"      "xwrcjghvxx"      "zocaqeleye"
+#>  [1] "bulkfromchr" "bulktest2"   "bulktest3"   "cats"        "cchecksdb"  
+#>  [6] "drinksdb"    "hello_earth" "iris190"     "iris984"     "irisrows"   
+#> [11] "sofadb"      "test"        "testing"     "testing123"  "testiris"
 ```
 
 ## Create documents
@@ -160,10 +158,10 @@ doc1 <- '{"name":"sofa","beer":"IPA"}'
 doc_create(x, doc1, dbname = "sofadb", docid = "a_beer")
 #> $ok
 #> [1] TRUE
-#>
+#> 
 #> $id
 #> [1] "a_beer"
-#>
+#> 
 #> $rev
 #> [1] "1-a48c98c945bcc05d482bc6f938c89882"
 ```
@@ -176,56 +174,18 @@ doc2 <- '{"name":"sofa","icecream":"rocky road"}'
 doc_create(x, doc2, dbname = "sofadb")
 #> $ok
 #> [1] TRUE
-#>
+#> 
 #> $id
-#> [1] "e6bb43092edaf8fd987434b8a30d08bd"
-#>
+#> [1] "15b4cdf4dfa683352b57015af2cfff2a"
+#> 
 #> $rev
 #> [1] "1-fd0da7fcb8d3afbfc5757d065c92362c"
 ```
 
-### XML?
+## More docs
 
-Write an xml document WITH a name (uses PUT). The xml is written as xml in couchdb, just wrapped in json, when you get it out it will be as xml.
+See the [vignettes](https://github.com/ropensci/sofa/tree/master/vignettes) for more documentation.
 
-write the xml
-
-
-```r
-doc3 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
-doc_create(x, doc3, dbname = "sofadb", docid = "somexml")
-#> $ok
-#> [1] TRUE
-#>
-#> $id
-#> [1] "somexml"
-#>
-#> $rev
-#> [1] "1-5f06e82103a0d5baa9d5f75226c8dcb8"
-```
-
-get the doc back out
-
-
-```r
-doc_get(x, dbname = "sofadb", docid = "somexml")
-#> $`_id`
-#> [1] "somexml"
-#>
-#> $`_rev`
-#> [1] "1-5f06e82103a0d5baa9d5f75226c8dcb8"
-#>
-#> $xml
-#> [1] "<top><a/><b/><c><d/><e>bob</e></c></top>"
-```
-
-get just the xml out
-
-
-```r
-doc_get(x, dbname = "sofadb", docid = "somexml")[["xml"]]
-#> [1] "<top><a/><b/><c><d/><e>bob</e></c></top>"
-```
 
 ## Meta
 

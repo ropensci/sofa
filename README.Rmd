@@ -34,7 +34,7 @@ package to interact with CouchDB.
 
 ## Install CouchDB
 
-Go to <http://docs.couchdb.org/en/2.0.0/install/index.html> for instructions.
+Go to <http://docs.couchdb.org/en/2.1.0/install/index.html> for instructions.
 
 ## Connect to CouchDB
 
@@ -88,10 +88,12 @@ z <- Cushion$new(
 Break down of parameters:
 
 * `host`: the base url, without the transport (`http`/`https`)
+* `path`: context path that is appended to the end of the url
 * `transport`: `http` or `https`
 * `port`: The port to connect to. Default: 5984. For Cloudant, have to set to `NULL`
 * `user`: User name for the service.
 * `pwd`: Password for the service, if any.
+* `headers`: headers to pass in all requests
 
 If you call `Cushion$new()` with no arguments you get a cushion set up for local
 use on your machine, with all defaults used.
@@ -103,7 +105,7 @@ x <- Cushion$new()
 ## Ping the server
 
 ```{r}
-ping(x)
+x$ping()
 ```
 
 Nice, it's working.
@@ -140,28 +142,10 @@ doc2 <- '{"name":"sofa","icecream":"rocky road"}'
 doc_create(x, doc2, dbname = "sofadb")
 ```
 
-### XML?
+## More docs
 
-Write an xml document WITH a name (uses PUT). The xml is written as xml in couchdb, just wrapped in json, when you get it out it will be as xml.
+See the [vignettes](https://github.com/ropensci/sofa/tree/master/vignettes) for more documentation.
 
-write the xml
-
-```{r}
-doc3 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
-doc_create(x, doc3, dbname = "sofadb", docid = "somexml")
-```
-
-get the doc back out
-
-```{r}
-doc_get(x, dbname = "sofadb", docid = "somexml")
-```
-
-get just the xml out
-
-```{r}
-doc_get(x, dbname = "sofadb", docid = "somexml")[["xml"]]
-```
 
 ## Meta
 
