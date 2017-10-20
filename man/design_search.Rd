@@ -2,16 +2,13 @@
 % Please edit documentation in R/design_search.R
 \name{design_search}
 \alias{design_search}
+\alias{design_search_many}
 \title{Search design documents}
 \usage{
-design_search(cushion, dbname, design, view, conflicts = NULL,
-  descending = NULL, endkey = NULL, end_key = NULL, endkey_docid = NULL,
-  end_key_doc_id = NULL, group = NULL, group_level = NULL,
-  include_docs = NULL, attachments = NULL, att_encoding_info = NULL,
-  inclusive_end = NULL, key = NULL, keys = NULL, limit = NULL,
-  reduce = NULL, skip = NULL, sorted = NULL, stale = NULL,
-  startkey = NULL, start_key = NULL, startkey_docid = NULL,
-  start_key_doc_id = NULL, update_seq = NULL, as = "list", ...)
+design_search(cushion, dbname, design, view, params = list(), body = list(),
+  as = "list", ...)
+
+design_search_many(cushion, dbname, design, view, queries, as = "list", ...)
 }
 \arguments{
 \item{cushion}{A \code{Cushion} object. Required.}
@@ -21,83 +18,21 @@ design_search(cushion, dbname, design, view, conflicts = NULL,
 \item{design}{(character) Design document name. this is the design name
 without \strong{_design/}, which is prepended internally. required.}
 
-\item{view}{(character) a view, same as \code{fxn} param in
-\code{\link{design_create_}}. required.}
+\item{view}{(character) a view, same as `fxn` param in
+[design_create_()]. required.}
 
-\item{conflicts}{(logical) Includes conflicts information in response.
-Ignored if include_docs isn't \code{TRUE}. Default: \code{FALSE}}
+\item{params}{query parameters. a named list}
 
-\item{descending}{(logical) Return the documents in descending by key
-order. Default: \code{FALSE}}
-
-\item{endkey, end_key}{(list) Stop returning records when the specified key is
-reached. Optional. \code{end_key} is an alias for \code{endkey}}
-
-\item{endkey_docid, end_key_doc_id}{(character) Stop returning records when
-the specified document ID is reached. Requires endkey to be specified for
-this to have any effect. Optional. \code{end_key_doc_id} is an alias for
-\code{endkey_docid}}
-
-\item{group}{(logical) Group the results using the reduce function to a
-group or single row. Default: \code{FALSE}}
-
-\item{group_level}{(integer) Specify the group level to be used. Optional}
-
-\item{include_docs}{(logical) Include the associated document with each
-row. Default: \code{FALSE}.}
-
-\item{attachments}{(logical) Include the Base64-encoded content of
-attachments in the documents that are included if include_docs is
-\code{TRUE}. Ignored if include_docs isn't \code{TRUE}.
-Default: \code{FALSE}}
-
-\item{att_encoding_info}{(logical) Include encoding information in
-attachment stubs if include_docs is \code{TRUE} and the particular
-attachment is compressed. Ignored if include_docs isn't \code{TRUE}.
-Default: \code{FALSE}.}
-
-\item{inclusive_end}{(logical) Specifies whether the specified end key
-should be included in the result. Default: \code{TRUE}}
-
-\item{key}{(list) Return only documents that match the specified
-key. Optional}
-
-\item{keys}{(list) Return only documents where the key matches one of the
-keys specified in the array. Optional}
-
-\item{limit}{(integer) Limit the number of the returned documents to the
-specified number. Optional}
-
-\item{reduce}{(logical)  Use the reduction function. Default: \code{TRUE}}
-
-\item{skip}{(integer)  Skip this number of records before starting to
-return the results. Default: 0}
-
-\item{sorted}{(logical)  Sort returned rows (see Sorting Returned Rows).
-Setting this to \code{FALSE} offers a performance boost. The total_rows
-and offset fields are not available when this is set to \code{FALSE}.
-Default: \code{TRUE}}
-
-\item{stale}{(character) Allow the results from a stale view to be used.
-Supported values: ok and update_after. Optional}
-
-\item{startkey, start_key}{(list) Return records starting with the specified
-key. Optional. \code{start_key} is an alias for startkey}
-
-\item{startkey_docid, start_key_doc_id}{(character) Return records starting
-with the specified document ID. Requires startkey to be specified for this
-to have any effect. Optional. \code{start_key_doc_id} is an alias for
-\code{startkey_docid}}
-
-\item{update_seq}{(logical) Response includes an update_seq value
-indicating which sequence id of the database the view reflects.
-Default: \code{FALSE}}
+\item{body}{same as `params`, but if any given, a POST request is
+sent (if body non-NULL, `params` also sent). a named list}
 
 \item{as}{(character) One of list (default) or json}
 
 \item{...}{Curl args passed on to one of the HTTP verbs (e.g,.
 \code{\link[httr]{GET}}, \code{\link[httr]{POST}}, \code{\link[httr]{PUT}},
 etc.)}
+
+\item{queries}{a list of named lists of queries}
 }
 \value{
 JSON as a character string or a list (determined by the
@@ -106,10 +41,61 @@ JSON as a character string or a list (determined by the
 \description{
 Search design documents
 }
-\details{
-Note that we only support GET for this method, and not POST.
-Let us know if you want POST support
+\section{Options to pass to `params`, `body`, or `queries` params}{
+
+\itemize{
+ \item conflicts (logical) Includes conflicts information in response.
+Ignored if include_docs isn't \code{TRUE}. Default: \code{FALSE}
+ \item descending (logical) Return the documents in descending by key
+order. Default: \code{FALSE}
+ \item endkey,end_key (list) Stop returning records when the specified key is
+reached. Optional. \code{end_key} is an alias for \code{endkey}
+ \item endkey_docid,end_key_doc_id (character) Stop returning records when
+the specified document ID is reached. Requires endkey to be specified for
+this to have any effect. Optional. \code{end_key_doc_id} is an alias for
+\code{endkey_docid}
+ \item group (logical) Group the results using the reduce function to a
+group or single row. Default: \code{FALSE}
+ \item group_level (integer) Specify the group level to be used. Optional
+ \item include_docs (logical) Include the associated document with each
+row. Default: \code{FALSE}.
+ \item attachments (logical) Include the Base64-encoded content of
+attachments in the documents that are included if include_docs is
+\code{TRUE}. Ignored if include_docs isn't \code{TRUE}.
+Default: \code{FALSE}
+ \item att_encoding_info (logical) Include encoding information in
+attachment stubs if include_docs is \code{TRUE} and the particular
+attachment is compressed. Ignored if include_docs isn't \code{TRUE}.
+Default: \code{FALSE}.
+ \item inclusive_end (logical) Specifies whether the specified end key
+should be included in the result. Default: \code{TRUE}
+ \item key (list) Return only documents that match the specified
+key. Optional
+ \item keys (list) Return only documents where the key matches one of the
+keys specified in the array. Optional
+ \item limit (integer) Limit the number of the returned documents to the
+specified number. Optional
+ \item reduce (logical)  Use the reduction function. Default: \code{TRUE}
+ \item skip (integer)  Skip this number of records before starting to
+return the results. Default: 0
+ \item sorted (logical)  Sort returned rows (see Sorting Returned Rows).
+Setting this to \code{FALSE} offers a performance boost. The total_rows
+and offset fields are not available when this is set to \code{FALSE}.
+Default: \code{TRUE}
+ \item stale (character) Allow the results from a stale view to be used.
+Supported values: ok and update_after. Optional
+ \item startkey,start_key (list) Return records starting with the specified
+key. Optional. \code{start_key} is an alias for startkey
+ \item startkey_docid,start_key_doc_id (character) Return records starting
+with the specified document ID. Requires startkey to be specified for this
+to have any effect. Optional. \code{start_key_doc_id} is an alias for
+\code{startkey_docid}
+ \item update_seq (logical) Response includes an update_seq value
+indicating which sequence id of the database the view reflects.
+Default: \code{FALSE}
 }
+}
+
 \examples{
 \dontrun{
 (x <- Cushion$new())
@@ -132,6 +118,8 @@ design_create(x, dbname='omdb', design='view2', fxnname="foobar2",
   value="doc.Country")
 design_create(x, dbname='omdb', design='view5', fxnname="foobar3",
   value="[doc.Country,doc.imdbRating]")
+design_create_(x, dbname='omdb', design='view6', fxnname="foobar4",
+  fxn = "function(doc){emit(doc._id,doc.Country)}")
 
 # Search using a view
 compact <- function(l) Filter(Negate(is.null), l)
@@ -157,9 +145,25 @@ head(
 # query parameters
 ## limit
 design_search(x, dbname='omdb', design='view5', view = 'foobar3',
-  limit = 5)
+  params = list(limit = 5))
+## limit and skip
+design_search(x, dbname='omdb', design='view5', view = 'foobar3',
+  params = list(limit = 5, skip = 3))
+
+# POST request
+ids <- vapply(db_alldocs(x, dbname='omdb')$rows[1:3], "[[", "", "id")
+res <- design_search(x, dbname='omdb', design='view6', view = 'foobar4',
+  body = list(keys = ids), verbose = TRUE)
+res
+
+# Many queries at once in a POST request
+queries <- list(
+  list(keys = ids),
+  list(limit = 3, skip = 2)
+)
+design_search_many(x, 'omdb', 'view6', 'foobar4', queries)
 }
 }
 \references{
-\url{http://docs.couchdb.org/en/latest/api/ddoc/views.html}
+<http://docs.couchdb.org/en/latest/api/ddoc/views.html>
 }

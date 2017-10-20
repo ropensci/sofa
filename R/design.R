@@ -86,13 +86,13 @@ design_create <- function(cushion, dbname, design, fxnname, key = "null",
 #' @rdname design
 design_create_ <- function(cushion, dbname, design, fxnname, fxn, as = 'list', ...) {
   check_cushion(cushion)
-  url <- cushion$make_url()
-  call_ <- file.path(url, dbname, "_design", design)
+  url <- file.path(cushion$make_url(), dbname, "_design", design)
   doc2 <- paste0('{"_id":',
                  '"_design/', design, '",',
                  '"views": {', '"', fxnname,
                  '": {', '"map":"', fxn ,'"}}}')
-  sofa_PUT(call_, as, body = doc2, cushion$get_headers(), ...)
+  sofa_PUT(url, as, body = doc2,
+    headers = cushion$get_headers(), auth = cushion$get_auth(), ...)
 }
 
 #' @export

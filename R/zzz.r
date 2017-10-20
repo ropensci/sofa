@@ -77,10 +77,10 @@ sofa_PUT <- function(url, as = 'list', body = NULL,
   if (as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
 }
 
-sofa_POST <- function(url, as = 'list', body, encode, headers = NULL, ...) {
+sofa_POST <- function(url, as = 'list', body, encode, headers = NULL, auth = NULL, query = NULL, ...) {
   cli <- crul::HttpClient$new(url = url,
-                              headers = c(ct_json, headers), opts = list(...))
-  res <- cli$post(body = body, encode = encode)
+                              headers = c(ct_json, headers), sc(c(auth, list(...))))
+  res <- cli$post(body = body, query = query, encode = encode)
   stop_status(res)
   tt <- res$parse("UTF-8")
   if (as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
