@@ -8,8 +8,8 @@
 #' @param startkey Document ID to start at. (character)
 #' @param endkey Document ID to end at. (character)
 #' @param limit Number document IDs to return. (numeric)
-#' @param include_docs (logical) If \code{TRUE}, returns docs themselves,
-#' in addition to IDs. Default: \code{FALSE}
+#' @param include_docs (logical) If `TRUE`, returns docs themselves,
+#' in addition to IDs. Default: `FALSE`
 #' @examples \dontrun{
 #' (x <- Cushion$new())
 #'

@@ -11,26 +11,24 @@ design_search(cushion, dbname, design, view, params = list(), body = list(),
 design_search_many(cushion, dbname, design, view, queries, as = "list", ...)
 }
 \arguments{
-\item{cushion}{A \code{Cushion} object. Required.}
+\item{cushion}{A \code{\link{Cushion}} object. Required.}
 
 \item{dbname}{(character) Database name. required.}
 
 \item{design}{(character) Design document name. this is the design name
-without \strong{_design/}, which is prepended internally. required.}
+without \code{_design/}, which is prepended internally. required.}
 
-\item{view}{(character) a view, same as `fxn` param in
-[design_create_()]. required.}
+\item{view}{(character) a view, same as \code{fxn} param in
+\code{\link[=design_create_]{design_create_()}}. required.}
 
 \item{params}{query parameters. a named list}
 
-\item{body}{same as `params`, but if any given, a POST request is
-sent (if body non-NULL, `params` also sent). a named list}
+\item{body}{same as \code{params}, but if any given, a POST request is
+sent (if body non-NULL, \code{params} also sent). a named list}
 
 \item{as}{(character) One of list (default) or json}
 
-\item{...}{Curl args passed on to one of the HTTP verbs (e.g,.
-\code{\link[httr]{GET}}, \code{\link[httr]{POST}}, \code{\link[httr]{PUT}},
-etc.)}
+\item{...}{Curl args passed on to \code{\link[crul]{HttpClient}}}
 
 \item{queries}{a list of named lists of queries}
 }
@@ -41,56 +39,56 @@ JSON as a character string or a list (determined by the
 \description{
 Search design documents
 }
-\section{Options to pass to `params`, `body`, or `queries` params}{
+\section{Options to pass to \code{params}, \code{body}, or \code{queries} params}{
 
 \itemize{
- \item conflicts (logical) Includes conflicts information in response.
+\item conflicts (logical) Includes conflicts information in response.
 Ignored if include_docs isn't \code{TRUE}. Default: \code{FALSE}
- \item descending (logical) Return the documents in descending by key
+\item descending (logical) Return the documents in descending by key
 order. Default: \code{FALSE}
- \item endkey,end_key (list) Stop returning records when the specified key is
+\item endkey,end_key (list) Stop returning records when the specified key is
 reached. Optional. \code{end_key} is an alias for \code{endkey}
- \item endkey_docid,end_key_doc_id (character) Stop returning records when
+\item endkey_docid,end_key_doc_id (character) Stop returning records when
 the specified document ID is reached. Requires endkey to be specified for
 this to have any effect. Optional. \code{end_key_doc_id} is an alias for
 \code{endkey_docid}
- \item group (logical) Group the results using the reduce function to a
+\item group (logical) Group the results using the reduce function to a
 group or single row. Default: \code{FALSE}
- \item group_level (integer) Specify the group level to be used. Optional
- \item include_docs (logical) Include the associated document with each
+\item group_level (integer) Specify the group level to be used. Optional
+\item include_docs (logical) Include the associated document with each
 row. Default: \code{FALSE}.
- \item attachments (logical) Include the Base64-encoded content of
+\item attachments (logical) Include the Base64-encoded content of
 attachments in the documents that are included if include_docs is
 \code{TRUE}. Ignored if include_docs isn't \code{TRUE}.
 Default: \code{FALSE}
- \item att_encoding_info (logical) Include encoding information in
+\item att_encoding_info (logical) Include encoding information in
 attachment stubs if include_docs is \code{TRUE} and the particular
 attachment is compressed. Ignored if include_docs isn't \code{TRUE}.
 Default: \code{FALSE}.
- \item inclusive_end (logical) Specifies whether the specified end key
+\item inclusive_end (logical) Specifies whether the specified end key
 should be included in the result. Default: \code{TRUE}
- \item key (list) Return only documents that match the specified
+\item key (list) Return only documents that match the specified
 key. Optional
- \item keys (list) Return only documents where the key matches one of the
+\item keys (list) Return only documents where the key matches one of the
 keys specified in the array. Optional
- \item limit (integer) Limit the number of the returned documents to the
+\item limit (integer) Limit the number of the returned documents to the
 specified number. Optional
- \item reduce (logical)  Use the reduction function. Default: \code{TRUE}
- \item skip (integer)  Skip this number of records before starting to
+\item reduce (logical)  Use the reduction function. Default: \code{TRUE}
+\item skip (integer)  Skip this number of records before starting to
 return the results. Default: 0
- \item sorted (logical)  Sort returned rows (see Sorting Returned Rows).
+\item sorted (logical)  Sort returned rows (see Sorting Returned Rows).
 Setting this to \code{FALSE} offers a performance boost. The total_rows
 and offset fields are not available when this is set to \code{FALSE}.
 Default: \code{TRUE}
- \item stale (character) Allow the results from a stale view to be used.
+\item stale (character) Allow the results from a stale view to be used.
 Supported values: ok and update_after. Optional
- \item startkey,start_key (list) Return records starting with the specified
+\item startkey,start_key (list) Return records starting with the specified
 key. Optional. \code{start_key} is an alias for startkey
- \item startkey_docid,start_key_doc_id (character) Return records starting
+\item startkey_docid,start_key_doc_id (character) Return records starting
 with the specified document ID. Requires startkey to be specified for this
 to have any effect. Optional. \code{start_key_doc_id} is an alias for
 \code{startkey_docid}
- \item update_seq (logical) Response includes an update_seq value
+\item update_seq (logical) Response includes an update_seq value
 indicating which sequence id of the database the view reflects.
 Default: \code{FALSE}
 }
@@ -165,5 +163,5 @@ design_search_many(x, 'omdb', 'view6', 'foobar4', queries)
 }
 }
 \references{
-<http://docs.couchdb.org/en/latest/api/ddoc/views.html>
+\url{http://docs.couchdb.org/en/latest/api/ddoc/views.html}
 }

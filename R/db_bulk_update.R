@@ -11,13 +11,12 @@
 #' becomes a separate document; if columns, each column becomes a separate
 #' document.
 #'
-#' @return Either a list or json (depending on \code{as} parameter), with
+#' @return Either a list or json (depending on `as` parameter), with
 #' each element an array of key:value pairs:
-#' \itemize{
-#'  \item ok - whether creation was successful
-#'  \item id - the document id
-#'  \item rev - the revision id
-#' }
+#'
+#' - ok - whether creation was successful
+#' - id - the document id
+#' - rev - the revision id
 #'
 #' @examples \dontrun{
 #' # initialize a CouchDB connection

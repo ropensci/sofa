@@ -8,7 +8,7 @@ db_alldocs(cushion, dbname, descending = NULL, startkey = NULL,
   endkey = NULL, limit = NULL, include_docs = FALSE, as = "list", ...)
 }
 \arguments{
-\item{cushion}{A \code{Cushion} object. Required.}
+\item{cushion}{A \code{\link{Cushion}} object. Required.}
 
 \item{dbname}{Database name. (character)}
 
@@ -25,9 +25,7 @@ in addition to IDs. Default: \code{FALSE}}
 
 \item{as}{(character) One of list (default) or json}
 
-\item{...}{Curl args passed on to one of the HTTP verbs (e.g,.
-\code{\link[httr]{GET}}, \code{\link[httr]{POST}}, \code{\link[httr]{PUT}},
-etc.)}
+\item{...}{Curl args passed on to \code{\link[crul]{HttpClient}}}
 }
 \value{
 JSON as a character string or a list (determined by the

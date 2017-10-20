@@ -9,14 +9,14 @@
 #' @param attname (character) Attachment name. Required.
 #' @param type (character) one of raw (default) or text. required.
 #' @details Methods:
-#' \itemize{
-#'  \item doc_attach_create - create an attachment
-#'  \item doc_attach_info - get info (headers) for an attachment
-#'  \item doc_attach_get - get an attachment. this method does not attempt
+#'
+#' - `doc_attach_create` - create an attachment
+#' - `doc_attach_info` - get info (headers) for an attachment
+#' - `doc_attach_get` - get an attachment. this method does not attempt
 #'  to read the object into R, but only gets the raw bytes or plain
 #'  text. See examples for how to read some attachment types
-#'  \item doc_attach_delete - delete and attachment
-#' }
+#' - `doc_attach_delete` - delete and attachment
+#'
 #' @examples \dontrun{
 #' (x <- Cushion$new())
 #'

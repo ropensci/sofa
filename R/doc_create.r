@@ -4,10 +4,10 @@
 #' @template all
 #' @template return
 #' @param dbname Database name3
-#' @param doc Document content, can be character string or a list. The character
-#' type can be XML as well, if embedded in JSON. When the document is
-#' retrieved via \code{\link{doc_get}}, the XML is given back and you can parse
-#' it as normal.
+#' @param doc Document content, can be character string or a list.
+#' The character type can be XML as well, if embedded in JSON. When
+#' the document is retrieved via [doc_get()], the XML is given back and
+#' you can parse it as normal.
 #' @param docid Document ID
 #' @param how (character) One of rows (default) or columns. If rows, each row
 #' becomes a separate document; if columns, each column becomes a separate
@@ -15,16 +15,16 @@
 #'
 #' @details Documents can have attachments just like email. There are two ways
 #' to use attachments: the first one is via a separate REST call
-#' (see \code{\link{doc_attach_create}}); the second is inline within your
+#' (see [doc_attach_create()]); the second is inline within your
 #' document, you can do so with this fxn. See
-#' \url{http://wiki.apache.org/couchdb/HTTP_Document_API#Attachments} for help
+#' <http://wiki.apache.org/couchdb/HTTP_Document_API#Attachments> for help
 #' on formatting json appropriately.
 #'
 #' Note that you can create documents from a data.frame with this function,
-#' where each row or column is a separate document. However, this function does
-#' not use the bulk API
-#' \url{https://couchdb.readthedocs.org/en/latest/api/database/bulk-api.html#db-bulk-docs}
-#' - see \code{\link{db_bulk_create}} and \code{\link{db_bulk_update}} to
+#' where each row or column is a separate document. However, this function
+#' does not use the bulk API
+#' <https://couchdb.readthedocs.org/en/latest/api/database/bulk-api.html#db-bulk-docs>
+#' - see [db_bulk_create()] and [db_bulk_update()] to
 #' create or update documents with the bulk API - which should be much faster
 #' for a large number of documents.
 #' @examples \dontrun{

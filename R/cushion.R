@@ -1,18 +1,19 @@
 #' sofa connection client
 #'
 #' @export
-#' @param host (character) A base URL (without the transport), e.g., \code{localhost},
-#' \code{127.0.0.1}, or \code{foobar.cloudant.com}
-#' @param port (numeric) Port. Remember that if you don't want a port set, set this
-#' parameter to \code{NULL}. Default: \code{5984}
-#' @param path (character) context path that is appended to the end of the url. e.g.,
-#' \code{bar} in \code{http://foo.com/bar}. Default: NULL, ignored
+#' @param host (character) A base URL (without the transport), e.g.,
+#' `localhost`, `127.0.0.1`, or `foobar.cloudant.com`
+#' @param port (numeric) Port. Remember that if you don't want a port set,
+#' set this parameter to `NULL`. Default: `5984`
+#' @param path (character) context path that is appended to the end of
+#' the url. e.g., `bar` in `http://foo.com/bar`. Default: `NULL`,
+#' ignored
 #' @param transport (character) http or https. Default: http
 #' @param user,pwd (character) user name, and password. these are used in all
 #' requests. if absent, they are not passed to requests
 #' @param headers A named list of headers. These headers are used in all
 #' requests. To use headers in individual requests and not others, pass
-#' in headers via \code{...} in a function call.
+#' in headers via `...` in a function call.
 #'
 #' @details
 #' \strong{Methods}
@@ -34,13 +35,13 @@
 #' @section CouchDB versions:
 #' \pkg{sofa} was built assuming CouchDB version 2 or greater. Some
 #' functionality of this package will work with versions < 2, while
-#' some may not (mango queries, see \code{\link{db_query}}). I don't
+#' some may not (mango queries, see [db_query()]). I don't
 #' plan to support older CouchDB versions per se.
 #'
 #' @format NULL
 #' @usage NULL
 #'
-#' @return An object of class \code{Cushion}, with variables accessible for
+#' @return An object of class `Cushion`, with variables accessible for
 #' host, port, path, transport, user, pwd, and headers. Functions are callable
 #' to get headers, and to make the base url sent with all requests.
 #'

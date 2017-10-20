@@ -5,15 +5,15 @@
 #' @template return
 #' @param dbname (character) Database name. required.
 #' @param design (character) Design document name. this is the design name
-#' without \strong{_design/}, which is prepended internally. required.
-#' @param fxnname (character) A function name. required for \code{view_put}
-#' and \code{view_put_}
+#' without `_design/`, which is prepended internally. required.
+#' @param fxnname (character) A function name. required for `view_put`
+#' and `view_put_`
 #' @param key,value (character) a key and value, see Examples and Details
-#' @param fxn (character) a javascript function. required for \code{view_put_}
-#' @details \code{design_create} is a slightly easier interface to creating
+#' @param fxn (character) a javascript function. required for `view_put_`
+#' @details `design_create` is a slightly easier interface to creating
 #' design documents; it just asks for a function name, the key and a
 #' value, then we create the function for you internally. TO have more
-#' flexibility use \code{view_put_} (with underscore on the end) to write the
+#' flexibility use `view_put_` (with underscore on the end) to write the
 #' function yourself.
 #' @examples \dontrun{
 #' (x <- Cushion$new())

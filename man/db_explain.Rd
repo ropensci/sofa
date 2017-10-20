@@ -9,7 +9,7 @@ db_explain(cushion, dbname, query = NULL, selector = NULL, limit = NULL,
   as = "list", ...)
 }
 \arguments{
-\item{cushion}{A \code{Cushion} object. Required.}
+\item{cushion}{A \code{\link{Cushion}} object. Required.}
 
 \item{dbname}{Database name}
 
@@ -21,7 +21,7 @@ documents. More information provided in the section on selector syntax.
 See the \code{query_tutorial} in this package, and the selectors docs
 \url{http://docs.couchdb.org/en/2.0.0/api/database/find.html#find-selectors}}
 
-\item{limit}{(number) - Maximum number of results returned. Default is 25.
+\item{limit}{(number) - Maximum number of results returned. Default: 25
 Optional}
 
 \item{skip}{(number) - Skip the first 'n' results, where 'n' is the value
@@ -37,14 +37,11 @@ information provided in the section on filtering fields. Optional
 See \url{http://docs.couchdb.org/en/2.0.0/api/database/find.html#find-filter}}
 
 \item{use_index}{(json) - Instruct a query to use a specific index.
-Specified either as "<design_document>" or ["<design_document>",
-"<index_name>"]. Optional}
+Specified either as \code{<design_document>} or \code{["<design_document>", "<index_name>"]}. Optional}
 
 \item{as}{(character) One of list (default) or json}
 
-\item{...}{Curl args passed on to one of the HTTP verbs (e.g,.
-\code{\link[httr]{GET}}, \code{\link[httr]{POST}}, \code{\link[httr]{PUT}},
-etc.)}
+\item{...}{Curl args passed on to \code{\link[crul]{HttpClient}}}
 }
 \value{
 JSON as a character string or a list (determined by the

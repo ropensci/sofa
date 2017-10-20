@@ -24,12 +24,12 @@ design_head(cushion, dbname, design, ...)
 design_info(cushion, dbname, design, ...)
 }
 \arguments{
-\item{cushion}{A \code{Cushion} object. Required.}
+\item{cushion}{A \code{\link{Cushion}} object. Required.}
 
 \item{dbname}{(character) Database name. required.}
 
 \item{design}{(character) Design document name. this is the design name
-without \strong{_design/}, which is prepended internally. required.}
+without \code{_design/}, which is prepended internally. required.}
 
 \item{fxnname}{(character) A function name. required for \code{view_put}
 and \code{view_put_}}
@@ -38,9 +38,7 @@ and \code{view_put_}}
 
 \item{as}{(character) One of list (default) or json}
 
-\item{...}{Curl args passed on to one of the HTTP verbs (e.g,.
-\code{\link[httr]{GET}}, \code{\link[httr]{POST}}, \code{\link[httr]{PUT}},
-etc.)}
+\item{...}{Curl args passed on to \code{\link[crul]{HttpClient}}}
 
 \item{fxn}{(character) a javascript function. required for \code{view_put_}}
 }

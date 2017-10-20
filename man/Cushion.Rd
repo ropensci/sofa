@@ -5,14 +5,15 @@
 \alias{Cushion}
 \title{sofa connection client}
 \arguments{
-\item{host}{(character) A base URL (without the transport), e.g., \code{localhost},
-\code{127.0.0.1}, or \code{foobar.cloudant.com}}
+\item{host}{(character) A base URL (without the transport), e.g.,
+\code{localhost}, \code{127.0.0.1}, or \code{foobar.cloudant.com}}
 
-\item{port}{(numeric) Port. Remember that if you don't want a port set, set this
-parameter to \code{NULL}. Default: \code{5984}}
+\item{port}{(numeric) Port. Remember that if you don't want a port set,
+set this parameter to \code{NULL}. Default: \code{5984}}
 
-\item{path}{(character) context path that is appended to the end of the url. e.g.,
-\code{bar} in \code{http://foo.com/bar}. Default: NULL, ignored}
+\item{path}{(character) context path that is appended to the end of
+the url. e.g., \code{bar} in \code{http://foo.com/bar}. Default: \code{NULL},
+ignored}
 
 \item{transport}{(character) http or https. Default: http}
 
@@ -33,26 +34,26 @@ sofa connection client
 }
 \details{
 \strong{Methods}
-  \describe{
-    \item{\code{ping()}}{
-      Ping the CouchDB server
-    }
-    \item{\code{make_url()}}{
-      Construct full base URL from the pieces in the connection object
-    }
-    \item{\code{get_headers()}}{
-      Get list of headers that will be sent with each request
-    }
-    \item{\code{get_auth()}}{
-      Get list of auth values, user and pwd
-    }
-  }
+\describe{
+\item{\code{ping()}}{
+Ping the CouchDB server
+}
+\item{\code{make_url()}}{
+Construct full base URL from the pieces in the connection object
+}
+\item{\code{get_headers()}}{
+Get list of headers that will be sent with each request
+}
+\item{\code{get_auth()}}{
+Get list of auth values, user and pwd
+}
+}
 }
 \section{CouchDB versions}{
 
 \pkg{sofa} was built assuming CouchDB version 2 or greater. Some
 functionality of this package will work with versions < 2, while
-some may not (mango queries, see \code{\link{db_query}}). I don't
+some may not (mango queries, see \code{\link[=db_query]{db_query()}}). I don't
 plan to support older CouchDB versions per se.
 }
 

@@ -8,10 +8,10 @@ e.g., Cloudant, Iriscouch}
 db_replicate(from, to, dbname, createdb = FALSE, as = "list", ...)
 }
 \arguments{
-\item{from}{Couch to replicate from. An object of class \code{Cushion}.
+\item{from}{Couch to replicate from. An object of class \link{Cushion}.
 Required.}
 
-\item{to}{Remote couch to replicate to. An object of class \code{Cushion}.
+\item{to}{Remote couch to replicate to. An object of class \link{Cushion}.
 Required.}
 
 \item{dbname}{(character) Database name. Required.}
@@ -22,7 +22,7 @@ you do it separately or this fxn can do it for you. Default: \code{FALSE}}
 
 \item{as}{(character) One of list (default) or json}
 
-\item{...}{Curl args passed on to \code{\link[crul]{HttpClient}}}
+\item{...}{Curl args passed on to \link[crul:HttpClient]{crul::HttpClient}}
 }
 \value{
 JSON as a character string or a list (determined by the

@@ -9,7 +9,7 @@ db_changes(cushion, dbname, descending = NULL, startkey = NULL,
   feed = "normal", heartbeat = NULL, filter = NULL, as = "list", ...)
 }
 \arguments{
-\item{cushion}{A \code{Cushion} object. Required.}
+\item{cushion}{A \code{\link{Cushion}} object. Required.}
 
 \item{dbname}{Database name. (character)}
 
@@ -39,23 +39,21 @@ selectively get updates.}
 
 \item{as}{(character) One of list (default) or json}
 
-\item{...}{Curl args passed on to one of the HTTP verbs (e.g,.
-\code{\link[httr]{GET}}, \code{\link[httr]{POST}}, \code{\link[httr]{PUT}},
-etc.)}
+\item{...}{Curl args passed on to \code{\link[crul]{HttpClient}}}
 }
 \value{
 Either a list of json (depending on \code{as} parameter), with
 keys:
 \itemize{
- \item results - Changes made to a database, length 0 if no changes.
- Each of these has:
- \itemize{
-  \item changes - List of document`s leafs with single field rev
-  \item id - Document ID
-  \item seq - Update sequence
- }
- \item last_seq - Last change update sequence
- \item pending - Count of remaining items in the feed
+\item results - Changes made to a database, length 0 if no changes.
+Each of these has:
+\itemize{
+\item changes - List of document`s leafs with single field rev
+\item id - Document ID
+\item seq - Update sequence
+}
+\item last_seq - Last change update sequence
+\item pending - Count of remaining items in the feed
 }
 }
 \description{

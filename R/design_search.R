@@ -5,7 +5,7 @@
 #' @template return
 #' @param dbname (character) Database name. required.
 #' @param design (character) Design document name. this is the design name
-#' without \strong{_design/}, which is prepended internally. required.
+#' without `_design/`, which is prepended internally. required.
 #' @param view (character) a view, same as `fxn` param in
 #' [design_create_()]. required.
 #' @param params query parameters. a named list
@@ -16,54 +16,54 @@
 #' @section Options to pass to `params`, `body`, or `queries` params:
 #' \itemize{
 #'  \item conflicts (logical) Includes conflicts information in response.
-#' Ignored if include_docs isn't \code{TRUE}. Default: \code{FALSE}
+#' Ignored if include_docs isn't `TRUE`. Default: `FALSE`
 #'  \item descending (logical) Return the documents in descending by key
-#' order. Default: \code{FALSE}
+#' order. Default: `FALSE`
 #'  \item endkey,end_key (list) Stop returning records when the specified key is
-#' reached. Optional. \code{end_key} is an alias for \code{endkey}
+#' reached. Optional. `end_key` is an alias for `endkey`
 #'  \item endkey_docid,end_key_doc_id (character) Stop returning records when
 #' the specified document ID is reached. Requires endkey to be specified for
-#' this to have any effect. Optional. \code{end_key_doc_id} is an alias for
-#' \code{endkey_docid}
+#' this to have any effect. Optional. `end_key_doc_id` is an alias for
+#' `endkey_docid`
 #'  \item group (logical) Group the results using the reduce function to a
-#' group or single row. Default: \code{FALSE}
+#' group or single row. Default: `FALSE`
 #'  \item group_level (integer) Specify the group level to be used. Optional
 #'  \item include_docs (logical) Include the associated document with each
-#' row. Default: \code{FALSE}.
+#' row. Default: `FALSE`.
 #'  \item attachments (logical) Include the Base64-encoded content of
 #' attachments in the documents that are included if include_docs is
-#' \code{TRUE}. Ignored if include_docs isn't \code{TRUE}.
-#' Default: \code{FALSE}
+#' `TRUE`. Ignored if include_docs isn't `TRUE`.
+#' Default: `FALSE`
 #'  \item att_encoding_info (logical) Include encoding information in
-#' attachment stubs if include_docs is \code{TRUE} and the particular
-#' attachment is compressed. Ignored if include_docs isn't \code{TRUE}.
-#' Default: \code{FALSE}.
+#' attachment stubs if include_docs is `TRUE` and the particular
+#' attachment is compressed. Ignored if include_docs isn't `TRUE`.
+#' Default: `FALSE`.
 #'  \item inclusive_end (logical) Specifies whether the specified end key
-#' should be included in the result. Default: \code{TRUE}
+#' should be included in the result. Default: `TRUE`
 #'  \item key (list) Return only documents that match the specified
 #' key. Optional
 #'  \item keys (list) Return only documents where the key matches one of the
 #' keys specified in the array. Optional
 #'  \item limit (integer) Limit the number of the returned documents to the
 #' specified number. Optional
-#'  \item reduce (logical)  Use the reduction function. Default: \code{TRUE}
+#'  \item reduce (logical)  Use the reduction function. Default: `TRUE`
 #'  \item skip (integer)  Skip this number of records before starting to
 #' return the results. Default: 0
 #'  \item sorted (logical)  Sort returned rows (see Sorting Returned Rows).
-#' Setting this to \code{FALSE} offers a performance boost. The total_rows
-#' and offset fields are not available when this is set to \code{FALSE}.
-#' Default: \code{TRUE}
+#' Setting this to `FALSE` offers a performance boost. The total_rows
+#' and offset fields are not available when this is set to `FALSE`.
+#' Default: `TRUE`
 #'  \item stale (character) Allow the results from a stale view to be used.
 #' Supported values: ok and update_after. Optional
 #'  \item startkey,start_key (list) Return records starting with the specified
-#' key. Optional. \code{start_key} is an alias for startkey
+#' key. Optional. `start_key` is an alias for startkey
 #'  \item startkey_docid,start_key_doc_id (character) Return records starting
 #' with the specified document ID. Requires startkey to be specified for this
-#' to have any effect. Optional. \code{start_key_doc_id} is an alias for
-#' \code{startkey_docid}
+#' to have any effect. Optional. `start_key_doc_id` is an alias for
+#' `startkey_docid`
 #'  \item update_seq (logical) Response includes an update_seq value
 #' indicating which sequence id of the database the view reflects.
-#' Default: \code{FALSE}
+#' Default: `FALSE`
 #' }
 #'
 #' @references <http://docs.couchdb.org/en/latest/api/ddoc/views.html>

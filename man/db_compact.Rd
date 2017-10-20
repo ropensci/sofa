@@ -7,15 +7,13 @@
 db_compact(cushion, dbname, as = "list", ...)
 }
 \arguments{
-\item{cushion}{A \code{Cushion} object. Required.}
+\item{cushion}{A \code{\link{Cushion}} object. Required.}
 
 \item{dbname}{Database name. Required.}
 
 \item{as}{(character) One of list (default) or json}
 
-\item{...}{Curl args passed on to one of the HTTP verbs (e.g,.
-\code{\link[httr]{GET}}, \code{\link[httr]{POST}}, \code{\link[httr]{PUT}},
-etc.)}
+\item{...}{Curl args passed on to \code{\link[crul]{HttpClient}}}
 }
 \value{
 JSON as a character string or a list (determined by the
@@ -28,12 +26,12 @@ Request compaction of the specified database
 Compaction compresses the disk database file by performing the following
 operations:
 \itemize{
- \item Writes a new, optimised, version of the database file, removing any unused
- sections from the new version during write. Because a new file is temporarily
- created for this purpose, you may require up to twice the current storage space
- of the specified database in order for the compaction routine to complete.
- \item Removes old revisions of documents from the database, up to the per-database
- limit specified by the _revs_limit database parameter.
+\item Writes a new, optimised, version of the database file, removing any unused
+sections from the new version during write. Because a new file is temporarily
+created for this purpose, you may require up to twice the current storage space
+of the specified database in order for the compaction routine to complete.
+\item Removes old revisions of documents from the database, up to the per-database
+limit specified by the _revs_limit database parameter.
 }
 
 Compaction can only be requested on an individual database; you cannot compact all

@@ -8,7 +8,7 @@ db_bulk_create(cushion, dbname, doc, docid = NULL, how = "rows",
   as = "list", ...)
 }
 \arguments{
-\item{cushion}{A \code{Cushion} object. Required.}
+\item{cushion}{A \code{\link{Cushion}} object. Required.}
 
 \item{dbname}{(character) Database name. Required.}
 
@@ -24,17 +24,15 @@ document.}
 
 \item{as}{(character) One of list (default) or json}
 
-\item{...}{Curl args passed on to one of the HTTP verbs (e.g,.
-\code{\link[httr]{GET}}, \code{\link[httr]{POST}}, \code{\link[httr]{PUT}},
-etc.)}
+\item{...}{Curl args passed on to \code{\link[crul]{HttpClient}}}
 }
 \value{
 Either a list or json (depending on \code{as} parameter), with
 each element an array of key:value pairs:
 \itemize{
- \item ok - whether creation was successful
- \item id - the document id
- \item rev - the revision id
+\item ok - whether creation was successful
+\item id - the document id
+\item rev - the revision id
 }
 }
 \description{

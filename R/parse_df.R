@@ -2,11 +2,14 @@
 #'
 #' @export
 #' @param dat (data.frame) A data.frame, matrix, or tbl_df
-#' @param how (character) One of rows (default) or columns. If rows, each row becomes a
-#' separate document; if columns, each column becomes a separate document.
-#' @param tojson (logical) If \code{TRUE} (default) convert to json - if \code{FALSE}, to lists
-#' @param ... Further args passed on to \code{\link[jsonlite]{toJSON}}
-#' @details Parse data.frame to get either rows or columns, each as a list or json string
+#' @param how (character) One of rows (default) or columns. If rows, each
+#' row becomes a separate document; if columns, each column becomes a
+#' separate document.
+#' @param tojson (logical) If `TRUE` (default) convert to json - if `FALSE`,
+#' to lists
+#' @param ... Further args passed on to [jsonlite::toJSON()]
+#' @details Parse data.frame to get either rows or columns, each as a list
+#' or json string
 #' @examples \dontrun{
 #' parse_df(mtcars, how="rows")
 #' parse_df(mtcars, how="columns")

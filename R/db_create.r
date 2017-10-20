@@ -4,8 +4,8 @@
 #' @template all
 #' @template return
 #' @param dbname Database name
-#' @param delifexists If TRUE, delete any database of the same name before
-#' creating it. This is useful for testing. Default is FALSE.
+#' @param delifexists If `TRUE`, delete any database of the same name before
+#' creating it. This is useful for testing. Default: `FALSE`
 #' @examples \dontrun{
 #' (x <- Cushion$new())
 #'

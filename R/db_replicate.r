@@ -3,16 +3,16 @@
 #'
 #' @export
 #' @template return
-#' @param from Couch to replicate from. An object of class \code{Cushion}.
+#' @param from Couch to replicate from. An object of class [Cushion].
 #' Required.
-#' @param to Remote couch to replicate to. An object of class \code{Cushion}.
+#' @param to Remote couch to replicate to. An object of class [Cushion].
 #' Required.
 #' @param dbname (character) Database name. Required.
-#' @param createdb If \code{TRUE}, the function creates the db on the remote
+#' @param createdb If `TRUE`, the function creates the db on the remote
 #' server before uploading. The db has to exist before uploading, so either
-#' you do it separately or this fxn can do it for you. Default: \code{FALSE}
+#' you do it separately or this fxn can do it for you. Default: `FALSE`
 #' @param as (character) One of list (default) or json
-#' @param ... Curl args passed on to \code{\link[crul]{HttpClient}}
+#' @param ... Curl args passed on to [crul::HttpClient]
 #' @examples \dontrun{
 #' ## create a connection
 #' (x <- Cushion$new())

@@ -4,7 +4,7 @@
 #' @template all
 #' @template return
 #' @param simplify (logical) Simplify to character vector, ignored
-#' if \code{as="json"}
+#' if `as="json"`
 #' @examples \dontrun{
 #' (x <- Cushion$new())
 #'

@@ -18,7 +18,7 @@ doc_attach_get(cushion, dbname, docid, attname, type = "raw", ...)
 doc_attach_delete(cushion, dbname, docid, attname, as = "list", ...)
 }
 \arguments{
-\item{cushion}{A \code{Cushion} object. Required.}
+\item{cushion}{A \code{\link{Cushion}} object. Required.}
 
 \item{dbname}{(character) Database name. Required.}
 
@@ -30,9 +30,7 @@ doc_attach_delete(cushion, dbname, docid, attname, as = "list", ...)
 
 \item{as}{(character) One of list (default) or json}
 
-\item{...}{Curl args passed on to one of the HTTP verbs (e.g,.
-\code{\link[httr]{GET}}, \code{\link[httr]{POST}}, \code{\link[httr]{PUT}},
-etc.)}
+\item{...}{Curl args passed on to \code{\link[crul]{HttpClient}}}
 
 \item{type}{(character) one of raw (default) or text. required.}
 }
@@ -46,12 +44,12 @@ Work with attachments
 \details{
 Methods:
 \itemize{
- \item doc_attach_create - create an attachment
- \item doc_attach_info - get info (headers) for an attachment
- \item doc_attach_get - get an attachment. this method does not attempt
- to read the object into R, but only gets the raw bytes or plain
- text. See examples for how to read some attachment types
- \item doc_attach_delete - delete and attachment
+\item \code{doc_attach_create} - create an attachment
+\item \code{doc_attach_info} - get info (headers) for an attachment
+\item \code{doc_attach_get} - get an attachment. this method does not attempt
+to read the object into R, but only gets the raw bytes or plain
+text. See examples for how to read some attachment types
+\item \code{doc_attach_delete} - delete and attachment
 }
 }
 \examples{

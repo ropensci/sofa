@@ -8,14 +8,14 @@ doc_create(cushion, dbname, doc, docid = NULL, how = "rows", as = "list",
   ...)
 }
 \arguments{
-\item{cushion}{A \code{Cushion} object. Required.}
+\item{cushion}{A \code{\link{Cushion}} object. Required.}
 
 \item{dbname}{Database name3}
 
-\item{doc}{Document content, can be character string or a list. The character
-type can be XML as well, if embedded in JSON. When the document is
-retrieved via \code{\link{doc_get}}, the XML is given back and you can parse
-it as normal.}
+\item{doc}{Document content, can be character string or a list.
+The character type can be XML as well, if embedded in JSON. When
+the document is retrieved via \code{\link[=doc_get]{doc_get()}}, the XML is given back and
+you can parse it as normal.}
 
 \item{docid}{Document ID}
 
@@ -25,9 +25,7 @@ document.}
 
 \item{as}{(character) One of list (default) or json}
 
-\item{...}{Curl args passed on to one of the HTTP verbs (e.g,.
-\code{\link[httr]{GET}}, \code{\link[httr]{POST}}, \code{\link[httr]{PUT}},
-etc.)}
+\item{...}{Curl args passed on to \code{\link[crul]{HttpClient}}}
 }
 \value{
 JSON as a character string or a list (determined by the
@@ -39,18 +37,20 @@ Create documents to a database.
 \details{
 Documents can have attachments just like email. There are two ways
 to use attachments: the first one is via a separate REST call
-(see \code{\link{doc_attach_create}}); the second is inline within your
+(see \code{\link[=doc_attach_create]{doc_attach_create()}}); the second is inline within your
 document, you can do so with this fxn. See
 \url{http://wiki.apache.org/couchdb/HTTP_Document_API#Attachments} for help
 on formatting json appropriately.
 
 Note that you can create documents from a data.frame with this function,
-where each row or column is a separate document. However, this function does
-not use the bulk API
+where each row or column is a separate document. However, this function
+does not use the bulk API
 \url{https://couchdb.readthedocs.org/en/latest/api/database/bulk-api.html#db-bulk-docs}
-- see \code{\link{db_bulk_create}} and \code{\link{db_bulk_update}} to
+\itemize{
+\item see \code{\link[=db_bulk_create]{db_bulk_create()}} and \code{\link[=db_bulk_update]{db_bulk_update()}} to
 create or update documents with the bulk API - which should be much faster
 for a large number of documents.
+}
 }
 \examples{
 \dontrun{

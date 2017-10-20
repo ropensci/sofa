@@ -9,18 +9,21 @@ parse_df(dat, how = "rows", tojson = TRUE, ...)
 \arguments{
 \item{dat}{(data.frame) A data.frame, matrix, or tbl_df}
 
-\item{how}{(character) One of rows (default) or columns. If rows, each row becomes a
-separate document; if columns, each column becomes a separate document.}
+\item{how}{(character) One of rows (default) or columns. If rows, each
+row becomes a separate document; if columns, each column becomes a
+separate document.}
 
-\item{tojson}{(logical) If \code{TRUE} (default) convert to json - if \code{FALSE}, to lists}
+\item{tojson}{(logical) If \code{TRUE} (default) convert to json - if \code{FALSE},
+to lists}
 
-\item{...}{Further args passed on to \code{\link[jsonlite]{toJSON}}}
+\item{...}{Further args passed on to \code{\link[jsonlite:toJSON]{jsonlite::toJSON()}}}
 }
 \description{
 Parse data.frame to json or list by row or column
 }
 \details{
-Parse data.frame to get either rows or columns, each as a list or json string
+Parse data.frame to get either rows or columns, each as a list
+or json string
 }
 \examples{
 \dontrun{
