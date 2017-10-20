@@ -37,18 +37,18 @@ Create and get database indexes
 \section{Body parameters}{
 
 \itemize{
-\item index (json) – JSON object describing the index to create.
-\item ddoc (string) – Name of the design document in which the index will be
+\item index (json) - JSON object describing the index to create.
+\item ddoc (string) - Name of the design document in which the index will be
 created. By default, each index will be created in its own design
 document. Indexes can be grouped into design documents for efficiency.
 However, a change to one index in a design document will invalidate all
 other indexes in the same document (similar to views). Optional
-\item name (string) – Name of the index. If no name is provided, a name will
+\item name (string) - Name of the index. If no name is provided, a name will
 be generated automatically. Optional
-\item type (string) – Can be "json" or "text". Defaults to json. Geospatial
+\item type (string) - Can be "json" or "text". Defaults to json. Geospatial
 indexes will be supported in the future. Optional Text indexes are
 supported via a third party library Optional
-\item partial_filter_selector (json) – A selector to apply to documents at
+\item partial_filter_selector (json) - A selector to apply to documents at
 indexing time, creating a partial index. Optional
 }
 }

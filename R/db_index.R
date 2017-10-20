@@ -10,18 +10,18 @@
 #'
 #' @section Body parameters:
 #'
-#' - index (json) – JSON object describing the index to create.
-#' - ddoc (string) – Name of the design document in which the index will be
+#' - index (json) - JSON object describing the index to create.
+#' - ddoc (string) - Name of the design document in which the index will be
 #' created. By default, each index will be created in its own design
 #' document. Indexes can be grouped into design documents for efficiency.
 #' However, a change to one index in a design document will invalidate all
 #' other indexes in the same document (similar to views). Optional
-#' - name (string) – Name of the index. If no name is provided, a name will
+#' - name (string) - Name of the index. If no name is provided, a name will
 #' be generated automatically. Optional
-#' - type (string) – Can be "json" or "text". Defaults to json. Geospatial
+#' - type (string) - Can be "json" or "text". Defaults to json. Geospatial
 #' indexes will be supported in the future. Optional Text indexes are
 #' supported via a third party library Optional
-#' - partial_filter_selector (json) – A selector to apply to documents at
+#' - partial_filter_selector (json) - A selector to apply to documents at
 #' indexing time, creating a partial index. Optional
 #'
 #' @examples \dontrun{
