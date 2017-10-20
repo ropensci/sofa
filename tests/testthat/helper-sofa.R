@@ -1,5 +1,3 @@
-library("httr")
-
 dbname_random <- function() {
   paste0(sample(letters, 10, replace = TRUE), collapse = '')
 }
