@@ -120,7 +120,6 @@ sofa_bulk <- function(url, as, body, headers, ...) {
   cli <- crul::HttpClient$new(url = url, headers = c(ct_json, headers),
                               opts = list(...))
   res <- cli$post(body = body)
-  #res <- POST(url, content_type_json(), body = body, ...)
   bulk_handle(res, as)
 }
 

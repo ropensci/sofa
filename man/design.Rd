@@ -43,10 +43,6 @@ and \code{view_put_}}
 etc.)}
 
 \item{fxn}{(character) a javascript function. required for \code{view_put_}}
-
-\item{design_to}{(character) Design document name. this is the design name
-without \strong{_design/}, which is prepended internally. required for
-\code{design_copy}}
 }
 \value{
 JSON as a character string or a list (determined by the
@@ -120,8 +116,5 @@ head(
     lapply(res$rows, function(x) x$value)
   ), .Names = c('Country', 'imdbRating'))
 )
-
-# copy a design doc to another design doc
-design_copy(x, dbname = "omdb", design = "view2", design_to = "view22")
 }
 }

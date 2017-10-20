@@ -6,9 +6,6 @@
 #' @param dbname (character) Database name. required.
 #' @param design (character) Design document name. this is the design name
 #' without \strong{_design/}, which is prepended internally. required.
-#' @param design_to (character) Design document name. this is the design name
-#' without \strong{_design/}, which is prepended internally. required for
-#' \code{design_copy}
 #' @param fxnname (character) A function name. required for \code{view_put}
 #' and \code{view_put_}
 #' @param key,value (character) a key and value, see Examples and Details
@@ -75,9 +72,6 @@
 #'     lapply(res$rows, function(x) x$value)
 #'   ), .Names = c('Country', 'imdbRating'))
 #' )
-#'
-#' # copy a design doc to another design doc
-#' design_copy(x, dbname = "omdb", design = "view2", design_to = "view22")
 #' }
 
 #' @export
