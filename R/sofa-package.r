@@ -24,8 +24,6 @@
 #'
 #' @importFrom R6 R6Class
 #' @importFrom jsonlite fromJSON toJSON unbox
-#' @importFrom httr DELETE GET HEAD POST PUT VERB content content_type
-#' content_type_json stop_for_status add_headers upload_file
 #' @importFrom crul HttpClient
 #' @name sofa-package
 #' @aliases sofa

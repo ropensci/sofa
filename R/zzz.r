@@ -86,13 +86,13 @@ sofa_POST <- function(url, as = 'list', body, encode, headers = NULL, ...) {
   if (as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
 }
 
-sofa_COPY <- function(url, as = 'list', headers = NULL, ...) {
-  as <- match.arg(as, c('list','json'))
-  res <- VERB("COPY", url, content_type_json(), ...)
-  stop_status(res)
-  tt <- contt(res)
-  if (as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
-}
+# sofa_COPY <- function(url, as = 'list', headers = NULL, ...) {
+#   as <- match.arg(as, c('list','json'))
+#   res <- VERB("COPY", url, content_type_json(), ...)
+#   stop_status(res)
+#   tt <- res$parse("UTF-8")
+#   if (as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
+# }
 
 stop_status <- function(x) {
   if (x$status_code > 202) {
@@ -104,10 +104,6 @@ stop_status <- function(x) {
       x$raise_for_status()
     }
   }
-}
-
-contt <- function(x) {
-  httr::content(x, "text", encoding = "UTF-8")
 }
 
 check_inputs <- function(x){

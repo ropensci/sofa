@@ -22,8 +22,7 @@
 #' db_alldocs(x, dbname="leothelion", limit=2, include_docs=TRUE)
 #'
 #' # curl options
-#' library('httr')
-#' res <- db_alldocs(x, dbname="leothelion", config=verbose())
+#' res <- db_alldocs(x, dbname="leothelion", verbose = TRUE)
 #' }
 
 db_alldocs <- function(cushion, dbname, descending=NULL, startkey=NULL,

@@ -12,7 +12,7 @@
 #' server before uploading. The db has to exist before uploading, so either
 #' you do it separately or this fxn can do it for you. Default: \code{FALSE}
 #' @param as (character) One of list (default) or json
-#' @param ... Curl args passed on to \code{\link[httr]{GET}}
+#' @param ... Curl args passed on to \code{\link[crul]{HttpClient}}
 #' @examples \dontrun{
 #' ## create a connection
 #' (x <- Cushion$new())

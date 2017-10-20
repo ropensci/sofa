@@ -8,7 +8,6 @@
 \alias{design_get}
 \alias{design_head}
 \alias{design_info}
-\alias{design_copy}
 \title{Work with design documents}
 \usage{
 design_create(cushion, dbname, design, fxnname, key = "null", value = "doc",
@@ -23,8 +22,6 @@ design_get(cushion, dbname, design, as = "list", ...)
 design_head(cushion, dbname, design, ...)
 
 design_info(cushion, dbname, design, ...)
-
-design_copy(cushion, dbname, design, design_to, as = "list", ...)
 }
 \arguments{
 \item{cushion}{A \code{Cushion} object. Required.}

@@ -135,12 +135,10 @@ design_info <- function(cushion, dbname, design, ...) {
   sofa_GET(file.path(url, dbname, "_design", design, "_info"), cushion$get_headers(), ...)
 }
 
-#' @export
-#' @rdname design
-design_copy <- function(cushion, dbname, design, design_to, as='list', ...) {
-  check_cushion(cushion)
-  url <- cushion$make_url()
-  call_ <- file.path(url, dbname, "_design", design)
-  sofa_COPY(call_, as, cushion$get_headers(),
-            add_headers(DESTINATION = paste0("_design/", design_to)), ...)
-}
+# design_copy <- function(cushion, dbname, design, design_to, as='list', ...) {
+#   check_cushion(cushion)
+#   url <- cushion$make_url()
+#   call_ <- file.path(url, dbname, "_design", design)
+#   sofa_COPY(call_, as, cushion$get_headers(),
+#             add_headers(DESTINATION = paste0("_design/", design_to)), ...)
+# }
