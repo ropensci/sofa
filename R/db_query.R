@@ -48,5 +48,6 @@ db_query <- function(cushion, dbname, query = NULL, selector = NULL,
     # query <- jsonlite::toJSON(query)
   }
   sofa_POST(file.path(cushion$make_url(), dbname, "_find"), as,
-            cushion$get_headers(), body = query, encode = "json", ...)
+            body = query, encode = "json",
+            cushion$get_headers(), cushion$get_auth(), ...)
 }

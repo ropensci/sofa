@@ -34,5 +34,6 @@ db_alldocs <- function(cushion, dbname, descending=NULL, startkey=NULL,
     descending = descending, startkey = startkey, endkey = endkey,
     limit = limit, include_docs = asl(include_docs)))
   call_ <- sprintf("%s/%s/_all_docs", cushion$make_url(), dbname)
-  sofa_GET(call_, as, query = args, cushion$get_headers(), ...)
+  sofa_GET(call_, as, query = args, cushion$get_headers(),
+           cushion$get_auth(), ...)
 }

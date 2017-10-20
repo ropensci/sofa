@@ -13,5 +13,5 @@
 session <- function(cushion, as = 'list', ...) {
   check_cushion(cushion)
   sofa_GET(file.path(cushion$make_url(), '_session'),
-           as = as, cushion$get_headers(), ...)
+           as = as, cushion$get_headers(), cushion$get_auth(), ...)
 }

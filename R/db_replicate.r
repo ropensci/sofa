@@ -56,5 +56,6 @@ db_replicate <- function(from, to, dbname, createdb = FALSE, as = 'list', ...) {
   tourl <- file.path(to$make_url(), dbname)
   args <- list(source = unbox(dbname), target = unbox(cloudant_url(to, dbname)))
   message("Uploading ...")
-  sofa_POST(fromurl, as, body = args, encode = "json", from$get_headers(), ...)
+  sofa_POST(fromurl, as, body = args, encode = "json",
+            from$get_headers(), from$get_auth(), ...)
 }

@@ -1,10 +1,11 @@
-#' Get header info for a document.
+#' Get header info for a document
 #'
 #' @export
-#' @template all
-#' @template return
+#' @param cushion A \code{\link{Cushion}} object. Required.
 #' @param dbname (character) Database name. Required.
 #' @param docid (character) Document ID. Required.
+#' @param ... Curl args passed on to \code{\link[crul]{HttpClient}}
+#' @template return
 #' @examples \dontrun{
 #' (x <- Cushion$new())
 #'
@@ -22,13 +23,8 @@
 #' doc_head(x, dbname="sofadb", docid="abeer")
 #' doc_head(x, dbname="sofadb", docid="abeer", as='json')
 #' }
-doc_head <- function(cushion, dbname, docid, as = 'list', ...) {
+doc_head <- function(cushion, dbname, docid, ...) {
   check_cushion(cushion)
-  sofa_HEAD(file.path(cushion$make_url(), dbname, docid), cushion$get_headers(), ...)
-  # out <- HEAD(
-  #   file.path(cushion$make_url(), dbname, docid),
-  #   cushion$get_headers(),
-  #   ...)
-  # stop_status(out)
-  # if (as == 'list') out$all_headers else jsonlite::toJSON(out$all_header)
+  sofa_HEAD(file.path(cushion$make_url(), dbname, docid),
+            cushion$get_headers(), cushion$get_auth(), ...)
 }

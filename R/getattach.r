@@ -19,5 +19,5 @@ attach_get <- function(cushion, dbname, docid, attname = NULL, as = 'list', ...)
     url <- file.path(cushion$make_url(), dbname, docid, attname)
   }
   sofa_GET(url, as, query = list(`_attachments` = "true"),
-           cushion$get_headers(), ...)
+           cushion$get_headers(), cushion$get_auth(), ...)
 }

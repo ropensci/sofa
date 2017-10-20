@@ -86,7 +86,7 @@ doc_attach_create <- function(cushion, dbname, docid, attachment, attname,
            headers = c(list(
             `Content-Type` = mime::guess_type(attachment)),
             cushion$get_headers()),
-           ...)
+           auth = cushion$get_auth(), ...)
 }
 
 #' @export
@@ -94,7 +94,7 @@ doc_attach_create <- function(cushion, dbname, docid, attachment, attname,
 doc_attach_info <- function(cushion, dbname, docid, attname, ...) {
   check_cushion(cushion)
   url <- file.path(cushion$make_url(), dbname, docid, attname)
-  sofa_HEAD(url, cushion$get_headers(), ...)
+  sofa_HEAD(url, cushion$get_headers(), cushion$get_auth(), ...)
 }
 
 #' @export
@@ -107,7 +107,7 @@ doc_attach_get <- function(cushion, dbname, docid, attname, type = "raw", ...) {
   cli <- crul::HttpClient$new(
     url = url,
     headers = sc(c(ct_json, cushion$get_headers(), list(`If-Match` = revget))),
-    opts = list(...))
+    opts = sc(c(cushion$get_auth(), list(...))))
   res <- cli$get()
   stop_status(res)
   if (type == 'raw') res$content else res$parse("UTF-8")
@@ -122,17 +122,17 @@ doc_attach_delete <- function(cushion, dbname, docid, attname, as = "list", ...)
   sofa_DELETE(url, as,
               sc(c(cushion$get_headers(),
                    list(Accept = "application/json", `If-Match` = revget))),
-              ...)
+              cushion$get_auth(), ...)
 }
 
 sofa_PUT_dac <- function(url, as = 'list', body, rev,
-                         encode = "json", headers = NULL, ...){
+                         encode = "json", headers = NULL, auth = NULL, ...){
 
   as <- match.arg(as, c('list','json'))
   cli <- crul::HttpClient$new(
     url = url,
     headers = sc(c(headers, list(`If-Match` = rev))),
-    opts = list(...))
+    opts = sc(c(auth, list(...))))
   res <- cli$put(body = body, encode = encode)
   res$raise_for_status()
   tt <- res$parse('UTF-8')

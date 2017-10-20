@@ -2,9 +2,9 @@
 % Please edit documentation in R/doc_head.r
 \name{doc_head}
 \alias{doc_head}
-\title{Get header info for a document.}
+\title{Get header info for a document}
 \usage{
-doc_head(cushion, dbname, docid, as = "list", ...)
+doc_head(cushion, dbname, docid, ...)
 }
 \arguments{
 \item{cushion}{A \code{\link{Cushion}} object. Required.}
@@ -13,8 +13,6 @@ doc_head(cushion, dbname, docid, as = "list", ...)
 
 \item{docid}{(character) Document ID. Required.}
 
-\item{as}{(character) One of list (default) or json}
-
 \item{...}{Curl args passed on to \code{\link[crul]{HttpClient}}}
 }
 \value{
@@ -22,7 +20,7 @@ JSON as a character string or a list (determined by the
 \code{as} parameter)
 }
 \description{
-Get header info for a document.
+Get header info for a document
 }
 \examples{
 \dontrun{

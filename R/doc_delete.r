@@ -27,5 +27,6 @@ doc_delete <- function(cushion, dbname, docid, as = 'list', ...) {
   revget <- doc_get(cushion, dbname, docid)[["_rev"]]
   check_cushion(cushion)
   url <- file.path(cushion$make_url(), dbname, docid)
-  sofa_DELETE(url, as, query = list(rev = revget), cushion$get_headers(), ...)
+  sofa_DELETE(url, as, headers = cushion$get_headers(),
+              auth = cushion$get_auth(), query = list(rev = revget), ...)
 }

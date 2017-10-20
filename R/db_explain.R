@@ -61,5 +61,6 @@ db_explain <- function(cushion, dbname, query = NULL, selector = NULL,
     ))
   }
   sofa_POST(file.path(cushion$make_url(), dbname, "_explain"), as,
-            cushion$get_headers(), body = query, encode = "json", ...)
+            body = query, encode = "json",
+            headers = cushion$get_headers(), auth = cushion$get_auth(), ...)
 }

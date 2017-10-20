@@ -44,5 +44,6 @@ doc_get <- function(cushion, dbname, docid, rev=NULL, attachments=FALSE, deleted
     deleted_conflicts = asl(deleted_conflicts), local_seq = asl(local_seq)
   ))
   url <- file.path(cushion$make_url(), dbname, docid)
-  sofa_GET(url, as, query = args, cushion$get_headers(), ...)
+  sofa_GET(url, as, query = args, cushion$get_headers(),
+           cushion$get_auth(), ...)
 }

@@ -13,5 +13,6 @@
 active_tasks <- function(cushion, as = 'list', ...) {
   check_cushion(cushion)
   sofa_GET(file.path(cushion$make_url(), '_active_tasks'),
-           as = as, cushion$get_headers(), ...)
+           as = as, headers = cushion$get_headers(),
+           auth = cushion$get_auth(), ...)
 }

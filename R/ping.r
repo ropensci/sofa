@@ -12,5 +12,6 @@
 #' }
 ping <- function(cushion, as = 'list', ...) {
   check_cushion(cushion)
-  sofa_GET(cushion$make_url(), as = as, args = NULL, cushion$get_headers(), ...)
+  sofa_GET(cushion$make_url(), as = as, args = NULL, cushion$get_headers(),
+           cushion$get_auth(), ...)
 }

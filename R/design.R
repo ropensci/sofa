@@ -118,7 +118,8 @@ design_get <- function(cushion, dbname, design, as='list', ...) {
 design_head <- function(cushion, dbname, design, ...) {
   check_cushion(cushion)
   url <- cushion$make_url()
-  sofa_HEAD(file.path(url, dbname, "_design", design), cushion$get_headers(), ...)
+  sofa_HEAD(file.path(url, dbname, "_design", design),
+            cushion$get_headers(), cushion$get_auth(), ...)
 }
 
 #' @export

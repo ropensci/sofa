@@ -92,10 +92,12 @@ doc_create_.character <- function(doc, cushion, dbname, docid = NULL,
   rev <- if (inherits(docex, "error")) NULL else docex$rev
   if (!is.null(docid)) {
     sofa_PUT_doc_create(file.path(url, docid), as, body = check_inputs(doc),
-      encode = "json", headers = list(`Accept` = "application/json"),
-      rev = rev, cushion$get_headers(), ...)
+      encode = "json", rev = rev,
+      headers = c(cushion$get_headers(), list(`Accept` = "application/json")),
+      auth = cushion$get_auth(), ...)
   } else {
-    sofa_POST(url, as, body = check_inputs(doc), ...)
+    sofa_POST(url, as, body = check_inputs(doc),
+              headers = cushion$get_headers(), auth = cushion$get_auth(), ...)
   }
 }
 
@@ -104,9 +106,10 @@ doc_create_.list <- function(doc, cushion, dbname, docid = NULL,
   url <- sprintf("%s/%s", cushion$make_url(), dbname)
   if (!is.null(docid)) {
     sofa_PUT(paste0(url, "/", docid), as, body = check_inputs(doc),
-             cushion$get_headers(), ...)
+             headers = cushion$get_headers(), auth = cushion$get_auth(), ...)
   } else {
-    sofa_POST(url, as, body = check_inputs(doc), ...)
+    sofa_POST(url, as, body = check_inputs(doc),
+              headers = cushion$get_headers(), auth = cushion$get_auth(), ...)
   }
 }
 
@@ -114,17 +117,19 @@ doc_create_.data.frame <- function(doc, cushion, dbname, docid = NULL,
                             how = 'rows', as = 'list', ...) {
   url <- sprintf("%s/%s", cushion$make_url(), dbname)
   each <- parse_df(doc, how = how)
-  lapply(each, function(x) sofa_POST(url, as, body = x,
-                                     cushion$get_headers(), ...))
+  lapply(each, function(x) {
+    sofa_POST(url, as, body = x,
+              headers = cushion$get_headers(), auth = cushion$get_auth(), ...)
+  })
 }
 
-sofa_PUT_doc_create <- function(url, as = 'list', body, encode = "json",
-                                headers = NULL, rev, ...){
+sofa_PUT_doc_create <- function(url, as = 'list', body, encode = "json", rev,
+                                headers = NULL, auth = NULL, ...){
   as <- match.arg(as, c('list','json'))
   cli <- crul::HttpClient$new(
     url = url,
     headers = sc(c(ct_json, headers, list(`If-Match` = rev))),
-    opts = list(...))
+    opts = sc(c(auth, list(...))))
   res <- cli$put(body = body, encode = encode)
   txt <- res$parse("UTF-8")
   if (as == 'json') txt else jsonlite::fromJSON(txt, FALSE)

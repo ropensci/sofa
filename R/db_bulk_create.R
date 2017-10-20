@@ -94,7 +94,8 @@ db_bulk_create_.character <- function(doc, cushion, dbname, docid = NULL,
                                    how = 'rows', as = 'list', ...) {
   url <- sprintf("%s/%s", cushion$make_url(), dbname)
   body <- sprintf('{"docs": [%s]}', paste0(doc, collapse = ", "))
-  sofa_bulk(file.path(url, "_bulk_docs"), as, body = body, cushion$get_headers(), ...)
+  sofa_bulk(file.path(url, "_bulk_docs"), as, body = body,
+            cushion$get_headers(), cushion$get_auth(), ...)
 }
 
 #' @export
@@ -102,7 +103,8 @@ db_bulk_create_.list <- function(doc, cushion, dbname, docid = NULL,
                                   how = 'rows', as = 'list', ...) {
   url <- sprintf("%s/%s", cushion$make_url(), dbname)
   body <- jsonlite::toJSON(list(docs = doc), auto_unbox = TRUE)
-  sofa_bulk(file.path(url, "_bulk_docs"), as, body = body, cushion$get_headers(), ...)
+  sofa_bulk(file.path(url, "_bulk_docs"), as, body = body,
+            cushion$get_headers(), cushion$get_auth(), ...)
 }
 
 #' @export
@@ -112,12 +114,13 @@ db_bulk_create_.data.frame <- function(doc, cushion, dbname, docid = NULL,
   url <- sprintf("%s/%s", cushion$make_url(), dbname)
   each <- unname(parse_df(doc, how = how, tojson = FALSE))
   body <- jsonlite::toJSON(list(docs = each), auto_unbox = TRUE)
-  sofa_bulk(file.path(url, "_bulk_docs"), as, body = body, cushion$get_headers(), ...)
+  sofa_bulk(file.path(url, "_bulk_docs"), as, body = body,
+            cushion$get_headers(), cushion$get_auth(), ...)
 }
 
-sofa_bulk <- function(url, as, body, headers, ...) {
+sofa_bulk <- function(url, as, body, headers, auth = NULL, ...) {
   cli <- crul::HttpClient$new(url = url, headers = c(ct_json, headers),
-                              opts = list(...))
+                              opts = sc(c(auth, list(...))))
   res <- cli$post(body = body)
   bulk_handle(res, as)
 }

@@ -6,11 +6,14 @@ remote_url <- function(cushion, dbname=NULL, endpt=NULL){
 
 cloudant_url <- function(cushion, dbname=NULL, endpt=NULL){
   if (is.null(dbname)) {
-    paste(sprintf('https://%s:%s@%s.cloudant.com', cushion$user, cushion$pwd, cushion$user), endpt, sep = "/")
+    paste(sprintf('https://%s:%s@%s.cloudant.com', cushion$user, cushion$pwd,
+                  cushion$user), endpt, sep = "/")
   } else if (is.null(endpt)) {
-    paste(sprintf('https://%s:%s@%s.cloudant.com', cushion$user, cushion$pwd, cushion$user), dbname, sep = "/")
+    paste(sprintf('https://%s:%s@%s.cloudant.com', cushion$user, cushion$pwd,
+                  cushion$user), dbname, sep = "/")
   } else {
-    paste(sprintf('https://%s:%s@%s.cloudant.com', cushion$user, cushion$pwd, cushion$user), dbname, endpt, sep = "/")
+    paste(sprintf('https://%s:%s@%s.cloudant.com', cushion$user, cushion$pwd,
+                  cushion$user), dbname, endpt, sep = "/")
   }
 }
 
@@ -20,7 +23,8 @@ iris_url <- function(cushion, dbname=NULL, endpt=NULL){
   } else if (is.null(endpt)) {
     paste(sprintf('https://%s.iriscouch.com', cushion$user), dbname, sep = "/")
   } else {
-    paste(sprintf('https://%s.iriscouch.com', cushion$user), dbname, endpt, sep = "/")
+    paste(sprintf('https://%s.iriscouch.com', cushion$user), dbname, endpt,
+          sep = "/")
   }
 }
 
@@ -46,19 +50,21 @@ sofa_GET <- function(url, as = 'list', query = NULL, headers = NULL,
   if (as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
 }
 
-sofa_HEAD <- function(url, headers = NULL, ...) {
+sofa_HEAD <- function(url, headers = NULL, auth = NULL, ...) {
   cli <- crul::HttpClient$new(url = url,
-                              headers = c(ct_json, headers), opts = list(...))
+                              headers = c(ct_json, headers),
+                              opts = sc(c(auth, list(...))))
   res <- cli$head()
   stop_status(res)
   res$response_headers
 }
 
-sofa_DELETE <- function(url, as = 'list', headers = NULL, auth = NULL, ...) {
+sofa_DELETE <- function(url, as = 'list', headers = NULL, auth = NULL,
+                        query = NULL, ...) {
   as <- match.arg(as, c('list','json'))
   cli <- crul::HttpClient$new(url = url, headers = headers,
                               opts = sc(c(auth, list(...))))
-  res <- cli$delete()
+  res <- cli$delete(query = query)
   stop_status(res)
   tt <- res$parse("UTF-8")
   if (as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
@@ -77,9 +83,11 @@ sofa_PUT <- function(url, as = 'list', body = NULL,
   if (as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
 }
 
-sofa_POST <- function(url, as = 'list', body, encode, headers = NULL, auth = NULL, query = NULL, ...) {
+sofa_POST <- function(url, as = 'list', body, encode, headers = NULL,
+                      auth = NULL, query = NULL, ...) {
   cli <- crul::HttpClient$new(url = url,
-                              headers = c(ct_json, headers), sc(c(auth, list(...))))
+                              headers = c(ct_json, headers),
+                              opts = sc(c(auth, list(...))))
   res <- cli$post(body = body, query = query, encode = encode)
   stop_status(res)
   tt <- res$parse("UTF-8")

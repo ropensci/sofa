@@ -30,7 +30,7 @@ db_revisions <- function(cushion, dbname, docid, simplify=TRUE,
   check_cushion(cushion)
   call_ <- sprintf("%s/%s/%s", cushion$make_url(), dbname, docid)
   tmp <- sofa_GET(call_, as = "list", query = list(revs_info = 'true'),
-                  cushion$get_headers(), ...)
+                  cushion$get_headers(), cushion$get_auth(), ...)
   revs <- if (simplify) {
     vapply(tmp$`_revs_info`, "[[", "", "rev")
   } else {
