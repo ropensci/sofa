@@ -25,7 +25,6 @@ test_that("db_explain basic usage works", {
   }', limit = 25)
 
 	expect_is(aa, "list")
-	expect_named(aa, c('dbname','index','selector','opts','limit','skip','fields','range'))
 	expect_equal(aa$dbname, "omdb")
 	expect_named(aa$selector, "_id")
 	expect_named(aa$selector$`_id`, "$gt")

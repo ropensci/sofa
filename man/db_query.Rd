@@ -83,10 +83,18 @@ db_query(x, dbname = "omdb",
 db_query(x, dbname = "omdb",
   selector = list(`_id` = list(`$gt` = NULL)), limit = 3)
 
+# fields
+## single field works
 db_query(x, dbname = "omdb",
   selector = list(`_id` = list(`$gt` = NULL)), limit = 3,
   fields = c('_id', 'Actors', 'imdbRating'))
 
+## as well as many fields
+db_query(x, dbname = "omdb",
+  selector = list(`_id` = list(`$gt` = NULL)), limit = 3,
+  fields = '_id')
+
+## other queries
 db_query(x, dbname = "omdb",
   selector = list(Year = list(`$gt` = "2013")))
 

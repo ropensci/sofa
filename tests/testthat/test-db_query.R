@@ -21,7 +21,7 @@ test_that("db_query - selector param works", {
   aa <- db_query(sofa_conn, 'omdb', selector = list(`_id` = list(`$gt` = NULL)))
 
 	expect_is(aa, "list")
-	expect_named(aa, 'docs')
+	expect_true('docs' %in% names(aa))
   expect_is(aa$docs, 'list')
   expect_is(aa$docs[[1]], "list")
 
@@ -42,7 +42,7 @@ test_that("db_query - query as text string works", {
   )
 
   expect_is(aa, "list")
-  expect_named(aa, 'docs')
+  expect_true('docs' %in% names(aa))
   expect_is(aa$docs, 'list')
   expect_is(aa$docs[[1]], "list")
 
@@ -59,7 +59,8 @@ test_that("db_query - a regex query works", {
   )
 
   expect_is(aa, "list")
-  expect_named(aa, c('warning', 'docs'))
+  expect_true('warning' %in% names(aa))
+  expect_true('docs' %in% names(aa))
   expect_is(aa$docs, 'list')
   expect_is(aa$docs[[1]], "list")
 
@@ -77,7 +78,8 @@ test_that("db_query - fields param works", {
     ), fields = c("_id", "Director"))
 
   expect_is(aa, "list")
-  expect_named(aa, c('warning', 'docs'))
+  expect_true('warning' %in% names(aa))
+  expect_true('docs' %in% names(aa))
   expect_is(aa$docs, 'list')
   expect_is(aa$docs[[1]], "list")
 

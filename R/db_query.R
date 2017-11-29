@@ -30,6 +30,7 @@ db_query <- function(cushion, dbname, query = NULL, selector = NULL,
   as = 'list', ...) {
 
   check_cushion(cushion)
+  if (!is.null(fields)) if (length(fields) == 1) fields <- list(fields)
   if (is.null(query)) {
     query <- sc(list(
       selector = selector, limit = unbox(limit), skip = skip,
