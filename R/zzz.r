@@ -39,7 +39,7 @@ asl <- function(x){
 }
 
 sofa_GET <- function(url, as = 'list', query = NULL, headers = NULL,
-                     auth = NULL, ...) {
+                     auth = NULL, disk = NULL, ...) {
   as <- match.arg(as, c('list', 'json', 'raw'))
   cli <- crul::HttpClient$new(url = url,
                               headers = c(ct_json, headers),
@@ -48,6 +48,17 @@ sofa_GET <- function(url, as = 'list', query = NULL, headers = NULL,
   stop_status(res)
   tt <- res$parse("UTF-8")
   if (as == 'json') tt else jsonlite::fromJSON(tt, FALSE)
+}
+
+sofa_GET_disk <- function(url, as = 'list', query = NULL, headers = NULL,
+                     auth = NULL, disk, ...) {
+  as <- match.arg(as, c('list', 'json', 'raw'))
+  cli <- crul::HttpClient$new(url = url,
+                              headers = c(ct_json, headers),
+                              opts = sc(c(auth, list(...))))
+  res <- cli$get(query = query, disk = disk)
+  stop_status(res)
+  res$content
 }
 
 sofa_HEAD <- function(url, headers = NULL, auth = NULL, ...) {

@@ -5,7 +5,8 @@
 \title{List all docs in a given database.}
 \usage{
 db_alldocs(cushion, dbname, descending = NULL, startkey = NULL,
-  endkey = NULL, limit = NULL, include_docs = FALSE, as = "list", ...)
+  endkey = NULL, limit = NULL, include_docs = FALSE, as = "list",
+  disk = NULL, ...)
 }
 \arguments{
 \item{cushion}{A \code{\link{Cushion}} object. Required.}
@@ -24,6 +25,10 @@ db_alldocs(cushion, dbname, descending = NULL, startkey = NULL,
 in addition to IDs. Default: \code{FALSE}}
 
 \item{as}{(character) One of list (default) or json}
+
+\item{disk}{write to disk or not. By default, data is in the R session;
+if you give a file path, we'll write data to disk and you'll get back
+the file path. by default, we save in the R session}
 
 \item{...}{Curl args passed on to \code{\link[crul]{HttpClient}}}
 }
@@ -48,5 +53,20 @@ db_alldocs(x, dbname="leothelion", limit=2, include_docs=TRUE)
 
 # curl options
 res <- db_alldocs(x, dbname="leothelion", verbose = TRUE)
+
+# write data to disk - useful when data is very large
+## create omdb dataset first
+file <- system.file("examples/omdb.json", package = "sofa")
+strs <- readLines(file)
+if ("omdb" \%in\% db_list(x)) {
+  invisible(db_delete(x, dbname="omdb"))
+}
+db_create(x, dbname='omdb')
+invisible(db_bulk_create(x, "omdb", strs))
+
+## get all docs, writing them to disk
+res <- db_alldocs(x, dbname="omdb", disk = (f <- tempfile(fileext=".json")))
+res
+readLines(res, n = 10)
 }
 }
