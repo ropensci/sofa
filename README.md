@@ -13,7 +13,7 @@ sofa
 
 [![Build Status](https://travis-ci.org/ropensci/sofa.svg?branch=master)](https://travis-ci.org/ropensci/sofa)
 [![codecov.io](https://codecov.io/github/ropensci/sofa/coverage.svg?branch=master)](https://codecov.io/github/ropensci/sofa?branch=master)
-[![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/grand-total/sofa?color=ff69b4)](https://github.com/metacran/cranlogs.app)
+[![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/sofa?color=ff69b4)](https://github.com/metacran/cranlogs.app)
 [![cran version](http://www.r-pkg.org/badges/version/sofa)](https://cran.r-project.org/package=sofa)
 
 __An easy interface to CouchDB from R__
@@ -25,9 +25,10 @@ package to interact with CouchDB.
 
 `sofa` is built targeting CouchDB v2 or greater.
 
-## Install CouchDB
+## CouchDB Info
 
-Go to <http://docs.couchdb.org/en/2.1.0/install/index.html> for instructions.
+* Docs: <http://docs.couchdb.org/en/latest/index.html>
+* Installation: <http://docs.couchdb.org/en/latest/install/index.html>
 
 ## Connect to CouchDB
 
@@ -37,7 +38,7 @@ This may be starting it on your terminal/shell
 couchdb
 ```
 
-Or opening the CouchDB app on your machine, or running it in docker. Whatever it
+Or opening the CouchDB app on your machine, or running it in Docker. Whatever it
 is, start it up.
 
 You can interact with your CouchDB databases as well in your browser. Navigate to <http://localhost:5984/_utils>
@@ -109,7 +110,7 @@ x$ping()
 #> [1] "Welcome"
 #> 
 #> $version
-#> [1] "2.1.0"
+#> [1] "2.1.1"
 #> 
 #> $features
 #> $features[[1]]
@@ -143,9 +144,7 @@ see if its there now
 
 ```r
 db_list(x)
-#>  [1] "bulkfromchr" "bulktest2"   "bulktest3"   "cats"        "cchecksdb"  
-#>  [6] "drinksdb"    "hello_earth" "iris190"     "iris984"     "irisrows"   
-#> [11] "sofadb"      "test"        "testing"     "testing123"  "testiris"
+#> [1] "cats"       "flights"    "sofadb"     "testing123"
 ```
 
 ## Create documents
@@ -176,7 +175,7 @@ doc_create(x, doc2, dbname = "sofadb")
 #> [1] TRUE
 #> 
 #> $id
-#> [1] "15b4cdf4dfa683352b57015af2cfff2a"
+#> [1] "901e4bf214fb50db456d3ef8ec0516c9"
 #> 
 #> $rev
 #> [1] "1-fd0da7fcb8d3afbfc5757d065c92362c"
@@ -192,6 +191,6 @@ See the [vignettes](https://github.com/ropensci/sofa/tree/master/vignettes) for 
 * Please [report any issues or bugs](https://github.com/ropensci/sofa/issues).
 * License: MIT
 * Get citation information for `sofa` in R doing `citation(package = 'sofa')`
-* Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
+* Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
 
 [![ropensci_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)

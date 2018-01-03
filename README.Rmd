@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 
 [![Build Status](https://travis-ci.org/ropensci/sofa.svg?branch=master)](https://travis-ci.org/ropensci/sofa)
 [![codecov.io](https://codecov.io/github/ropensci/sofa/coverage.svg?branch=master)](https://codecov.io/github/ropensci/sofa?branch=master)
-[![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/grand-total/sofa?color=ff69b4)](https://github.com/metacran/cranlogs.app)
+[![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/sofa?color=ff69b4)](https://github.com/metacran/cranlogs.app)
 [![cran version](http://www.r-pkg.org/badges/version/sofa)](https://cran.r-project.org/package=sofa)
 
 __An easy interface to CouchDB from R__
@@ -32,9 +32,10 @@ package to interact with CouchDB.
 
 `sofa` is built targeting CouchDB v2 or greater.
 
-## Install CouchDB
+## CouchDB Info
 
-Go to <http://docs.couchdb.org/en/2.1.0/install/index.html> for instructions.
+* Docs: <http://docs.couchdb.org/en/latest/index.html>
+* Installation: <http://docs.couchdb.org/en/latest/install/index.html>
 
 ## Connect to CouchDB
 
@@ -44,7 +45,7 @@ This may be starting it on your terminal/shell
 couchdb
 ```
 
-Or opening the CouchDB app on your machine, or running it in docker. Whatever it
+Or opening the CouchDB app on your machine, or running it in Docker. Whatever it
 is, start it up.
 
 You can interact with your CouchDB databases as well in your browser. Navigate to <http://localhost:5984/_utils>
@@ -113,7 +114,7 @@ Nice, it's working.
 ## Create a new database, and list available databases
 
 ```{r echo=FALSE}
-if (is.null(db_info(x, dbname = "sofadb")$error)) db_delete(x, dbname = 'sofadb')
+if ("sofadb" %in% db_list(x)) db_delete(x, dbname = 'sofadb')
 ```
 
 ```{r}

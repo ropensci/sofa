@@ -16,22 +16,7 @@ knitr::opts_chunk$set(
 sofa introduction
 =========
 
-CouchDB links
-
-+ [Apache CouchDB](http://couchdb.apache.org/)
-+ [CouchDB docs](http://docs.couchdb.org/en/2.1.0/index.html)
-
-## CouchDB versions
-
-`sofa` is built targeting CouchDB v2 or greater.
-
-## Install CouchDB
-
-Go to <http://docs.couchdb.org/en/2.1.0/install/index.html> for instructions.
-
-## Start CouchDB
-
-Start CouchDB however is appropriate for your setup. You can interact with your CouchDB databases as well in your browser. Navigate to <http://localhost:5984>
+Make sure your CouchDB installation is running.
 
 ## Install sofa
 

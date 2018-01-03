@@ -9,22 +9,7 @@
 sofa introduction
 =========
 
-CouchDB links
-
-+ [Apache CouchDB](http://couchdb.apache.org/)
-+ [CouchDB docs](http://docs.couchdb.org/en/2.1.0/index.html)
-
-## CouchDB versions
-
-`sofa` is built targeting CouchDB v2 or greater.
-
-## Install CouchDB
-
-Go to <http://docs.couchdb.org/en/2.1.0/install/index.html> for instructions.
-
-## Start CouchDB
-
-Start CouchDB however is appropriate for your setup. You can interact with your CouchDB databases as well in your browser. Navigate to <http://localhost:5984>
+Make sure your CouchDB installation is running.
 
 ## Install sofa
 
@@ -123,7 +108,7 @@ ping(x)
 #> [1] "Welcome"
 #> 
 #> $version
-#> [1] "2.1.0"
+#> [1] "2.1.1"
 #> 
 #> $features
 #> $features[[1]]
@@ -151,9 +136,7 @@ db_create(x, 'cats')
 
 ```r
 db_list(x)
-#>  [1] "bulkfromchr" "bulktest2"   "bulktest3"   "cats"        "cchecksdb"  
-#>  [6] "drinksdb"    "hello_earth" "iris190"     "iris984"     "irisrows"   
-#> [11] "sofadb"      "test"        "testing"     "testing123"  "testiris"
+#> [1] "cats"       "flights"    "testing123"
 ```
 
 ## Create a document
@@ -182,7 +165,7 @@ doc_create(x, dbname = "cats", doc2)
 #> [1] TRUE
 #> 
 #> $id
-#> [1] "15b4cdf4dfa683352b57015af2cff956"
+#> [1] "901e4bf214fb50db456d3ef8ec000cfd"
 #> 
 #> $rev
 #> [1] "1-08aef850a23f5ff95869c9cf5d9604dc"
@@ -198,7 +181,7 @@ doc_create(x, dbname = "cats", doc3)
 #> [1] TRUE
 #> 
 #> $id
-#> [1] "15b4cdf4dfa683352b57015af2cffc00"
+#> [1] "901e4bf214fb50db456d3ef8ec00167e"
 #> 
 #> $rev
 #> [1] "1-953d3cfbbebb977fb75940c2bb0c93a1"
@@ -217,40 +200,40 @@ db_changes(x, "cats")
 #> $results
 #> $results[[1]]
 #> $results[[1]]$seq
-#> [1] "1-g1AAAAB5eJzLYWBgYMpgTmEQTM4vTc5ISXLIyU9OzMnILy7JAUklMiTV____PyuDOZExFyjAbmSWaplsaYFNAx5j8liAJEMDkPoPMi2RIQsAvksmfA"
+#> [1] "1-g1AAAAB5eJzLYWBgYMpgTmEQTM4vTc5ISXLIyU9OzMnILy7JAUklMiTV____PyuRAY-iPBYgydAApP6D1GYwJzLmAgXYk9NMkpOMTLHpywIA9BAmyw"
 #> 
 #> $results[[1]]$id
-#> [1] "15b4cdf4dfa683352b57015af2cff956"
+#> [1] "bluecat"
 #> 
 #> $results[[1]]$changes
 #> $results[[1]]$changes[[1]]
 #> $results[[1]]$changes[[1]]$rev
-#> [1] "1-08aef850a23f5ff95869c9cf5d9604dc"
+#> [1] "1-41784f190c466d990684003a958c9f39"
 #> 
 #> 
 #> 
 #> 
 #> $results[[2]]
 #> $results[[2]]$seq
-#> [1] "2-g1AAAACbeJzLYWBgYMpgTmEQTM4vTc5ISXLIyU9OzMnILy7JAUklMiTV____PyuDOZExFyjAbmSWaplsaYFNAx5j8liAJEMDkPqPYlqKgblZqlEqNn1ZAGmlMK8"
+#> [1] "2-g1AAAACbeJzLYWBgYMpgTmEQTM4vTc5ISXLIyU9OzMnILy7JAUklMiTV____PyuDOZExFyjAnpRonpxsYolNAx5j8liAJEMDkPqPYlpymklykpEpNn1ZAJEOMS4"
 #> 
 #> $results[[2]]$id
-#> [1] "bluecat"
+#> [1] "901e4bf214fb50db456d3ef8ec000cfd"
 #> 
 #> $results[[2]]$changes
 #> $results[[2]]$changes[[1]]
 #> $results[[2]]$changes[[1]]$rev
-#> [1] "1-41784f190c466d990684003a958c9f39"
+#> [1] "1-08aef850a23f5ff95869c9cf5d9604dc"
 #> 
 #> 
 #> 
 #> 
 #> $results[[3]]
 #> $results[[3]]$seq
-#> [1] "3-g1AAAACbeJzLYWBgYMpgTmEQTM4vTc5ISXLIyU9OzMnILy7JAUklMiTV____PyuDOZExFyjAbmSWaplsaYFNAx5j8liAJEMDkPoPNY0JbFqKgblZqlEqNn1ZAGnHMLA"
+#> [1] "3-g1AAAACbeJzLYWBgYMpgTmEQTM4vTc5ISXLIyU9OzMnILy7JAUklMiTV____PyuDOZEpFyjAnpRonpxsYolNAx5j8liAJEMDkPoPNY0RbFpymklykpEpNn1ZAJF-MS8"
 #> 
 #> $results[[3]]$id
-#> [1] "15b4cdf4dfa683352b57015af2cffc00"
+#> [1] "901e4bf214fb50db456d3ef8ec00167e"
 #> 
 #> $results[[3]]$changes
 #> $results[[3]]$changes[[1]]
@@ -262,7 +245,7 @@ db_changes(x, "cats")
 #> 
 #> 
 #> $last_seq
-#> [1] "3-g1AAAACbeJzLYWBgYMpgTmEQTM4vTc5ISXLIyU9OzMnILy7JAUklMiTV____PyuDOZExFyjAbmSWaplsaYFNAx5j8liAJEMDkPoPNY0JbFqKgblZqlEqNn1ZAGnHMLA"
+#> [1] "3-g1AAAACbeJzLYWBgYMpgTmEQTM4vTc5ISXLIyU9OzMnILy7JAUklMiTV____PyuDOZEpFyjAnpRonpxsYolNAx5j8liAJEMDkPoPNY0RbFpymklykpEpNn1ZAJF-MS8"
 #> 
 #> $pending
 #> [1] 0
@@ -277,7 +260,7 @@ The simplest search just returns the documents.
 db_query(x, dbname = "cats", selector = list(`_id` = list(`$gt` = NULL)))$docs
 #> [[1]]
 #> [[1]]$`_id`
-#> [1] "15b4cdf4dfa683352b57015af2cff956"
+#> [1] "901e4bf214fb50db456d3ef8ec000cfd"
 #> 
 #> [[1]]$`_rev`
 #> [1] "1-08aef850a23f5ff95869c9cf5d9604dc"
@@ -297,7 +280,7 @@ db_query(x, dbname = "cats", selector = list(`_id` = list(`$gt` = NULL)))$docs
 #> 
 #> [[2]]
 #> [[2]]$`_id`
-#> [1] "15b4cdf4dfa683352b57015af2cffc00"
+#> [1] "901e4bf214fb50db456d3ef8ec00167e"
 #> 
 #> [[2]]$`_rev`
 #> [1] "1-953d3cfbbebb977fb75940c2bb0c93a1"
@@ -345,7 +328,7 @@ Search for cats that are red
 db_query(x, dbname = "cats", selector = list(color = "red"))$docs
 #> [[1]]
 #> [[1]]$`_id`
-#> [1] "15b4cdf4dfa683352b57015af2cff956"
+#> [1] "901e4bf214fb50db456d3ef8ec000cfd"
 #> 
 #> [[1]]$`_rev`
 #> [1] "1-08aef850a23f5ff95869c9cf5d9604dc"
