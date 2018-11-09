@@ -4,10 +4,9 @@ Description: Provides an interface to the 'NoSQL' database 'CouchDB'
     (<http://couchdb.apache.org>). Methods are provided for managing
     databases within 'CouchDB', including creating/deleting/updating/transferring,
     and managing documents within databases. One can connect with a local
-    'CouchDB' instance, or a remote 'CouchDB' databases such as 'Cloudant'
-    (<https://docs.cloudant.com>). Documents can be inserted directly from
-    vectors, lists, data.frames, and 'JSON'. Targeted at 'CouchDB' v2 or
-    greater.
+    'CouchDB' instance, or a remote 'CouchDB' databases such as 'Cloudant'. 
+    Documents can be inserted directly from vectors, lists, data.frames, 
+    and 'JSON'. Targeted at 'CouchDB' v2 or greater.
 Version: 0.3.0.9100
 Authors@R: person("Scott", "Chamberlain", role = c("aut", "cre"),
     email = "myrmecocystus@gmail.com")
@@ -26,3 +25,6 @@ Suggests:
     rmarkdown
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
+X-schema.org-applicationCategory: Databases
+X-schema.org-keywords: CouchDB, database, NoSQL, documents
+X-schema.org-isPartOf: https://ropensci.org

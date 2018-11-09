@@ -1,8 +1,11 @@
 {
-  "@context": ["http://purl.org/codemeta/2.0", "http://schema.org"],
+  "@context": [
+    "http://purl.org/codemeta/2.0",
+    "http://schema.org"
+  ],
   "@type": "SoftwareSourceCode",
   "identifier": "sofa",
-  "description": "Provides an interface to the 'NoSQL' database 'CouchDB'\n    (<http://couchdb.apache.org>). Methods are provided for managing\n    databases within 'CouchDB', including creating/deleting/updating/transferring,\n    and managing documents within databases. One can connect with a local\n    'CouchDB' instance, or a remote 'CouchDB' databases such as 'Cloudant'\n    (<https://docs.cloudant.com>). Documents can be inserted directly from\n    vectors, lists, data.frames, and 'JSON'. Targeted at 'CouchDB' v2 or\n    greater.",
+  "description": "Provides an interface to the 'NoSQL' database 'CouchDB'\n    (<http://couchdb.apache.org>). Methods are provided for managing\n    databases within 'CouchDB', including creating/deleting/updating/transferring,\n    and managing documents within databases. One can connect with a local\n    'CouchDB' instance, or a remote 'CouchDB' databases such as 'Cloudant'. \n    Documents can be inserted directly from vectors, lists, data.frames, \n    and 'JSON'. Targeted at 'CouchDB' v2 or greater.",
   "name": "sofa: Connector to 'CouchDB'",
   "codeRepository": "https://github.com/ropensci/sofa",
   "issueTracker": "https://github.com/ropensci/sofa/issues",
@@ -11,10 +14,10 @@
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "3.4.3",
+    "version": "3.5.1",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.4.3 Patched (2018-01-01 r74017)",
+  "runtimePlatform": "R version 3.5.1 Patched (2018-11-02 r75543)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -29,12 +32,14 @@
       "email": "myrmecocystus@gmail.com"
     }
   ],
-  "maintainer": {
-    "@type": "Person",
-    "givenName": "Scott",
-    "familyName": "Chamberlain",
-    "email": "myrmecocystus@gmail.com"
-  },
+  "maintainer": [
+    {
+      "@type": "Person",
+      "givenName": "Scott",
+      "familyName": "Chamberlain",
+      "email": "myrmecocystus@gmail.com"
+    }
+  ],
   "softwareSuggestions": [
     {
       "@type": "SoftwareApplication",
@@ -43,9 +48,10 @@
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
-        "name": "Central R Archive Network (CRAN)",
+        "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
-      }
+      },
+      "sameAs": "https://CRAN.R-project.org/package=testthat"
     },
     {
       "@type": "SoftwareApplication",
@@ -54,9 +60,10 @@
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
-        "name": "Central R Archive Network (CRAN)",
+        "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
-      }
+      },
+      "sameAs": "https://CRAN.R-project.org/package=knitr"
     },
     {
       "@type": "SoftwareApplication",
@@ -65,9 +72,10 @@
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
-        "name": "Central R Archive Network (CRAN)",
+        "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
-      }
+      },
+      "sameAs": "https://CRAN.R-project.org/package=rmarkdown"
     }
   ],
   "softwareRequirements": [
@@ -75,37 +83,40 @@
       "@type": "SoftwareApplication",
       "identifier": "crul",
       "name": "crul",
-      "version": "0.4.0",
+      "version": ">= 0.4.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
-        "name": "Central R Archive Network (CRAN)",
+        "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
-      }
+      },
+      "sameAs": "https://CRAN.R-project.org/package=crul"
     },
     {
       "@type": "SoftwareApplication",
       "identifier": "jsonlite",
       "name": "jsonlite",
-      "version": "1.5",
+      "version": ">= 1.5",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
-        "name": "Central R Archive Network (CRAN)",
+        "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
-      }
+      },
+      "sameAs": "https://CRAN.R-project.org/package=jsonlite"
     },
     {
       "@type": "SoftwareApplication",
       "identifier": "R6",
       "name": "R6",
-      "version": "2.2.2",
+      "version": ">= 2.2.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
-        "name": "Central R Archive Network (CRAN)",
+        "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
-      }
+      },
+      "sameAs": "https://CRAN.R-project.org/package=R6"
     },
     {
       "@type": "SoftwareApplication",
@@ -114,13 +125,18 @@
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
-        "name": "Central R Archive Network (CRAN)",
+        "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
-      }
+      },
+      "sameAs": "https://CRAN.R-project.org/package=mime"
     }
   ],
   "contIntegration": "https://travis-ci.org/ropensci/sofa",
   "releaseNotes": "https://github.com/ropensci/sofa/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/sofa/blob/master/README.md",
-  "fileSize": "68.001KB"
+  "fileSize": "68.162KB",
+  "applicationCategory": "Databases",
+  "isPartOf": "https://ropensci.org",
+  "keywords": ["CouchDB", "database", "NoSQL", "documents", "couchdb", "couchdb-client", "cloudant", "r", "rstats", "r-package"],
+  "developmentStatus": "http://www.repostatus.org/#active"
 }
