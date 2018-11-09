@@ -125,6 +125,8 @@ stop_status <- function(x) {
   }
 }
 
+`%||%` <- function(x, y) if (is.null(x)) y else x
+
 check_inputs <- function(x){
   if (length(x) == 0) {
     NULL
@@ -142,7 +144,7 @@ check_inputs <- function(x){
         x
       }
     } else if (is.list(x)) {
-      jsonlite::toJSON(x, auto_unbox = TRUE)
+      jsonlite::toJSON(x, auto_unbox = TRUE, digits = getOption("digits") %||% 7)
     } else {
       stop("Only character and list types supported currently")
     }

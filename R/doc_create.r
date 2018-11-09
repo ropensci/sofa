@@ -27,6 +27,19 @@
 #' - see [db_bulk_create()] and [db_bulk_update()] to
 #' create or update documents with the bulk API - which should be much faster
 #' for a large number of documents.
+#' 
+#' @section Digits after the decimal:
+#' If you have any concern about number of digits after the decimal
+#' in your documents, make sure to look at `digits` in your R options.
+#' The default value is 7 (see [options] for more informnation). You
+#' can set the value you like with e.g., `options(digits = 10)`, and 
+#' get what `digits` is set to with `getOption("digits")`. 
+#' 
+#' Note that in [doc_create()] we convert your document to JSON with 
+#' [jsonlite::toJSON()] if given as a list, which has a `digits` parameter.
+#' We pass `getOption("digits")` to the `digits` parameter in 
+#' `jsonlite::toJSON`. 
+#' 
 #' @examples \dontrun{
 #' (x <- Cushion$new())
 #'
