@@ -120,6 +120,19 @@
 #' ## limit and skip
 #' design_search(x, dbname='omdb', design='view5', view = 'foobar3',
 #'   params = list(limit = 5, skip = 3))
+#' ## with start and end keys
+#' ### important: the key strings have to be in JSON, so here e.g., 
+#' ###  need to add escaped double quotes
+#' res <- design_search(
+#'   cushion = x,
+#'   dbname = 'omdb',
+#'   design = 'view6',
+#'   view = 'foobar4',
+#'   params = list(
+#'     startkey = "\"c25bbf4fef99408b3e1115374a03f642\"",
+#'     endkey = "\"c25bbf4fef99408b3e1115374a040f11\""
+#'   )
+#' )
 #'
 #' # POST request
 #' ids <- vapply(db_alldocs(x, dbname='omdb')$rows[1:3], "[[", "", "id")
@@ -170,7 +183,8 @@ ds_params_keys <- c(
   "end_key_doc_id", "group", "group_level", "include_docs",
   "attachments", "att_encoding_info", "inclusive_end",
   "limit", "reduce", "skip", "sorted", "stale",
-  "startkey_docid", "start_key_doc_id", "update_seq"
+  "startkey_docid", "start_key_doc_id", "update_seq",
+  "endkey", "end_key", "startkey", "start_key"
 )
 
 ds_body_keys <- c(
