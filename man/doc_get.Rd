@@ -5,8 +5,9 @@
 \title{Get a document from a database.}
 \usage{
 doc_get(cushion, dbname, docid, rev = NULL, attachments = FALSE,
-  deleted = FALSE, revs = FALSE, revs_info = FALSE, conflicts = FALSE,
-  deleted_conflicts = FALSE, local_seq = FALSE, as = "list", ...)
+  deleted = FALSE, revs = FALSE, revs_info = FALSE,
+  conflicts = FALSE, deleted_conflicts = FALSE, local_seq = FALSE,
+  as = "list", ...)
 }
 \arguments{
 \item{cushion}{A \code{\link{Cushion}} object. Required.}

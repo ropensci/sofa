@@ -10,8 +10,8 @@
 \alias{design_info}
 \title{Work with design documents}
 \usage{
-design_create(cushion, dbname, design, fxnname, key = "null", value = "doc",
-  as = "list", ...)
+design_create(cushion, dbname, design, fxnname, key = "null",
+  value = "doc", as = "list", ...)
 
 design_create_(cushion, dbname, design, fxnname, fxn, as = "list", ...)
 

@@ -4,8 +4,8 @@
 \alias{doc_create}
 \title{Create documents to a database.}
 \usage{
-doc_create(cushion, dbname, doc, docid = NULL, how = "rows", as = "list",
-  ...)
+doc_create(cushion, dbname, doc, docid = NULL, how = "rows",
+  as = "list", ...)
 }
 \arguments{
 \item{cushion}{A \code{\link{Cushion}} object. Required.}

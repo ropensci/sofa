@@ -4,9 +4,9 @@
 \alias{db_explain}
 \title{Explain API}
 \usage{
-db_explain(cushion, dbname, query = NULL, selector = NULL, limit = NULL,
-  skip = NULL, sort = NULL, fields = NULL, use_index = NULL,
-  as = "list", ...)
+db_explain(cushion, dbname, query = NULL, selector = NULL,
+  limit = NULL, skip = NULL, sort = NULL, fields = NULL,
+  use_index = NULL, as = "list", ...)
 }
 \arguments{
 \item{cushion}{A \code{\link{Cushion}} object. Required.}

@@ -5,10 +5,11 @@
 \alias{design_search_many}
 \title{Search design documents}
 \usage{
-design_search(cushion, dbname, design, view, params = list(), body = list(),
-  as = "list", ...)
+design_search(cushion, dbname, design, view, params = list(),
+  body = list(), as = "list", ...)
 
-design_search_many(cushion, dbname, design, view, queries, as = "list", ...)
+design_search_many(cushion, dbname, design, view, queries, as = "list",
+  ...)
 }
 \arguments{
 \item{cushion}{A \code{\link{Cushion}} object. Required.}

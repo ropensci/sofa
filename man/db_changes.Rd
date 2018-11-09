@@ -6,7 +6,8 @@
 \usage{
 db_changes(cushion, dbname, descending = NULL, startkey = NULL,
   endkey = NULL, since = NULL, limit = NULL, include_docs = NULL,
-  feed = "normal", heartbeat = NULL, filter = NULL, as = "list", ...)
+  feed = "normal", heartbeat = NULL, filter = NULL, as = "list",
+  ...)
 }
 \arguments{
 \item{cushion}{A \code{\link{Cushion}} object. Required.}
