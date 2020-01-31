@@ -125,9 +125,11 @@ Cushion <- R6::R6Class(
     },
 
     #' @description Ping the CouchDB server
+    #' @param as (character) One of list (default) or json
     #' @param ... curl options passed to [crul::verb-GET]
-    ping = function(...) {
-      sofa_GET(self$make_url(), ...)
+    ping = function(as = 'list', ...) {
+      sofa_GET(self$make_url(), as = as, query = NULL,
+        headers = self$get_headers(), auth = self$get_auth(), ...)
     },
 
     #' @description Construct full base URL from the pieces in the

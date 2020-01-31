@@ -166,12 +166,14 @@ print method for \code{Cushion}
 \subsection{Method \code{ping()}}{
 Ping the CouchDB server
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Cushion$ping(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Cushion$ping(as = "list", ...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
+\item{\code{as}}{(character) One of list (default) or json}
+
 \item{\code{...}}{curl options passed to \link[crul:verb-GET]{crul::verb-GET}}
 }
 \if{html}{\out{</div>}}

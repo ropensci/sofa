@@ -25,6 +25,8 @@ Ping a CouchDB server
 # initialize a CouchDB connection
 (x <- Cushion$new())
 
+# call ping on the cushion object, or pass the cushion to ping()
+x$ping()
 ping(x)
 ping(x, as = "json")
 }
