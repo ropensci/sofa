@@ -4,9 +4,18 @@
 \alias{db_alldocs}
 \title{List all docs in a given database.}
 \usage{
-db_alldocs(cushion, dbname, descending = NULL, startkey = NULL,
-  endkey = NULL, limit = NULL, include_docs = FALSE, as = "list",
-  disk = NULL, ...)
+db_alldocs(
+  cushion,
+  dbname,
+  descending = NULL,
+  startkey = NULL,
+  endkey = NULL,
+  limit = NULL,
+  include_docs = FALSE,
+  as = "list",
+  disk = NULL,
+  ...
+)
 }
 \arguments{
 \item{cushion}{A \code{\link{Cushion}} object. Required.}

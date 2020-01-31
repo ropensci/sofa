@@ -10,8 +10,16 @@
 \alias{design_info}
 \title{Work with design documents}
 \usage{
-design_create(cushion, dbname, design, fxnname, key = "null",
-  value = "doc", as = "list", ...)
+design_create(
+  cushion,
+  dbname,
+  design,
+  fxnname,
+  key = "null",
+  value = "doc",
+  as = "list",
+  ...
+)
 
 design_create_(cushion, dbname, design, fxnname, fxn, as = "list", ...)
 
@@ -29,7 +37,7 @@ design_info(cushion, dbname, design, ...)
 \item{dbname}{(character) Database name. required.}
 
 \item{design}{(character) Design document name. this is the design name
-without \code{_design/}, which is prepended internally. required.}
+without \verb{_design/}, which is prepended internally. required.}
 
 \item{fxnname}{(character) A function name. required for \code{view_put}
 and \code{view_put_}}

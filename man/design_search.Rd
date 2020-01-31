@@ -5,11 +5,18 @@
 \alias{design_search_many}
 \title{Search design documents}
 \usage{
-design_search(cushion, dbname, design, view, params = list(),
-  body = list(), as = "list", ...)
+design_search(
+  cushion,
+  dbname,
+  design,
+  view,
+  params = list(),
+  body = list(),
+  as = "list",
+  ...
+)
 
-design_search_many(cushion, dbname, design, view, queries, as = "list",
-  ...)
+design_search_many(cushion, dbname, design, view, queries, as = "list", ...)
 }
 \arguments{
 \item{cushion}{A \code{\link{Cushion}} object. Required.}
@@ -17,7 +24,7 @@ design_search_many(cushion, dbname, design, view, queries, as = "list",
 \item{dbname}{(character) Database name. required.}
 
 \item{design}{(character) Design document name. this is the design name
-without \code{_design/}, which is prepended internally. required.}
+without \verb{_design/}, which is prepended internally. required.}
 
 \item{view}{(character) a view, same as \code{fxn} param in
 \code{\link[=design_create_]{design_create_()}}. required.}
@@ -157,8 +164,8 @@ res <- design_search(
   design = 'view6',
   view = 'foobar4',
   params = list(
-    startkey = "\\"c25bbf4fef99408b3e1115374a03f642\\"",
-    endkey = "\\"c25bbf4fef99408b3e1115374a040f11\\""
+    startkey = "\"c25bbf4fef99408b3e1115374a03f642\"",
+    endkey = "\"c25bbf4fef99408b3e1115374a040f11\""
   )
 )
 

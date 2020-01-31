@@ -7,11 +7,12 @@ Description: Provides an interface to the 'NoSQL' database 'CouchDB'
     'CouchDB' instance, or a remote 'CouchDB' databases such as 'Cloudant'. 
     Documents can be inserted directly from vectors, lists, data.frames, 
     and 'JSON'. Targeted at 'CouchDB' v2 or greater.
-Version: 0.3.2.9100
+Version: 0.3.2.97
 Authors@R: person("Scott", "Chamberlain", role = c("aut", "cre"),
     email = "myrmecocystus@gmail.com")
 License: MIT + file LICENSE
-URL: https://docs.ropensci.org/sofa, https://github.com/ropensci/sofa
+URL: https://github.com/ropensci/sofa (devel)
+    https://docs.ropensci.org/sofa (docs)
 BugReports: https://github.com/ropensci/sofa/issues
 Roxygen: list(markdown = TRUE)
 Encoding: UTF-8
@@ -25,7 +26,7 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 X-schema.org-applicationCategory: Databases
 X-schema.org-keywords: CouchDB, database, NoSQL, documents
 X-schema.org-isPartOf: https://ropensci.org

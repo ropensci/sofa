@@ -8,8 +8,15 @@
 \alias{doc_attach_delete}
 \title{Work with attachments}
 \usage{
-doc_attach_create(cushion, dbname, docid, attachment, attname,
-  as = "list", ...)
+doc_attach_create(
+  cushion,
+  dbname,
+  docid,
+  attachment,
+  attname,
+  as = "list",
+  ...
+)
 
 doc_attach_info(cushion, dbname, docid, attname, ...)
 

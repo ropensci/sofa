@@ -4,8 +4,15 @@
 \alias{db_bulk_update}
 \title{Create documents via the bulk API}
 \usage{
-db_bulk_update(cushion, dbname, doc, docid = NULL, how = "rows",
-  as = "list", ...)
+db_bulk_update(
+  cushion,
+  dbname,
+  doc,
+  docid = NULL,
+  how = "rows",
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{cushion}{A \code{\link{Cushion}} object. Required.}

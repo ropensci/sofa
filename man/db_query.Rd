@@ -4,9 +4,19 @@
 \alias{db_query}
 \title{Query a database.}
 \usage{
-db_query(cushion, dbname, query = NULL, selector = NULL,
-  limit = NULL, skip = NULL, sort = NULL, fields = NULL,
-  use_index = NULL, as = "list", ...)
+db_query(
+  cushion,
+  dbname,
+  query = NULL,
+  selector = NULL,
+  limit = NULL,
+  skip = NULL,
+  sort = NULL,
+  fields = NULL,
+  use_index = NULL,
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{cushion}{A \code{\link{Cushion}} object. Required.}
@@ -37,7 +47,7 @@ information provided in the section on filtering fields. Optional
 See \url{http://docs.couchdb.org/en/2.0.0/api/database/find.html#find-filter}}
 
 \item{use_index}{(json) - Instruct a query to use a specific index.
-Specified either as \code{<design_document>} or \code{["<design_document>", "<index_name>"]}. Optional}
+Specified either as \verb{<design_document>} or \verb{["<design_document>", "<index_name>"]}. Optional}
 
 \item{as}{(character) One of list (default) or json}
 
