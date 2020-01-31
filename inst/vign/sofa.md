@@ -108,10 +108,19 @@ ping(x)
 #> [1] "Welcome"
 #> 
 #> $version
-#> [1] "2.1.1"
+#> [1] "2.3.0"
+#> 
+#> $git_sha
+#> [1] "07ea0c7"
+#> 
+#> $uuid
+#> [1] "cd699a7c5484d5d17e05d9d8eac14d54"
 #> 
 #> $features
 #> $features[[1]]
+#> [1] "pluggable-storage-engines"
+#> 
+#> $features[[2]]
 #> [1] "scheduler"
 #> 
 #> 
@@ -136,7 +145,7 @@ db_create(x, 'cats')
 
 ```r
 db_list(x)
-#> [1] "cats"       "flights"    "testing123"
+#>  [1] "cats"       "df"         "diamonds"   "flights"    "foobar"     "geotest"    "mtcars2"    "sofadb"     "test"       "testing123"
 ```
 
 ## Create a document
@@ -165,7 +174,7 @@ doc_create(x, dbname = "cats", doc2)
 #> [1] TRUE
 #> 
 #> $id
-#> [1] "901e4bf214fb50db456d3ef8ec000cfd"
+#> [1] "d3fb75de7d37f6f026c9ef98661bffbe"
 #> 
 #> $rev
 #> [1] "1-08aef850a23f5ff95869c9cf5d9604dc"
@@ -181,7 +190,7 @@ doc_create(x, dbname = "cats", doc3)
 #> [1] TRUE
 #> 
 #> $id
-#> [1] "901e4bf214fb50db456d3ef8ec00167e"
+#> [1] "d3fb75de7d37f6f026c9ef98661c0692"
 #> 
 #> $rev
 #> [1] "1-953d3cfbbebb977fb75940c2bb0c93a1"
@@ -200,7 +209,7 @@ db_changes(x, "cats")
 #> $results
 #> $results[[1]]
 #> $results[[1]]$seq
-#> [1] "1-g1AAAAB5eJzLYWBgYMpgTmEQTM4vTc5ISXLIyU9OzMnILy7JAUklMiTV____PyuRAY-iPBYgydAApP6D1GYwJzLmAgXYk9NMkpOMTLHpywIA9BAmyw"
+#> [1] "1-g1AAAACTeJzLYWBgYMpgTmEQTM4vTc5ISXLIyU9OzMnILy7JAUklMiTV____PyuDOZEhFyjAbplonpaWnJzCwFmal5KalpmXmoJHex4LkGRoAFL_oaYwgk1JMjVIMku2xKYvCwDsHy3-"
 #> 
 #> $results[[1]]$id
 #> [1] "bluecat"
@@ -215,10 +224,10 @@ db_changes(x, "cats")
 #> 
 #> $results[[2]]
 #> $results[[2]]$seq
-#> [1] "2-g1AAAACbeJzLYWBgYMpgTmEQTM4vTc5ISXLIyU9OzMnILy7JAUklMiTV____PyuDOZExFyjAnpRonpxsYolNAx5j8liAJEMDkPqPYlpymklykpEpNn1ZAJEOMS4"
+#> [1] "2-g1AAAACTeJzLYWBgYMpgTmEQTM4vTc5ISXLIyU9OzMnILy7JAUklMiTV____PyuDOZEhFyjAbplonpaWnJzCwFmal5KalpmXmoJHex4LkGRoAFL_oaYwgU1JMjVIMku2xKYvCwDsQS3_"
 #> 
 #> $results[[2]]$id
-#> [1] "901e4bf214fb50db456d3ef8ec000cfd"
+#> [1] "d3fb75de7d37f6f026c9ef98661bffbe"
 #> 
 #> $results[[2]]$changes
 #> $results[[2]]$changes[[1]]
@@ -230,10 +239,10 @@ db_changes(x, "cats")
 #> 
 #> $results[[3]]
 #> $results[[3]]$seq
-#> [1] "3-g1AAAACbeJzLYWBgYMpgTmEQTM4vTc5ISXLIyU9OzMnILy7JAUklMiTV____PyuDOZEpFyjAnpRonpxsYolNAx5j8liAJEMDkPoPNY0RbFpymklykpEpNn1ZAJF-MS8"
+#> [1] "3-g1AAAACTeJzLYWBgYMpgTmEQTM4vTc5ISXLIyU9OzMnILy7JAUklMiTV____PyuDOZEhFyjAbplonpaWnJzCwFmal5KalpmXmoJHex4LkGRoAFL_oaYwg01JMjVIMku2xKYvCwDsYy4A"
 #> 
 #> $results[[3]]$id
-#> [1] "901e4bf214fb50db456d3ef8ec00167e"
+#> [1] "d3fb75de7d37f6f026c9ef98661c0692"
 #> 
 #> $results[[3]]$changes
 #> $results[[3]]$changes[[1]]
@@ -245,7 +254,7 @@ db_changes(x, "cats")
 #> 
 #> 
 #> $last_seq
-#> [1] "3-g1AAAACbeJzLYWBgYMpgTmEQTM4vTc5ISXLIyU9OzMnILy7JAUklMiTV____PyuDOZEpFyjAnpRonpxsYolNAx5j8liAJEMDkPoPNY0RbFpymklykpEpNn1ZAJF-MS8"
+#> [1] "3-g1AAAACTeJzLYWBgYMpgTmEQTM4vTc5ISXLIyU9OzMnILy7JAUklMiTV____PyuDOZEhFyjAbplonpaWnJzCwFmal5KalpmXmoJHex4LkGRoAFL_oaYwg01JMjVIMku2xKYvCwDsYy4A"
 #> 
 #> $pending
 #> [1] 0
@@ -260,65 +269,65 @@ The simplest search just returns the documents.
 db_query(x, dbname = "cats", selector = list(`_id` = list(`$gt` = NULL)))$docs
 #> [[1]]
 #> [[1]]$`_id`
-#> [1] "901e4bf214fb50db456d3ef8ec000cfd"
+#> [1] "bluecat"
 #> 
 #> [[1]]$`_rev`
-#> [1] "1-08aef850a23f5ff95869c9cf5d9604dc"
+#> [1] "1-41784f190c466d990684003a958c9f39"
 #> 
 #> [[1]]$name
-#> [1] "samson"
+#> [1] "leo"
 #> 
 #> [[1]]$color
-#> [1] "red"
+#> [1] "blue"
 #> 
 #> [[1]]$furry
-#> [1] FALSE
+#> [1] TRUE
 #> 
 #> [[1]]$size
-#> [1] 3
+#> [1] 1
 #> 
 #> 
 #> [[2]]
 #> [[2]]$`_id`
-#> [1] "901e4bf214fb50db456d3ef8ec00167e"
+#> [1] "d3fb75de7d37f6f026c9ef98661bffbe"
 #> 
 #> [[2]]$`_rev`
-#> [1] "1-953d3cfbbebb977fb75940c2bb0c93a1"
+#> [1] "1-08aef850a23f5ff95869c9cf5d9604dc"
 #> 
 #> [[2]]$name
-#> [1] "matilda"
+#> [1] "samson"
 #> 
 #> [[2]]$color
-#> [1] "green"
+#> [1] "red"
 #> 
 #> [[2]]$furry
 #> [1] FALSE
 #> 
 #> [[2]]$size
-#> [1] 5
-#> 
-#> [[2]]$age
-#> [1] 2
+#> [1] 3
 #> 
 #> 
 #> [[3]]
 #> [[3]]$`_id`
-#> [1] "bluecat"
+#> [1] "d3fb75de7d37f6f026c9ef98661c0692"
 #> 
 #> [[3]]$`_rev`
-#> [1] "1-41784f190c466d990684003a958c9f39"
+#> [1] "1-953d3cfbbebb977fb75940c2bb0c93a1"
 #> 
 #> [[3]]$name
-#> [1] "leo"
+#> [1] "matilda"
 #> 
 #> [[3]]$color
-#> [1] "blue"
+#> [1] "green"
 #> 
 #> [[3]]$furry
-#> [1] TRUE
+#> [1] FALSE
 #> 
 #> [[3]]$size
-#> [1] 1
+#> [1] 5
+#> 
+#> [[3]]$age
+#> [1] 2
 ```
 
 Search for cats that are red
@@ -328,7 +337,7 @@ Search for cats that are red
 db_query(x, dbname = "cats", selector = list(color = "red"))$docs
 #> [[1]]
 #> [[1]]$`_id`
-#> [1] "901e4bf214fb50db456d3ef8ec000cfd"
+#> [1] "d3fb75de7d37f6f026c9ef98661bffbe"
 #> 
 #> [[1]]$`_rev`
 #> [1] "1-08aef850a23f5ff95869c9cf5d9604dc"
@@ -406,9 +415,9 @@ res <- db_query(x, dbname = "cats",
 
 fromJSON(res)$docs
 #>      name color furry size age
-#> 1  samson   red FALSE    3  NA
-#> 2 matilda green FALSE    5   2
-#> 3     leo  blue  TRUE    1  NA
+#> 1     leo  blue  TRUE    1  NA
+#> 2  samson   red FALSE    3  NA
+#> 3 matilda green FALSE    5   2
 ```
 
 

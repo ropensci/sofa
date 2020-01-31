@@ -4,11 +4,11 @@ RSCRIPT = Rscript --no-init-file
 all: move rmd2md
 
 move:
-	cp inst/vign/sofa_vignette.md vignettes
+	cp inst/vign/sofa.md vignettes
 
 rmd2md:
 	cd vignettes;\
-	mv sofa_vignette.md sofa_vignette.Rmd
+	mv sofa.md sofa.Rmd
 
 install: doc build
 	R CMD INSTALL . && rm *.tar.gz
