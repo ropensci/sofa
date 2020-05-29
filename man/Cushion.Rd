@@ -109,6 +109,7 @@ alldocs(z, "foobar")
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
 Create a new \code{Cushion} object
 \subsection{Usage}{
@@ -145,6 +146,7 @@ A new \code{Cushion} object
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-print"></a>}}
+\if{latex}{\out{\hypertarget{method-print}{}}}
 \subsection{Method \code{print()}}{
 print method for \code{Cushion}
 \subsection{Usage}{
@@ -163,6 +165,7 @@ print method for \code{Cushion}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ping"></a>}}
+\if{latex}{\out{\hypertarget{method-ping}{}}}
 \subsection{Method \code{ping()}}{
 Ping the CouchDB server
 \subsection{Usage}{
@@ -181,6 +184,7 @@ Ping the CouchDB server
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-make_url"></a>}}
+\if{latex}{\out{\hypertarget{method-make_url}{}}}
 \subsection{Method \code{make_url()}}{
 Construct full base URL from the pieces in the
 connection object
@@ -191,6 +195,7 @@ connection object
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-get_headers"></a>}}
+\if{latex}{\out{\hypertarget{method-get_headers}{}}}
 \subsection{Method \code{get_headers()}}{
 Get list of headers that will be sent with
 each request
@@ -201,6 +206,7 @@ each request
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-get_auth"></a>}}
+\if{latex}{\out{\hypertarget{method-get_auth}{}}}
 \subsection{Method \code{get_auth()}}{
 Get list of auth values, user and pwd
 \subsection{Usage}{
@@ -210,6 +216,7 @@ Get list of auth values, user and pwd
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

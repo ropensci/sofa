@@ -7,7 +7,7 @@ Description: Provides an interface to the 'NoSQL' database 'CouchDB'
     'CouchDB' instance, or a remote 'CouchDB' databases such as 'Cloudant'. 
     Documents can be inserted directly from vectors, lists, data.frames, 
     and 'JSON'. Targeted at 'CouchDB' v2 or greater.
-Version: 0.3.3.91
+Version: 0.3.4.91
 Authors@R: person("Scott", "Chamberlain", role = c("aut", "cre"),
     email = "myrmecocystus@gmail.com")
 License: MIT + file LICENSE
@@ -26,7 +26,7 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 X-schema.org-applicationCategory: Databases
 X-schema.org-keywords: CouchDB, database, NoSQL, documents
 X-schema.org-isPartOf: https://ropensci.org
