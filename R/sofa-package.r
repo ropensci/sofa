@@ -33,6 +33,10 @@
 #' [jsonlite::toJSON()] if given as a list, which has a `digits` parameter.
 #' We pass `getOption("digits")` to the `digits` parameter in 
 #' `jsonlite::toJSON`. 
+#' 
+#' @section Defunct functions:
+#' 
+#' - [attach_get]
 #'
 #' @importFrom R6 R6Class
 #' @importFrom jsonlite fromJSON toJSON unbox

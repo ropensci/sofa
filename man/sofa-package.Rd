@@ -48,6 +48,13 @@ We pass \code{getOption("digits")} to the \code{digits} parameter in
 \code{jsonlite::toJSON}.
 }
 
+\section{Defunct functions}{
+
+\itemize{
+\item \link{attach_get}
+}
+}
+
 \author{
 Scott Chamberlain \email{myrmecocystus@gmail.com}
 }
