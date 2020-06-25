@@ -1,6 +1,7 @@
 .DS_Store
 .scott_auth.r
 .Rproj.user
+*.Rproj
 .Rhistory
 ^notes\.md$
 notes.R
