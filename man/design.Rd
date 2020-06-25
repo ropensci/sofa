@@ -90,7 +90,7 @@ design_create(x, dbname='omdb', design='view5', fxnname="foobar3",
   value="[doc.Country,doc.imdbRating]")
 
 # the harder way, write your own function, but more flexible
-design_create_(x, dbname='omdb', design='view2',
+design_create_(x, dbname='omdb', design='view22',
   fxnname = "stuffthings", fxn = "function(doc){emit(null,doc.Country)}")
 
 # Delete a view
@@ -109,7 +109,7 @@ design_get(x, dbname='omdb', design='view2')
 design_get(x, dbname='omdb', design='view5')
 
 # Search using a view
-res <- design_search(x, dbname='omdb', design='view2')
+res <- design_search(x, dbname='omdb', design='view2', view='foobar2')
 head(
   do.call(
     "rbind.data.frame",
@@ -117,7 +117,7 @@ head(
   )
 )
 
-res <- design_search(x, dbname='omdb', design='view5')
+res <- design_search(x, dbname='omdb', design='view5', view='foobar3')
 head(
   structure(do.call(
     "rbind.data.frame",

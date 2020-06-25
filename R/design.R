@@ -40,7 +40,7 @@
 #'   value="[doc.Country,doc.imdbRating]")
 #'
 #' # the harder way, write your own function, but more flexible
-#' design_create_(x, dbname='omdb', design='view2',
+#' design_create_(x, dbname='omdb', design='view22',
 #'   fxnname = "stuffthings", fxn = "function(doc){emit(null,doc.Country)}")
 #'
 #' # Delete a view
@@ -59,7 +59,7 @@
 #' design_get(x, dbname='omdb', design='view5')
 #'
 #' # Search using a view
-#' res <- design_search(x, dbname='omdb', design='view2')
+#' res <- design_search(x, dbname='omdb', design='view2', view='foobar2')
 #' head(
 #'   do.call(
 #'     "rbind.data.frame",
@@ -67,7 +67,7 @@
 #'   )
 #' )
 #'
-#' res <- design_search(x, dbname='omdb', design='view5')
+#' res <- design_search(x, dbname='omdb', design='view5', view='foobar3')
 #' head(
 #'   structure(do.call(
 #'     "rbind.data.frame",
@@ -104,7 +104,8 @@ design_delete <- function(cushion, dbname, design, as='list', ...) {
   url <- cushion$make_url()
   rev <- design_get(cushion, dbname, design)$`_rev`
   call_ <- file.path(url, dbname, "_design", design)
-  sofa_DELETE(call_, as, query = list(rev = rev), cushion$get_headers(), ...)
+  sofa_DELETE(call_, as, query = list(rev = rev), cushion$get_headers(), 
+    cushion$get_auth(), ...)
 }
 
 #' @export
@@ -112,7 +113,8 @@ design_delete <- function(cushion, dbname, design, as='list', ...) {
 design_get <- function(cushion, dbname, design, as='list', ...) {
   check_cushion(cushion)
   url <- cushion$make_url()
-  sofa_GET(file.path(url, dbname, "_design", design), as, cushion$get_headers(), ...)
+  sofa_GET(file.path(url, dbname, "_design", design), as, NULL,
+    cushion$get_headers(), cushion$get_auth(), ...)
 }
 
 #' @export
@@ -129,7 +131,8 @@ design_head <- function(cushion, dbname, design, ...) {
 design_info <- function(cushion, dbname, design, ...) {
   check_cushion(cushion)
   url <- cushion$make_url()
-  sofa_GET(file.path(url, dbname, "_design", design, "_info"), cushion$get_headers(), ...)
+  sofa_GET(file.path(url, dbname, "_design", design, "_info"),
+    headers = cushion$get_headers(), auth = cushion$get_auth(), ...)
 }
 
 # design_copy <- function(cushion, dbname, design, design_to, as='list', ...) {

@@ -14,7 +14,9 @@
 #' @param deleted_conflicts (logical) Whether to include _deleted_conflicts field.
 #' @param local_seq (logical) Whether to include _local_seq field.
 #' @examples \dontrun{
-#' (x <- Cushion$new())
+#' user <- Sys.getenv("COUCHDB_TEST_USER")
+#' pwd <- Sys.getenv("COUCHDB_TEST_PWD")
+#' (x <- Cushion$new(user=user, pwd=pwd))
 #'
 #' if ("sofadb" %in% db_list(x)) {
 #'   invisible(db_delete(x, dbname="sofadb"))
@@ -22,16 +24,15 @@
 #' db_create(x, dbname="sofadb")
 #'
 #' # create a document
-#' doc1 <- '{"name": "drink", "beer": "IPA", "score": 5}'
-#' doc_create(x, dbname="sofadb", doc1, docid="abeer")
+#' doc1 <- '{"name": "drink", "type": "drink", "score": 5}'
+#' doc_create(x, dbname="sofadb", doc1, docid="asoda")
 #'
-#' doc_get(x, dbname="sofadb", docid="abeer")
-#' revs <- db_revisions(x, dbname="sofadb", docid="abeer")
-#' doc_get(x, dbname="sofadb", docid="abeer", rev=revs[1])
-#' doc_get(x, dbname="sofadb", docid="abeer", rev=revs[2])
-#' doc_get(x, dbname="sofadb", docid="abeer", as='json')
-#' doc_get(x, dbname="sofadb", docid="abeer", revs=TRUE)
-#' doc_get(x, dbname="sofadb", docid="abeer", revs=TRUE, local_seq=TRUE)
+#' doc_get(x, dbname="sofadb", docid="asoda")
+#' revs <- db_revisions(x, dbname="sofadb", docid="asoda")
+#' doc_get(x, dbname="sofadb", docid="asoda", rev=revs[1])
+#' doc_get(x, dbname="sofadb", docid="asoda", as='json')
+#' doc_get(x, dbname="sofadb", docid="asoda", revs=TRUE)
+#' doc_get(x, dbname="sofadb", docid="asoda", revs=TRUE, local_seq=TRUE)
 #' }
 doc_get <- function(cushion, dbname, docid, rev=NULL, attachments=FALSE, deleted=FALSE,
   revs=FALSE, revs_info=FALSE, conflicts=FALSE, deleted_conflicts=FALSE,

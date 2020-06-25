@@ -54,6 +54,9 @@ user <- Sys.getenv("COUCHDB_TEST_USER")
 pwd <- Sys.getenv("COUCHDB_TEST_PWD")
 (x <- Cushion$new(user=user, pwd=pwd))
 
+if ("leothelion" \%in\% db_list(x)) {
+  invisible(db_delete(x, dbname="leothelion"))
+}
 db_create(x, dbname='leothelion')
 db_bulk_create(x, mtcars, dbname="leothelion")
 

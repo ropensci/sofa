@@ -67,7 +67,9 @@ We pass \code{getOption("digits")} to the \code{digits} parameter in
 
 \examples{
 \dontrun{
-(x <- Cushion$new())
+user <- Sys.getenv("COUCHDB_TEST_USER")
+pwd <- Sys.getenv("COUCHDB_TEST_PWD")
+(x <- Cushion$new(user=user, pwd=pwd))
 
 if ("sofadb" \%in\% db_list(x)) {
   invisible(db_delete(x, dbname="sofadb"))
@@ -99,18 +101,24 @@ doc_create(x, doc4, dbname="sofadb", docid="somexml")
 doc_get(x, dbname = "sofadb", docid = "somexml")
 
 # You can pass in lists that autoconvert to json internally
-doc1 <- list(name = "drink", beer = "IPA", score = 9)
-doc_create(x, dbname="sofadb", doc1, docid="goodbeer")
+doc1 <- list(name = "drink", type = "soda", score = 9)
+doc_create(x, dbname="sofadb", doc1, docid="gooddrink")
 
 # Write directly from a data.frame
 ## Each row or column becomes a separate document
 ### by rows
+if ("test" \%in\% db_list(x)) {
+  invisible(db_delete(x, dbname="test"))
+}
 db_create(x, dbname = "test")
 doc_create(x, mtcars, dbname="test", how="rows")
 doc_create(x, mtcars, dbname="test", how="columns")
 
-head(iris)
+if ("testiris" \%in\% db_list(x)) {
+  invisible(db_delete(x, dbname="testiris"))
+}
 db_create(x, dbname = "testiris")
+head(iris)
 doc_create(x, iris, dbname = "testiris")
 }
 }

@@ -7,7 +7,9 @@
 #' @param ... Curl args passed on to \code{\link[crul]{HttpClient}}
 #' @template return
 #' @examples \dontrun{
-#' (x <- Cushion$new())
+#' user <- Sys.getenv("COUCHDB_TEST_USER")
+#' pwd <- Sys.getenv("COUCHDB_TEST_PWD")
+#' (x <- Cushion$new(user=user, pwd=pwd))
 #'
 #' # create a database
 #' if ("sofadb" %in% db_list(x)) {
@@ -21,7 +23,6 @@
 #'
 #' # run doc_head
 #' doc_head(x, dbname="sofadb", docid="abeer")
-#' doc_head(x, dbname="sofadb", docid="abeer", as='json')
 #' }
 doc_head <- function(cushion, dbname, docid, ...) {
   check_cushion(cushion)

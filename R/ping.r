@@ -5,7 +5,9 @@
 #' @template return
 #' @examples \dontrun{
 #' # initialize a CouchDB connection
-#' (x <- Cushion$new())
+#' user <- Sys.getenv("COUCHDB_TEST_USER")
+#' pwd <- Sys.getenv("COUCHDB_TEST_PWD")
+#' (x <- Cushion$new(user=user, pwd=pwd))
 #'
 #' # call ping on the cushion object, or pass the cushion to ping()
 #' x$ping()

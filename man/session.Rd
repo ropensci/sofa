@@ -23,7 +23,9 @@ session
 \examples{
 \dontrun{
 # Create a CouchDB connection client
-(x <- Cushion$new())
+user <- Sys.getenv("COUCHDB_TEST_USER")
+pwd <- Sys.getenv("COUCHDB_TEST_PWD")
+(x <- Cushion$new(user=user, pwd=pwd))
 
 session(x)
 session(x, as = 'json')

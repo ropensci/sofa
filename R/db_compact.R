@@ -25,7 +25,7 @@
 #' user <- Sys.getenv("COUCHDB_TEST_USER")
 #' pwd <- Sys.getenv("COUCHDB_TEST_PWD")
 #' (x <- Cushion$new(user=user, pwd=pwd))
-#' db_compact(x, dbname = "iris")
+#' # db_compact(x, dbname = "iris")
 #' }
 db_compact <- function(cushion, dbname, as = 'list', ...) {
   check_cushion(cushion)

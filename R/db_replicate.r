@@ -14,6 +14,7 @@
 #' @param as (character) One of list (default) or json
 #' @param ... Curl args passed on to [crul::HttpClient]
 #' @examples \dontrun{
+#' if (interactive()) {
 #' ## create a connection
 #' user <- Sys.getenv("COUCHDB_TEST_USER")
 #' pwd <- Sys.getenv("COUCHDB_TEST_PWD")
@@ -49,6 +50,7 @@
 #'
 #' ## cleanup - delete the database
 #' db_delete(z, 'hello_earth')
+#' }
 #' }
 db_replicate <- function(from, to, dbname, createdb = FALSE, as = 'list', ...) {
   check_cushion(to)

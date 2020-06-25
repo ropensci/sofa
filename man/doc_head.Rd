@@ -24,7 +24,9 @@ Get header info for a document
 }
 \examples{
 \dontrun{
-(x <- Cushion$new())
+user <- Sys.getenv("COUCHDB_TEST_USER")
+pwd <- Sys.getenv("COUCHDB_TEST_PWD")
+(x <- Cushion$new(user=user, pwd=pwd))
 
 # create a database
 if ("sofadb" \%in\% db_list(x)) {
@@ -38,6 +40,5 @@ doc_create(x, dbname="sofadb", doc1, docid="abeer")
 
 # run doc_head
 doc_head(x, dbname="sofadb", docid="abeer")
-doc_head(x, dbname="sofadb", docid="abeer", as='json')
 }
 }

@@ -105,12 +105,12 @@ doc_attach_info(x, "foodb", docid="asoda", attname="plot.pdf")
 
 # get an attachment (GET request)
 res <- doc_attach_get(x, "foodb", docid="asoda",
-  attname="mtcarstable.csv", as = "text")
+  attname="mtcarstable.csv", type = "text")
 read.csv(text = res)
 doc_attach_get(x, "foodb", docid="asoda", attname="img.png")
 doc_attach_get(x, "foodb", docid="asoda", attname="plot.pdf")
 ## OR, don't specify an attachment and list the attachments
-(attchms <- doc_attach_get(x, "sofadb", docid="asoda", type="text"))
+(attchms <- doc_attach_get(x, "foodb", docid="asoda", type="text"))
 jsonlite::fromJSON(attchms)
 
 # delete an attachment

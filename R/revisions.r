@@ -8,9 +8,11 @@
 #' @param simplify (logical) Simplify to character vector of revision ids.
 #' If `FALSE`, gives back availability info too. Default: `TRUE`
 #' @examples \dontrun{
-#' (x <- Cushion$new())
+#' user <- Sys.getenv("COUCHDB_TEST_USER")
+#' pwd <- Sys.getenv("COUCHDB_TEST_PWD")
+#' (x <- Cushion$new(user=user, pwd=pwd))
 #'
-#' if ("sofa" %in% db_list(x)) {
+#' if ("sofadb" %in% db_list(x)) {
 #'  db_delete(x, dbname = "sofadb")
 #' }
 #' db_create(x, dbname = "sofadb")

@@ -28,15 +28,21 @@
 #' x$version()
 #'
 #' # create database
-#' db_create(x, "stuff")
+#' if (!"stuff" %in% db_list(x)) {
+#'   db_create(x, "stuff")
+#' }
 #'
 #' # add documents to a database
-#' db_create(x, "sofadb")
+#' if (!"sofadb" %in% db_list(x)) {
+#'   db_create(x, "sofadb")
+#' }
 #' doc1 <- '{"name": "drink", "beer": "IPA", "score": 5}'
 #' doc_create(x, dbname="sofadb", docid="abeer", doc1)
 #'
 #' # bulk create
-#' db_create(x, "mymtcars")
+#' if (!"mymtcars" %in% db_list(x)) {
+#'   db_create(x, "mymtcars")
+#' }
 #' db_bulk_create(x, dbname="mymtcars", doc = mtcars)
 #' db_list(x)
 #'
