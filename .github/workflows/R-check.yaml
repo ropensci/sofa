@@ -12,11 +12,12 @@ jobs:
       fail-fast: false
       matrix:
         config:
-        - { os: ubuntu-16.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
+        - { os: ubuntu-16.04, r: 'release', couch: 'latest', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
+        - { os: ubuntu-16.04, r: 'release', couch: '2.3', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
 
     services:
       couchdb:
-        image: couchdb
+        image: couchdb:${{ matrix.config.couch }}
         env:
           COUCHDB_USER: admin
           COUCHDB_PASSWORD: password
@@ -37,9 +38,6 @@ jobs:
           r-version: ${{ matrix.config.r }}
 
       - uses: r-lib/actions/setup-pandoc@master
-
-      - uses: r-lib/actions/setup-tinytex@master
-        if: contains(matrix.config.args, 'no-manual') == false
 
       - name: Query dependencies
         run: |
