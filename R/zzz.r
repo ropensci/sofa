@@ -42,7 +42,7 @@ sofa_GET <- function(url, as = 'list', query = NULL, headers = NULL,
                      auth = NULL, disk = NULL, ...) {
   as <- match.arg(as, c('list', 'json', 'raw'))
   cli <- crul::HttpClient$new(url = url,
-                              headers = c(ct_json, headers),
+                              headers = c(ct_json, a_json, headers),
                               opts = sc(c(auth, list(...))))
   res <- cli$get(query = query)
   stop_status(res)
@@ -54,7 +54,7 @@ sofa_GET_disk <- function(url, as = 'list', query = NULL, headers = NULL,
                      auth = NULL, disk, ...) {
   as <- match.arg(as, c('list', 'json', 'raw'))
   cli <- crul::HttpClient$new(url = url,
-                              headers = c(ct_json, headers),
+                              headers = c(ct_json, a_json, headers),
                               opts = sc(c(auth, list(...))))
   res <- cli$get(query = query, disk = disk)
   stop_status(res)
@@ -63,7 +63,7 @@ sofa_GET_disk <- function(url, as = 'list', query = NULL, headers = NULL,
 
 sofa_HEAD <- function(url, headers = NULL, auth = NULL, ...) {
   cli <- crul::HttpClient$new(url = url,
-                              headers = c(ct_json, headers),
+                              headers = c(ct_json, a_json, headers),
                               opts = sc(c(auth, list(...))))
   res <- cli$head()
   stop_status(res)
@@ -86,7 +86,7 @@ sofa_PUT <- function(url, as = 'list', body = NULL,
 
   as <- match.arg(as, c('list','json'))
   cli <- crul::HttpClient$new(
-    url = url, headers = c(ct_json, headers),
+    url = url, headers = c(ct_json, a_json, headers),
     opts = sc(c(auth, list(...))))
   res <- cli$put(body = body, encode = encode)
   stop_status(res)
@@ -97,7 +97,7 @@ sofa_PUT <- function(url, as = 'list', body = NULL,
 sofa_POST <- function(url, as = 'list', body, encode, headers = NULL,
                       auth = NULL, query = NULL, ...) {
   cli <- crul::HttpClient$new(url = url,
-                              headers = c(ct_json, headers),
+                              headers = c(ct_json, a_json, headers),
                               opts = sc(c(auth, list(...))))
   res <- cli$post(body = body, query = query, encode = encode)
   stop_status(res)
@@ -156,3 +156,4 @@ check_if <- function(x, class) {
 }
 
 ct_json <- list(`Content-Type` = "application/json")
+a_json <- list(Accept = "application/json")
