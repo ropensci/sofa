@@ -17,12 +17,17 @@ jobs:
     services:
       couchdb:
         image: couchdb
+        env:
+          COUCHDB_USER: admin
+          COUCHDB_PASSWORD: password
         ports:
           - 5984:5984
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       CRAN: ${{ matrix.config.rspm }}
+      COUCHDB_TEST_USER: admin
+      COUCHDB_TEST_PWD: password
 
     steps:
       - uses: actions/checkout@v2
