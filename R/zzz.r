@@ -154,6 +154,14 @@ check_inputs <- function(x){
 check_if <- function(x, class) {
   if (!inherits(x, class)) stop("input must be of class ", class, call. = FALSE)
 }
+assert <- function(x, y) {
+  if (!is.null(x)) {
+    if (!inherits(x, y)) {
+      stop(deparse(substitute(x)), " must be of class ",
+          paste0(y, collapse = ", "), call. = FALSE)
+    }
+  }
+}
 
 ct_json <- list(`Content-Type` = "application/json")
 a_json <- list(Accept = "application/json")

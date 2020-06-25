@@ -14,6 +14,12 @@ db_query(
   sort = NULL,
   fields = NULL,
   use_index = NULL,
+  r = NULL,
+  bookmark = NULL,
+  update = NULL,
+  stable = NULL,
+  stale = NULL,
+  execution_stats = FALSE,
   as = "list",
   ...
 )
@@ -26,15 +32,15 @@ db_query(
 \item{query}{(character) instead of using the other parameters, you can
 compose one R list or json blob here}
 
-\item{selector}{(json) - JSON object describing criteria used to select
+\item{selector}{(list/json) - JSON object describing criteria used to select
 documents. More information provided in the section on selector syntax.
 See the \code{query_tutorial} in this package, and the selectors docs
 \url{http://docs.couchdb.org/en/2.0.0/api/database/find.html#find-selectors}}
 
-\item{limit}{(number) - Maximum number of results returned. Default is 25.
+\item{limit}{(numeric) - Maximum number of results returned. Default is 25.
 Optional}
 
-\item{skip}{(number) - Skip the first 'n' results, where 'n' is the value
+\item{skip}{(numeric) - Skip the first 'n' results, where 'n' is the value
 specified. Optional}
 
 \item{sort}{(json) - JSON array following sort syntax. Optional.
@@ -48,6 +54,31 @@ See \url{http://docs.couchdb.org/en/2.0.0/api/database/find.html#find-filter}}
 
 \item{use_index}{(json) - Instruct a query to use a specific index.
 Specified either as \verb{<design_document>} or \verb{["<design_document>", "<index_name>"]}. Optional}
+
+\item{r}{(numeric) Read quorum needed for the result. This defaults to 1,
+in which case the document found in the index is returned. If set to a
+higher value, each document is read from at least that many replicas before
+it is returned in the results. This is likely to take more time than using
+only the document stored locally with the index. Optional, default: 1}
+
+\item{bookmark}{(character) A string that enables you to specify which
+page of results you require. Used for paging through result sets. Every
+query returns an opaque string under the bookmark key that can then be
+passed back in a query to get the next page of results. If any part of
+the selector query changes between requests, the results are undefined.
+Optional, default: \code{NULL}}
+
+\item{update}{(logical) Whether to update the index prior to returning the
+result. Default is true. Optional}
+
+\item{stable}{(logical) Whether or not the view results should be returned
+from a “stable” set of shards. Optional}
+
+\item{stale}{(character) Combination of \code{update=FALSE} and \code{stable=TRUE}
+options. Possible options: "ok", "FALSE" (default). Optional}
+
+\item{execution_stats}{(logical) Include execution statistics in the query
+response. Optional, default: \code{FALSE}}
 
 \item{as}{(character) One of list (default) or json}
 
