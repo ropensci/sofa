@@ -26,7 +26,7 @@ sofa docs: https://docs.ropensci.org/sofa/
 
 ## CouchDB versions
 
-`sofa` is built targeting CouchDB v2 or greater.
+`sofa` works with CouchDB v2 and v3. See [the builds](https://github.com/ropensci/sofa/actions?query=workflow%3AR-check) for checks on various CouchDB versions.
 
 ## CouchDB Info
 
