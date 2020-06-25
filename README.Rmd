@@ -10,14 +10,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-<pre>
-  _ _ _ _ _ _ _ _ _ _ _
- /|                   |\
-/ |_ _ _ _ _ _ _ _ _ _| \
-\ /                    \/
- \ ___________________ /
-</pre>
-
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![cran checks](https://cranchecks.info/badges/worst/sofa)](https://cranchecks.info/pkgs/sofa)
 [![R-check](https://github.com/ropensci/sofa/workflows/R-check/badge.svg)](https://github.com/ropensci/sofa/actions)
@@ -51,8 +43,6 @@ couchdb
 
 Or opening the CouchDB app on your machine, or running it in Docker. Whatever it
 is, start it up.
-
-You can interact with your CouchDB databases as well in your browser. Navigate to http://localhost:5984/_utils
 
 ## Install sofa
 
