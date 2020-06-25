@@ -37,6 +37,9 @@ x$type
 ## ping the CouchDB server
 x$ping()
 
+## get CouchDB version
+x$version()
+
 # create database
 db_create(x, "stuff")
 
@@ -103,6 +106,7 @@ db_changes(x, "mymtcars")
 \item \href{#method-make_url}{\code{Cushion$make_url()}}
 \item \href{#method-get_headers}{\code{Cushion$get_headers()}}
 \item \href{#method-get_auth}{\code{Cushion$get_auth()}}
+\item \href{#method-version}{\code{Cushion$version()}}
 \item \href{#method-clone}{\code{Cushion$clone()}}
 }
 }
@@ -210,6 +214,16 @@ each request
 Get list of auth values, user and pwd
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Cushion$get_auth()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-version"></a>}}
+\if{latex}{\out{\hypertarget{method-version}{}}}
+\subsection{Method \code{version()}}{
+Get the CouchDB version as a numeric
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Cushion$version()}\if{html}{\out{</div>}}
 }
 
 }

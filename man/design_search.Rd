@@ -186,5 +186,5 @@ design_search_many(x, 'omdb', 'view6', 'foobar4', queries)
 }
 }
 \references{
-\url{http://docs.couchdb.org/en/latest/api/ddoc/views.html}
+https://docs.couchdb.org/en/latest/api/ddoc/views.html
 }

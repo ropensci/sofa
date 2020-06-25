@@ -66,7 +66,7 @@
 #' Default: `FALSE`
 #' }
 #'
-#' @references <http://docs.couchdb.org/en/latest/api/ddoc/views.html>
+#' @references https://docs.couchdb.org/en/latest/api/ddoc/views.html
 #'
 #' @examples \dontrun{
 #' user <- Sys.getenv("COUCHDB_TEST_USER")
@@ -172,8 +172,13 @@ design_search_many <- function(cushion, dbname, design, view, queries,
   as = 'list', ...) {
 
   check_cushion(cushion)
-  url <- file.path(cushion$make_url(), dbname, "_design", design,
-    "_view", view)
+  if (cushion$version() < 220) {
+    url <- file.path(cushion$make_url(), dbname, "_design", design,
+      "_view", view)
+  } else {
+    url <- file.path(cushion$make_url(), dbname, "_design", design,
+      "_view", view, "queries")
+  }
   sofa_POST(url, as, body = list(queries = queries),
     "json", cushion$get_headers(),
     cushion$get_auth(), ...)

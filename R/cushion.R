@@ -23,6 +23,9 @@
 #'
 #' ## ping the CouchDB server
 #' x$ping()
+#' 
+#' ## get CouchDB version
+#' x$version()
 #'
 #' # create database
 #' db_create(x, "stuff")
@@ -148,7 +151,17 @@ Cushion <- R6::R6Class(
     #' each request
     get_headers = function() self$headers,
     #' @description Get list of auth values, user and pwd
-    get_auth = function() private$auth_headers
+    get_auth = function() private$auth_headers,
+    #' @description Get the CouchDB version as a numeric
+    version = function() {
+      z <- self$ping()
+      ver <- as.numeric(paste0(strx(z$version, '[0-9]'), collapse=""))
+      if (nchar(ver) < 3) {
+        ver <- as.numeric(paste0(c(ver, rep("0", times=3-nchar(ver))),
+          collapse=""))
+      }
+      return(ver)
+    }
   ),
 
   private = list(
@@ -161,3 +174,5 @@ check_cushion <- function(x) {
     stop("input must be a sofa Cushion object, see ?Cushion", call. = FALSE)
   }
 }
+
+strx <- function(str, pattern) regmatches(str, gregexpr(pattern, str))[[1]]
