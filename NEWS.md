@@ -1,3 +1,33 @@
+sofa 0.4.0
+==========
+
+### NEW FEATURES
+
+* new function `doc_upsert()`: updates an existing document or creates it if it doesn't yet exist (#69) work by @critichu
+
+CouchDB v3 related changes
+
+* made sure sofa works with v3; all examples/tests updated to use username/password  (#73)
+* new function `db_bulk_get()` for the `/{db}/_bulk_get` route  (#73)
+* fixed `design_search_many()`: in couch v2.2 and greater there's a new route `/{db}/_design/{ddoc}/_view/{view}/queries`, which is used in this fxn now instead of using the `/{db}/_design/{ddoc}/_view/{view}` route (#75)
+* Cushion class gains new method `$version()` to get the CouchDB version you're using as a numeric (to enable progammatic couch version checking)
+* `db_query()` changes: some new parameters added: `r`, `bookmark`, `update`, `stable`, `stale`, and `execution_stats` (#74)
+
+### DEFUNCT
+
+* `attach_get()` is now defunct, use `doc_attach_get()` (#76)
+
+### MINOR IMPROVEMENTS
+
+* added more tests (#61)
+* `design_search()` now allows more possible values for start and end keys: `startkey_docid`, `start_key_doc_id`, `startkey`, `start_key`, `endkey_docid`, `end_key_doc_id`, `endkey`, `end_key` (#62)
+* add title to vignettes (#71)
+* for `docs_create()` internally support using user's setting for the R option `digits` to pass on to `jsonlite::toJSON` to control number of digits after decimal place (#66)
+
+### BUG FIXES
+
+* fixed authorization problems in `$ping()` method in Cushion; now separate `ping()` function calls `$ping()` method in Cushion (#72)
+
 sofa 0.3.0
 ==========
 

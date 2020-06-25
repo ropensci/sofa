@@ -49,3 +49,6 @@ doc_upsert(x, dbname="sofadb", doc2, docid="abeer")
 doc_get(x, dbname = "sofadb", docid = "abeer")
 }
 }
+\author{
+George Kritikos
+}

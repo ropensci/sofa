@@ -1,4 +1,3 @@
-
 #' Create a new document or update an existing one
 #'
 #' @export
@@ -9,6 +8,7 @@
 #' @param docid (character) Document ID. Required.
 #' @details Internally, this function attempts to update a document with the given name. \cr
 #' If the document does not exist, it is created
+#' @author George Kritikos
 #' @examples \dontrun{
 #' user <- Sys.getenv("COUCHDB_TEST_USER")
 #' pwd <- Sys.getenv("COUCHDB_TEST_PWD")
@@ -30,7 +30,6 @@
 #'
 #' doc_get(x, dbname = "sofadb", docid = "abeer")
 #' }
-
 doc_upsert = function(cushion, dbname, doc, docid){
   tryCatch({
     #try to update, if failed (record doesn't exist), create new entry
