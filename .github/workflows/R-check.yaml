@@ -6,7 +6,7 @@ jobs:
   R-check:
     runs-on: ${{ matrix.config.os }}
 
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }}
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }}-${{ matrix.config.couch }})
 
     strategy:
       fail-fast: false
@@ -38,6 +38,8 @@ jobs:
           r-version: ${{ matrix.config.r }}
 
       - uses: r-lib/actions/setup-pandoc@master
+
+      - uses: r-lib/actions/setup-tinytex@master
 
       - name: Query dependencies
         run: |
