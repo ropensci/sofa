@@ -16,7 +16,9 @@
 #' flexibility use `view_put_` (with underscore on the end) to write the
 #' function yourself.
 #' @examples \dontrun{
-#' (x <- Cushion$new())
+#' user <- Sys.getenv("COUCHDB_TEST_USER")
+#' pwd <- Sys.getenv("COUCHDB_TEST_PWD")
+#' (x <- Cushion$new(user=user, pwd=pwd))
 #'
 #' file <- system.file("examples/omdb.json", package = "sofa")
 #' strs <- readLines(file)

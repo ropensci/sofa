@@ -22,7 +22,9 @@
 #' running processes to determine whether compaction is currently running.
 #' See "/_active_tasks"
 #' @examples \dontrun{
-#' (x <- Cushion$new())
+#' user <- Sys.getenv("COUCHDB_TEST_USER")
+#' pwd <- Sys.getenv("COUCHDB_TEST_PWD")
+#' (x <- Cushion$new(user=user, pwd=pwd))
 #' db_compact(x, dbname = "iris")
 #' }
 db_compact <- function(cushion, dbname, as = 'list', ...) {

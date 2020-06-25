@@ -15,7 +15,9 @@
 #' @param ... Curl args passed on to [crul::HttpClient]
 #' @examples \dontrun{
 #' ## create a connection
-#' (x <- Cushion$new())
+#' user <- Sys.getenv("COUCHDB_TEST_USER")
+#' pwd <- Sys.getenv("COUCHDB_TEST_PWD")
+#' (x <- Cushion$new(user=user, pwd=pwd))
 #'
 #' # Create a database locally
 #' db_list(x)

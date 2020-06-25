@@ -24,7 +24,9 @@ plan to support older CouchDB versions per se.
 \examples{
 \dontrun{
 # Create a CouchDB connection client
-(x <- Cushion$new())
+user <- Sys.getenv("COUCHDB_TEST_USER")
+pwd <- Sys.getenv("COUCHDB_TEST_PWD")
+(x <- Cushion$new(user=user, pwd=pwd))
 
 ## metadata
 x$host
@@ -34,9 +36,6 @@ x$type
 
 ## ping the CouchDB server
 x$ping()
-
-## CouchDB server statistics
-# stats(x)
 
 # create database
 db_create(x, "stuff")
@@ -48,32 +47,32 @@ doc_create(x, dbname="sofadb", docid="abeer", doc1)
 
 # bulk create
 db_create(x, "mymtcars")
-bulk_create(x, dbname="mymtcars", doc = mtcars)
+db_bulk_create(x, dbname="mymtcars", doc = mtcars)
 db_list(x)
 
 ## database info
-db_info(x, "bulktest")
+db_info(x, "mymtcars")
 
 ## list dbs
 db_list(x)
 
 ## all docs
-alldocs(x, "bulktest", limit = 3)
+db_alldocs(x, "mymtcars", limit = 3)
 
 ## changes
-changes(x, "bulktest")
+db_changes(x, "mymtcars")
 
 # With auth
-x <- Cushion$new(user = 'sckott', pwd = 'sckott')
+# x <- Cushion$new(user = 'sckott', pwd = 'sckott')
 
 # Using Cloudant
-z <- Cushion$new(host = "ropensci.cloudant.com", transport = 'https', port = NULL,
-   user = 'ropensci', pwd = Sys.getenv('CLOUDANT_PWD'))
-z
-db_list(z)
-db_create(z, "stuff2")
-db_info(z, "stuff2")
-alldocs(z, "foobar")
+# z <- Cushion$new(host = "ropensci.cloudant.com", transport = 'https', port = NULL,
+#   user = 'ropensci', pwd = Sys.getenv('CLOUDANT_PWD'))
+# z
+# db_list(z)
+# db_create(z, "stuff2")
+# db_info(z, "stuff2")
+# db_alldocs(z, "foobar")
 }
 }
 \section{Public fields}{

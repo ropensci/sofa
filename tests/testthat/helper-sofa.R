@@ -1,12 +1,16 @@
 library(sofa)
 
+COUCHDB_TEST_USER <- Sys.getenv("COUCHDB_TEST_USER")
+COUCHDB_TEST_PWD <- Sys.getenv("COUCHDB_TEST_PWD")
+
 dbname_random <- function() {
   paste0(sample(letters, 10, replace = TRUE), collapse = '')
 }
 
 cleanup_dbs <- function(x) invisible(db_delete(sofa_conn, x))
 
-invisible(sofa_conn <- Cushion$new())
+invisible(sofa_conn <- Cushion$new(
+  user = COUCHDB_TEST_USER, pwd=COUCHDB_TEST_PWD))
 pinged <- tryCatch(sofa_conn$ping(), error = function(e) e)
 if (!inherits(pinged, "error")) {
 	db_test_name <- "testing123"

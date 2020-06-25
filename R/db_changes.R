@@ -33,7 +33,9 @@
 #' - pending - Count of remaining items in the feed
 #'
 #' @examples \dontrun{
-#' (x <- Cushion$new())
+#' user <- Sys.getenv("COUCHDB_TEST_USER")
+#' pwd <- Sys.getenv("COUCHDB_TEST_PWD")
+#' (x <- Cushion$new(user=user, pwd=pwd))
 #'
 #' if ("leothelion" %in% db_list(x)) {
 #'   invisible(db_delete(x, dbname="leothelion"))

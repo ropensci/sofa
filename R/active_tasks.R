@@ -5,7 +5,9 @@
 #' @template return
 #' @examples \dontrun{
 #' # Create a CouchDB connection client
-#' (x <- Cushion$new())
+#' user <- Sys.getenv("COUCHDB_TEST_USER")
+#' pwd <- Sys.getenv("COUCHDB_TEST_PWD")
+#' (x <- Cushion$new(user=user, pwd=pwd))
 #'
 #' active_tasks(x)
 #' active_tasks(x, as = 'json')

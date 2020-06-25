@@ -6,7 +6,9 @@
 #' @param simplify (logical) Simplify to character vector, ignored
 #' if `as="json"`
 #' @examples \dontrun{
-#' (x <- Cushion$new())
+#' user <- Sys.getenv("COUCHDB_TEST_USER")
+#' pwd <- Sys.getenv("COUCHDB_TEST_PWD")
+#' (x <- Cushion$new(user=user, pwd=pwd))
 #'
 #' db_list(x)
 #' db_list(x, as = 'json')

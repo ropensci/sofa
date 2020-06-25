@@ -50,10 +50,12 @@ List all docs in a given database.
 }
 \examples{
 \dontrun{
-(x <- Cushion$new())
+user <- Sys.getenv("COUCHDB_TEST_USER")
+pwd <- Sys.getenv("COUCHDB_TEST_PWD")
+(x <- Cushion$new(user=user, pwd=pwd))
 
 db_create(x, dbname='leothelion')
-bulk_create(x, mtcars, dbname="leothelion")
+db_bulk_create(x, mtcars, dbname="leothelion")
 
 db_alldocs(x, dbname="leothelion")
 db_alldocs(x, dbname="leothelion", as='json')

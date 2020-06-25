@@ -18,7 +18,9 @@
 #' - `doc_attach_delete` - delete and attachment
 #'
 #' @examples \dontrun{
-#' (x <- Cushion$new())
+#' user <- Sys.getenv("COUCHDB_TEST_USER")
+#' pwd <- Sys.getenv("COUCHDB_TEST_PWD")
+#' (x <- Cushion$new(user=user, pwd=pwd))
 #'
 #' if ("drinksdb" %in% db_list(x)) {
 #'   invisible(db_delete(x, dbname="drinksdb"))

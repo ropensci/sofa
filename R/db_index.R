@@ -25,7 +25,9 @@
 #' indexing time, creating a partial index. Optional
 #'
 #' @examples \dontrun{
-#' (x <- Cushion$new())
+#' user <- Sys.getenv("COUCHDB_TEST_USER")
+#' pwd <- Sys.getenv("COUCHDB_TEST_PWD")
+#' (x <- Cushion$new(user=user, pwd=pwd))
 #'
 #' # create a database first
 #' if ("testing" %in% db_list(x)) {
