@@ -59,10 +59,10 @@ test_that("doc_create - json back works", {
 test_that("doc_create fails well", {
   expect_error(doc_create(), "argument \"cushion\" is missing")
   expect_error(doc_create(sofa_conn), "argument \"doc\" is missing")
-  expect_error(doc_create(sofa_conn, "asdfds", "asdfadf"),
-               "invalid char in json text")
 
   skip_on_cran()
+  expect_error(doc_create(sofa_conn, "asdfds", "asdfadf"),
+               "invalid char in json text")
   expect_error(doc_create(sofa_conn, "asdfds", '{"a": 5}'),
                "Database does not exist")
 })

@@ -117,12 +117,13 @@ test_that("db_query fails well", {
   expect_error(db_query(), "argument \"cushion\" is missing")
   expect_error(db_query(sofa_conn), "argument \"dbname\" is missing")
 
+  skip_on_cran()
+  
   # execution_stats should be logical
   expect_error(db_query(sofa_conn, "asdf", execution_stats = 234))
   # bookmark should be character
   expect_error(db_query(sofa_conn, "asdf", bookmark = 234))
 
-  skip_on_cran()
   expect_error(db_query(sofa_conn, "asdfds"), "Database does not exist")
 })
 

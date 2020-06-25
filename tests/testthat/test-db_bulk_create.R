@@ -21,10 +21,11 @@ test_that("db_bulk_create basic usage works", {
 })
 
 test_that("db_bulk_create fails well", {
+  skip_on_cran()
+
   expect_error(db_bulk_create(), "argument \"cushion\" is missing")
   expect_error(db_bulk_create(sofa_conn), "argument \"doc\" is missing")
   expect_error(db_bulk_create(sofa_conn, "stuff"), "argument \"doc\" is missing")
 
-  skip_on_cran()
   expect_error(db_bulk_create(sofa_conn, "asdfds", "adsfsdf"), "Database does not exist")
 })

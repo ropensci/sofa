@@ -27,11 +27,12 @@ test_that("db_bulk_get", {
 
 test_that("db_bulk_get fails well", {
   expect_error(db_bulk_get(), "argument \"cushion\" is missing")
+  
+  skip_on_cran()
+  
   expect_error(db_bulk_get(sofa_conn), "argument \"dbname\" is missing")
   expect_error(db_bulk_get(sofa_conn, "stuff"),
     "argument \"docid_rev\" is missing")
-
-  skip_on_cran()
   expect_error(db_bulk_get(sofa_conn, "asdfds", "adsfsdf"),
     "Database does not exist")
 })
