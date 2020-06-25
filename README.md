@@ -11,17 +11,19 @@ sofa
  \ ___________________ /
 </pre>
 
-[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![cran checks](https://cranchecks.info/badges/worst/sofa)](https://cranchecks.info/pkgs/sofa)
-[![Build Status](https://travis-ci.org/ropensci/sofa.svg?branch=master)](https://travis-ci.org/ropensci/sofa)
+[![R-check](https://github.com/ropensci/sofa/workflows/R-check/badge.svg)](https://github.com/ropensci/sofa/actions)
 [![codecov.io](https://codecov.io/github/ropensci/sofa/coverage.svg?branch=master)](https://codecov.io/github/ropensci/sofa?branch=master)
 [![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/sofa?color=ff69b4)](https://github.com/metacran/cranlogs.app)
-[![cran version](http://www.r-pkg.org/badges/version/sofa)](https://cran.r-project.org/package=sofa)
+[![cran version](https://www.r-pkg.org/badges/version/sofa)](https://cran.r-project.org/package=sofa)
 
 __An easy interface to CouchDB from R__
 
 Note: Check out [*R4couchdb*](https://github.com/wactbprot/R4CouchDB), another R
 package to interact with CouchDB.
+
+sofa docs: https://docs.ropensci.org/sofa/
 
 ## CouchDB versions
 
@@ -58,7 +60,7 @@ Development version from GitHub
 
 
 ```r
-devtools::install_github("ropensci/sofa")
+remotes::install_github("ropensci/sofa")
 ```
 
 
@@ -103,89 +105,18 @@ use on your machine, with all defaults used.
 x <- Cushion$new()
 ```
 
-## Ping the server
+Ping the server
 
 
 ```r
 x$ping()
-#> $couchdb
-#> [1] "Welcome"
-#> 
-#> $version
-#> [1] "2.1.1"
-#> 
-#> $features
-#> $features[[1]]
-#> [1] "scheduler"
-#> 
-#> 
-#> $vendor
-#> $vendor$name
-#> [1] "The Apache Software Foundation"
 ```
 
 Nice, it's working.
 
-## Create a new database, and list available databases
+## More
 
-
-```
-#> $ok
-#> [1] TRUE
-```
-
-
-```r
-db_create(x, dbname = 'sofadb')
-#> $ok
-#> [1] TRUE
-```
-
-see if its there now
-
-
-```r
-db_list(x)
-#> [1] "cats"       "flights"    "sofadb"     "testing123"
-```
-
-## Create documents
-
-### Write a document WITH a name (uses PUT)
-
-
-```r
-doc1 <- '{"name":"sofa","beer":"IPA"}'
-doc_create(x, doc1, dbname = "sofadb", docid = "a_beer")
-#> $ok
-#> [1] TRUE
-#> 
-#> $id
-#> [1] "a_beer"
-#> 
-#> $rev
-#> [1] "1-a48c98c945bcc05d482bc6f938c89882"
-```
-
-### Write a json document WITHOUT a name (uses POST)
-
-
-```r
-doc2 <- '{"name":"sofa","icecream":"rocky road"}'
-doc_create(x, doc2, dbname = "sofadb")
-#> $ok
-#> [1] TRUE
-#> 
-#> $id
-#> [1] "901e4bf214fb50db456d3ef8ec0516c9"
-#> 
-#> $rev
-#> [1] "1-fd0da7fcb8d3afbfc5757d065c92362c"
-```
-
-## More docs
-
-See the [vignettes](https://github.com/ropensci/sofa/tree/master/vignettes) for more documentation.
+See the docs https://docs.ropensci.org/sofa/ for more.
 
 
 ## Meta
@@ -193,6 +124,8 @@ See the [vignettes](https://github.com/ropensci/sofa/tree/master/vignettes) for 
 * Please [report any issues or bugs](https://github.com/ropensci/sofa/issues).
 * License: MIT
 * Get citation information for `sofa` in R doing `citation(package = 'sofa')`
-* Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+* Please note that this project is released with a [Contributor Code of Conduct][coc]. By participating in this project you agree to abide by its terms.
 
-[![ropensci_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
+[![ropensci_footer](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
+
+[coc]: https://github.com/ropensci/sofa/blob/master/CODE_OF_CONDUCT.md
