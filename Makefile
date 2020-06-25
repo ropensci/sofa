@@ -1,20 +1,16 @@
 PACKAGE := $(shell grep '^Package:' DESCRIPTION | sed -E 's/^Package:[[:space:]]+//')
 RSCRIPT = Rscript --no-init-file
 
-all: move rmd2md
-
-move:
-	cp inst/vign/sofa.md vignettes
-
-rmd2md:
-	cd vignettes;\
-	mv sofa.md sofa.Rmd
+vign:
+		cd vignettes;\
+		${RSCRIPT} -e "Sys.setenv(NOT_CRAN='true'); knitr::knit('sofa.Rmd.og', output = 'sofa.Rmd')";\
+		cd ..
 
 install: doc build
 	R CMD INSTALL . && rm *.tar.gz
 
 build:
-	R CMD build . --no-build-vignettes
+	R CMD build .
 
 doc:
 	${RSCRIPT} -e "devtools::document()"

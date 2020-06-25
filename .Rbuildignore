@@ -11,4 +11,4 @@ man-roxygen
 .github
 ^codemeta\.json$
 notes.R
-
+vignettes/sofa.Rmd.og
