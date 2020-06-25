@@ -22,21 +22,21 @@
 #' pwd <- Sys.getenv("COUCHDB_TEST_PWD")
 #' (x <- Cushion$new(user=user, pwd=pwd))
 #'
-#' if ("drinksdb" %in% db_list(x)) {
-#'   invisible(db_delete(x, dbname="drinksdb"))
+#' if ("foodb" %in% db_list(x)) {
+#'   invisible(db_delete(x, dbname="foodb"))
 #' }
-#' db_create(x, dbname='drinksdb')
+#' db_create(x, dbname='foodb')
 #'
 #' # create an attachment on an existing document
 #' ## create a document first
 #' doc <- '{"name":"stuff", "drink":"soda"}'
-#' doc_create(x, dbname="drinksdb", doc=doc, docid="asoda")
+#' doc_create(x, dbname="foodb", doc=doc, docid="asoda")
 #'
 #' ## create a csv attachment
 #' row.names(mtcars) <- NULL
 #' file <- tempfile(fileext = ".csv")
 #' write.csv(mtcars, file = file, row.names = FALSE)
-#' doc_attach_create(x, dbname="drinksdb", docid="asoda",
+#' doc_attach_create(x, dbname="foodb", docid="asoda",
 #'   attachment=file, attname="mtcarstable.csv")
 #'
 #' ## create a binary (png) attachment
@@ -44,7 +44,7 @@
 #' png(file)
 #' plot(1:10)
 #' dev.off()
-#' doc_attach_create(x, dbname="drinksdb", docid="asoda",
+#' doc_attach_create(x, dbname="foodb", docid="asoda",
 #'   attachment=file, attname="img.png")
 #'
 #' ## create a binary (pdf) attachment
@@ -52,25 +52,28 @@
 #' pdf(file)
 #' plot(1:10)
 #' dev.off()
-#' doc_attach_create(x, dbname="drinksdb", docid="asoda",
+#' doc_attach_create(x, dbname="foodb", docid="asoda",
 #'   attachment=file, attname="plot.pdf")
 #'
 #' # get info for an attachment (HEAD request)
-#' doc_attach_info(x, "drinksdb", docid="asoda", attname="mtcarstable.csv")
-#' doc_attach_info(x, "drinksdb", docid="asoda", attname="img.png")
-#' doc_attach_info(x, "drinksdb", docid="asoda", attname="plot.pdf")
+#' doc_attach_info(x, "foodb", docid="asoda", attname="mtcarstable.csv")
+#' doc_attach_info(x, "foodb", docid="asoda", attname="img.png")
+#' doc_attach_info(x, "foodb", docid="asoda", attname="plot.pdf")
 #'
 #' # get an attachment (GET request)
-#' res <- doc_attach_get(x, "drinksdb", docid="asoda",
+#' res <- doc_attach_get(x, "foodb", docid="asoda",
 #'   attname="mtcarstable.csv", as = "text")
 #' read.csv(text = res)
-#' doc_attach_get(x, "drinksdb", docid="asoda", attname="img.png")
-#' doc_attach_get(x, "drinksdb", docid="asoda", attname="plot.pdf")
+#' doc_attach_get(x, "foodb", docid="asoda", attname="img.png")
+#' doc_attach_get(x, "foodb", docid="asoda", attname="plot.pdf")
+#' ## OR, don't specify an attachment and list the attachments
+#' (attchms <- doc_attach_get(x, "sofadb", docid="asoda", type="text"))
+#' jsonlite::fromJSON(attchms)
 #'
 #' # delete an attachment
-#' doc_attach_delete(x, "drinksdb", docid="asoda", attname="mtcarstable.csv")
-#' doc_attach_delete(x, "drinksdb", docid="asoda", attname="img.png")
-#' doc_attach_delete(x, "drinksdb", docid="asoda", attname="plot.pdf")
+#' doc_attach_delete(x, "foodb", docid="asoda", attname="mtcarstable.csv")
+#' doc_attach_delete(x, "foodb", docid="asoda", attname="img.png")
+#' doc_attach_delete(x, "foodb", docid="asoda", attname="plot.pdf")
 #' }
 
 #' @export
@@ -101,16 +104,24 @@ doc_attach_info <- function(cushion, dbname, docid, attname, ...) {
 
 #' @export
 #' @rdname attachments
-doc_attach_get <- function(cushion, dbname, docid, attname, type = "raw", ...) {
+doc_attach_get <- function(cushion, dbname, docid, attname = NULL,
+  type = "raw", ...) {
+
   check_cushion(cushion)
-  url <- file.path(cushion$make_url(), dbname, docid, attname)
+  if (is.null(attname)) {
+    url <- file.path(cushion$make_url(), dbname, docid)
+    query <- list(`_attachments` = "true")
+  } else {
+    url <- file.path(cushion$make_url(), dbname, docid, attname)
+    query <- list()
+  }
   revget <- db_revisions(cushion, dbname = dbname, docid = docid)[1]
   type <- match.arg(type, c('text', 'raw'))
   cli <- crul::HttpClient$new(
     url = url,
     headers = sc(c(ct_json, cushion$get_headers(), list(`If-Match` = revget))),
     opts = sc(c(cushion$get_auth(), list(...))))
-  res <- cli$get()
+  res <- cli$get(query = query)
   stop_status(res)
   if (type == 'raw') res$content else res$parse("UTF-8")
 }

@@ -2,34 +2,14 @@
 % Please edit documentation in R/getattach.r
 \name{attach_get}
 \alias{attach_get}
-\title{Get an attachment.}
+\title{Get an attachment}
 \usage{
-attach_get(cushion, dbname, docid, attname = NULL, as = "list", ...)
+attach_get(...)
 }
 \arguments{
-\item{cushion}{A \code{\link{Cushion}} object. Required.}
-
-\item{dbname}{(character) Database name. Required.}
-
-\item{docid}{(character) Document ID. Required.}
-
-\item{attname}{(character) Attachment name. Optional.}
-
-\item{as}{(character) One of list (default) or json}
-
-\item{...}{Curl args passed on to \code{\link[crul]{HttpClient}}}
-}
-\value{
-JSON as a character string or a list (determined by the
-\code{as} parameter)
+\item{...}{ignored}
 }
 \description{
-Get an attachment.
+This function is defunct. See \code{\link[=doc_attach_get]{doc_attach_get()}}
 }
-\examples{
-\dontrun{
-(x <- Cushion$new())
-
-attach_get(x, dbname="sofadb", docid="guysbeer")
-}
-}
+\keyword{internal}
