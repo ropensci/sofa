@@ -14,8 +14,8 @@ jobs:
         config:
         - { os: ubuntu-16.04, r: 'release', couch: 'latest', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
         - { os: ubuntu-16.04, r: 'release', couch: '2.3', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
-        - { os: windows-latest, r: 'latest', couch: 'latest', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
-        - { os: macOS-latest, r: 'devel', couch: 'latest', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
+        - { os: ubuntu-16.04, r: 'devel', couch: 'latest', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
+        - { os: ubuntu-16.04, r: 'devel', couch: '2.3', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
 
     services:
       couchdb:
