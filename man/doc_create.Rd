@@ -38,7 +38,7 @@ Documents can have attachments just like email. There are two ways
 to use attachments: the first one is via a separate REST call
 (see \code{\link[=doc_attach_create]{doc_attach_create()}}); the second is inline within your
 document, you can do so with this fxn. See
-\url{http://wiki.apache.org/couchdb/HTTP_Document_API#Attachments} for help
+https://docs.couchdb.org/en/latest/api/document/attachments.html for help
 on formatting json appropriately.
 
 Note that you can create documents from a data.frame with this function,
