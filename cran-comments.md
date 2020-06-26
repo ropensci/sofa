@@ -14,7 +14,7 @@ There are no reverse dependencies.
 
 ---
 
-This version adds some new functions and makes some bug fixes.
+This version adds some new functions and makes some bug fixes. This is a re-submission of the same version fixing a non-file package-anchored link in the documentation.
 
 Thanks!
 Scott Chamberlain

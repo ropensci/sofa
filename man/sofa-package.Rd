@@ -43,9 +43,9 @@ can set the value you like with e.g., \code{options(digits = 10)}, and
 get what \code{digits} is set to with \code{getOption("digits")}.
 
 Note that in \code{\link[=doc_create]{doc_create()}} we convert your document to JSON with
-\code{\link[jsonlite:toJSON]{jsonlite::toJSON()}} if given as a list, which has a \code{digits} parameter.
+\code{jsonlite::toJSON()} if given as a list, which has a \code{digits} parameter.
 We pass \code{getOption("digits")} to the \code{digits} parameter in
-\code{jsonlite::toJSON}.
+\code{jsonlite::toJSON()}.
 }
 
 \section{Defunct functions}{

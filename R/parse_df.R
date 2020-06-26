@@ -7,7 +7,7 @@
 #' separate document.
 #' @param tojson (logical) If `TRUE` (default) convert to json - if `FALSE`,
 #' to lists
-#' @param ... Further args passed on to [jsonlite::toJSON()]
+#' @param ... Further args passed on to `jsonlite::toJSON()`
 #' @details Parse data.frame to get either rows or columns, each as a list
 #' or json string
 #' @examples \dontrun{

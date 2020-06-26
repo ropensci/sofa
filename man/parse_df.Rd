@@ -16,7 +16,7 @@ separate document.}
 \item{tojson}{(logical) If \code{TRUE} (default) convert to json - if \code{FALSE},
 to lists}
 
-\item{...}{Further args passed on to \code{\link[jsonlite:toJSON]{jsonlite::toJSON()}}}
+\item{...}{Further args passed on to \code{jsonlite::toJSON()}}
 }
 \description{
 Parse data.frame to json or list by row or column

@@ -30,9 +30,9 @@
 #' get what `digits` is set to with `getOption("digits")`. 
 #' 
 #' Note that in [doc_create()] we convert your document to JSON with 
-#' [jsonlite::toJSON()] if given as a list, which has a `digits` parameter.
+#' `jsonlite::toJSON()` if given as a list, which has a `digits` parameter.
 #' We pass `getOption("digits")` to the `digits` parameter in 
-#' `jsonlite::toJSON`. 
+#' `jsonlite::toJSON()`. 
 #' 
 #' @section Defunct functions:
 #' 
