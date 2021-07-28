@@ -7,6 +7,7 @@
 #' @param doc (character) Document content. Required.
 #' @param docid (character) Document ID. Required.
 #' @param rev (character) Revision id. Required.
+#' @param as (character) One of list (default) or json
 #' @details Internally, this function adds in the docid and revision id,
 #' required to do a document update
 #' @examples \dontrun{

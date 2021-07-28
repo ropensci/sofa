@@ -4,7 +4,7 @@
 \alias{doc_upsert}
 \title{Create a new document or update an existing one}
 \usage{
-doc_upsert(cushion, dbname, doc, docid)
+doc_upsert(cushion, dbname, doc, docid, as = "list")
 }
 \arguments{
 \item{cushion}{A \code{\link{Cushion}} object. Required.}
@@ -14,6 +14,8 @@ doc_upsert(cushion, dbname, doc, docid)
 \item{doc}{(character) Document content. Required.}
 
 \item{docid}{(character) Document ID. Required.}
+
+\item{as}{(character) One of list (default) or json}
 }
 \value{
 JSON as a character string or a list (determined by the

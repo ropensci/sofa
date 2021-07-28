@@ -12,6 +12,7 @@
 #' @param how (character) One of rows (default) or columns. If rows, each row
 #' becomes a separate document; if columns, each column becomes a separate
 #' document.
+#' @param as (character) One of list (default) or json
 #'
 #' @details Documents can have attachments just like email. There are two ways
 #' to use attachments: the first one is via a separate REST call

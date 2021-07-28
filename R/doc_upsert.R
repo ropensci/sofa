@@ -6,6 +6,7 @@
 #' @param dbname (character) Database name. Required.
 #' @param doc (character) Document content. Required.
 #' @param docid (character) Document ID. Required.
+#' @param as (character) One of list (default) or json
 #' @details Internally, this function attempts to update a document with the given name. \cr
 #' If the document does not exist, it is created
 #' @author George Kritikos
@@ -30,16 +31,16 @@
 #'
 #' doc_get(x, dbname = "sofadb", docid = "abeer")
 #' }
-doc_upsert = function(cushion, dbname, doc, docid){
+doc_upsert = function(cushion, dbname, doc, docid, as = "list"){
   tryCatch({
     #try to update, if failed (record doesn't exist), create new entry
     revs = db_revisions(cushion = cushion, dbname = dbname, docid = docid)
     return(
-      doc_update(cushion = cushion, dbname = dbname, doc = doc, docid = docid, rev = revs[1])
+      doc_update(cushion = cushion, dbname = dbname, doc = doc, docid = docid, rev = revs[1], as = as)
     )
   }, error = function(e){
     return(
-      doc_create(cushion = cushion, dbname = dbname, doc = doc, docid = docid)
+      doc_create(cushion = cushion, dbname = dbname, doc = doc, docid = docid, as = as)
     )
   })
 }
