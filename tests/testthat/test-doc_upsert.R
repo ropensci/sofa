@@ -79,4 +79,33 @@ test_that("doc_upsert fails well", {
   expect_error(doc_upsert(sofa_conn), "argument \"doc\" is missing")
 })
 
+
+test_that("doc_upsert - creating document works with json response", {
+  skip_on_cran()
+  
+  aa <- doc_upsert(sofa_conn, db, doc = doc1, docid = "j1", as = "json")
+  
+  expect_is(aa, "character")
+  expect_match(aa, "ok")
+  expect_match(aa, "true")
+  expect_match(aa, "id")
+  expect_match(aa, "rev")
+  expect_is(jsonlite::fromJSON(aa), "list")
+})
+
+
+test_that("doc_upsert - updating document works  with json response", {
+  skip_on_cran()
+  
+  aa <- doc_upsert(sofa_conn, db, doc = doc3, docid = "j1", as = "json")
+  
+  expect_is(aa, "character")
+  expect_match(aa, "ok")
+  expect_match(aa, "true")
+  expect_match(aa, "id")
+  expect_match(aa, "rev")
+  expect_is(jsonlite::fromJSON(aa), "list")
+  
+})
+
 cleanup_dbs(db)
