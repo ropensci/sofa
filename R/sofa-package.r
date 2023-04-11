@@ -46,5 +46,6 @@
 #' @docType package
 #' @title R client for CouchDB
 #' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
+#' @author Eduard Szöcs \email{eduardszoecs@@gmail.com}
 #' @keywords package
 NULL
