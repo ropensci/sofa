@@ -31,3 +31,7 @@ check_windows:
 
 readme:
 	${RSCRIPT} -e "knitr::knit('README.Rmd')"
+
+dockercouch:
+	docker rm -f couch-sofa
+	docker run -d --name couch-sofa -p 5984:5984 -e COUCHDB_USER=admin -e COUCHDB_PASSWORD=password couchdb:latest
