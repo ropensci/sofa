@@ -5,3 +5,5 @@
 .Rhistory
 ^notes\.md$
 notes.R
+.devcontainer
+.env

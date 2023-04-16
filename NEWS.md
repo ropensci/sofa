@@ -1,3 +1,8 @@
+sofa 0.4.1
+==========
+
+* Maintainer changed to Eduard Szöcs
+
 sofa 0.4.0
 ==========
 

@@ -5,10 +5,10 @@ Makefile
 README.Rmd
 ^\.travis\.yml$
 ^CODE_OF_CONDUCT\.md$
-^notes\.md$
 man-roxygen
 ^cran-comments\.md$
 .github
-^codemeta\.json$
 notes.R
 vignettes/sofa.Rmd.og
+.devcontainer
+.env
