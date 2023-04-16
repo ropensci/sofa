@@ -2,6 +2,7 @@ context("db_explain")
 
 test_that("db_explain basic usage works", {
   skip_on_cran()
+  skip_if_no_couch(pinged)
 
   file <- system.file("examples/omdb.json", package = "sofa")
   strs <- readLines(file)

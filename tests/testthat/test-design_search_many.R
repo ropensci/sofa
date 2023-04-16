@@ -2,6 +2,7 @@ context("design_search_many")
 
 local({
   skip_on_cran()
+  skip_if_no_couch(pinged)
   file <- system.file("examples/omdb.json", package = "sofa")
   strs <- readLines(file)
 
@@ -17,6 +18,7 @@ local({
 
 test_that("design_search_many", {
   skip_on_cran()
+  skip_if_no_couch(pinged)
 
   design_create_(sofa_conn, dbname='omdb', design='view6', fxnname="foobar4",
     fxn = "function(doc){emit(doc._id,doc.Country)}")
@@ -42,6 +44,7 @@ test_that("design_search_many", {
 
 test_that("design_search_many fails well", {
   skip_on_cran()
+  skip_if_no_couch(pinged)
 
   expect_error(design_search_many(), "argument \"cushion\" is missing")
   expect_error(design_search_many(sofa_conn), "argument \"dbname\" is missing")

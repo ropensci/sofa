@@ -2,6 +2,7 @@ context("db_delete")
 
 test_that("db_delete basic usage works", {
   skip_on_cran()
+  skip_if_no_couch(pinged)
 
   dbn <- dbname_random()
   invisible(db_create(sofa_conn, dbname = dbn))
@@ -15,6 +16,7 @@ test_that("db_delete basic usage works", {
 
 test_that("db_delete - json return works", {
   skip_on_cran()
+  skip_if_no_couch(pinged)
 
   dbn <- dbname_random()
   invisible(db_create(sofa_conn, dbname = dbn))
@@ -31,6 +33,8 @@ test_that("db_delete fails well", {
   expect_error(db_delete(sofa_conn), "argument \"dbname\" is missing")
 
   skip_on_cran()
+  skip_if_no_couch(pinged)
+  
   dbn <- dbname_random()
   invisible(db_create(sofa_conn, dbname = dbn))
   invisible(db_delete(sofa_conn, dbn))

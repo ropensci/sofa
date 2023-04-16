@@ -21,3 +21,9 @@ if (!inherits(pinged, "error")) {
   }
   invisible(db_bulk_create(sofa_conn, dbname = db_test_name, doc = iris))
 }
+
+skip_if_no_couch <- function(pinged) {
+  if (inherits(pinged, "error")) {
+    skip("CouchDB not available")
+  }
+}

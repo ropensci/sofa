@@ -9,6 +9,7 @@ just_dat <- function(x) {
 
 test_that("db_bulk_update basic usage works", {
   skip_on_cran()
+  skip_if_no_couch(pinged)
 
   row.names(mtcars) <- NULL
 
@@ -54,6 +55,7 @@ test_that("db_bulk_update fails well", {
   expect_error(db_bulk_update(), "argument \"cushion\" is missing")
   
   skip_on_cran()
+  skip_if_no_couch(pinged)
 
   expect_error(db_bulk_update(sofa_conn), "argument \"doc\" is missing")
   expect_error(db_bulk_update(sofa_conn, "stuff"), "argument \"doc\" is missing")

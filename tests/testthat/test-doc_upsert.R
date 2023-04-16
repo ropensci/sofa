@@ -4,6 +4,7 @@ db <- dbname_random()
 
 local({
   skip_on_cran()
+  skip_if_no_couch(pinged)
   if (db %in% db_list(sofa_conn)) {
     invisible(db_delete(sofa_conn, dbname = db))
   }
@@ -16,6 +17,7 @@ doc3 <- '{"name": "drink", "beer": "barleywine", "score": 9}'
 
 test_that("doc_upsert - basic usage works", {
   skip_on_cran()
+  skip_if_no_couch(pinged)
 
   aa <- doc_upsert(sofa_conn, db, doc = doc1, docid = "a1")
 
@@ -30,6 +32,7 @@ test_that("doc_upsert - basic usage works", {
 
 test_that("doc_upsert - creating document works", {
   skip_on_cran()
+  skip_if_no_couch(pinged)
 
   aa <- doc_upsert(sofa_conn, db, doc = doc2, docid = "a2")
 
@@ -53,6 +56,7 @@ test_that("doc_upsert - creating document works", {
 
 test_that("doc_upsert - updating document works", {
   skip_on_cran()
+  skip_if_no_couch(pinged)
 
   aa <- doc_upsert(sofa_conn, db, doc = doc3, docid = "a2")
 

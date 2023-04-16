@@ -2,6 +2,7 @@ context("db_bulk_create")
 
 test_that("db_bulk_create basic usage works", {
   skip_on_cran()
+  skip_if_no_couch(pinged)
 
   if ("bulktest" %in% db_list(sofa_conn)) {
      invisible(db_delete(sofa_conn, dbname = "bulktest"))
@@ -22,6 +23,7 @@ test_that("db_bulk_create basic usage works", {
 
 test_that("db_bulk_create fails well", {
   skip_on_cran()
+  skip_if_no_couch(pinged)
 
   expect_error(db_bulk_create(), "argument \"cushion\" is missing")
   expect_error(db_bulk_create(sofa_conn), "argument \"doc\" is missing")

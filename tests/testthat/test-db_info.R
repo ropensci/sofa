@@ -2,6 +2,7 @@ context("db_info")
 
 test_that("db_info basic usage works", {
   skip_on_cran()
+  skip_if_no_couch(pinged)
 
   db <- dbname_random()
   if (db %in% db_list(sofa_conn)) {
@@ -25,5 +26,6 @@ test_that("db_info fails well", {
   expect_error(db_info(sofa_conn), "argument \"dbname\" is missing")
 
   skip_on_cran()
+  skip_if_no_couch(pinged)
   expect_error(db_info(sofa_conn, "asdfds"), "Database does not exist")
 })

@@ -2,6 +2,7 @@ context("db_changes")
 
 test_that("db_changes basic usage works", {
   skip_on_cran()
+  skip_if_no_couch(pinged)
 
   if ("leothelion" %in% db_list(sofa_conn)) {
     invisible(db_delete(sofa_conn, dbname="leothelion"))
@@ -29,6 +30,7 @@ test_that("db_changes basic usage works", {
 
 test_that("db_changes - json return works", {
   skip_on_cran()
+  skip_if_no_couch(pinged)
 
   if ("sss" %in% db_list(sofa_conn)) {
     invisible(db_delete(sofa_conn, dbname="sss"))
@@ -49,4 +51,3 @@ test_that("db_changes fails well", {
 	expect_error(db_changes(), "argument \"cushion\" is missing")
   expect_error(db_changes(sofa_conn), "argument \"dbname\" is missing")
 })
-
