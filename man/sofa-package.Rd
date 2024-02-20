@@ -56,6 +56,8 @@ We pass \code{getOption("digits")} to the \code{digits} parameter in
 }
 
 \author{
+Yaoxiang Li \email{liyaoxiang@outlook.com}
+
 Scott Chamberlain \email{myrmecocystus@gmail.com}
 
 Eduard Szöcs \email{eduardszoecs@gmail.com}

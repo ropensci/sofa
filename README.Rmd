@@ -9,13 +9,15 @@ knitr::opts_chunk$set(
   message=FALSE
 )
 ```
+<!-- badges: start -->
 
+[![CRAN status](https://www.r-pkg.org/badges/version/sofa)](https://CRAN.R-project.org/package=sofa)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![cran checks](https://cranchecks.info/badges/worst/sofa)](https://cranchecks.info/pkgs/sofa)
 [![R-check](https://github.com/ropensci/sofa/workflows/R-check/badge.svg)](https://github.com/ropensci/sofa/actions)
 [![codecov.io](https://codecov.io/github/ropensci/sofa/coverage.svg?branch=master)](https://codecov.io/github/ropensci/sofa?branch=master)
 [![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/sofa?color=ff69b4)](https://github.com/metacran/cranlogs.app)
-[![cran version](https://www.r-pkg.org/badges/version/sofa)](https://cran.r-project.org/package=sofa)
+<!-- badges: end -->
+
 
 __An easy interface to CouchDB from R__
 
