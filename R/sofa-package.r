@@ -21,21 +21,21 @@
 #' functionality of this package will work with versions < 2, while
 #' some may not (mango queries, see [db_query()]). I don't
 #' plan to support older CouchDB versions per se.
-#' 
+#'
 #' @section Digits after the decimal:
 #' If you have any concern about number of digits after the decimal
 #' in your documents, make sure to look at `digits` in your R options.
 #' The default value is 7 (see [options] for more informnation). You
-#' can set the value you like with e.g., `options(digits = 10)`, and 
-#' get what `digits` is set to with `getOption("digits")`. 
-#' 
-#' Note that in [doc_create()] we convert your document to JSON with 
+#' can set the value you like with e.g., `options(digits = 10)`, and
+#' get what `digits` is set to with `getOption("digits")`.
+#'
+#' Note that in [doc_create()] we convert your document to JSON with
 #' `jsonlite::toJSON()` if given as a list, which has a `digits` parameter.
-#' We pass `getOption("digits")` to the `digits` parameter in 
-#' `jsonlite::toJSON()`. 
-#' 
+#' We pass `getOption("digits")` to the `digits` parameter in
+#' `jsonlite::toJSON()`.
+#'
 #' @section Defunct functions:
-#' 
+#'
 #' - [attach_get]
 #'
 #' @importFrom R6 R6Class
@@ -45,6 +45,7 @@
 #' @aliases sofa
 #' @docType package
 #' @title R client for CouchDB
+#' @author Yaoxiang Li \email{liyaoxiang@@outlook.com}
 #' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
 #' @author Eduard Szöcs \email{eduardszoecs@@gmail.com}
 #' @keywords package

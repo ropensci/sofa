@@ -57,5 +57,7 @@ We pass \code{getOption("digits")} to the \code{digits} parameter in
 
 \author{
 Scott Chamberlain \email{myrmecocystus@gmail.com}
+
+Eduard Szöcs \email{eduardszoecs@gmail.com}
 }
 \keyword{package}
