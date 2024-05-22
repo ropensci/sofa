@@ -13,7 +13,7 @@
 #' # Create a CouchDB connection client
 #' user <- Sys.getenv("COUCHDB_TEST_USER")
 #' pwd <- Sys.getenv("COUCHDB_TEST_PWD")
-#' (x <- Cushion$new(user=user, pwd=pwd))
+#' (x <- Cushion$new(user = user, pwd = pwd))
 #'
 #' ## metadata
 #' x$host
@@ -23,7 +23,7 @@
 #'
 #' ## ping the CouchDB server
 #' x$ping()
-#' 
+#'
 #' ## get CouchDB version
 #' x$version()
 #'
@@ -37,13 +37,13 @@
 #'   db_create(x, "sofadb")
 #' }
 #' doc1 <- '{"name": "drink", "beer": "IPA", "score": 5}'
-#' doc_create(x, dbname="sofadb", docid="abeer", doc1)
+#' doc_create(x, dbname = "sofadb", docid = "abeer", doc1)
 #'
 #' # bulk create
 #' if (!"mymtcars" %in% db_list(x)) {
 #'   db_create(x, "mymtcars")
 #' }
-#' db_bulk_create(x, dbname="mymtcars", doc = mtcars)
+#' db_bulk_create(x, dbname = "mymtcars", doc = mtcars)
 #' db_list(x)
 #'
 #' ## database info
@@ -74,13 +74,13 @@ Cushion <- R6::R6Class(
   "Cushion",
   public = list(
     #' @field host (character) host
-    host = '127.0.0.1',
+    host = "127.0.0.1",
     #' @field port (integer) port
     port = 5984,
     #' @field path (character) url path, if any
     path = NULL,
     #' @field transport (character) transport schema, (http|https)
-    transport = 'http',
+    transport = "http",
     #' @field user (character) username
     user = NULL,
     #' @field pwd (character) password
@@ -127,17 +127,20 @@ Cushion <- R6::R6Class(
       cat(paste0("  path: ", self$path), sep = "\n")
       cat(paste0("  type: ", self$type), sep = "\n")
       cat(paste0("  user: ", self$user), sep = "\n")
-      cat(paste0("  pwd: ", if (!is.null(self$pwd)) '<secret>' else ''),
-          sep = "\n")
+      cat(paste0("  pwd: ", if (!is.null(self$pwd)) "<secret>" else ""),
+        sep = "\n"
+      )
       invisible(self)
     },
 
     #' @description Ping the CouchDB server
     #' @param as (character) One of list (default) or json
     #' @param ... curl options passed to [crul::verb-GET]
-    ping = function(as = 'list', ...) {
-      sofa_GET(self$make_url(), as = as, query = NULL,
-        headers = self$get_headers(), auth = self$get_auth(), ...)
+    ping = function(as = "list", ...) {
+      sofa_GET(self$make_url(),
+        as = as, query = NULL,
+        headers = self$get_headers(), auth = self$get_auth(), ...
+      )
     },
 
     #' @description Construct full base URL from the pieces in the
@@ -161,15 +164,15 @@ Cushion <- R6::R6Class(
     #' @description Get the CouchDB version as a numeric
     version = function() {
       z <- self$ping()
-      ver <- as.numeric(paste0(strx(z$version, '[0-9]'), collapse=""))
+      ver <- as.numeric(paste0(strx(z$version, "[0-9]"), collapse = ""))
       if (nchar(ver) < 3) {
-        ver <- as.numeric(paste0(c(ver, rep("0", times=3-nchar(ver))),
-          collapse=""))
+        ver <- as.numeric(paste0(c(ver, rep("0", times = 3 - nchar(ver))),
+          collapse = ""
+        ))
       }
       return(ver)
     }
   ),
-
   private = list(
     auth_headers = NULL
   )

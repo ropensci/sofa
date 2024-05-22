@@ -44,11 +44,11 @@
 #' @param execution_stats (logical) Include execution statistics in the query
 #' response. Optional, default: `FALSE`
 #' @template query-egs
-db_query <- function(cushion, dbname, query = NULL, selector = NULL,
-  limit = NULL, skip = NULL, sort = NULL, fields = NULL, use_index = NULL,
-  r = NULL, bookmark = NULL, update = NULL, stable = NULL, stale = NULL,
-  execution_stats = FALSE, as = 'list', ...) {
-
+db_query <- function(
+    cushion, dbname, query = NULL, selector = NULL,
+    limit = NULL, skip = NULL, sort = NULL, fields = NULL, use_index = NULL,
+    r = NULL, bookmark = NULL, update = NULL, stable = NULL, stale = NULL,
+    execution_stats = FALSE, as = "list", ...) {
   check_cushion(cushion)
   assert(selector, c("character", "list"))
   assert(limit, c("numeric", "integer"))
@@ -83,6 +83,7 @@ db_query <- function(cushion, dbname, query = NULL, selector = NULL,
     # query <- jsonlite::toJSON(query)
   }
   sofa_POST(file.path(cushion$make_url(), dbname, "_find"), as,
-            body = query, encode = "json",
-            cushion$get_headers(), cushion$get_auth(), ...)
+    body = query, encode = "json",
+    cushion$get_headers(), cushion$get_auth(), ...
+  )
 }

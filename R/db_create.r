@@ -9,19 +9,20 @@
 #' @examples \dontrun{
 #' user <- Sys.getenv("COUCHDB_TEST_USER")
 #' pwd <- Sys.getenv("COUCHDB_TEST_PWD")
-#' (x <- Cushion$new(user=user, pwd=pwd))
+#' (x <- Cushion$new(user = user, pwd = pwd))
 #'
 #' if ("leothetiger" %in% db_list(x)) {
-#'   invisible(db_delete(x, dbname="leothetiger"))
+#'   invisible(db_delete(x, dbname = "leothetiger"))
 #' }
-#' db_create(x, dbname='leothetiger')
+#' db_create(x, dbname = "leothetiger")
 #'
 #' ## see if its there now
 #' db_list(x)
 #' }
-db_create <- function(cushion, dbname, delifexists=FALSE, as='list', ...) {
+db_create <- function(cushion, dbname, delifexists = FALSE, as = "list", ...) {
   if (delifexists) db_delete(cushion, dbname, ...)
   check_cushion(cushion)
   sofa_PUT(file.path(cushion$make_url(), dbname), as,
-           headers = cushion$get_headers(), auth = cushion$get_auth(), ...)
+    headers = cushion$get_headers(), auth = cushion$get_auth(), ...
+  )
 }

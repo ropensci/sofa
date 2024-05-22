@@ -12,34 +12,37 @@
 #' @examples \dontrun{
 #' user <- Sys.getenv("COUCHDB_TEST_USER")
 #' pwd <- Sys.getenv("COUCHDB_TEST_PWD")
-#' (x <- Cushion$new(user=user, pwd=pwd))
+#' (x <- Cushion$new(user = user, pwd = pwd))
 #'
 #' if ("sofadb" %in% db_list(x)) {
-#'   invisible(db_delete(x, dbname="sofadb"))
+#'   invisible(db_delete(x, dbname = "sofadb"))
 #' }
-#' db_create(x, 'sofadb')
+#' db_create(x, "sofadb")
 #'
 #' # create a document
 #' doc1 <- '{"name": "drink", "beer": "IPA", "score": 5}'
-#' doc_upsert(x, dbname="sofadb", doc1, docid="abeer")
+#' doc_upsert(x, dbname = "sofadb", doc1, docid = "abeer")
 #'
-#' #update the document
+#' # update the document
 #' doc2 <- '{"name": "drink", "beer": "lager", "score": 6}'
-#' doc_upsert(x, dbname="sofadb", doc2, docid="abeer")
+#' doc_upsert(x, dbname = "sofadb", doc2, docid = "abeer")
 #'
 #'
 #' doc_get(x, dbname = "sofadb", docid = "abeer")
 #' }
-doc_upsert = function(cushion, dbname, doc, docid){
-  tryCatch({
-    #try to update, if failed (record doesn't exist), create new entry
-    revs = db_revisions(cushion = cushion, dbname = dbname, docid = docid)
-    return(
-      doc_update(cushion = cushion, dbname = dbname, doc = doc, docid = docid, rev = revs[1])
-    )
-  }, error = function(e){
-    return(
-      doc_create(cushion = cushion, dbname = dbname, doc = doc, docid = docid)
-    )
-  })
+doc_upsert <- function(cushion, dbname, doc, docid) {
+  tryCatch(
+    {
+      # try to update, if failed (record doesn't exist), create new entry
+      revs <- db_revisions(cushion = cushion, dbname = dbname, docid = docid)
+      return(
+        doc_update(cushion = cushion, dbname = dbname, doc = doc, docid = docid, rev = revs[1])
+      )
+    },
+    error = function(e) {
+      return(
+        doc_create(cushion = cushion, dbname = dbname, doc = doc, docid = docid)
+      )
+    }
+  )
 }

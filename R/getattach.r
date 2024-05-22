@@ -1,7 +1,7 @@
 #' Get an attachment
-#' 
+#'
 #' This function is defunct. See [doc_attach_get()]
-#' 
+#'
 #' @export
 #' @rdname attach_get-defunct
 #' @keywords internal

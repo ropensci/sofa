@@ -28,16 +28,16 @@
 #' ## create a connection
 #' user <- Sys.getenv("COUCHDB_TEST_USER")
 #' pwd <- Sys.getenv("COUCHDB_TEST_PWD")
-#' (x <- Cushion$new(user=user, pwd=pwd))
+#' (x <- Cushion$new(user = user, pwd = pwd))
 #'
 #' file <- system.file("examples/omdb.json", package = "sofa")
 #' strs <- readLines(file)
 #'
 #' ## create a database
 #' if ("omdb" %in% db_list(x)) {
-#'   invisible(db_delete(x, dbname="omdb"))
+#'   invisible(db_delete(x, dbname = "omdb"))
 #' }
-#' db_create(x, dbname='omdb')
+#' db_create(x, dbname = "omdb")
 #'
 #' ## add some documents
 #' invisible(db_bulk_create(x, "omdb", strs))
@@ -51,10 +51,10 @@
 #'   }
 #' }')
 #' }
-db_explain <- function(cushion, dbname, query = NULL, selector = NULL,
-  limit = NULL, skip = NULL, sort = NULL, fields = NULL, use_index = NULL,
-  as = 'list', ...) {
-
+db_explain <- function(
+    cushion, dbname, query = NULL, selector = NULL,
+    limit = NULL, skip = NULL, sort = NULL, fields = NULL, use_index = NULL,
+    as = "list", ...) {
   check_cushion(cushion)
   if (is.null(query)) {
     query <- sc(list(
@@ -63,6 +63,7 @@ db_explain <- function(cushion, dbname, query = NULL, selector = NULL,
     ))
   }
   sofa_POST(file.path(cushion$make_url(), dbname, "_explain"), as,
-            body = query, encode = "json",
-            headers = cushion$get_headers(), auth = cushion$get_auth(), ...)
+    body = query, encode = "json",
+    headers = cushion$get_headers(), auth = cushion$get_auth(), ...
+  )
 }

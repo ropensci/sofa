@@ -27,11 +27,11 @@
 #' @examples \dontrun{
 #' user <- Sys.getenv("COUCHDB_TEST_USER")
 #' pwd <- Sys.getenv("COUCHDB_TEST_PWD")
-#' (x <- Cushion$new(user=user, pwd=pwd))
+#' (x <- Cushion$new(user = user, pwd = pwd))
 #'
 #' # create a database first
 #' if ("testing" %in% db_list(x)) {
-#'   invisible(db_delete(x, dbname="testing"))
+#'   invisible(db_delete(x, dbname = "testing"))
 #' }
 #' db_create(x, "testing")
 #'
@@ -51,28 +51,32 @@
 #' ## and it's gone
 #' db_index(x, "testing")
 #' }
-db_index <- function(cushion, dbname, as = 'list', ...) {
+db_index <- function(cushion, dbname, as = "list", ...) {
   check_cushion(cushion)
   sofa_GET(file.path(cushion$make_url(), dbname, "_index"), as,
-          headers = cushion$get_headers(),
-          auth = cushion$get_auth(), ...)
+    headers = cushion$get_headers(),
+    auth = cushion$get_auth(), ...
+  )
 }
 
 #' @export
 #' @rdname db_index
-db_index_create <- function(cushion, dbname, body, as = 'list', ...) {
+db_index_create <- function(cushion, dbname, body, as = "list", ...) {
   check_cushion(cushion)
   sofa_POST(file.path(cushion$make_url(), dbname, "_index"), as,
-          body = body, encode = "json",
-          headers = cushion$get_headers(),
-          auth = cushion$get_auth(), ...)
+    body = body, encode = "json",
+    headers = cushion$get_headers(),
+    auth = cushion$get_auth(), ...
+  )
 }
 
 #' @export
 #' @rdname db_index
-db_index_delete <- function(cushion, dbname, design, index_name, as = 'list', ...) {
+db_index_delete <- function(cushion, dbname, design, index_name, as = "list", ...) {
   check_cushion(cushion)
   url <- file.path(cushion$make_url(), dbname, "_index", design, "json", index_name)
-  sofa_DELETE(url, as, headers = cushion$get_headers(),
-  	auth = cushion$get_auth(), ...)
+  sofa_DELETE(url, as,
+    headers = cushion$get_headers(),
+    auth = cushion$get_auth(), ...
+  )
 }

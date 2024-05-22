@@ -35,39 +35,43 @@
 #' @examples \dontrun{
 #' user <- Sys.getenv("COUCHDB_TEST_USER")
 #' pwd <- Sys.getenv("COUCHDB_TEST_PWD")
-#' (x <- Cushion$new(user=user, pwd=pwd))
+#' (x <- Cushion$new(user = user, pwd = pwd))
 #'
 #' if ("leoalion" %in% db_list(x)) {
-#'   invisible(db_delete(x, dbname="leoalion"))
+#'   invisible(db_delete(x, dbname = "leoalion"))
 #' }
-#' db_create(x, dbname='leoalion')
+#' db_create(x, dbname = "leoalion")
 #'
 #' # no changes
-#' res <- db_changes(x, dbname="leoalion")
+#' res <- db_changes(x, dbname = "leoalion")
 #' res$results
 #'
 #' # create a document
 #' doc1 <- '{"name": "drink", "type": "water", "score": 5}'
-#' doc_create(x, dbname="leoalion", doc1, docid="awater")
+#' doc_create(x, dbname = "leoalion", doc1, docid = "awater")
 #'
 #' # now there's changes
-#' res <- db_changes(x, dbname="leoalion")
+#' res <- db_changes(x, dbname = "leoalion")
 #' res$results
 #'
 #' # as JSON
-#' db_changes(x, dbname="leoalion", as='json')
+#' db_changes(x, dbname = "leoalion", as = "json")
 #' }
-db_changes <- function(cushion, dbname, descending=NULL, startkey=NULL,
-  endkey=NULL, since=NULL, limit=NULL, include_docs=NULL, feed="normal",
-  heartbeat=NULL, filter=NULL, as='list', ...) {
-
+db_changes <- function(
+    cushion, dbname, descending = NULL, startkey = NULL,
+    endkey = NULL, since = NULL, limit = NULL, include_docs = NULL, feed = "normal",
+    heartbeat = NULL, filter = NULL, as = "list", ...) {
   check_cushion(cushion)
-  args <- sc(list(descending=descending,startkey=startkey,endkey=endkey,
-                  since=since,limit=limit,include_docs=include_docs,feed=feed,
-                  heartbeat=heartbeat,filter=filter))
+  args <- sc(list(
+    descending = descending, startkey = startkey, endkey = endkey,
+    since = since, limit = limit, include_docs = include_docs, feed = feed,
+    heartbeat = heartbeat, filter = filter
+  ))
 
   call_ <- sprintf("%s/%s/_changes", cushion$make_url(), dbname)
-  sofa_GET(call_, as, query = args,
-           cushion$get_headers(),
-           cushion$get_auth(), ...)
+  sofa_GET(call_, as,
+    query = args,
+    cushion$get_headers(),
+    cushion$get_auth(), ...
+  )
 }

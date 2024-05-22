@@ -7,14 +7,15 @@
 #' # Create a CouchDB connection client
 #' user <- Sys.getenv("COUCHDB_TEST_USER")
 #' pwd <- Sys.getenv("COUCHDB_TEST_PWD")
-#' (x <- Cushion$new(user=user, pwd=pwd))
+#' (x <- Cushion$new(user = user, pwd = pwd))
 #'
 #' session(x)
-#' session(x, as = 'json')
+#' session(x, as = "json")
 #' }
-session <- function(cushion, as = 'list', ...) {
+session <- function(cushion, as = "list", ...) {
   check_cushion(cushion)
-  sofa_GET(file.path(cushion$make_url(), '_session'),
+  sofa_GET(file.path(cushion$make_url(), "_session"),
     as = as, headers = cushion$get_headers(),
-    auth = cushion$get_auth(), ...)
+    auth = cushion$get_auth(), ...
+  )
 }

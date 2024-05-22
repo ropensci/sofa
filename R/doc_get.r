@@ -16,28 +16,28 @@
 #' @examples \dontrun{
 #' user <- Sys.getenv("COUCHDB_TEST_USER")
 #' pwd <- Sys.getenv("COUCHDB_TEST_PWD")
-#' (x <- Cushion$new(user=user, pwd=pwd))
+#' (x <- Cushion$new(user = user, pwd = pwd))
 #'
 #' if ("sofadb" %in% db_list(x)) {
-#'   invisible(db_delete(x, dbname="sofadb"))
+#'   invisible(db_delete(x, dbname = "sofadb"))
 #' }
-#' db_create(x, dbname="sofadb")
+#' db_create(x, dbname = "sofadb")
 #'
 #' # create a document
 #' doc1 <- '{"name": "drink", "type": "drink", "score": 5}'
-#' doc_create(x, dbname="sofadb", doc1, docid="asoda")
+#' doc_create(x, dbname = "sofadb", doc1, docid = "asoda")
 #'
-#' doc_get(x, dbname="sofadb", docid="asoda")
-#' revs <- db_revisions(x, dbname="sofadb", docid="asoda")
-#' doc_get(x, dbname="sofadb", docid="asoda", rev=revs[1])
-#' doc_get(x, dbname="sofadb", docid="asoda", as='json')
-#' doc_get(x, dbname="sofadb", docid="asoda", revs=TRUE)
-#' doc_get(x, dbname="sofadb", docid="asoda", revs=TRUE, local_seq=TRUE)
+#' doc_get(x, dbname = "sofadb", docid = "asoda")
+#' revs <- db_revisions(x, dbname = "sofadb", docid = "asoda")
+#' doc_get(x, dbname = "sofadb", docid = "asoda", rev = revs[1])
+#' doc_get(x, dbname = "sofadb", docid = "asoda", as = "json")
+#' doc_get(x, dbname = "sofadb", docid = "asoda", revs = TRUE)
+#' doc_get(x, dbname = "sofadb", docid = "asoda", revs = TRUE, local_seq = TRUE)
 #' }
-doc_get <- function(cushion, dbname, docid, rev=NULL, attachments=FALSE, deleted=FALSE,
-  revs=FALSE, revs_info=FALSE, conflicts=FALSE, deleted_conflicts=FALSE,
-  local_seq=FALSE, as='list', ...) {
-
+doc_get <- function(
+    cushion, dbname, docid, rev = NULL, attachments = FALSE, deleted = FALSE,
+    revs = FALSE, revs_info = FALSE, conflicts = FALSE, deleted_conflicts = FALSE,
+    local_seq = FALSE, as = "list", ...) {
   check_cushion(cushion)
   args <- sc(list(
     rev = rev, attachments = asl(attachments), deleted = asl(deleted), revs = asl(revs),
@@ -45,6 +45,8 @@ doc_get <- function(cushion, dbname, docid, rev=NULL, attachments=FALSE, deleted
     deleted_conflicts = asl(deleted_conflicts), local_seq = asl(local_seq)
   ))
   url <- file.path(cushion$make_url(), dbname, docid)
-  sofa_GET(url, as, query = args, cushion$get_headers(),
-           cushion$get_auth(), ...)
+  sofa_GET(url, as,
+    query = args, cushion$get_headers(),
+    cushion$get_auth(), ...
+  )
 }
