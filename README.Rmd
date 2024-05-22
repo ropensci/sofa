@@ -1,5 +1,7 @@
-sofa <a href="https://docs.ropensci.org/sofa/"><img src="man/figures/logo.png" align="right" height="139" alt="sofa website" /></a>
-====
+---
+title: 'sofa'
+output: md_document
+---
 
 ```{r, echo=FALSE}
 knitr::opts_chunk$set(
@@ -10,7 +12,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# sofa <img src="man/figures/logo.png" width=120px align="right" />
+# <img src="man/figures/logo.png" width=120px align="right" />
 
 <!-- badges: start -->
 
