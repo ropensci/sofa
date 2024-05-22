@@ -1,5 +1,5 @@
 library(sofa)
-
+COUCHDB_TEST_HOST <- Sys.getenv("COUCHDB_TEST_HOST")
 COUCHDB_TEST_USER <- Sys.getenv("COUCHDB_TEST_USER")
 COUCHDB_TEST_PWD <- Sys.getenv("COUCHDB_TEST_PWD")
 
@@ -10,9 +10,15 @@ dbname_random <- function() {
 cleanup_dbs <- function(x) invisible(db_delete(sofa_conn, x))
 
 invisible(sofa_conn <- Cushion$new(
-  user = COUCHDB_TEST_USER, pwd = COUCHDB_TEST_PWD
+  host = COUCHDB_TEST_HOST,
+  user = COUCHDB_TEST_USER,
+  pwd = COUCHDB_TEST_PWD,
+  transport = 'https',
+  port = 443
 ))
+
 pinged <- tryCatch(sofa_conn$ping(), error = function(e) e)
+
 if (!inherits(pinged, "error")) {
   db_test_name <- "testing123"
   if (!db_test_name %in% db_list(sofa_conn)) {
@@ -20,3 +26,4 @@ if (!inherits(pinged, "error")) {
   }
   invisible(db_bulk_create(sofa_conn, dbname = db_test_name, doc = iris))
 }
+
