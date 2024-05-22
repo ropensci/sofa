@@ -1,5 +1,5 @@
 .DS_Store
-.scott_auth.r
+.auth.r
 .Rproj.user
 *.Rproj
 .Rhistory
