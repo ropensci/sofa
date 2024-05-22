@@ -9,6 +9,9 @@ knitr::opts_chunk$set(
   message=FALSE
 )
 ```
+
+# sofa <img src="man/figures/logo.png" width=120px align="right" />
+
 <!-- badges: start -->
 
 [![CRAN status](https://www.r-pkg.org/badges/version/sofa)](https://CRAN.R-project.org/package=sofa)
