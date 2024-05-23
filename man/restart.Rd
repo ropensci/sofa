@@ -24,7 +24,7 @@ Restart your Couchdb instance
 \dontrun{
 user <- Sys.getenv("COUCHDB_TEST_USER")
 pwd <- Sys.getenv("COUCHDB_TEST_PWD")
-(x <- Cushion$new(user=user, pwd=pwd))
+(x <- Cushion$new(user = user, pwd = pwd))
 
 # restart(x)
 }

@@ -26,7 +26,7 @@ plan to support older CouchDB versions per se.
 # Create a CouchDB connection client
 user <- Sys.getenv("COUCHDB_TEST_USER")
 pwd <- Sys.getenv("COUCHDB_TEST_PWD")
-(x <- Cushion$new(user=user, pwd=pwd))
+(x <- Cushion$new(user = user, pwd = pwd))
 
 ## metadata
 x$host
@@ -50,13 +50,13 @@ if (!"sofadb" \%in\% db_list(x)) {
   db_create(x, "sofadb")
 }
 doc1 <- '{"name": "drink", "beer": "IPA", "score": 5}'
-doc_create(x, dbname="sofadb", docid="abeer", doc1)
+doc_create(x, dbname = "sofadb", docid = "abeer", doc1)
 
 # bulk create
 if (!"mymtcars" \%in\% db_list(x)) {
   db_create(x, "mymtcars")
 }
-db_bulk_create(x, dbname="mymtcars", doc = mtcars)
+db_bulk_create(x, dbname = "mymtcars", doc = mtcars)
 db_list(x)
 
 ## database info

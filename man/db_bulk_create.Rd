@@ -53,53 +53,53 @@ Note that row.names are dropped from data.frame inputs.
 # initialize a CouchDB connection
 user <- Sys.getenv("COUCHDB_TEST_USER")
 pwd <- Sys.getenv("COUCHDB_TEST_PWD")
-(x <- Cushion$new(user=user, pwd=pwd))
+(x <- Cushion$new(user = user, pwd = pwd))
 
 # From a data.frame
 if ("bulktest" \%in\% db_list(x)) {
-  invisible(db_delete(x, dbname="bulktest"))
+  invisible(db_delete(x, dbname = "bulktest"))
 }
-db_create(x, dbname="bulktest")
+db_create(x, dbname = "bulktest")
 db_bulk_create(x, "bulktest", mtcars)
 
 if ("bulktest2" \%in\% db_list(x)) {
-  invisible(db_delete(x, dbname="bulktest2"))
+  invisible(db_delete(x, dbname = "bulktest2"))
 }
-db_create(x, dbname="bulktest2")
+db_create(x, dbname = "bulktest2")
 db_bulk_create(x, "bulktest2", iris)
 
 # data.frame with 1 or more columns as neseted lists
 mtcars$stuff <- list("hello_world")
-mtcars$stuff2 <- list("hello_world","things")
+mtcars$stuff2 <- list("hello_world", "things")
 if ("bulktest3" \%in\% db_list(x)) {
-  invisible(db_delete(x, dbname="bulktest3"))
+  invisible(db_delete(x, dbname = "bulktest3"))
 }
-db_create(x, dbname="bulktest3")
+db_create(x, dbname = "bulktest3")
 db_bulk_create(x, "bulktest3", mtcars)
 
 # From a json character string, or more likely, many json character strings
 library("jsonlite")
 strs <- as.character(parse_df(mtcars, "columns"))
 if ("bulkfromchr" \%in\% db_list(x)) {
-  invisible(db_delete(x, dbname="bulkfromchr"))
+  invisible(db_delete(x, dbname = "bulkfromchr"))
 }
-db_create(x, dbname="bulkfromchr")
+db_create(x, dbname = "bulkfromchr")
 db_bulk_create(x, "bulkfromchr", strs)
 
 # From a list of lists
 library("jsonlite")
-lst <- parse_df(mtcars, tojson=FALSE)
+lst <- parse_df(mtcars, tojson = FALSE)
 if ("bulkfromchr" \%in\% db_list(x)) {
-  invisible(db_delete(x, dbname="bulkfromchr"))
+  invisible(db_delete(x, dbname = "bulkfromchr"))
 }
-db_create(x, dbname="bulkfromchr")
+db_create(x, dbname = "bulkfromchr")
 db_bulk_create(x, "bulkfromchr", lst)
 
 # iris dataset - by rows
 if ("irisrows" \%in\% db_list(x)) {
-  invisible(db_delete(x, dbname="irisrows"))
+  invisible(db_delete(x, dbname = "irisrows"))
 }
-db_create(x, dbname="irisrows")
+db_create(x, dbname = "irisrows")
 db_bulk_create(x, "irisrows", apply(iris, 1, as.list))
 
 # iris dataset - by columns - doesn't quite work yet

@@ -26,14 +26,14 @@ List database info.
 \dontrun{
 user <- Sys.getenv("COUCHDB_TEST_USER")
 pwd <- Sys.getenv("COUCHDB_TEST_PWD")
-(x <- Cushion$new(user=user, pwd=pwd))
+(x <- Cushion$new(user = user, pwd = pwd))
 
 if ("sofadb" \%in\% db_list(x)) {
-  invisible(db_delete(x, dbname="sofadb"))
+  invisible(db_delete(x, dbname = "sofadb"))
 }
-db_create(x, dbname='sofadb')
+db_create(x, dbname = "sofadb")
 
-db_info(x, dbname="sofadb")
-db_info(x, dbname="sofadb", as='json')
+db_info(x, dbname = "sofadb")
+db_info(x, dbname = "sofadb", as = "json")
 }
 }

@@ -57,11 +57,11 @@ indexing time, creating a partial index. Optional
 \dontrun{
 user <- Sys.getenv("COUCHDB_TEST_USER")
 pwd <- Sys.getenv("COUCHDB_TEST_PWD")
-(x <- Cushion$new(user=user, pwd=pwd))
+(x <- Cushion$new(user = user, pwd = pwd))
 
 # create a database first
 if ("testing" \%in\% db_list(x)) {
-  invisible(db_delete(x, dbname="testing"))
+  invisible(db_delete(x, dbname = "testing"))
 }
 db_create(x, "testing")
 

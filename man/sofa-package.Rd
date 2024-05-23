@@ -55,6 +55,14 @@ We pass \code{getOption("digits")} to the \code{digits} parameter in
 }
 }
 
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/ropensci/sofa (devel) https://docs.ropensci.org/sofa (docs)}
+  \item Report bugs at \url{https://github.com/ropensci/sofa/issues}
+}
+
+}
 \author{
 Yaoxiang Li \email{liyaoxiang@outlook.com}
 

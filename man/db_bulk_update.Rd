@@ -50,15 +50,15 @@ Create documents via the bulk API
 # initialize a CouchDB connection
 user <- Sys.getenv("COUCHDB_TEST_USER")
 pwd <- Sys.getenv("COUCHDB_TEST_PWD")
-(x <- Cushion$new(user=user, pwd=pwd))
+(x <- Cushion$new(user = user, pwd = pwd))
 
 row.names(mtcars) <- NULL
 
 if ("bulktest" \%in\% db_list(x)) {
-  invisible(db_delete(x, dbname="bulktest"))
+  invisible(db_delete(x, dbname = "bulktest"))
 }
-db_create(x, dbname="bulktest")
-db_bulk_create(x, mtcars, dbname="bulktest")
+db_create(x, dbname = "bulktest")
+db_bulk_create(x, mtcars, dbname = "bulktest")
 
 # modify mtcars
 mtcars$letter <- sample(letters, NROW(mtcars), replace = TRUE)

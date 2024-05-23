@@ -65,16 +65,16 @@ Explain API
 ## create a connection
 user <- Sys.getenv("COUCHDB_TEST_USER")
 pwd <- Sys.getenv("COUCHDB_TEST_PWD")
-(x <- Cushion$new(user=user, pwd=pwd))
+(x <- Cushion$new(user = user, pwd = pwd))
 
 file <- system.file("examples/omdb.json", package = "sofa")
 strs <- readLines(file)
 
 ## create a database
 if ("omdb" \%in\% db_list(x)) {
-  invisible(db_delete(x, dbname="omdb"))
+  invisible(db_delete(x, dbname = "omdb"))
 }
-db_create(x, dbname='omdb')
+db_create(x, dbname = "omdb")
 
 ## add some documents
 invisible(db_bulk_create(x, "omdb", strs))

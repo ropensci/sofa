@@ -30,20 +30,20 @@ If the document does not exist, it is created
 \dontrun{
 user <- Sys.getenv("COUCHDB_TEST_USER")
 pwd <- Sys.getenv("COUCHDB_TEST_PWD")
-(x <- Cushion$new(user=user, pwd=pwd))
+(x <- Cushion$new(user = user, pwd = pwd))
 
 if ("sofadb" \%in\% db_list(x)) {
-  invisible(db_delete(x, dbname="sofadb"))
+  invisible(db_delete(x, dbname = "sofadb"))
 }
-db_create(x, 'sofadb')
+db_create(x, "sofadb")
 
 # create a document
 doc1 <- '{"name": "drink", "beer": "IPA", "score": 5}'
-doc_upsert(x, dbname="sofadb", doc1, docid="abeer")
+doc_upsert(x, dbname = "sofadb", doc1, docid = "abeer")
 
-#update the document
+# update the document
 doc2 <- '{"name": "drink", "beer": "lager", "score": 6}'
-doc_upsert(x, dbname="sofadb", doc2, docid="abeer")
+doc_upsert(x, dbname = "sofadb", doc2, docid = "abeer")
 
 
 doc_get(x, dbname = "sofadb", docid = "abeer")

@@ -25,9 +25,9 @@ session
 # Create a CouchDB connection client
 user <- Sys.getenv("COUCHDB_TEST_USER")
 pwd <- Sys.getenv("COUCHDB_TEST_PWD")
-(x <- Cushion$new(user=user, pwd=pwd))
+(x <- Cushion$new(user = user, pwd = pwd))
 
 session(x)
-session(x, as = 'json')
+session(x, as = "json")
 }
 }

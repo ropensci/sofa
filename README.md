@@ -15,9 +15,6 @@ downloads](https://cranlogs.r-pkg.org/badges/sofa?color=ff69b4)](https://github.
 
 **An easy interface to CouchDB from R**
 
-Note: Check out [*R4couchdb*](https://github.com/wactbprot/R4CouchDB),
-another R package to interact with CouchDB.
-
 sofa docs: <https://docs.ropensci.org/sofa/>
 
 ## CouchDB versions

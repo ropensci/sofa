@@ -69,53 +69,53 @@ We pass \code{getOption("digits")} to the \code{digits} parameter in
 \dontrun{
 user <- Sys.getenv("COUCHDB_TEST_USER")
 pwd <- Sys.getenv("COUCHDB_TEST_PWD")
-(x <- Cushion$new(user=user, pwd=pwd))
+(x <- Cushion$new(user = user, pwd = pwd))
 
 if ("sofadb" \%in\% db_list(x)) {
-  invisible(db_delete(x, dbname="sofadb"))
+  invisible(db_delete(x, dbname = "sofadb"))
 }
-db_create(x, 'sofadb')
+db_create(x, "sofadb")
 
 # write a document WITH a name (uses PUT)
 doc1 <- '{"name": "drink", "beer": "IPA", "score": 5}'
-doc_create(x, dbname="sofadb", doc1, docid="abeer")
-doc_create(x, dbname="sofadb", doc1, docid="morebeer", as='json')
+doc_create(x, dbname = "sofadb", doc1, docid = "abeer")
+doc_create(x, dbname = "sofadb", doc1, docid = "morebeer", as = "json")
 doc_get(x, dbname = "sofadb", docid = "abeer")
 ## with factor class values
 doc2 <- list(name = as.factor("drink"), beer = "stout", score = 4)
-doc_create(x, doc2, dbname="sofadb", docid="nextbeer", as='json')
+doc_create(x, doc2, dbname = "sofadb", docid = "nextbeer", as = "json")
 doc_get(x, dbname = "sofadb", docid = "nextbeer")
 
 # write a json document WITHOUT a name (uses POST)
 doc2 <- '{"name": "food", "icecream": "rocky road"}'
-doc_create(x, doc2, dbname="sofadb")
+doc_create(x, doc2, dbname = "sofadb")
 doc3 <- '{"planet": "mars", "size": "smallish"}'
-doc_create(x, doc3, dbname="sofadb")
+doc_create(x, doc3, dbname = "sofadb")
 ## assigns a UUID instead of a user given name
 db_alldocs(x, dbname = "sofadb")
 
 # write an xml document WITH a name (uses PUT). xml is written as xml in
 # couchdb, just wrapped in json, when you get it out it will be as xml
 doc4 <- "<top><a/><b/><c><d/><e>bob</e></c></top>"
-doc_create(x, doc4, dbname="sofadb", docid="somexml")
+doc_create(x, doc4, dbname = "sofadb", docid = "somexml")
 doc_get(x, dbname = "sofadb", docid = "somexml")
 
 # You can pass in lists that autoconvert to json internally
 doc1 <- list(name = "drink", type = "soda", score = 9)
-doc_create(x, dbname="sofadb", doc1, docid="gooddrink")
+doc_create(x, dbname = "sofadb", doc1, docid = "gooddrink")
 
 # Write directly from a data.frame
 ## Each row or column becomes a separate document
 ### by rows
 if ("test" \%in\% db_list(x)) {
-  invisible(db_delete(x, dbname="test"))
+  invisible(db_delete(x, dbname = "test"))
 }
 db_create(x, dbname = "test")
-doc_create(x, mtcars, dbname="test", how="rows")
-doc_create(x, mtcars, dbname="test", how="columns")
+doc_create(x, mtcars, dbname = "test", how = "rows")
+doc_create(x, mtcars, dbname = "test", how = "columns")
 
 if ("testiris" \%in\% db_list(x)) {
-  invisible(db_delete(x, dbname="testiris"))
+  invisible(db_delete(x, dbname = "testiris"))
 }
 db_create(x, dbname = "testiris")
 head(iris)

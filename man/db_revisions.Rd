@@ -31,20 +31,20 @@ Get document revisions.
 \dontrun{
 user <- Sys.getenv("COUCHDB_TEST_USER")
 pwd <- Sys.getenv("COUCHDB_TEST_PWD")
-(x <- Cushion$new(user=user, pwd=pwd))
+(x <- Cushion$new(user = user, pwd = pwd))
 
 if ("sofadb" \%in\% db_list(x)) {
- db_delete(x, dbname = "sofadb")
+  db_delete(x, dbname = "sofadb")
 }
 db_create(x, dbname = "sofadb")
 
 doc1 <- '{"name": "drink", "beer": "IPA", "score": 5}'
-doc_create(x, dbname="sofadb", doc1, docid="abeer")
-doc_create(x, dbname="sofadb", doc1, docid="morebeer", as='json')
+doc_create(x, dbname = "sofadb", doc1, docid = "abeer")
+doc_create(x, dbname = "sofadb", doc1, docid = "morebeer", as = "json")
 
-db_revisions(x, dbname="sofadb", docid="abeer")
-db_revisions(x, dbname="sofadb", docid="abeer", simplify=FALSE)
-db_revisions(x, dbname="sofadb", docid="abeer", as='json')
-db_revisions(x, dbname="sofadb", docid="abeer", simplify=FALSE, as='json')
+db_revisions(x, dbname = "sofadb", docid = "abeer")
+db_revisions(x, dbname = "sofadb", docid = "abeer", simplify = FALSE)
+db_revisions(x, dbname = "sofadb", docid = "abeer", as = "json")
+db_revisions(x, dbname = "sofadb", docid = "abeer", simplify = FALSE, as = "json")
 }
 }

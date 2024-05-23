@@ -68,48 +68,54 @@ function yourself.
 \dontrun{
 user <- Sys.getenv("COUCHDB_TEST_USER")
 pwd <- Sys.getenv("COUCHDB_TEST_PWD")
-(x <- Cushion$new(user=user, pwd=pwd))
+(x <- Cushion$new(user = user, pwd = pwd))
 
 file <- system.file("examples/omdb.json", package = "sofa")
 strs <- readLines(file)
 
 ## create a database
 if ("omdb" \%in\% db_list(x)) {
-  invisible(db_delete(x, dbname="omdb"))
+  invisible(db_delete(x, dbname = "omdb"))
 }
-db_create(x, dbname='omdb')
+db_create(x, dbname = "omdb")
 
 ## add the documents
 invisible(db_bulk_create(x, "omdb", strs))
 
 # Create a view, the easy way, but less flexible
-design_create(x, dbname='omdb', design='view1', fxnname="foobar1")
-design_create(x, dbname='omdb', design='view2', fxnname="foobar2",
-  value="doc.Country")
-design_create(x, dbname='omdb', design='view5', fxnname="foobar3",
-  value="[doc.Country,doc.imdbRating]")
+design_create(x, dbname = "omdb", design = "view1", fxnname = "foobar1")
+design_create(x,
+  dbname = "omdb", design = "view2", fxnname = "foobar2",
+  value = "doc.Country"
+)
+design_create(x,
+  dbname = "omdb", design = "view5", fxnname = "foobar3",
+  value = "[doc.Country,doc.imdbRating]"
+)
 
 # the harder way, write your own function, but more flexible
-design_create_(x, dbname='omdb', design='view22',
-  fxnname = "stuffthings", fxn = "function(doc){emit(null,doc.Country)}")
+design_create_(x,
+  dbname = "omdb", design = "view22",
+  fxnname = "stuffthings", fxn = "function(doc){emit(null,doc.Country)}"
+)
 
 # Delete a view
-design_delete(x, dbname='omdb', design='view1')
+design_delete(x, dbname = "omdb", design = "view1")
 
 # Get info on a design document
 ## HEAD request, returns just response headers
-design_head(x, dbname='omdb', design='view2')
-design_head(x, dbname='omdb', design='view5')
+design_head(x, dbname = "omdb", design = "view2")
+design_head(x, dbname = "omdb", design = "view5")
 ## GET request, returns information about the design document
-design_info(x, dbname='omdb', design='view2')
-design_info(x, dbname='omdb', design='view5')
+design_info(x, dbname = "omdb", design = "view2")
+design_info(x, dbname = "omdb", design = "view5")
 
 # Get a design document (GET request)
-design_get(x, dbname='omdb', design='view2')
-design_get(x, dbname='omdb', design='view5')
+design_get(x, dbname = "omdb", design = "view2")
+design_get(x, dbname = "omdb", design = "view5")
 
 # Search using a view
-res <- design_search(x, dbname='omdb', design='view2', view='foobar2')
+res <- design_search(x, dbname = "omdb", design = "view2", view = "foobar2")
 head(
   do.call(
     "rbind.data.frame",
@@ -117,12 +123,12 @@ head(
   )
 )
 
-res <- design_search(x, dbname='omdb', design='view5', view='foobar3')
+res <- design_search(x, dbname = "omdb", design = "view5", view = "foobar3")
 head(
   structure(do.call(
     "rbind.data.frame",
     lapply(res$rows, function(x) x$value)
-  ), .Names = c('Country', 'imdbRating'))
+  ), .Names = c("Country", "imdbRating"))
 )
 }
 }

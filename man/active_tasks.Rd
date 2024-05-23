@@ -25,9 +25,9 @@ active tasks
 # Create a CouchDB connection client
 user <- Sys.getenv("COUCHDB_TEST_USER")
 pwd <- Sys.getenv("COUCHDB_TEST_PWD")
-(x <- Cushion$new(user=user, pwd=pwd))
+(x <- Cushion$new(user = user, pwd = pwd))
 
 active_tasks(x)
-active_tasks(x, as = 'json')
+active_tasks(x, as = "json")
 }
 }

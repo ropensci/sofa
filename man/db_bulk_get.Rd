@@ -29,12 +29,12 @@ Query many documents at once
 # initialize a CouchDB connection
 user <- Sys.getenv("COUCHDB_TEST_USER")
 pwd <- Sys.getenv("COUCHDB_TEST_PWD")
-(x <- Cushion$new(user=user, pwd=pwd))
+(x <- Cushion$new(user = user, pwd = pwd))
 
 if ("bulkgettest" \%in\% db_list(x)) {
-  invisible(db_delete(x, dbname="bulkgettest"))
+  invisible(db_delete(x, dbname = "bulkgettest"))
 }
-db_create(x, dbname="bulkgettest")
+db_create(x, dbname = "bulkgettest")
 db_bulk_create(x, "bulkgettest", mtcars)
 res <- db_query(x, dbname = "bulkgettest", selector = list(cyl = 8))
 
@@ -44,8 +44,10 @@ ids_only <- lapply(ids[1:5], function(w) list(id = w))
 db_bulk_get(x, "bulkgettest", docid_rev = ids_only)
 
 # with ids and revs
-ids_rev <- lapply(res$docs[1:3],
-  function(w) list(id = w$`_id`, rev = w$`_rev`))
+ids_rev <- lapply(
+  res$docs[1:3],
+  function(w) list(id = w$`_id`, rev = w$`_rev`)
+)
 db_bulk_get(x, "bulkgettest", docid_rev = ids_rev)
 }
 }

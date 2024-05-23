@@ -27,9 +27,9 @@ or json string
 }
 \examples{
 \dontrun{
-parse_df(mtcars, how="rows")
-parse_df(mtcars, how="columns")
-parse_df(mtcars, how="rows", tojson=FALSE)
-parse_df(mtcars, how="columns", tojson=FALSE)
+parse_df(mtcars, how = "rows")
+parse_df(mtcars, how = "columns")
+parse_df(mtcars, how = "rows", tojson = FALSE)
+parse_df(mtcars, how = "columns", tojson = FALSE)
 }
 }

@@ -106,65 +106,75 @@ Default: \code{FALSE}
 \dontrun{
 user <- Sys.getenv("COUCHDB_TEST_USER")
 pwd <- Sys.getenv("COUCHDB_TEST_PWD")
-(x <- Cushion$new(user=user, pwd=pwd))
+(x <- Cushion$new(user = user, pwd = pwd))
 
 file <- system.file("examples/omdb.json", package = "sofa")
 strs <- readLines(file)
 
 ## create a database
 if ("omdb" \%in\% db_list(x)) {
-  invisible(db_delete(x, dbname="omdb"))
+  invisible(db_delete(x, dbname = "omdb"))
 }
-db_create(x, dbname='omdb')
+db_create(x, dbname = "omdb")
 
 ## add the documents
 invisible(db_bulk_create(x, "omdb", strs))
 
 # Create a view, the easy way, but less flexible
-design_create(x, dbname='omdb', design='view1', fxnname="foobar1")
-design_create(x, dbname='omdb', design='view2', fxnname="foobar2",
-  value="doc.Country")
-design_create(x, dbname='omdb', design='view5', fxnname="foobar3",
-  value="[doc.Country,doc.imdbRating]")
-design_create_(x, dbname='omdb', design='view6', fxnname="foobar4",
-  fxn = "function(doc){emit(doc._id,doc.Country)}")
+design_create(x, dbname = "omdb", design = "view1", fxnname = "foobar1")
+design_create(x,
+  dbname = "omdb", design = "view2", fxnname = "foobar2",
+  value = "doc.Country"
+)
+design_create(x,
+  dbname = "omdb", design = "view5", fxnname = "foobar3",
+  value = "[doc.Country,doc.imdbRating]"
+)
+design_create_(x,
+  dbname = "omdb", design = "view6", fxnname = "foobar4",
+  fxn = "function(doc){emit(doc._id,doc.Country)}"
+)
 
 # Search using a view
 compact <- function(l) Filter(Negate(is.null), l)
-res <- design_search(x, dbname='omdb', design='view2', view ='foobar2')
+res <- design_search(x, dbname = "omdb", design = "view2", view = "foobar2")
 head(
   do.call(
     "rbind.data.frame",
     Filter(
       function(z) length(z) == 2,
-      lapply(res$rows, function(x) compact(x[names(x) \%in\% c('id', 'value')]))
+      lapply(res$rows, function(x) compact(x[names(x) \%in\% c("id", "value")]))
     )
   )
 )
 
-res <- design_search(x, dbname='omdb', design='view5', view = 'foobar3')
+res <- design_search(x, dbname = "omdb", design = "view5", view = "foobar3")
 head(
   structure(do.call(
     "rbind.data.frame",
     lapply(res$rows, function(x) x$value)
-  ), .Names = c('Country', 'imdbRating'))
+  ), .Names = c("Country", "imdbRating"))
 )
 
 # query parameters
 ## limit
-design_search(x, dbname='omdb', design='view5', view = 'foobar3',
-  params = list(limit = 5))
+design_search(x,
+  dbname = "omdb", design = "view5", view = "foobar3",
+  params = list(limit = 5)
+)
 ## limit and skip
-design_search(x, dbname='omdb', design='view5', view = 'foobar3',
-  params = list(limit = 5, skip = 3))
+design_search(x,
+  dbname = "omdb", design = "view5", view = "foobar3",
+  params = list(limit = 5, skip = 3)
+)
 ## with start and end keys
-### important: the key strings have to be in JSON, so here e.g., 
+### important: the key strings have to be in JSON, so here e.g.,
 ###  need to add escaped double quotes
 res <- design_search(
   cushion = x,
-  dbname = 'omdb',
-  design = 'view6',
-  view = 'foobar4',
+  dbname = "omdb",
+  design = "view6",
+  view = "foobar4",
   params = list(
     startkey = "\"c25bbf4fef99408b3e1115374a03f642\"",
     endkey = "\"c25bbf4fef99408b3e1115374a040f11\""
@@ -172,9 +182,11 @@ res <- design_search(
 )
 
 # POST request
-ids <- vapply(db_alldocs(x, dbname='omdb')$rows[1:3], "[[", "", "id")
-res <- design_search(x, dbname='omdb', design='view6', view = 'foobar4',
-  body = list(keys = ids), verbose = TRUE)
+ids <- vapply(db_alldocs(x, dbname = "omdb")$rows[1:3], "[[", "", "id")
+res <- design_search(x,
+  dbname = "omdb", design = "view6", view = "foobar4",
+  body = list(keys = ids), verbose = TRUE
+)
 res
 
 # Many queries at once in a POST request
@@ -182,7 +194,7 @@ queries <- list(
   list(keys = ids),
   list(limit = 3, skip = 2)
 )
-design_search_many(x, 'omdb', 'view6', 'foobar4', queries)
+design_search_many(x, "omdb", "view6", "foobar4", queries)
 }
 }
 \references{

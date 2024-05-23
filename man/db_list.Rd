@@ -27,9 +27,9 @@ List all databases.
 \dontrun{
 user <- Sys.getenv("COUCHDB_TEST_USER")
 pwd <- Sys.getenv("COUCHDB_TEST_PWD")
-(x <- Cushion$new(user=user, pwd=pwd))
+(x <- Cushion$new(user = user, pwd = pwd))
 
 db_list(x)
-db_list(x, as = 'json')
+db_list(x, as = "json")
 }
 }

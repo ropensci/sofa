@@ -58,22 +58,22 @@ Get a document from a database.
 \dontrun{
 user <- Sys.getenv("COUCHDB_TEST_USER")
 pwd <- Sys.getenv("COUCHDB_TEST_PWD")
-(x <- Cushion$new(user=user, pwd=pwd))
+(x <- Cushion$new(user = user, pwd = pwd))
 
 if ("sofadb" \%in\% db_list(x)) {
-  invisible(db_delete(x, dbname="sofadb"))
+  invisible(db_delete(x, dbname = "sofadb"))
 }
-db_create(x, dbname="sofadb")
+db_create(x, dbname = "sofadb")
 
 # create a document
 doc1 <- '{"name": "drink", "type": "drink", "score": 5}'
-doc_create(x, dbname="sofadb", doc1, docid="asoda")
+doc_create(x, dbname = "sofadb", doc1, docid = "asoda")
 
-doc_get(x, dbname="sofadb", docid="asoda")
-revs <- db_revisions(x, dbname="sofadb", docid="asoda")
-doc_get(x, dbname="sofadb", docid="asoda", rev=revs[1])
-doc_get(x, dbname="sofadb", docid="asoda", as='json')
-doc_get(x, dbname="sofadb", docid="asoda", revs=TRUE)
-doc_get(x, dbname="sofadb", docid="asoda", revs=TRUE, local_seq=TRUE)
+doc_get(x, dbname = "sofadb", docid = "asoda")
+revs <- db_revisions(x, dbname = "sofadb", docid = "asoda")
+doc_get(x, dbname = "sofadb", docid = "asoda", rev = revs[1])
+doc_get(x, dbname = "sofadb", docid = "asoda", as = "json")
+doc_get(x, dbname = "sofadb", docid = "asoda", revs = TRUE)
+doc_get(x, dbname = "sofadb", docid = "asoda", revs = TRUE, local_seq = TRUE)
 }
 }

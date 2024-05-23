@@ -38,7 +38,7 @@ Suggests:
     testthat,
     knitr,
     rmarkdown
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.0
 X-schema.org-applicationCategory: Databases
 X-schema.org-keywords: CouchDB, database, NoSQL, documents
 X-schema.org-isPartOf: https://ropensci.org
