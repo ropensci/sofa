@@ -12,3 +12,4 @@ man-roxygen
 ^codemeta\.json$
 notes.R
 vignettes/sofa.Rmd.og
+^LICENSE\.md$
