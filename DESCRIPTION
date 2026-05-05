@@ -36,6 +36,7 @@ Imports:
     mime
 Suggests:
     testthat,
+    cli,
     knitr,
     rmarkdown
 RoxygenNote: 7.3.0
