@@ -10,6 +10,12 @@ test_that("remote URL helpers build supported service URLs", {
   expect_equal(sofa:::remote_url(x, endpt = "_all_dbs"), "https://alice.iriscouch.com/_all_dbs")
   expect_equal(sofa:::remote_url(x, dbname = "db"), "https://alice.iriscouch.com/db")
   expect_equal(sofa:::remote_url(x, dbname = "db", endpt = "_changes"), "https://alice.iriscouch.com/db/_changes")
+
+  y <- Cushion$new(host = "example.org", port = NULL, transport = "https")
+  expect_equal(sofa:::replication_url(y, "db"), "https://example.org/db")
+
+  z <- Cushion$new(host = "example.org", port = NULL, transport = "https", user = "a user", pwd = "p/word")
+  expect_equal(sofa:::replication_url(z, "db"), "https://a%20user:p%2Fword@example.org/db")
 })
 
 test_that("input helpers cover empty, XML, list, and invalid types", {

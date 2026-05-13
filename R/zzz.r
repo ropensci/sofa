@@ -36,6 +36,19 @@ iris_url <- function(cushion, dbname = NULL, endpt = NULL) {
   }
 }
 
+replication_url <- function(cushion, dbname) {
+  url <- file.path(cushion$make_url(), dbname)
+  if (!is.null(cushion$user) && !is.null(cushion$pwd)) {
+    auth <- sprintf(
+      "%s:%s@",
+      utils::URLencode(cushion$user, reserved = TRUE),
+      utils::URLencode(cushion$pwd, reserved = TRUE)
+    )
+    url <- sub("://", paste0("://", auth), url, fixed = TRUE)
+  }
+  url
+}
+
 sc <- function(l) Filter(Negate(is.null), l)
 
 asl <- function(x) {
@@ -70,7 +83,7 @@ sofa_GET_disk <- function(url, as = "list", query = NULL, headers = NULL,
   )
   res <- cli$get(query = query, disk = disk)
   stop_status(res)
-  res$content
+  disk
 }
 
 sofa_HEAD <- function(url, headers = NULL, auth = NULL, ...) {

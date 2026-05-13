@@ -58,6 +58,8 @@ test_that("replication endpoint posts a CouchDB replication request", {
   remote <- Cushion$new(host = "example", port = NULL, transport = "https", user = "user", pwd = "pwd")
   expect_message(res <- db_replicate(sofa_conn, remote, db), "Uploading")
   expect_true(res$ok)
+  expect_equal(res$source, db)
+  expect_equal(res$target, paste0("https://user:pwd@example/", db))
 })
 
 test_that("replication can create the target database first", {

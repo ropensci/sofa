@@ -1,4 +1,4 @@
-#' Work with databases in your CouchDB's.
+#' Work with databases in CouchDB.
 #'
 #' @name databases
 #'

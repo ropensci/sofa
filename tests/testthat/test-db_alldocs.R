@@ -32,11 +32,12 @@ test_that("db_alldocs - include_docs works", {
   expect_equal(length(bb$rows), 6)
 })
 
-test_that("db_alldocs can return raw content and validates include_docs", {
+test_that("db_alldocs can write to disk and validates include_docs", {
   skip_if_no_couchdb()
 
-  raw <- db_alldocs(sofa_conn, dbname = db_test_name, disk = tempfile())
-  expect_type(raw, "raw")
+  path <- tempfile(fileext = ".json")
+  res <- db_alldocs(sofa_conn, dbname = db_test_name, disk = path)
+  expect_equal(res, path)
   expect_error(db_alldocs(sofa_conn, db_test_name, include_docs = 1), "input must be of class logical")
 })
 

@@ -2,8 +2,7 @@
 % Please edit documentation in R/db_replicate.r
 \name{db_replicate}
 \alias{db_replicate}
-\title{Upload (replicate) a local database to a remote database server,
-e.g., Cloudant, Iriscouch}
+\title{Upload (replicate) a local database to a remote CouchDB-compatible server}
 \usage{
 db_replicate(from, to, dbname, createdb = FALSE, as = "list", ...)
 }
@@ -18,7 +17,7 @@ Required.}
 
 \item{createdb}{If \code{TRUE}, the function creates the db on the remote
 server before uploading. The db has to exist before uploading, so either
-you do it separately or this fxn can do it for you. Default: \code{FALSE}}
+you do it separately or this function can do it for you. Default: \code{FALSE}}
 
 \item{as}{(character) One of list (default) or json}
 
@@ -29,8 +28,7 @@ JSON as a character string or a list (determined by the
 \code{as} parameter)
 }
 \description{
-Upload (replicate) a local database to a remote database server,
-e.g., Cloudant, Iriscouch
+Upload (replicate) a local database to a remote CouchDB-compatible server
 }
 \examples{
 \dontrun{
@@ -48,10 +46,7 @@ if (interactive()) {
   db_create(x, "hello_earth")
 
   ## replicate to a remote server
-  z <- Cushion$new(
-    host = "ropensci.cloudant.com", transport = "https",
-    port = NULL, user = "ropensci", pwd = Sys.getenv("CLOUDANT_PWD")
-  )
+  z <- Cushion$new(host = "example.com", transport = "https", port = NULL)
 
   ## do the replication
   db_replicate(x, z, dbname = "hello_earth")
@@ -65,7 +60,7 @@ if (interactive()) {
     dbname = "hello_earth",
     '{"language":"python","library":"requests"}', "stuff"
   )
-  changes(z, dbname = "hello_earth")
+  db_changes(z, dbname = "hello_earth")
 
   ## create another document, and try to get it
   doc_create(z,

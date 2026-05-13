@@ -9,18 +9,18 @@
 #' @param selector (list/json) - JSON object describing criteria used to select
 #' documents. More information provided in the section on selector syntax.
 #' See the `query_tutorial` in this package, and the selectors docs
-#' <http://docs.couchdb.org/en/2.0.0/api/database/find.html#find-selectors>
+#' <https://docs.couchdb.org/en/stable/api/database/find.html>
 #' @param limit (numeric) - Maximum number of results returned. Default is 25.
 #' Optional
 #' @param skip (numeric) - Skip the first 'n' results, where 'n' is the value
 #' specified. Optional
 #' @param sort (json) - JSON array following sort syntax. Optional.
-#' See <http://docs.couchdb.org/en/2.0.0/api/database/find.html#find-sort>
+#' See <https://docs.couchdb.org/en/stable/api/database/find.html>
 #' For some reason, sort doesn't work often, not sure why.
 #' @param fields (json) - JSON array specifying which fields of each object
 #' should be returned. If it is omitted, the entire object is returned. More
 #' information provided in the section on filtering fields. Optional
-#' See <http://docs.couchdb.org/en/2.0.0/api/database/find.html#find-filter>
+#' See <https://docs.couchdb.org/en/stable/api/database/find.html>
 #' @param use_index (json) - Instruct a query to use a specific index.
 #' Specified either as `<design_document>` or `["<design_document>",
 #' "<index_name>"]`. Optional
@@ -38,7 +38,7 @@
 #' @param update (logical) Whether to update the index prior to returning the
 #' result. Default is true. Optional
 #' @param stable (logical) Whether or not the view results should be returned
-#' from a “stable” set of shards. Optional
+#' from a stable set of shards. Optional
 #' @param stale (character) Combination of `update=FALSE` and `stable=TRUE`
 #' options. Possible options: "ok", "FALSE" (default). Optional
 #' @param execution_stats (logical) Include execution statistics in the query

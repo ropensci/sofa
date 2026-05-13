@@ -1,4 +1,4 @@
-#' Restart your Couchdb instance
+#' Restart your CouchDB instance
 #'
 #' @export
 #' @template all

@@ -29,7 +29,7 @@ compose one R list or json blob here}
 \item{selector}{(json) - JSON object describing criteria used to select
 documents. More information provided in the section on selector syntax.
 See the \code{query_tutorial} in this package, and the selectors docs
-\url{http://docs.couchdb.org/en/2.0.0/api/database/find.html#find-selectors}}
+\url{https://docs.couchdb.org/en/stable/api/database/find.html}}
 
 \item{limit}{(number) - Maximum number of results returned. Default: 25
 Optional}
@@ -38,13 +38,13 @@ Optional}
 specified. Optional}
 
 \item{sort}{(json) - JSON array following sort syntax. Optional.
-See \url{http://docs.couchdb.org/en/2.0.0/api/database/find.html#find-sort}
+See \url{https://docs.couchdb.org/en/stable/api/database/find.html}
 For some reason, sort doesn't work often, not sure why.}
 
 \item{fields}{(json) - JSON array specifying which fields of each object
 should be returned. If it is omitted, the entire object is returned. More
 information provided in the section on filtering fields. Optional
-See \url{http://docs.couchdb.org/en/2.0.0/api/database/find.html#find-filter}}
+See \url{https://docs.couchdb.org/en/stable/api/database/find.html}}
 
 \item{use_index}{(json) - Instruct a query to use a specific index.
 Specified either as \verb{<design_document>} or \verb{["<design_document>", "<index_name>"]}. Optional}

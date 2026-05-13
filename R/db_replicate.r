@@ -1,5 +1,4 @@
-#' Upload (replicate) a local database to a remote database server,
-#' e.g., Cloudant, Iriscouch
+#' Upload (replicate) a local database to a remote CouchDB-compatible server
 #'
 #' @export
 #' @template return
@@ -10,7 +9,7 @@
 #' @param dbname (character) Database name. Required.
 #' @param createdb If `TRUE`, the function creates the db on the remote
 #' server before uploading. The db has to exist before uploading, so either
-#' you do it separately or this fxn can do it for you. Default: `FALSE`
+#' you do it separately or this function can do it for you. Default: `FALSE`
 #' @param as (character) One of list (default) or json
 #' @param ... Curl args passed on to [crul::HttpClient]
 #' @examples \dontrun{
@@ -28,10 +27,7 @@
 #'   db_create(x, "hello_earth")
 #'
 #'   ## replicate to a remote server
-#'   z <- Cushion$new(
-#'     host = "ropensci.cloudant.com", transport = "https",
-#'     port = NULL, user = "ropensci", pwd = Sys.getenv("CLOUDANT_PWD")
-#'   )
+#'   z <- Cushion$new(host = "example.com", transport = "https", port = NULL)
 #'
 #'   ## do the replication
 #'   db_replicate(x, z, dbname = "hello_earth")
@@ -45,7 +41,7 @@
 #'     dbname = "hello_earth",
 #'     '{"language":"python","library":"requests"}', "stuff"
 #'   )
-#'   changes(z, dbname = "hello_earth")
+#'   db_changes(z, dbname = "hello_earth")
 #'
 #'   ## create another document, and try to get it
 #'   doc_create(z,
@@ -63,8 +59,7 @@ db_replicate <- function(from, to, dbname, createdb = FALSE, as = "list", ...) {
   check_cushion(from)
   if (createdb) db_create(to, dbname)
   fromurl <- file.path(from$make_url(), "_replicate")
-  tourl <- file.path(to$make_url(), dbname)
-  args <- list(source = unbox(dbname), target = unbox(cloudant_url(to, dbname)))
+  args <- list(source = unbox(dbname), target = unbox(replication_url(to, dbname)))
   message("Uploading ...")
   sofa_POST(fromurl, as,
     body = args, encode = "json",

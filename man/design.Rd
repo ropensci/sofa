@@ -39,8 +39,8 @@ design_info(cushion, dbname, design, ...)
 \item{design}{(character) Design document name. this is the design name
 without \verb{_design/}, which is prepended internally. required.}
 
-\item{fxnname}{(character) A function name. required for \code{view_put}
-and \code{view_put_}}
+\item{fxnname}{(character) A function name. Required for \code{design_create}
+and \code{design_create_}.}
 
 \item{key, value}{(character) a key and value, see Examples and Details}
 
@@ -48,7 +48,7 @@ and \code{view_put_}}
 
 \item{...}{Curl args passed on to \code{\link[crul]{HttpClient}}}
 
-\item{fxn}{(character) a javascript function. required for \code{view_put_}}
+\item{fxn}{(character) a javascript function. Required for \code{design_create_}.}
 }
 \value{
 JSON as a character string or a list (determined by the
@@ -60,7 +60,7 @@ Work with design documents
 \details{
 \code{design_create} is a slightly easier interface to creating
 design documents; it just asks for a function name, the key and a
-value, then we create the function for you internally. TO have more
+value, then we create the function for you internally. To have more
 flexibility use \code{view_put_} (with underscore on the end) to write the
 function yourself.
 }

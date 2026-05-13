@@ -8,6 +8,11 @@ envvar <- function(x, default = NULL) {
 `%||%` <- function(x, y) if (is.null(x)) y else x
 
 fake_response <- function(req, body, status = 200L, headers = list()) {
+  content <- charToRaw(jsonlite::toJSON(body, auto_unbox = TRUE, null = "null"))
+  if (!is.null(req$disk)) {
+    writeBin(content, req$disk)
+    content <- req$disk
+  }
   crul::HttpResponse$new(
     method = req$method,
     url = req$url$url,
@@ -19,7 +24,7 @@ fake_response <- function(req, body, status = 200L, headers = list()) {
     response_headers_all = list(),
     modified = Sys.time(),
     times = numeric(),
-    content = charToRaw(jsonlite::toJSON(body, auto_unbox = TRUE, null = "null")),
+    content = content,
     request = req
   )
 }
@@ -196,7 +201,15 @@ new_fake_couchdb <- function() {
       return(fake_response(req, list(ok = TRUE)))
     }
     if (path == "/_replicate" && method == "POST") {
-      return(fake_response(req, list(ok = TRUE, history = list(), session_id = "fake-session", source_last_seq = 0L)))
+      body <- parse_body(req)
+      return(fake_response(req, list(
+        ok = TRUE,
+        history = list(),
+        session_id = "fake-session",
+        source_last_seq = 0L,
+        source = body$source,
+        target = body$target
+      )))
     }
     if (path == "/_session" && method == "GET") {
       return(fake_response(req, list(ok = TRUE, userCtx = list(name = NULL, roles = list()), info = list(authenticated = "default"))))

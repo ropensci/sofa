@@ -8,9 +8,9 @@ status](https://www.r-pkg.org/badges/version/sofa)](https://CRAN.R-project.org/p
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![R-check](https://github.com/ropensci/sofa/actions/workflows/R-check.yaml/badge.svg)](https://github.com/ropensci/sofa/actions/workflows/R-check.yaml)
-[![codecov.io](https://codecov.io/github/ropensci/sofa/coverage.svg?branch=master)](https://codecov.io/github/ropensci/sofa?branch=master)
+[![codecov.io](https://codecov.io/github/ropensci/sofa/coverage.svg?branch=master)](https://app.codecov.io/github/ropensci/sofa?branch=master)
 [![rstudio mirror
-downloads](https://cranlogs.r-pkg.org/badges/sofa?color=ff69b4)](https://github.com/metacran/cranlogs.app)
+downloads](https://cranlogs.r-pkg.org/badges/sofa?color=ff69b4)](https://github.com/r-hub/cranlogs.app)
 <!-- badges: end -->
 
 **An easy interface to CouchDB from R**
@@ -55,10 +55,10 @@ Cushions? What? Since it’s couch we gotta use `cushions` somehow.
 `cushions` are a connection class containing all connection info to a
 CouchDB instance. See `?Cushion` for help.
 
-As an example, connecting to a Cloudant couch:
+As an example, connecting to a remote CouchDB-compatible service:
 
     z <- Cushion$new(
-      host = "stuff.cloudant.com",
+      host = "example.com",
       transport = 'https',
       port = NULL,
       user = 'foobar',

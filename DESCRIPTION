@@ -1,10 +1,10 @@
 Package: sofa
 Title: Connector to 'CouchDB'
 Description: Provides an interface to the 'NoSQL' database 'CouchDB'
-    (<http://couchdb.apache.org>). Methods are provided for managing
+    (<https://couchdb.apache.org/>). Methods are provided for managing
     databases within 'CouchDB', including creating/deleting/updating/transferring,
     and managing documents within databases. One can connect with a local
-    'CouchDB' instance, or a remote 'CouchDB' databases such as 'Cloudant'. 
+    'CouchDB' instance, or a remote 'CouchDB' database such as 'IBM Cloudant'. 
     Documents can be inserted directly from vectors, lists, data.frames, 
     and 'JSON'. Targeted at 'CouchDB' v2 or greater.
 Version: 0.4.1
@@ -23,8 +23,8 @@ Authors@R: c(
         comment = c(ROR = "019jywm96"))
     )
 License: MIT + file LICENSE
-URL: https://github.com/ropensci/sofa (devel)
-    https://docs.ropensci.org/sofa (docs)
+URL: https://github.com/ropensci/sofa,
+    https://docs.ropensci.org/sofa/
 BugReports: https://github.com/ropensci/sofa/issues
 Roxygen: list(markdown = TRUE)
 Encoding: UTF-8
@@ -39,7 +39,7 @@ Suggests:
     cli,
     knitr,
     rmarkdown
-RoxygenNote: 7.3.0
+RoxygenNote: 7.3.2
 X-schema.org-applicationCategory: Databases
 X-schema.org-keywords: CouchDB, database, NoSQL, documents
 X-schema.org-isPartOf: https://ropensci.org

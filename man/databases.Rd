@@ -2,9 +2,9 @@
 % Please edit documentation in R/databases.r
 \name{databases}
 \alias{databases}
-\title{Work with databases in your CouchDB's.}
+\title{Work with databases in CouchDB.}
 \description{
-Work with databases in your CouchDB's.
+Work with databases in CouchDB.
 }
 \details{
 There are the following functions for working with databases:

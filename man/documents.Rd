@@ -2,9 +2,9 @@
 % Please edit documentation in R/documents.r
 \name{documents}
 \alias{documents}
-\title{Work with documents in your CouchDB's.}
+\title{Work with documents in CouchDB.}
 \description{
-Work with documents in your CouchDB's.
+Work with documents in CouchDB.
 }
 \details{
 If you are writing a complicated javascript function, better to do

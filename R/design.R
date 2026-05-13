@@ -6,13 +6,13 @@
 #' @param dbname (character) Database name. required.
 #' @param design (character) Design document name. this is the design name
 #' without `_design/`, which is prepended internally. required.
-#' @param fxnname (character) A function name. required for `view_put`
-#' and `view_put_`
+#' @param fxnname (character) A function name. Required for `design_create`
+#' and `design_create_`.
 #' @param key,value (character) a key and value, see Examples and Details
-#' @param fxn (character) a javascript function. required for `view_put_`
+#' @param fxn (character) a javascript function. Required for `design_create_`.
 #' @details `design_create` is a slightly easier interface to creating
 #' design documents; it just asks for a function name, the key and a
-#' value, then we create the function for you internally. TO have more
+#' value, then we create the function for you internally. To have more
 #' flexibility use `view_put_` (with underscore on the end) to write the
 #' function yourself.
 #' @examples \dontrun{

@@ -4,11 +4,11 @@
 #'
 #' @section About sofa:
 #' \pkg{sofa} provides an interface to the NoSQL database CouchDB
-#' (<http://couchdb.apache.org>). Methods are provided for managing
+#' (<https://couchdb.apache.org/>). Methods are provided for managing
 #' databases within CouchDB, including creating/deleting/updating/transferring,
 #' and managing documents within databases. One can connect with a local
-#' CouchDB instance, or a remote CouchDB databases such as Cloudant
-#' (<https://cloudant.com>). Documents can be inserted directly from
+#' CouchDB instance, or a remote CouchDB database such as IBM Cloudant
+#' (<https://www.ibm.com/products/cloudant>). Documents can be inserted directly from
 #' vectors, lists, data.frames, and JSON.
 #'
 #' @section Client connections:
@@ -25,7 +25,7 @@
 #' @section Digits after the decimal:
 #' If you have any concern about number of digits after the decimal
 #' in your documents, make sure to look at `digits` in your R options.
-#' The default value is 7 (see [options] for more informnation). You
+#' The default value is 7 (see [options] for more information). You
 #' can set the value you like with e.g., `options(digits = 10)`, and
 #' get what `digits` is set to with `getOption("digits")`.
 #'

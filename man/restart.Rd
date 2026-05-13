@@ -2,7 +2,7 @@
 % Please edit documentation in R/restart.R
 \name{restart}
 \alias{restart}
-\title{Restart your Couchdb instance}
+\title{Restart your CouchDB instance}
 \usage{
 restart(cushion = "localhost", as = "list", ...)
 }
@@ -18,7 +18,7 @@ JSON as a character string or a list (determined by the
 \code{as} parameter)
 }
 \description{
-Restart your Couchdb instance
+Restart your CouchDB instance
 }
 \examples{
 \dontrun{

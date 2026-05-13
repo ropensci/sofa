@@ -11,11 +11,11 @@ Relax.
 \section{About sofa}{
 
 \pkg{sofa} provides an interface to the NoSQL database CouchDB
-(\url{http://couchdb.apache.org}). Methods are provided for managing
+(\url{https://couchdb.apache.org/}). Methods are provided for managing
 databases within CouchDB, including creating/deleting/updating/transferring,
 and managing documents within databases. One can connect with a local
-CouchDB instance, or a remote CouchDB databases such as Cloudant
-(\url{https://cloudant.com}). Documents can be inserted directly from
+CouchDB instance, or a remote CouchDB database such as IBM Cloudant
+(\url{https://www.ibm.com/products/cloudant}). Documents can be inserted directly from
 vectors, lists, data.frames, and JSON.
 }
 
@@ -38,7 +38,7 @@ plan to support older CouchDB versions per se.
 
 If you have any concern about number of digits after the decimal
 in your documents, make sure to look at \code{digits} in your R options.
-The default value is 7 (see \link{options} for more informnation). You
+The default value is 7 (see \link{options} for more information). You
 can set the value you like with e.g., \code{options(digits = 10)}, and
 get what \code{digits} is set to with \code{getOption("digits")}.
 
@@ -58,7 +58,8 @@ We pass \code{getOption("digits")} to the \code{digits} parameter in
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/ropensci/sofa (devel) https://docs.ropensci.org/sofa (docs)}
+  \item \url{https://github.com/ropensci/sofa}
+  \item \url{https://docs.ropensci.org/sofa/}
   \item Report bugs at \url{https://github.com/ropensci/sofa/issues}
 }
 

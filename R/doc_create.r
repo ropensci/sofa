@@ -16,14 +16,14 @@
 #' @details Documents can have attachments just like email. There are two ways
 #' to use attachments: the first one is via a separate REST call
 #' (see [doc_attach_create()]); the second is inline within your
-#' document, you can do so with this fxn. See
+#' document, you can do so with this function. See
 #' https://docs.couchdb.org/en/latest/api/document/attachments.html for help
 #' on formatting json appropriately.
 #'
 #' Note that you can create documents from a data.frame with this function,
 #' where each row or column is a separate document. However, this function
 #' does not use the bulk API
-#' <https://couchdb.readthedocs.org/en/latest/api/database/bulk-api.html#db-bulk-docs>
+#' <https://docs.couchdb.org/en/stable/api/database/bulk-api.html#db-bulk-docs>
 #' - see [db_bulk_create()] and [db_bulk_update()] to
 #' create or update documents with the bulk API - which should be much faster
 #' for a large number of documents.
@@ -31,7 +31,7 @@
 #' @section Digits after the decimal:
 #' If you have any concern about number of digits after the decimal
 #' in your documents, make sure to look at `digits` in your R options.
-#' The default value is 7 (see [options] for more informnation). You
+#' The default value is 7 (see [options] for more information). You
 #' can set the value you like with e.g., `options(digits = 10)`, and
 #' get what `digits` is set to with `getOption("digits")`.
 #'

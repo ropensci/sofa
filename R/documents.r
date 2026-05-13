@@ -1,4 +1,4 @@
-#' Work with documents in your CouchDB's.
+#' Work with documents in CouchDB.
 #'
 #' @name documents
 #' @details If you are writing a complicated javascript function, better to do

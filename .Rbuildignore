@@ -1,6 +1,9 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 .scott_auth.r
+^auth\.R$
+^\.auth\.R$
+^coverage\.csv$
 Makefile
 README.Rmd
 ^\.travis\.yml$
