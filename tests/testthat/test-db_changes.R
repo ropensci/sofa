@@ -1,7 +1,7 @@
 context("db_changes")
 
 test_that("db_changes basic usage works", {
-  skip_on_cran()
+  skip_if_no_couchdb()
 
   if ("leothelion" %in% db_list(sofa_conn)) {
     invisible(db_delete(sofa_conn, dbname="leothelion"))
@@ -28,7 +28,7 @@ test_that("db_changes basic usage works", {
 })
 
 test_that("db_changes - json return works", {
-  skip_on_cran()
+  skip_if_no_couchdb()
 
   if ("sss" %in% db_list(sofa_conn)) {
     invisible(db_delete(sofa_conn, dbname="sss"))

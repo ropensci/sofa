@@ -3,7 +3,7 @@ context("doc_create")
 db <- dbname_random()
 
 local({
-  skip_on_cran()
+  skip_if_no_couchdb()
   if (db %in% db_list(sofa_conn)) {
     invisible(db_delete(sofa_conn, dbname = db))
   }
@@ -15,7 +15,7 @@ doc2 <- '{"name": "drink", "beer": "pale ale", "score": 6}'
 doc3 <- '{"name": "drink", "beer": "barleywine", "score": 9}'
 
 test_that("doc_create - basic usage works - with id", {
-  skip_on_cran()
+  skip_if_no_couchdb()
 
   aa <- doc_create(sofa_conn, db, doc = doc1, docid = "a1")
 
@@ -29,7 +29,7 @@ test_that("doc_create - basic usage works - with id", {
 })
 
 test_that("doc_create - basic usage works - without id", {
-  skip_on_cran()
+  skip_if_no_couchdb()
 
   aa <- doc_create(sofa_conn, db, doc = doc2)
 
@@ -44,7 +44,7 @@ test_that("doc_create - basic usage works - without id", {
 })
 
 test_that("doc_create - json back works", {
-  skip_on_cran()
+  skip_if_no_couchdb()
 
   aa <- doc_create(sofa_conn, db, doc = doc3, as = "json")
 
@@ -60,7 +60,7 @@ test_that("doc_create fails well", {
   expect_error(doc_create(), "argument \"cushion\" is missing")
   expect_error(doc_create(sofa_conn), "argument \"doc\" is missing")
 
-  skip_on_cran()
+  skip_if_no_couchdb()
   expect_error(doc_create(sofa_conn, "asdfds", "asdfadf"),
                "invalid char in json text")
   expect_error(doc_create(sofa_conn, "asdfds", '{"a": 5}'),

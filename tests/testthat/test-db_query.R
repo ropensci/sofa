@@ -1,7 +1,7 @@
 context("db_query")
 
 local({
-  skip_on_cran()
+  skip_if_no_couchdb()
   file <- system.file("examples/omdb.json", package = "sofa")
   strs <- readLines(file)
 
@@ -16,7 +16,7 @@ local({
 })
 
 test_that("db_query - selector param works", {
-  skip_on_cran()
+  skip_if_no_couchdb()
 
   aa <- db_query(sofa_conn, 'omdb', selector = list(`_id` = list(`$gt` = NULL)))
 
@@ -29,7 +29,7 @@ test_that("db_query - selector param works", {
 })
 
 test_that("db_query - query as text string works", {
-  skip_on_cran()
+  skip_if_no_couchdb()
 
   aa <- db_query(
     sofa_conn, 'omdb', query = '{
@@ -50,7 +50,7 @@ test_that("db_query - query as text string works", {
 })
 
 test_that("db_query - a regex query works", {
-  skip_on_cran()
+  skip_if_no_couchdb()
 
   aa <- db_query(
     sofa_conn, 'omdb', selector = list(
@@ -70,7 +70,7 @@ test_that("db_query - a regex query works", {
 })
 
 test_that("db_query - fields param works", {
-  skip_on_cran()
+  skip_if_no_couchdb()
 
   aa <- db_query(
     sofa_conn, dbname = "omdb", selector = list(
@@ -89,7 +89,7 @@ test_that("db_query - fields param works", {
 })
 
 test_that("db_query - bookmark param works", {
-  skip_on_cran()
+  skip_if_no_couchdb()
 
   aa <- db_query(
     sofa_conn, dbname = "omdb", selector = list(
@@ -117,7 +117,7 @@ test_that("db_query fails well", {
   expect_error(db_query(), "argument \"cushion\" is missing")
   expect_error(db_query(sofa_conn), "argument \"dbname\" is missing")
 
-  skip_on_cran()
+  skip_if_no_couchdb()
   
   # execution_stats should be logical
   expect_error(db_query(sofa_conn, "asdf", execution_stats = 234))

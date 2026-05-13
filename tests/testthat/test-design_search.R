@@ -1,7 +1,7 @@
 context("design_search")
 
 local({
-  skip_on_cran()
+  skip_if_no_couchdb()
   file <- system.file("examples/omdb.json", package = "sofa")
   strs <- readLines(file)
 
@@ -16,7 +16,7 @@ local({
 })
 
 test_that("design_search", {
-  skip_on_cran()
+  skip_if_no_couchdb()
 
   design_create(sofa_conn, dbname='omdb', design='view5', fxnname="foobar3",
     value="[doc.Country,doc.imdbRating]")
@@ -40,7 +40,7 @@ test_that("design_search", {
 })
 
 test_that("design_search fails well", {
-  skip_on_cran()
+  skip_if_no_couchdb()
 
   expect_error(design_search(), "argument \"cushion\" is missing")
   expect_error(design_search(sofa_conn), "argument \"dbname\" is missing")

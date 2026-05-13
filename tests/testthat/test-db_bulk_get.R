@@ -1,5 +1,5 @@
 test_that("db_bulk_get", {
-  skip_on_cran()
+  skip_if_no_couchdb()
 
   if ("bulkgettest" %in% db_list(sofa_conn)) {
     invisible(db_delete(sofa_conn, dbname="bulkgettest"))
@@ -28,7 +28,7 @@ test_that("db_bulk_get", {
 test_that("db_bulk_get fails well", {
   expect_error(db_bulk_get(), "argument \"cushion\" is missing")
   
-  skip_on_cran()
+  skip_if_no_couchdb()
   
   expect_error(db_bulk_get(sofa_conn), "argument \"dbname\" is missing")
   expect_error(db_bulk_get(sofa_conn, "stuff"),

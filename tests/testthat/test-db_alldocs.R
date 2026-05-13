@@ -1,7 +1,7 @@
 context("db_alldocs")
 
 test_that("db_alldocs basic usage works", {
-  skip_on_cran()
+  skip_if_no_couchdb()
 
   aa <- db_alldocs(sofa_conn, dbname = db_test_name, limit = 100)
 
@@ -14,7 +14,7 @@ test_that("db_alldocs basic usage works", {
 })
 
 test_that("db_alldocs - limit param works", {
-  skip_on_cran()
+  skip_if_no_couchdb()
 
   aa <- db_alldocs(sofa_conn, dbname = db_test_name, limit = 3)
   bb <- db_alldocs(sofa_conn, dbname = db_test_name, limit = 6)
@@ -24,7 +24,7 @@ test_that("db_alldocs - limit param works", {
 })
 
 test_that("db_alldocs - include_docs works", {
-  skip_on_cran()
+  skip_if_no_couchdb()
 
   bb <- db_alldocs(sofa_conn, dbname = db_test_name, limit = 6, include_docs = TRUE)
 
@@ -33,7 +33,7 @@ test_that("db_alldocs - include_docs works", {
 })
 
 test_that("db_alldocs fails well", {
-  skip_on_cran()
+  skip_if_no_couchdb()
   
 	expect_error(db_alldocs(), "argument \"cushion\" is missing")
   expect_error(db_alldocs(sofa_conn), "argument \"dbname\" is missing")

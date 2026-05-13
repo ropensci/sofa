@@ -1,7 +1,7 @@
 context("db_create")
 
 test_that("db_create basic usage works", {
-  skip_on_cran()
+  skip_if_no_couchdb()
 
   if ("leothelion" %in% db_list(sofa_conn)) {
     invisible(db_delete(sofa_conn, dbname = "leothelion"))
@@ -17,7 +17,7 @@ test_that("db_create basic usage works", {
 })
 
 test_that("db_create - json return works", {
-  skip_on_cran()
+  skip_if_no_couchdb()
 
   if ("leothelion-json" %in% db_list(sofa_conn)) {
     invisible(db_delete(sofa_conn, dbname = "leothelion-json"))
@@ -36,7 +36,7 @@ test_that("db_create fails well", {
 	expect_error(db_create(), "argument \"cushion\" is missing")
   expect_error(db_create(sofa_conn), "argument \"dbname\" is missing")
 
-  skip_on_cran()
+  skip_if_no_couchdb()
   if ("leothelion" %in% db_list(sofa_conn)) {
     invisible(db_delete(sofa_conn, dbname = "leothelion"))
   }
