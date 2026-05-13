@@ -7,7 +7,7 @@ status](https://www.r-pkg.org/badges/version/sofa)](https://CRAN.R-project.org/p
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![R-check](https://github.com/ropensci/sofa/workflows/R-check/badge.svg)](https://github.com/ropensci/sofa/actions)
+[![R-check](https://github.com/ropensci/sofa/actions/workflows/R-check.yaml/badge.svg)](https://github.com/ropensci/sofa/actions/workflows/R-check.yaml)
 [![codecov.io](https://codecov.io/github/ropensci/sofa/coverage.svg?branch=master)](https://codecov.io/github/ropensci/sofa?branch=master)
 [![rstudio mirror
 downloads](https://cranlogs.r-pkg.org/badges/sofa?color=ff69b4)](https://github.com/metacran/cranlogs.app)
