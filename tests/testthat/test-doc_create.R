@@ -54,6 +54,27 @@ test_that("doc_create - json back works", {
   expect_match(aa, "id")
   expect_match(aa, "rev")
   expect_is(jsonlite::fromJSON(aa), "list")
+
+  bb <- doc_create(sofa_conn, db, doc = '{"name":"water"}', docid = "json-id", as = "json")
+  expect_is(bb, "character")
+  expect_match(bb, '"ok":true')
+  expect_equal(jsonlite::fromJSON(bb)$id, "json-id")
+})
+
+test_that("doc_create accepts lists and data frames", {
+  skip_if_no_couchdb()
+
+  aa <- doc_create(sofa_conn, db, doc = list(name = "drink", score = 10), docid = "list-doc")
+  expect_true(aa$ok)
+  expect_equal(doc_get(sofa_conn, db, "list-doc")$name, "drink")
+
+  bb <- doc_create(sofa_conn, db, doc = list(name = "food"))
+  expect_true(bb$ok)
+  expect_equal(doc_get(sofa_conn, db, bb$id)$name, "food")
+
+  cc <- doc_create(sofa_conn, db, doc = data.frame(name = c("a", "b"), score = c(1, 2)))
+  expect_equal(length(cc), 2)
+  expect_true(all(vapply(cc, "[[", logical(1), "ok")))
 })
 
 test_that("doc_create fails well", {

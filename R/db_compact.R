@@ -29,7 +29,7 @@
 #' }
 db_compact <- function(cushion, dbname, as = "list", ...) {
   check_cushion(cushion)
-  sofa_POST(paste0(cushion$make_url(), dbname, "/", "_compact"),
+  sofa_POST(file.path(cushion$make_url(), dbname, "_compact"),
     as = as,
     cushion$get_headers(), cushion$get_auth(), ...
   )

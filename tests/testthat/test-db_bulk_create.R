@@ -20,6 +20,22 @@ test_that("db_bulk_create basic usage works", {
   cleanup_dbs("bulktest")
 })
 
+test_that("db_bulk_create accepts list input and json output", {
+  skip_if_no_couchdb()
+
+  db <- dbname_random()
+  db_create(sofa_conn, db)
+  on.exit(cleanup_dbs(db), add = TRUE)
+
+  aa <- db_bulk_create(sofa_conn, db, list(list(name = "a"), list(name = "b")))
+  expect_equal(length(aa), 2)
+  expect_true(all(vapply(aa, "[[", logical(1), "ok")))
+
+  bb <- db_bulk_create(sofa_conn, db, list(list(name = "c")), as = "json")
+  expect_is(bb, "character")
+  expect_match(bb, '"ok":true')
+})
+
 test_that("db_bulk_create fails well", {
   skip_if_no_couchdb()
 

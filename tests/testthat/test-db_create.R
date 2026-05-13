@@ -32,6 +32,16 @@ test_that("db_create - json return works", {
   cleanup_dbs("leothelion-json")
 })
 
+test_that("db_create can delete an existing database first", {
+  skip_if_no_couchdb()
+
+  db <- dbname_random()
+  db_create(sofa_conn, db)
+  aa <- db_create(sofa_conn, db, delifexists = TRUE)
+  expect_true(aa$ok)
+  cleanup_dbs(db)
+})
+
 test_that("db_create fails well", {
 	expect_error(db_create(), "argument \"cushion\" is missing")
   expect_error(db_create(sofa_conn), "argument \"dbname\" is missing")

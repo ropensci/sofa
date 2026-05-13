@@ -39,6 +39,22 @@ test_that("design_search", {
   expect_named(df, c("Country", "imdbRating"))
 })
 
+test_that("design_search supports POST bodies and validates query names", {
+  skip_if_no_couchdb()
+
+  ids <- vapply(db_alldocs(sofa_conn, dbname = "omdb")$rows[1:2], "[[", "", "id")
+  res <- design_search(
+    sofa_conn, dbname = "omdb", design = "view5", view = "foobar3",
+    body = list(keys = ids)
+  )
+  expect_gt(length(res$rows), 0)
+
+  expect_error(
+    design_search(sofa_conn, "omdb", "view5", "foobar3", params = list(bad = TRUE)),
+    "acceptable set"
+  )
+})
+
 test_that("design_search fails well", {
   skip_if_no_couchdb()
 

@@ -40,6 +40,26 @@ test_that("design_search_many", {
   expect_named(res$results[[1]]$rows[[1]], c("id", "key", "value"))
 })
 
+test_that("design_search_many supports CouchDB versions before 2.2", {
+  skip_if_no_couchdb()
+
+  old_version <- sofa_conn$version
+  unlockBinding("version", sofa_conn)
+  sofa_conn$version <- function() 210
+  on.exit({
+    sofa_conn$version <- old_version
+    lockBinding("version", sofa_conn)
+  }, add = TRUE)
+
+  ids <- vapply(db_alldocs(sofa_conn, dbname = "omdb")$rows[1:2], "[[", "", "id")
+  res <- design_search_many(
+    sofa_conn, "omdb", "view6", "foobar4",
+    list(list(keys = ids))
+  )
+
+  expect_named(res, c("total_rows", "offset", "rows"))
+})
+
 test_that("design_search_many fails well", {
   skip_if_no_couchdb()
 

@@ -28,6 +28,23 @@ fake_error <- function(req, status, error, reason) {
   fake_response(req, list(error = error, reason = reason), status)
 }
 
+fake_raw_response <- function(req, body, status = 200L, headers = list()) {
+  crul::HttpResponse$new(
+    method = req$method,
+    url = req$url$url,
+    opts = req$options,
+    handle = req$url$handle,
+    status_code = status,
+    request_headers = req$headers,
+    response_headers = headers,
+    response_headers_all = list(),
+    modified = Sys.time(),
+    times = numeric(),
+    content = body,
+    request = req
+  )
+}
+
 new_fake_couchdb <- function() {
   state <- new.env(parent = emptyenv())
   state$dbs <- new.env(parent = emptyenv())
@@ -98,6 +115,12 @@ new_fake_couchdb <- function() {
     }
     parsed
   }
+  parse_upload <- function(req) {
+    if (!is.null(req$options$readfunction)) {
+      return(req$options$readfunction(req$options$postfieldsize_large %||% 1e6))
+    }
+    req$options$postfields %||% raw()
+  }
   selected_docs <- function(db_env, selector) {
     docs <- lapply(user_docs(db_env), function(id) get(id, db_env$docs, inherits = FALSE))
     if (length(docs) == 0) return(list())
@@ -160,8 +183,27 @@ new_fake_couchdb <- function() {
     if (path == "/" && method == "GET") {
       return(fake_response(req, list(couchdb = "Welcome", version = "3.3.3", vendor = list(name = "The Apache Software Foundation"))))
     }
+    if (path == "/_active_tasks" && method == "GET") {
+      return(fake_response(req, list()))
+    }
     if (path == "/_all_dbs" && method == "GET") {
       return(fake_response(req, as.list(sort(ls(state$dbs, all.names = TRUE)))))
+    }
+    if (path == "/_membership" && method == "GET") {
+      return(fake_response(req, list(all_nodes = list("sofa@127.0.0.1"), cluster_nodes = list("sofa@127.0.0.1"))))
+    }
+    if (path == "/_restart" && method == "POST") {
+      return(fake_response(req, list(ok = TRUE)))
+    }
+    if (path == "/_replicate" && method == "POST") {
+      return(fake_response(req, list(ok = TRUE, history = list(), session_id = "fake-session", source_last_seq = 0L)))
+    }
+    if (path == "/_session" && method == "GET") {
+      return(fake_response(req, list(ok = TRUE, userCtx = list(name = NULL, roles = list()), info = list(authenticated = "default"))))
+    }
+    if (path == "/_uuids" && method == "GET") {
+      count <- as.integer(query$count %||% 1L)
+      return(fake_response(req, list(uuids = as.list(vapply(seq_len(count), function(x) next_uuid(), "")))))
     }
 
     db <- parts[1]
@@ -173,6 +215,8 @@ new_fake_couchdb <- function() {
       }
       db_env <- new.env(parent = emptyenv())
       db_env$docs <- new.env(parent = emptyenv())
+      db_env$attachments <- new.env(parent = emptyenv())
+      db_env$indexes <- list(list(ddoc = NULL, name = "_all_docs", type = "special", def = list(fields = list(list(`_id` = "asc")))))
       db_env$seq <- 0L
       db_env$changes <- list()
       assign(db, db_env, state$dbs)
@@ -247,11 +291,43 @@ new_fake_couchdb <- function() {
       body <- parse_body(req)
       return(fake_response(req, list(dbname = db, selector = body$selector, fields = "all_fields")))
     }
+    if (endpoint == "_compact" && method == "POST") {
+      return(fake_response(req, list(ok = TRUE), 202L))
+    }
+    if (endpoint == "_index") {
+      if (length(parts) == 2L && method == "GET") {
+        return(fake_response(req, list(total_rows = length(db_env$indexes), indexes = db_env$indexes)))
+      }
+      if (length(parts) == 2L && method == "POST") {
+        body <- parse_body(req)
+        idx <- list(
+          ddoc = body$ddoc %||% paste0("_design/", body$name %||% "idx"),
+          name = body$name %||% "idx",
+          type = body$type %||% "json",
+          def = body$index
+        )
+        db_env$indexes[[length(db_env$indexes) + 1L]] <- idx
+        return(fake_response(req, list(result = "created", id = idx$ddoc, name = idx$name)))
+      }
+      if (length(parts) >= 5L && method == "DELETE") {
+        ddoc <- paste(parts[3:(length(parts) - 2L)], collapse = "/")
+        name <- parts[length(parts)]
+        db_env$indexes <- Filter(function(x) {
+          !identical(x$ddoc, ddoc) || !identical(x$name, name)
+        }, db_env$indexes)
+        return(fake_response(req, list(ok = TRUE)))
+      }
+    }
     if (endpoint == "_design") {
       design <- parts[3]
       if (length(parts) == 3L && method == "PUT") {
         doc <- save_doc(db_env, paste0("_design/", design), parse_body(req))
         return(fake_response(req, list(ok = TRUE, id = doc$`_id`, rev = doc$`_rev`), 201L))
+      }
+      if (length(parts) == 4L && parts[4] == "_info" && method == "GET") {
+        design_id <- paste0("_design/", design)
+        if (!exists(design_id, db_env$docs, inherits = FALSE)) return(fake_error(req, 404L, "not_found", "missing"))
+        return(fake_response(req, list(name = design, view_index = list(signature = "fake", language = "javascript"))))
       }
       if (length(parts) >= 5L && parts[4] == "_view") {
         rows <- view_rows(db_env, design, parts[5])
@@ -266,6 +342,43 @@ new_fake_couchdb <- function() {
         params <- if (method == "POST") parse_body(req) else query
         rows <- page_rows(rows, params)
         return(fake_response(req, list(total_rows = length(rows), offset = 0L, rows = rows)))
+      }
+    }
+
+    if (length(parts) >= 3L && !startsWith(endpoint, "_")) {
+      id <- parts[2]
+      attname <- paste(parts[-c(1, 2)], collapse = "/")
+      key <- paste(id, attname, sep = "/")
+      if (method == "PUT") {
+        if (!exists(id, db_env$docs, inherits = FALSE)) return(fake_error(req, 404L, "not_found", "missing"))
+        doc <- get(id, db_env$docs, inherits = FALSE)
+        doc$`_attachments` <- doc$`_attachments` %||% list()
+        body <- parse_upload(req)
+        doc$`_attachments`[[attname]] <- list(
+          content_type = req$headers$`Content-Type` %||% "application/octet-stream",
+          length = length(body),
+          stub = TRUE
+        )
+        doc <- save_doc(db_env, id, doc)
+        assign(key, body, db_env$attachments)
+        return(fake_response(req, list(ok = TRUE, id = id, rev = doc$`_rev`), 201L))
+      }
+      if (method == "HEAD") {
+        if (!exists(key, db_env$attachments, inherits = FALSE)) return(fake_error(req, 404L, "not_found", "missing"))
+        doc <- get(id, db_env$docs, inherits = FALSE)
+        return(fake_response(req, list(), headers = list(rev = doc$`_rev`, `content-type` = doc$`_attachments`[[attname]]$content_type)))
+      }
+      if (method == "GET") {
+        if (!exists(key, db_env$attachments, inherits = FALSE)) return(fake_error(req, 404L, "not_found", "missing"))
+        return(fake_raw_response(req, get(key, db_env$attachments, inherits = FALSE), headers = list(`content-type` = "application/octet-stream")))
+      }
+      if (method == "DELETE") {
+        if (!exists(key, db_env$attachments, inherits = FALSE)) return(fake_error(req, 404L, "not_found", "missing"))
+        rm(list = key, envir = db_env$attachments)
+        doc <- get(id, db_env$docs, inherits = FALSE)
+        doc$`_attachments`[[attname]] <- NULL
+        doc <- save_doc(db_env, id, doc)
+        return(fake_response(req, list(ok = TRUE, id = id, rev = doc$`_rev`)))
       }
     }
 

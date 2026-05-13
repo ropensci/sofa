@@ -32,6 +32,14 @@ test_that("db_alldocs - include_docs works", {
   expect_equal(length(bb$rows), 6)
 })
 
+test_that("db_alldocs can return raw content and validates include_docs", {
+  skip_if_no_couchdb()
+
+  raw <- db_alldocs(sofa_conn, dbname = db_test_name, disk = tempfile())
+  expect_type(raw, "raw")
+  expect_error(db_alldocs(sofa_conn, db_test_name, include_docs = 1), "input must be of class logical")
+})
+
 test_that("db_alldocs fails well", {
   skip_if_no_couchdb()
   

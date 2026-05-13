@@ -88,6 +88,18 @@ test_that("db_query - fields param works", {
   expect_true(all(c("_id", "Director") %in% names(aa$docs[[1]])))
 })
 
+test_that("db_query wraps a single field before posting", {
+  skip_if_no_couchdb()
+
+  aa <- db_query(
+    sofa_conn, dbname = "omdb",
+    selector = list(Director = list(`$regex` = "^R")),
+    fields = "_id"
+  )
+
+  expect_named(aa$docs[[1]], "_id")
+})
+
 test_that("db_query - bookmark param works", {
   skip_if_no_couchdb()
 
