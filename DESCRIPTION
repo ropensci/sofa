@@ -37,6 +37,7 @@ Imports:
 Suggests:
     testthat,
     cli,
+    webfakes,
     knitr,
     rmarkdown
 RoxygenNote: 7.3.0
