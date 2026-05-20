@@ -1,3 +1,24 @@
+sofa 0.4.1
+==========
+
+### MINOR IMPROVEMENTS
+
+* Updated package metadata and documentation links for CRAN.
+* Added a GitHub Actions check workflow for Linux, macOS, and Windows.
+* Reworked tests to use a lightweight mocked CouchDB service by default, while
+  preserving the option to test against a real CouchDB server with
+  `SOFA_TEST_REAL_COUCHDB=true`.
+* Expanded test coverage across the package.
+
+### BUG FIXES
+
+* Fixed `db_replicate()` so replication targets use the supplied remote
+  `Cushion` URL rather than assuming the old Cloudant URL pattern.
+* Fixed `db_alldocs(..., disk=)` to return the output file path as documented.
+* Fixed stale examples and verified documented examples against the mocked
+  CouchDB test service.
+* Declared the `cli` test dependency used by `testthat`.
+
 sofa 0.4.0
 ==========
 

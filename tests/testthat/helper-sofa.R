@@ -110,6 +110,7 @@ new_fake_couchdb <- function() {
     raw <- req$options$postfields
     if (is.null(raw) || !length(raw)) return(list())
     txt <- rawToChar(raw)
+    Encoding(txt) <- "UTF-8"
     if (!jsonlite::validate(txt)) {
       txt <- sub(".*\\r\\n\\r\\n", "", txt)
       txt <- sub("\\r\\n--.*$", "", txt)
