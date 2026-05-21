@@ -4,6 +4,7 @@
 ^auth\.R$
 ^\.auth\.R$
 ^coverage\.csv$
+^.*\.tar\.gz$
 Makefile
 README.Rmd
 ^\.travis\.yml$
