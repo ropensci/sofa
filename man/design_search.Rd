@@ -153,7 +153,7 @@ head(
   structure(do.call(
     "rbind.data.frame",
     lapply(res$rows, function(x) x$value)
-  ), .Names = c("Country", "imdbRating"))
+  ), names = c("Country", "imdbRating"))
 )
 
 # query parameters

@@ -18,7 +18,7 @@
 #' the databases for a CouchDB instance. The compaction process runs as a background
 #' process. You can determine if the compaction process is operating on a database by
 #' obtaining the database meta information, the compact_running value of the returned
-#' database structure will be set to true. See `GET /{db}`. You can also obtain a list of
+#' database structure will be set to true. See \code{GET /\{db\}}. You can also obtain a list of
 #' running processes to determine whether compaction is currently running.
 #' See "/_active_tasks"
 #' @examples \dontrun{

@@ -1,3 +1,15 @@
+sofa 0.4.2
+==========
+
+### BUG FIXES
+
+* Fixed Rd markup for the CouchDB `GET /{db}` reference in `db_compact()`
+  (lost braces note on CRAN checks; request from Kurt Hornik, 2026-07-20).
+* Replaced deprecated `structure(..., .Names = )` with `names =` in design
+  search examples and tests.
+* Corrected Eduard Szöcs's ORCID in DESCRIPTION (was accidentally duplicated
+  from Scott Chamberlain).
+
 sofa 0.4.1
 ==========
 

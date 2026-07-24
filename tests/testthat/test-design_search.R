@@ -24,7 +24,7 @@ test_that("design_search", {
   df = structure(do.call(
     "rbind.data.frame",
     lapply(res$rows, function(x) x$value)
-  ), .Names = c('Country', 'imdbRating'))
+  ), names = c('Country', 'imdbRating'))
 
   expect_is(res, "list")
   expect_named(res, c("total_rows", "offset", "rows"))
