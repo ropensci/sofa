@@ -10,7 +10,11 @@ envvar <- function(x, default = NULL) {
 fake_response <- function(req, body, status = 200L, headers = list()) {
   content <- charToRaw(jsonlite::toJSON(body, auto_unbox = TRUE, null = "null"))
   if (!is.null(req$disk)) {
-    writeBin(content, req$disk)
+    connection <- file(req$disk, open = "wb")
+    tryCatch(
+      writeBin(content, connection),
+      finally = close(connection)
+    )
     content <- req$disk
   }
   crul::HttpResponse$new(
@@ -123,6 +127,16 @@ new_fake_couchdb <- function() {
   }
   parse_upload <- function(req) {
     if (!is.null(req$options$readfunction)) {
+      existing <- as.integer(rownames(showConnections(all = TRUE)))
+      on.exit({
+        opened <- setdiff(
+          as.integer(rownames(showConnections(all = TRUE))),
+          existing
+        )
+        for (connection in opened) {
+          close(getConnection(connection))
+        }
+      }, add = TRUE)
       return(req$options$readfunction(req$options$postfieldsize_large %||% 1e6))
     }
     req$options$postfields %||% raw()
