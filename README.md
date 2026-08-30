@@ -1,4 +1,4 @@
-# sofa <img src="man/figures/logo.png" width=120px align="right" />
+# sofa <img src="man/figures/logo.png" alt="sofa package logo" width="120" align="right" />
 
 <!-- badges: start -->
 
